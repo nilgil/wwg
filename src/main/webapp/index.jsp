@@ -9,8 +9,8 @@
 <body>
 <script>
   location.href="/home";
-  
 
 </script>
-</body>
+</body>  
 </html>
+
