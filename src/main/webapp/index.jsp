@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-  location.href="/home";
 
+<script>
+	location.href="/";
 </script>
+
 </body>
 </html>
