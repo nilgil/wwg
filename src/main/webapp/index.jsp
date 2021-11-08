@@ -12,5 +12,5 @@
 	location.href="/";
 </script>
 
-</body>
+</body>  
 </html>
