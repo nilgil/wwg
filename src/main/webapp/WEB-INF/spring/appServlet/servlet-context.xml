@@ -21,6 +21,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- fileupload용 인스턴스 추가... -->
+	<!-- 스프일 파일 업로더 파서... commons 라이브러리를 이용 -->	
+	<beans:bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000000"></beans:property>
+	</beans:bean>
+	
 	<context:component-scan base-package="com.project.wwg" />
 	
 	
