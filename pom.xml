@@ -16,6 +16,13 @@
 	<dependencies>
 		<!-- ja : 추가 라이브러리 시작 -->
 		
+		<!-- oracle 추가 -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>11.2.0.4</version>
+		</dependency>
+		
 		<!-- dbcp jdbc connection pool -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -49,11 +56,16 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- Java Mail API -->
+		<!-- javax.mail-->
 		<dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>mail</artifactId>
-		    <version>1.4.7</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.1.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 		
 		<!-- ja : 파일 업로드 처리 라이브러리 -->
