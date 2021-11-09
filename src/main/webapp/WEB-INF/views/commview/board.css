@@ -1,0 +1,60 @@
+body{
+    margin: 0%;
+}
+.a{
+    text-decoration: none;
+    color: black;
+    
+}
+
+.container{
+    margin: 0 auto;
+    justify-content: center;
+    display: grid;
+    grid-gap: 20px;
+    height: 100vh;
+    grid-template-columns: 150px 800px;
+    /* grid-template-rows: px; */
+    grid-template-areas: 'side table'
+                         'search_bar search_bar'
+                         'footer footer';
+
+}
+.aside_menu{
+    padding: 10%;
+}
+.aside_menu ul{
+    height: 200px;
+    width: 120px;
+    padding: 10%;
+    margin: auto;
+    background-color: #f1f1f1;
+}
+.aside_menu ul li{
+    list-style: none;
+    padding-left: 0%;
+    margin: 0%;
+}
+.search_bar{
+    grid-area: search_bar;
+    display: grid;
+    display: flex;
+    justify-content: center;
+}
+.footer{
+    grid-area: footer;
+    display: grid;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 반응형 웹 기능 */
+@media screen and (max-width: 48rem){
+.aside_menu{
+display: none;
+}
+.search_bar{
+    display: none;
+}
+}
