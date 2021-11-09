@@ -9,9 +9,7 @@ import com.project.wwg.comm.service.comm1service;
 @Controller
 public class comm1cont {
 
-	@Autowired
-	private comm1service cs;
-	
+
 	@RequestMapping("/comm1")
 	public String comm1() {
 		return "/commview/comm1";
