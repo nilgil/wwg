@@ -9,22 +9,22 @@
 		
 	<context:property-placeholder location="classpath:jdbc.properties" />
 		
-		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
-	</bean>	
-	
+	</bean>
+
 	<!-- 스프링 jdbc 즉 스프링으로 oracle 디비 연결 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:configuration.xml" />
-		<property name="mapperLocations" value="classpath:sql/*.xml" />
+		<property name="mapperLocations" value="classpath:sql/*/*.xml" />
 	</bean>
-	
+
 		<bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
