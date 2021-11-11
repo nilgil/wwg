@@ -21,8 +21,8 @@
     <!-- 스프링 jdbc 즉 스프링으로 oracle 디비 연결 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:configuration.xml"/>
-        <property name="mapperLocations" value="classpath:sql/*/*.xml"/>
+        <property name="configLocation" value="classpath:/configuration.xml"/>
+        <property name="mapperLocations" value="classpath:/sql/*/*.xml"/>
     </bean>
 
     <bean id="session" class="org.mybatis.spring.SqlSessionTemplate">

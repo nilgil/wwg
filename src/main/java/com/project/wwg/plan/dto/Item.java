@@ -1,25 +1,27 @@
 package com.project.wwg.plan.dto;
 
+import java.math.BigDecimal;
+
 public class Item {
-    private int idx;
     private String title;
     private String info;
-    private double lat;
-    private double lng;
+    private BigDecimal lat;
+    private BigDecimal lng;
     private String address;
     private String photo;
-    private String theme;
-    private String category;
     private String phone;
-    private String website;
-    private double rating;
 
-    public int getIdx() {
-        return idx;
+    public Item() {
     }
 
-    public void setIdx(int idx) {
-        this.idx = idx;
+    public Item(String title, String info, BigDecimal lat, BigDecimal lng, String address, String photo, String phone) {
+        this.title = title;
+        this.info = info;
+        this.lat = lat;
+        this.lng = lng;
+        this.address = address;
+        this.photo = photo;
+        this.phone = phone;
     }
 
     public String getTitle() {
@@ -38,19 +40,19 @@ public class Item {
         this.info = info;
     }
 
-    public double getLat() {
+    public BigDecimal getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(BigDecimal lat) {
         this.lat = lat;
     }
 
-    public double getLng() {
+    public BigDecimal getLng() {
         return lng;
     }
 
-    public void setLng(double lng) {
+    public void setLng(BigDecimal lng) {
         this.lng = lng;
     }
 
@@ -70,22 +72,6 @@ public class Item {
         this.photo = photo;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -94,11 +80,4 @@ public class Item {
         this.phone = phone;
     }
 
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
 }
