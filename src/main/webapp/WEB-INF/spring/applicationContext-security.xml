@@ -28,25 +28,28 @@
         />
     </http>
 
-<!--    <authentication-manager>-->
-<!--    <jdbc-user-service data-source-ref="dataSource" id="userService"-->
-<!--                       users-by-username-query="SELECT ID as loginId, PASSWORD as loginPwd, ENABLED FROM user WHERE ID=?"-->
-<!--                       authorities-by-username-query="SELECT ID as loginID, AUTHORITY FROM user WHERE ID=?"/>-->
-<!--    </authentication-manager>-->
-<!--    <authentication-manager>-->
-<!--        <authentication-provider user-service-ref="userService">-->
-<!--        </authentication-provider>-->
-<!--    </authentication-manager>-->
+    <!-- provider -->
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                               role-prefix=""
+                               users-by-username-query="select username, password, enabled from users where username = ?"
+                               authorities-by-username-query="select username, authority from authorities where username = ?"
+            />
+                               <!--group-authorities-by-username-query="select g.id, g.group_name, ga.authority from groups g, group_members gm, group_authorities ga where gm.username = ? and g.id = ga.group_id and g.id = gm.group_id"-->
+        </authentication-provider>
+    </authentication-manager>
+
 
 
     <!--테스트를 위한 기본적인 유저정보 입력-->
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>
-                <user name="user" password="{noop}user" authorities="ROLE_USER"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+<!--    <authentication-manager>-->
+<!--        <authentication-provider>-->
+<!--            <user-service>-->
+<!--                <user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>-->
+<!--                <user name="user" password="{noop}user" authorities="ROLE_USER"/>-->
+<!--            </user-service>-->
+<!--        </authentication-provider>-->
+<!--    </authentication-manager>-->
 
 </beans:beans>
