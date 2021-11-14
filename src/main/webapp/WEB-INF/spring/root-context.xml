@@ -8,14 +8,14 @@
     <!-- jdbc 설정을 담은 jdbc.properties 파일을 불러온다. -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <!-- DataSource 구현 클래스 ComboPooledDataSource 빈 등록 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+    <!-- DataSource 구현 클래스 BasicDataSource 빈 등록 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.username}"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <property name="maxTotal" value="${jdbc.maxPoolSize}"/>
     </bean>
 
     <!--  SqlSessionFactory 빈 등록, 설정 파일, 매퍼 위치 등록 -->
