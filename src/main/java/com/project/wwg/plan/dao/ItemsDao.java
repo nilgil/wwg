@@ -10,6 +10,8 @@ import java.util.List;
  * @author giri
  */
 public interface ItemsDao {
+    List<Item> searchItems(String keyword);
+
     int insertItem(Item item);
 
     int insertItems(List<Item> items);

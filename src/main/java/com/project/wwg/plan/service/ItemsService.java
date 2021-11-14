@@ -5,6 +5,8 @@ import com.project.wwg.plan.dto.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemsService {
 
@@ -15,9 +17,8 @@ public class ItemsService {
         this.itemsDao = itemsDao;
     }
 
-    public int insertItem(Item item) {
-
-        return 0;
+    public List<Item> searchItem(String keyword) {
+        return itemsDao.searchItems(keyword);
     }
 
 }

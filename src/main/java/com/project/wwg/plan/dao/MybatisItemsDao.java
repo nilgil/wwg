@@ -1,18 +1,26 @@
 package com.project.wwg.plan.dao;
 
 import com.project.wwg.plan.dto.Item;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class MybatisItemsDao implements ItemsDao {
 
-    private SqlSessionTemplate sqlSession;
+    private SqlSession sqlSession;
 
     @Autowired
-    public MybatisItemsDao(SqlSessionTemplate sqlSession) {
+    public MybatisItemsDao(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
+    }
+
+    @Override
+    public List<Item> searchItems(String keyword) {
+        return sqlSession.selectList("items.searchItem", keyword);
     }
 
     @Override
@@ -22,12 +30,11 @@ public class MybatisItemsDao implements ItemsDao {
 
     @Override
     public int insertItems(List<Item> items) {
-        return sqlSession.insert("com.project.wwg.plan.dao.MybatisItemDao.insertItems", items);
+        return 0;
     }
 
     @Override
     public int deleteAllItems() {
-        return sqlSession.delete("com.project.wwg.plan.dao.MybatisItemDao.deleteAllItems");
+        return 0;
     }
-
 }

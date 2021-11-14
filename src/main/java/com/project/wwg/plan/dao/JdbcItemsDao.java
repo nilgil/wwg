@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 
-@Repository
 public class JdbcItemsDao implements ItemsDao {
 
     private final DataSource dataSource;
@@ -21,6 +20,11 @@ public class JdbcItemsDao implements ItemsDao {
 
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
+    }
+
+    @Override
+    public List<Item> searchItems(String keyword) {
+        return null;
     }
 
     @Override

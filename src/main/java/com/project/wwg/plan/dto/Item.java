@@ -80,4 +80,16 @@ public class Item {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "title='" + title + '\'' +
+                ", info='" + info + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                ", address='" + address + '\'' +
+                ", photo='" + photo + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

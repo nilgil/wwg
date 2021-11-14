@@ -21,8 +21,8 @@
     <!--  SqlSessionFactory 빈 등록, 설정 파일, 매퍼 위치 등록 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:/mybatis_config.xml"/>
-        <property name="mapperLocations" value="classpath:/sql/*/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis_config.xml"/>
+        <property name="mapperLocations" value="classpath:sql/**/*.xml"/>
     </bean>
 
     <!-- SqlSession 빈 등록,  -->
