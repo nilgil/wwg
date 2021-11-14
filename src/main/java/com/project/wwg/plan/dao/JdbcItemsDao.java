@@ -10,12 +10,12 @@ import java.sql.*;
 import java.util.List;
 
 @Repository
-public class JdbcItemDao implements ItemDao {
+public class JdbcItemsDao implements ItemsDao {
 
     private final DataSource dataSource;
 
     @Autowired
-    public JdbcItemDao(DataSource dataSource) {
+    public JdbcItemsDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

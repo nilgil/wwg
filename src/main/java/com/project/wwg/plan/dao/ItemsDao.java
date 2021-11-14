@@ -9,7 +9,7 @@ import java.util.List;
  * 아이템 DAO
  * @author giri
  */
-public interface ItemDao {
+public interface ItemsDao {
     int insertItem(Item item);
 
     int insertItems(List<Item> items);

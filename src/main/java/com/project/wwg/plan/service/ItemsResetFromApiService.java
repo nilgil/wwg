@@ -1,12 +1,11 @@
 package com.project.wwg.plan.service;
 
-import com.project.wwg.plan.dao.ItemDao;
+import com.project.wwg.plan.dao.ItemsDao;
 import com.project.wwg.plan.dto.Item;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,15 +39,15 @@ public class ItemsResetFromApiService {
     private JSONObject currentObj;
     private Object dummy = new JSONObject();
     private StringBuilder stringBuilder;
-    private ItemDao itemDao;
+    private ItemsDao itemsDao;
     private URL url;
     private HttpURLConnection connection;
     private BufferedReader br;
     private String line;
 
     @Autowired
-    public ItemsResetFromApiService(ItemDao itemDao) {
-        this.itemDao = itemDao;
+    public ItemsResetFromApiService(ItemsDao itemsDao) {
+        this.itemsDao = itemsDao;
     }
 
     /**
@@ -71,7 +70,7 @@ public class ItemsResetFromApiService {
 
             System.out.println("Delete Items : " + deleteAllItems());
             System.out.println("New Items : " + items.size());
-            result = itemDao.insertItems(items);
+            result = itemsDao.insertItems(items);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,7 +190,7 @@ public class ItemsResetFromApiService {
     }
 
     public int deleteAllItems() {
-        return itemDao.deleteAllItems();
+        return itemsDao.deleteAllItems();
     }
 
 }

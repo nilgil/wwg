@@ -3,16 +3,15 @@ package com.project.wwg.plan.dao;
 import com.project.wwg.plan.dto.Item;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class MybatisItemDao implements ItemDao {
+public class MybatisItemsDao implements ItemsDao {
 
     private SqlSessionTemplate sqlSession;
 
     @Autowired
-    public MybatisItemDao(SqlSessionTemplate sqlSession) {
+    public MybatisItemsDao(SqlSessionTemplate sqlSession) {
         this.sqlSession = sqlSession;
     }
 
