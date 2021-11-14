@@ -5,10 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-    <!-- Root Context: defines shared resources visible to all other web components -->
-
+    <!-- jdbc 설정을 담은 jdbc.properties 파일을 불러온다. -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
+    <!-- DataSource 구현 클래스 ComboPooledDataSource 빈 등록 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClassName}"/>
@@ -18,13 +18,14 @@
         <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
     </bean>
 
-    <!-- 스프링 jdbc 즉 스프링으로 oracle 디비 연결 -->
+    <!--  SqlSessionFactory 빈 등록, 설정 파일, 매퍼 위치 등록 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:/configuration.xml"/>
+        <property name="configLocation" value="classpath:/mybatis_config.xml"/>
         <property name="mapperLocations" value="classpath:/sql/*/*.xml"/>
     </bean>
 
+    <!-- SqlSession 빈 등록,  -->
     <bean id="session" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
