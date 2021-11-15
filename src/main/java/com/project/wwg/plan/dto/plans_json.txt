@@ -1,0 +1,13 @@
+{
+    "plans":
+        {
+            "day1": {
+                "plan1":{"category": "spot", "id": "76", "expense": "12000"},
+                "plan2":{"category": "stay", "id": "23", "expense": "24000"}
+            }
+            "day2": {
+                "plan1":{"category": "rest", "id": "41", "expense": "32000"},
+                "plan2":{"category": "stay", "id": "23", "expense": "18000"}
+            }
+        }
+}

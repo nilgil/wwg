@@ -1,6 +1,5 @@
 package com.project.wwg.secu.service;
 
-import com.project.wwg.secu.controller.TestController;
 import com.project.wwg.secu.dao.TestDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
