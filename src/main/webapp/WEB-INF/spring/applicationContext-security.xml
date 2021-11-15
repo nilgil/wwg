@@ -13,6 +13,7 @@
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="permitAll"/>
 
+
         <!--폼 로그인에 대한 처리 설정-->
         <form-login
                 username-parameter="id"
@@ -39,8 +40,6 @@
                                <!--group-authorities-by-username-query="select g.id, g.group_name, ga.authority from groups g, group_members gm, group_authorities ga where gm.username = ? and g.id = ga.group_id and g.id = gm.group_id"-->
         </authentication-provider>
     </authentication-manager>
-
-
 
     <!--테스트를 위한 기본적인 유저정보 입력-->
 <!--    <authentication-manager>-->
