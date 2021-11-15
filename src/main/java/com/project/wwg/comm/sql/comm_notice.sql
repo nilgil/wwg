@@ -11,3 +11,4 @@ create table comm_notice (
 	);               
 	
 	select * from COMM_NOTICE;
+	select * from tab;
