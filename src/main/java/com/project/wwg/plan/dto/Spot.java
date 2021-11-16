@@ -9,8 +9,8 @@ public class Spot {
     @NonNull
     private String title;
     private String info;
-    private double lat;
-    private double lng;
+    private Double lat;
+    private Double lng;
     private String address;
     private String photo;
     private String phone;

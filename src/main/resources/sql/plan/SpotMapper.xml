@@ -34,6 +34,7 @@
         <foreach collection="list" item="spot" separator=",">
             (#{spot.title}, #{spot.info}, #{spot.lat}, #{spot.lng}, #{spot.address}, #{spot.photo}, #{spot.phone})
         </foreach>
+        ;
     </insert>
 
     <delete id="deleteSpot" parameterType="String">

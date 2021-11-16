@@ -205,14 +205,12 @@ public class SpotServiceImpl implements SpotService {
                     System.out.println("lat 없음");
                     continue;
                 }
-                double lat = latD.doubleValue();
 
                 Double lngD = (Double) currentObj.get("longitude");
                 if (lngD == null) {
                     System.out.println("lng 없음");
                     continue;
                 }
-                double lng = lngD.doubleValue();
 
                 String address = (String) currentObj.get("roadaddress");
                 if (address == null) {
@@ -236,8 +234,7 @@ public class SpotServiceImpl implements SpotService {
                     phone = "--";
                 }
 
-                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
-                Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
+                Spot spot = new Spot(title, info, latD, lngD, address, photo, phone);
                 spots.add(spot);
             }
             System.out.println(spots.size());
