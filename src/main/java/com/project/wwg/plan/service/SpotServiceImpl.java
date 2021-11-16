@@ -195,15 +195,6 @@ public class SpotServiceImpl implements SpotService {
                 double lng = (double) currentObj.getOrDefault("longitude", 0);
                 String address = (String) currentObj.getOrDefault("roadaddress", "");
 
-//                if (currentObj.get("latitude") != null) {
-//                    latD = (Double) currentObj.get("latitude");
-//                    lat = new BigDecimal(latD);
-//                }
-//                if (currentObj.get("longitude") != null) {
-//                    lngD = (Double) currentObj.get("longitude");
-//                    lng = new BigDecimal(lngD);
-//                }
-
                 String photo = "";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
                 if (photo1 != null) {
