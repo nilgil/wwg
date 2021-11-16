@@ -1,38 +1,48 @@
 package com.project.wwg.secu.service;
 
-import com.project.wwg.secu.dao.UserMapper;
-import com.project.wwg.secu.dto.UserDetailsVO;
-import com.project.wwg.secu.dto.UserInfoVO;
+import com.project.wwg.secu.dao.TestDao;
+import com.project.wwg.secu.dto.UserDetailsDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+@Service("userDetailsServiceCustom")
 public class UserDetailsServiceCustom implements UserDetailsService {
+    private static final Log LOG = LogFactory.getLog(TestDao.class);
+    private SqlSession sqlSession;
+    private final String NAMESPACE = "UserMapper.";
+
     @Autowired
-    private UserMapper mapper;
+    UserDetailsServiceCustom(SqlSession sqlSession){
+        this.sqlSession = sqlSession;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String inputUserId) {
-
+    public UserDetails loadUserByUsername(String inputUserId) throws UsernameNotFoundException {
+        LOG.info("UserDetails 시작");
         // 최종적으로 리턴해야할 객체
-        UserDetailsVO userDetails = new UserDetailsVO();
+        UserDetailsDto userDetails = null;
+        //권한을 받아오는 객체
+        List<String> authList = null;
 
         // 사용자 정보 select
-        UserInfoVO userInfo = mapper.selectUserInfoOne(inputUserId);
+        userDetails = sqlSession.selectOne(NAMESPACE+"getUserInfos", inputUserId);
+        authList = sqlSession.selectList(NAMESPACE+"getUserAuth", inputUserId);
 
         // 사용자 정보 없으면 null 처리
-        if (userInfo == null) {
-            return null;
+        if (userDetails == null) {
+            throw new UsernameNotFoundException(inputUserId);
 
             // 사용자 정보 있을 경우 로직 전개 (userDetails에 데이터 넣기)
         } else {
-            userDetails.setUsername(userInfo.getUsername());
-            userDetails.setPassword(userInfo.getPassword());
-
-            // 사용자 권한 select해서 받아온 List<String> 객체 주입
-            userDetails.setAuthorities(mapper.selectUserAuthOne(inputUserId));
+            userDetails.setAuthorities(authList);
             return userDetails;
         }
     }

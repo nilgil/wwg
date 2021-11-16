@@ -5,8 +5,7 @@
     <typeAliases>
         <!--길재우-->
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
-        <typeAlias type="com.project.wwg.secu.dto.UserInfoVO" alias="UserInfoVO"/>
-        <typeAlias type="com.project.wwg.secu.dto.UserDetailsVO" alias="UserDetailsVO"/>
+        <typeAlias type="com.project.wwg.secu.dto.UserDetailsDto" alias="UserDetailsDto"/>
 
         <!--코딩노비 1-->
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>

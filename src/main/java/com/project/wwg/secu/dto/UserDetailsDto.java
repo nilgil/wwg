@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UserDetailsVO implements UserDetails {
+public class UserDetailsDto implements UserDetails {
     // 안만들어도 상관없지만 Warning이 발생함
     private static final long serialVersionUID = 1L;
 
