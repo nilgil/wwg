@@ -21,12 +21,12 @@ public class FoodBoardDao {
 	
 	// 글갯수
 	public int getCount() {
-		return session.selectOne("count");
+		return session.selectOne("foodMapper.count");
 	}
 
 	// 총 데이터 갯수
 	public List<FoodBoard> getFoodList(int page) {
-		return session.selectList("list", page);
+		return session.selectList("foodMapper.list", page);
 	}
 
 
