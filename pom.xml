@@ -206,7 +206,7 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Test -->
+		<!-- EnTest -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
