@@ -190,19 +190,34 @@ public class SpotServiceImpl implements SpotService {
                 JSONObject currentObj = (JSONObject) jsonArray.get(i);
 
                 String title = (String) currentObj.get("title");
-                String info = (String) currentObj.getOrDefault("introduction", "");
-                double lat = (double) currentObj.getOrDefault("latitude", 0);
-                double lng = (double) currentObj.getOrDefault("longitude", 0);
-                String address = (String) currentObj.getOrDefault("roadaddress", "");
+                if (title == null) {
+                    System.out.println("title 없음");
+                    continue;
+                }
 
-//                if (currentObj.get("latitude") != null) {
-//                    latD = (Double) currentObj.get("latitude");
-//                    lat = new BigDecimal(latD);
-//                }
-//                if (currentObj.get("longitude") != null) {
-//                    lngD = (Double) currentObj.get("longitude");
-//                    lng = new BigDecimal(lngD);
-//                }
+                String info = (String) currentObj.get("introduction");
+                if (info == null) {
+                    info = "--";
+                }
+
+                Double latD = (Double) currentObj.get("latitude");
+                if (latD == null) {
+                    System.out.println("lat 없음");
+                    continue;
+                }
+                double lat = latD.doubleValue();
+
+                Double lngD = (Double) currentObj.get("longitude");
+                if (lngD == null) {
+                    System.out.println("lng 없음");
+                    continue;
+                }
+                double lng = lngD.doubleValue();
+
+                String address = (String) currentObj.get("roadaddress");
+                if (address == null) {
+                    address = "--";
+                }
 
                 String photo = "";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
@@ -212,13 +227,20 @@ public class SpotServiceImpl implements SpotService {
                         photo = (String) photo2.get("imgpath");
                     }
                 }
+                if (photo == null) {
+                    photo = "--";
+                }
 
-                String phone = (String) currentObj.getOrDefault("phoneno", "");
-                String id = (String) currentObj.getOrDefault("phoneno", "");
+                String phone = (String) currentObj.get("phoneno");
+                if (phone == null) {
+                    phone = "--";
+                }
 
-                Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
+                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
+                Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
             }
+            System.out.println(spots.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
