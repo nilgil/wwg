@@ -5,6 +5,10 @@
     <typeAliases>
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
+<<<<<<< HEAD
+        <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>
+=======
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
+>>>>>>> 413ad88bf5778ca0ed88fa5a3a17b02b1ab2e4c4
     </typeAliases>
 </configuration>

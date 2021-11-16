@@ -90,6 +90,10 @@ create table trip_food_like(
     food_like number default 0
 );
 
+<<<<<<< HEAD
+create sequence trip_seq;
+insert into trip_food values(trip_seq.nextval,'홍길동','게시판 연습','게시판 내용',0,sysdate,0);
+=======
 
 -- QnA 게시판
 drop table qna_board;
@@ -106,3 +110,4 @@ create table qna_board(
 );
 
 select * from tab;
+>>>>>>> 413ad88bf5778ca0ed88fa5a3a17b02b1ab2e4c4
