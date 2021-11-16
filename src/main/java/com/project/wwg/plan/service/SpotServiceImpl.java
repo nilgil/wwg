@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -104,6 +105,8 @@ public class SpotServiceImpl implements SpotService {
                 jsonToList(searchSpotsFromApi(i));
             }
             deleteAllSpots();
+
+            System.out.println(spots.size());
             result = spotDao.insertSpots(spots);
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,16 +203,17 @@ public class SpotServiceImpl implements SpotService {
                     info = "--";
                 }
 
-                Double latD = (Double) currentObj.get("latitude");
-                if (latD == null) {
-                    System.out.println("lat 없음");
-                    continue;
+                BigDecimal lat = new BigDecimal(0);
+                BigDecimal lng = new BigDecimal(0);
+                Double latD;
+                Double lngD;
+                if (currentObj.get("latitude") != null) {
+                    latD = (Double) currentObj.get("latitude");
+                    lat = new BigDecimal(latD);
                 }
-
-                Double lngD = (Double) currentObj.get("longitude");
-                if (lngD == null) {
-                    System.out.println("lng 없음");
-                    continue;
+                if (currentObj.get("longitude") != null) {
+                    lngD = (Double) currentObj.get("longitude");
+                    lng = new BigDecimal(lngD);
                 }
 
                 String address = (String) currentObj.get("roadaddress");
@@ -234,10 +238,9 @@ public class SpotServiceImpl implements SpotService {
                     phone = "--";
                 }
 
-                Spot spot = new Spot(title, info, latD, lngD, address, photo, phone);
+                Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
             }
-            System.out.println(spots.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
