@@ -1,78 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<display-name>wwg</display-name>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>wwg</display-name>
 
-	<!-- UTF-8 인코딩 필터 -->
-	<filter>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <!-- UTF-8 인코딩 필터 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-	<!-- 시큐리티 인코딩 필터 -->
-<<<<<<< HEAD
-<!--	<filter>-->
-<!--		<filter-name>springSecurityFilterChain</filter-name>-->
-<!--		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-<!--	</filter>-->
-<!--	<filter-mapping>-->
-<!--		<filter-name>springSecurityFilterChain</filter-name>-->
-<!--		<url-pattern>/*</url-pattern>-->
-<!--	</filter-mapping>-->
-=======
-<!-- 	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
->>>>>>> d4d4794971f474fa1b5fbd0434113275bb05da0a
+    <!-- 시큐리티 인코딩 필터 -->
+    <!--	<filter>-->
+    <!--		<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--	</filter>-->
+    <!--	<filter-mapping>-->
+    <!--		<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--		<url-pattern>/*</url-pattern>-->
+    <!--	</filter-mapping>-->
 
-	<!-- 모든 서블릿, 필터에 공유되는 루트 컨텍스트 생성 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
-	<!-- 루트 컨텍스트에 포함할 설정파일 등록 -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/spring/root-context.xml
-			<!--시큐리티 설정파일-->
-			/WEB-INF/spring/applicationContext-security.xml
-		</param-value>
-	</context-param>
+    <!-- 모든 서블릿, 필터에 공유되는 루트 컨텍스트 생성 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-	<!-- DispatcherServlet 등록, servlet-context.xml은 DispatcherServlet 에서만 유효한 설정파일 -->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <!-- 루트 컨텍스트에 포함할 설정파일 등록 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/root-context.xml
+            <!--시큐리티 설정파일-->
+            /WEB-INF/spring/applicationContext-security.xml
+        </param-value>
+    </context-param>
 
-	<!-- 모든 요청은 DispatcherServlet을 거친다 -->
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <!-- DispatcherServlet 등록, servlet-context.xml은 DispatcherServlet 에서만 유효한 설정파일 -->
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- 모든 요청은 DispatcherServlet을 거친다 -->
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 </web-app>
