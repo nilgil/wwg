@@ -90,5 +90,24 @@ create table trip_food_like(
     food_like number default 0
 );
 
+<<<<<<< HEAD
 create sequence trip_seq;
 insert into trip_food values(trip_seq.nextval,'홍길동','게시판 연습','게시판 내용',0,sysdate,0);
+=======
+
+-- QnA 게시판
+drop table qna_board;
+create table qna_board(
+      qna_no number primary key,
+      username varchar2(20) references users(username), --FK
+      qna_title varchar2(50),
+      qna_content varchar2(500),
+      qna_regdate date not null,
+      qna_re_ref number not null,  --부모 댓글 번호
+      qna_re_lev number not null,  --자식 댓글 순서
+      qna_re_seq number not null,  --댓글 오름차순 순서
+      qna_hit number default 0
+);
+
+select * from tab;
+>>>>>>> 413ad88bf5778ca0ed88fa5a3a17b02b1ab2e4c4
