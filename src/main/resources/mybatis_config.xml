@@ -4,7 +4,11 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
+<<<<<<< HEAD:src/main/resources/configuration.xml
         <typeAlias type="com.project.wwg.plan.dto.Item" alias="Item"/>
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
+=======
+        <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
+>>>>>>> 3901b2d3f0930ab6d3b7b6bf669c94385500892c:src/main/resources/mybatis_config.xml
     </typeAliases>
 </configuration>
