@@ -5,5 +5,6 @@
     <typeAliases>
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
+        <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>
     </typeAliases>
 </configuration>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="foodMapper">
+
+<!-- 글작성 / alias="FoodBoard" -->
+	<insert id="insert" parameterType="FoodBoard">
+        insert into trip_food values(#{food_no},0,
+		#{food_title},#{food_content},0,sysdate,0)
+	</insert>
+
+<!-- 글갯수 -->
+	<select id="count" resultType="int">
+		select count(*) from trip_food
+	</select>
+	
+<!-- 글목록 / alias="FoodBoard" -->
+	<select id="list" parameterType="int" resultType="FoodBoard">
+		<![CDATA[
+		select * from ( select rownum rnum, FoodBoard.* from (
+		select * from trip_food order by food_no desc) FoodBoard )
+		where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page}*10)
+		]]>
+	</select>	
+
+</mapper>

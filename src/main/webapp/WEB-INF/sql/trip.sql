@@ -89,3 +89,6 @@ create table trip_food_like(
     username varchar2(20) not null references users(username),
     food_like number default 0
 );
+
+create sequence trip_seq;
+insert into trip_food values(trip_seq.nextval,'홍길동','게시판 연습','게시판 내용',0,sysdate,0);
