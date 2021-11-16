@@ -6,7 +6,9 @@ import com.project.wwg.secu.dto.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDetailsServiceCustom implements UserDetailsService {
     @Autowired
     private UserMapper mapper;
@@ -26,8 +28,8 @@ public class UserDetailsServiceCustom implements UserDetailsService {
 
             // 사용자 정보 있을 경우 로직 전개 (userDetails에 데이터 넣기)
         } else {
-            userDetails.setUsername(userInfo.getUserId());
-            userDetails.setPassword(userInfo.getUserPw());
+            userDetails.setUsername(userInfo.getUsername());
+            userDetails.setPassword(userInfo.getPassword());
 
             // 사용자 권한 select해서 받아온 List<String> 객체 주입
             userDetails.setAuthorities(mapper.selectUserAuthOne(inputUserId));

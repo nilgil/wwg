@@ -4,6 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserMapper">
+    <select id="getUserInfos" parameterType="String" resultType="UserInfoVO">
+        SELECT * from Users where username = #{username}
+    </select>
 
+    <select id="getUserAuth" parameterType="String" resultType="String">
+        select authority from authorities where username = #{username}
+    </select>
 
 </mapper>

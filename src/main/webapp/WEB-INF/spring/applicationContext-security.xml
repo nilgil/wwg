@@ -25,7 +25,6 @@
                 login-processing-url="/login"
                 login-page="/loginPage"
                 default-target-url="/all"
-                authentication-failure-handler-ref="userLoginFailHandler"
         />
         <logout
                 logout-url="/logout"
@@ -37,7 +36,7 @@
 
     <!-- provider -->
     <authentication-manager>
-        <authentication-provider ref="userLoginAuthenticationProvider">
+        <authentication-provider user-service-ref="userDetailsServiceCustom">
         </authentication-provider>
     </authentication-manager>
 
