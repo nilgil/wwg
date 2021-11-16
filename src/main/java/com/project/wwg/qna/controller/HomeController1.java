@@ -33,7 +33,7 @@ public class HomeController1 {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "qna/navbar";
+		return "qna/write";
 	}
 	
 }

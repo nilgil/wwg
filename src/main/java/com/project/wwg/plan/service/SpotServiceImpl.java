@@ -207,8 +207,10 @@ public class SpotServiceImpl implements SpotService {
                 String phone = (String) currentObj.getOrDefault("phoneno", "");
                 String id = (String) currentObj.getOrDefault("phoneno", "");
 
-                Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
-                spots.add(spot);
+				/*
+				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
+				 * spots.add(spot);
+				 */
             }
         } catch (Exception e) {
             e.printStackTrace();

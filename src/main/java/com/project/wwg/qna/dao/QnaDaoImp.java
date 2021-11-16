@@ -39,4 +39,11 @@ public class QnaDaoImp implements QnaDao{
 		return st.delete("qnans.delete", qna_no);
 	}
 
+	@Override
+	public int getMaxNum() {
+		// TODO Auto-generated method stub
+		return st.selectOne("qnans.getMaxNum");
+	}
+	
+
 }

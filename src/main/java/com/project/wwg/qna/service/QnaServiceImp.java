@@ -42,4 +42,8 @@ public class QnaServiceImp implements QnaService{
 		return qd.delete(qna_no);
 	}
 	
+	public int getMaxNum() {
+		return qd.getMaxNum();
+	}
+	
 }
