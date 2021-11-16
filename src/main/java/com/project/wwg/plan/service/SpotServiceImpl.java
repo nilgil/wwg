@@ -190,12 +190,30 @@ public class SpotServiceImpl implements SpotService {
                 JSONObject currentObj = (JSONObject) jsonArray.get(i);
 
                 String title = (String) currentObj.get("title");
-                String info = (String) currentObj.getOrDefault("introduction", "");
-                double lat = (double) currentObj.getOrDefault("latitude", 0);
-                double lng = (double) currentObj.getOrDefault("longitude", 0);
-                String address = (String) currentObj.getOrDefault("roadaddress", "");
+                if (title == null) {
+                    System.out.println("title 없음");
+                    continue;
+                }
 
-                String photo = "";
+                String info = (String) currentObj.getOrDefault("introduction", "X");
+
+                Double latD = (Double) currentObj.get("latitude");
+                if (latD == null) {
+                    System.out.println("lat 없음");
+                    continue;
+                }
+                double lat = latD.doubleValue();
+
+                Double lngD = (Double) currentObj.get("longitude");
+                if ( lngD == null) {
+                    System.out.println("lng 없음");
+                    continue;
+                }
+                double lng = lngD.doubleValue();
+
+                String address = (String) currentObj.getOrDefault("roadaddress", "X");
+
+                String photo = "X";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
                 if (photo1 != null) {
                     JSONObject photo2 = (JSONObject) photo1.get("photoid");
@@ -204,12 +222,13 @@ public class SpotServiceImpl implements SpotService {
                     }
                 }
 
-                String phone = (String) currentObj.getOrDefault("phoneno", "");
-                String id = (String) currentObj.getOrDefault("phoneno", "");
+                String phone = (String) currentObj.getOrDefault("phoneno", "X");
 
-                Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
+                System.out.println(title+"\n"+info+"\n"+lat+"\n"+lng+"\n"+address+"\n"+photo+"\n"+phone);
+                Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
             }
+            System.out.println(spots.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -23,6 +23,16 @@
 	</filter-mapping>
 
 	<!-- 시큐리티 인코딩 필터 -->
+<<<<<<< HEAD
+<!--	<filter>-->
+<!--		<filter-name>springSecurityFilterChain</filter-name>-->
+<!--		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+<!--	</filter>-->
+<!--	<filter-mapping>-->
+<!--		<filter-name>springSecurityFilterChain</filter-name>-->
+<!--		<url-pattern>/*</url-pattern>-->
+<!--	</filter-mapping>-->
+=======
 <!-- 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -31,6 +41,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
+>>>>>>> d4d4794971f474fa1b5fbd0434113275bb05da0a
 
 	<!-- 모든 서블릿, 필터에 공유되는 루트 컨텍스트 생성 -->
 	<listener>

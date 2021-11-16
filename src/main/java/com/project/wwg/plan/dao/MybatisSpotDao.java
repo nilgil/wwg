@@ -37,23 +37,23 @@ public class MybatisSpotDao implements SpotDao {
     /**
      * Spot 1개 insert
      *
-     * @param item
+     * @param spot
      * @return
      */
     @Override
-    public void insertSpot(Spot item) {
-        sqlSession.insert("spot.insertSpot", item);
+    public void insertSpot(Spot spot) {
+        sqlSession.insert("spot.insertSpot", spot);
     }
 
     /**
      * Spot 여러 개 insert
      *
-     * @param items
+     * @param spots
      * @return
      */
     @Override
-    public int insertSpots(List<Spot> items) {
-        return sqlSession.insert("spot.insertSpots", items);
+    public int insertSpots(List<Spot> spots) {
+        return sqlSession.insert("spot.insertSpots", spots);
     }
 
     /**

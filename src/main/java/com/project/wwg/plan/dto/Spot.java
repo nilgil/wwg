@@ -3,6 +3,7 @@ package com.project.wwg.plan.dto;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Spot {
     @NonNull
@@ -13,6 +14,4 @@ public class Spot {
     private String address;
     private String photo;
     private String phone;
-    @NonNull
-    private String id;
 }
