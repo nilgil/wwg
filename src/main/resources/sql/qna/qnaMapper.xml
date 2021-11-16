@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="qnans">
+
+<!-- <resultMap type="qnatype" id="qna">
+<result property="qna_no" column="qna_no"  />
+<result property="username" column="username" />
+<result property="qna_title" column="qna_title" />
+<result property="qna_content" column="qna_content" />
+<result property="qna_regdate" column="qna_regdate" />
+<result property="qna_re_ref" column="qna_re_ref" />
+<result property="qna_re_lev" column="qna_re_lev" />
+<result property="qna_re_seq" column="qna_re_seq" />
+<result property="qna_hit" column="qna_hit" />
+</resultMap> -->
+
+<select id="list" resultType="qna">
+ select * from qna_board order by qna_no
+</select>
+
+<select id="select" parameterType="int" resultType="qna">
+ select * from qna_board where qna_no=#{qna_no}
+</select>
+
+</mapper>        
+        

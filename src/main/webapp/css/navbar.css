@@ -1,0 +1,133 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    margin: 0%;
+    font-family: 'paybooc-Bold';
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:whitesmoke;
+    padding: 20px 30px;
+}
+a{
+    text-decoration: none;
+    color: rgb(49, 48, 41);
+}
+
+.navbar_logo{
+    color:rgb(49, 48, 41);
+    font-size: 25px;
+    padding: 8px 12px;
+}
+.navbar_logo img{
+    width: 80px;
+}
+.navbar_menu{
+display: flex;
+list-style: none;
+padding-left: 0%;
+margin-bottom: 0px;
+}
+.navbar_menu li{
+    padding: 8px 24px;
+    position: relative;
+    list-style: none;
+}
+.navbar_menu li li{
+    padding: 1px 1px;
+    top: 20px;
+    display: flex;
+    background-color: whitesmoke;
+}
+/* .navbar_menu li:hover{
+    background-color:gray;
+    border-radius: 4px;
+} */
+
+.navbar_menu ul{
+    display: none;
+    position: absolute;
+    /* top: 0%; */
+    left: 0%; 
+}
+
+.navbar_menu li:hover > ul{
+    display: block;
+}
+
+/* .navbar_icons{
+    display: flex;
+    list-style: none;
+    color: rgb(49, 48, 41);
+    padding-left: 0%;
+}
+.navbar_icons li{
+    padding: 8px 12px;
+} */
+.navbar_search{
+    display: flex;
+    list-style: none;
+    padding-left: 0%;
+    margin-bottom: 0px;
+}
+.navbar_search li{
+    padding: 8px 0px;
+}
+.navbar_toogleBtn{
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: rgb(49, 48, 41);
+    display: none;
+    padding: 8px 12px;
+}
+
+/* 반응형 웹 기능 */
+@media screen and (max-width: 48rem){
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+    .navbar_menu{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar_menu li{
+        width: 100%;
+        text-align: center;
+    }
+    .navbar_search{
+        display: none;
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar_toogleBtn{
+        display: block;
+    }
+    .navbar_menu.active,
+    .navbar_icons.active{
+        display: flex;
+    }
+    .center{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin: 0%;
+        width: 78%;
+        text-align: center;
+    }
+    .navbar_menu li li{
+        display: none;
+    }
+}
