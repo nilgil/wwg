@@ -3,19 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="spot">
-<!--    <select id="getSpotsList" resultType="Spot" parameterType="Integer">-->
-<!--        <![CDATA[-->
-<!--        SELECT *-->
-<!--        FROM (-->
-<!--                 SELECT a.*, ROWNUM as rnum-->
-<!--                 FROM (-->
-<!--                          SELECT *-->
-<!--                          FROM plan_item-->
-<!--                          ORDER BY title DESC) a)-->
-<!--        WHERE rnum >= 1-->
-<!--          and rnum <= 3-->
-<!--        ]]>-->
-<!--    </select>-->
+    <!--    <select id="getSpotsList" resultType="Spot" parameterType="Integer">-->
+    <!--        <![CDATA[-->
+    <!--        SELECT *-->
+    <!--        FROM (-->
+    <!--                 SELECT a.*, ROWNUM as rnum-->
+    <!--                 FROM (-->
+    <!--                          SELECT *-->
+    <!--                          FROM plan_item-->
+    <!--                          ORDER BY title DESC) a)-->
+    <!--        WHERE rnum >= 1-->
+    <!--          and rnum <= 3-->
+    <!--        ]]>-->
+    <!--    </select>-->
 
     <select id="searchSpot" resultType="Spot" parameterType="String">
         select *
@@ -32,7 +32,8 @@
         insert into plan_spot
         values
         <foreach collection="list" item="spot" separator=",">
-            ( #{spot.title}, #{spot.info}, #{spot.lat}, #{spot.lng}, #{spot.address}, #{spot.photo}, #{spot.phone} )
+            ("#{spot.title}", "#{spot.info}", #{spot.lat}, #{spot.lng}, "#{spot.address}", "#{spot.photo}",
+            "#{spot.phone}")
         </foreach>
     </insert>
 
