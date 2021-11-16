@@ -14,18 +14,38 @@ public class QnaController{
 	@Autowired
 	private QnaService qs; //service 인터페이스
 	
-	@RequestMapping("mainPage.do")
-	public String mainPage() {
-		return "mainPage";
+	//글작성폼
+	@RequestMapping("qnawriteform.do")
+	public String qnawriteform() {
+		return "qna/qnaWrite";
 	}
 	
-	@RequestMapping("/insert")
-	public String insert(Qna qna) {
-		int qna_no = qna.getQna_no();
-		int number = qs.getMaxNum();
-		qs.insert(qna);
+	//글작성
+	@RequestMapping("qnawrite.do")
+	public String qnainsert(Qna qna, Model model) {
 		
-		return "write_alert";
+		//글작성성공여부확인하기위해서
+		int result = qs.insert(qna);
+		
+		//값 공유
+		model.addAttribute("result", result);
+		
+		return "qna/qnaWriteTest";
 	}
+	
+	
+//	@RequestMapping("mainPage.do")
+//	public String mainPage() {
+//		return "mainPage";
+//	}
+	
+//	@RequestMapping("/insert")
+//	public String insert(Qna qna) {
+//		int qna_no = qna.getQna_no();
+//		int number = qs.getMaxNum();
+//		qs.insert(qna);
+//		
+//		return "write_alert";
+//	}
 	
 }

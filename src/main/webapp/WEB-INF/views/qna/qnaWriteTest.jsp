@@ -11,17 +11,19 @@
 </head>
 <body>
 
+<c:if test="${result > 0}">
 <script type="text/javascript">
 alert("입력성공");
 location.href="list";
 </script>
+</c:if>
 
+<c:if test="${result <= 0 }">
 <script type="text/javascript">
 alert("입력실패");
 history.go(-1);
 </script>
-
-
+</c:if>
 
 </body>
 </html>

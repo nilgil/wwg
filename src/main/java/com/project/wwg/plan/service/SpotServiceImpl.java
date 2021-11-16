@@ -227,16 +227,16 @@ public class SpotServiceImpl implements SpotService {
 
                 String phone = (String) currentObj.getOrDefault("phoneno", "X");
 
-<<<<<<< HEAD
+
 				/*
 				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
 				 * spots.add(spot);
 				 */
-=======
+
                 System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
->>>>>>> 3303664d055ad9e094c10010ae649a87677b3d31
+
             }
             System.out.println(spots.size());
         } catch (Exception e) {
