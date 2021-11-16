@@ -205,7 +205,7 @@ public class SpotServiceImpl implements SpotService {
                 double lat = latD.doubleValue();
 
                 Double lngD = (Double) currentObj.get("longitude");
-                if ( lngD == null) {
+                if (lngD == null) {
                     System.out.println("lng 없음");
                     continue;
                 }
@@ -213,7 +213,7 @@ public class SpotServiceImpl implements SpotService {
 
                 String address = (String) currentObj.getOrDefault("roadaddress", "X");
 
-                String photo = "X";
+                String photo = "";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
                 if (photo1 != null) {
                     JSONObject photo2 = (JSONObject) photo1.get("photoid");
@@ -221,10 +221,13 @@ public class SpotServiceImpl implements SpotService {
                         photo = (String) photo2.get("imgpath");
                     }
                 }
+                if (photo == null) {
+                    photo = "--";
+                }
 
                 String phone = (String) currentObj.getOrDefault("phoneno", "X");
 
-                System.out.println(title+"\n"+info+"\n"+lat+"\n"+lng+"\n"+address+"\n"+photo+"\n"+phone);
+                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
             }
