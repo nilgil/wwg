@@ -12,16 +12,8 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-<<<<<<< HEAD
-	
-	<context:component-scan base-package="com.project.wwg" />
-	
-	
-	
-=======
 
 	<!-- 어노테이션으로 컴포넌트를 설정할 수 있게 하며, 밑 패키지 범위에서 컴포넌트를 검색하여 빈 등록 -->
 	<context:component-scan base-package="com.project.wwg" />
 
->>>>>>> 3901b2d3f0930ab6d3b7b6bf669c94385500892c
 </beans:beans>

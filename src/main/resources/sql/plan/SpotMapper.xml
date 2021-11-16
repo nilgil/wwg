@@ -4,10 +4,10 @@
 
 <mapper namespace="spot">
     <select id="getSpotsList" resultType="Spot" parameterType="Integer">
-        SELECT * FROM (
+<!--         SELECT * FROM (
         SELECT a.*, ROWNUM as rnum FROM (
         SELECT * FROM plan_item ORDER BY title DESC) a)
-        WHERE rnum >= 1 and rnum<=3
+        WHERE rnum >= 1 and rnum<=3 -->
     </select>
 
     <select id="searchSpot" resultType="Spot" parameterType="String">
