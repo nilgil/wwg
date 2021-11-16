@@ -9,7 +9,7 @@
 <body>
 
 <script>
-	location.href="navbar";
+	location.href="/comm_list";
 </script>
 
 </body>

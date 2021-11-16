@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+<resultMap id="noticeresult"      type="notice">
+		<result property="notice_no"	     column="notice_no" />
+		<result property="member_id"    column="member_id" />
+		<result property="notice_title"   column="notice_title" />
+		<result property="notice_content"   column="notice_content" />
+		<result property="notice_regdate"     column="notice_regdate" />
+		<result property="notice_hit" column="notice_hit" />
+</resultMap>
+
+<insert id="insert" parameterType="notice">
+		insert into comm_notice values (#{notice_no},#{member_id},#{notice_title},
+		#{notice_content},sysdate,0)
+
+</insert>
+
+</mapper>
+

@@ -180,7 +180,8 @@ public class SpotServiceImpl implements SpotService {
      * @param response
      * @return Item들이 담긴 List 객체
      */
-    @Override
+    @Autowired
+	@Override
     public void jsonToList(String response) {
         try {
             JSONObject responseObj = (JSONObject) parser.parse(response);
@@ -208,7 +209,7 @@ public class SpotServiceImpl implements SpotService {
                 String id = (String) currentObj.getOrDefault("phoneno", "");
 
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
-                spots.add(spot);
+                spots.add(spot); 
             }
         } catch (Exception e) {
             e.printStackTrace();
