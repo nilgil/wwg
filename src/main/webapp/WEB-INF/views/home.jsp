@@ -13,5 +13,11 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<!-- 소정 test 중  -->
+<script type="text/javascript">
+location.href="qnawriteform.do";
+</script>
+
 </body>
 </html>

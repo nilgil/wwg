@@ -24,5 +24,14 @@
  select * from qna_board where qna_no=#{qna_no}
 </select>
 
+<select id="getMaxNum" resultType="int">
+ select nvl(max(num),0) + 1 from board
+</select>
+
+<insert id="insert" parameterType="qna">
+ insert into qna_board values (#{qna_no},0,#{qna_title},
+ #{qna_content},sysdate,#{qna_re_ref},#{qna_re_lev},#{qna_re_seq},0)
+</insert>
+
 </mapper>        
         

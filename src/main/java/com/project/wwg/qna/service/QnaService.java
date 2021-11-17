@@ -15,5 +15,7 @@ public interface QnaService{
 	int update(Qna qna);
 	
 	int delete(int qna_no);
+	
+	int getMaxNum();
 
 }
