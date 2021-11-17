@@ -25,7 +25,7 @@ public class FoodBoardController {
 	}
 	
 	// 글작성
-	@RequestMapping("foodwrite.do")
+	@RequestMapping("foodwrite")
 	public String foodwrite(FoodBoard foodboard, Model model) {
 		System.out.println("in");
 		System.out.println("food_title:"+foodboard.getFood_title());
