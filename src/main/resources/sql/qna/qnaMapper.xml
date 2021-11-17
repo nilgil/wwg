@@ -29,7 +29,7 @@
 </select>
 
 <insert id="insert" parameterType="qna">
- insert into qna_board values (#{qna_no},0,#{qna_tilte},
+ insert into qna_board values (#{qna_no},0,#{qna_title},
  #{qna_content},sysdate,#{qna_re_ref},#{qna_re_lev},#{qna_re_seq},0)
 </insert>
 

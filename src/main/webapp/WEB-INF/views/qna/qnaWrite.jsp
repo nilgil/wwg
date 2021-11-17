@@ -15,16 +15,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-<!--     <link rel='stylesheet' type='text/css' media='screen' href='write.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../include/footerbar.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../include/navbar.css'>
-    <script src='main.js'></script> -->
+<!--     <link rel='stylesheet' type='text/css' media='screen' href='write.css'> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/footerbar.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/navbar.css'>
+    <script src='./js/main.js'></script>
 </head>
 <body>
+
+<%-- <jsp:include page="navbar.jsp"></jsp:include> --%>
+
+<%-- 
     <!-- navbar -->
     <nav class="navbar">
         <div class="navbar_logo"><a href="mainPage.html"><img src="./img/jlogo.png"> 혼저옵서예</a></div>
-<%--         <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
+        <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div>
         
         <ul class="navbar_menu">
 
@@ -41,7 +45,6 @@
                 </div>
             </li>
         
-            
         <li>
             <div class="dropdown">
                 <button data-toggle="dropdown">
@@ -91,10 +94,10 @@
         </a>
         
         </nav>
-
+ --%>
     <!-- 여기서부터 write center -->
     <div class="write_center">
-    <form action="${path}/insert" method="post">
+    <form action="qnawrite.do" method="post">
     <!-- board_sidebar -->
     <div class="side"> 
         <table id="side_menu" class="table table-hover">
@@ -110,7 +113,7 @@
     </div>     
     
      <div class="write_main">
-      <table id="write_table" class="table table-hover" action="">
+      <table id="write_table" class="table table-hover" action="qnaWriteTest">
         <h2>문의글 작성</h2>
         <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
         <thead>
@@ -121,7 +124,7 @@
         <tbody>
         <tr>
             <td>아이디</td>
-            <td><input type="text" name="username" required="required" size="10" value="아이디불러오기"></td>
+            <td><input type="text" name="username" required="required" size="10" ></td>
         </tr>
         <tr>
             <td>제목</td>
@@ -151,19 +154,19 @@
             <div class="footer_menu">이메일 문의 | 개인정보취급방침 | 마케팅 문의 | 채용정보</div>
              <div class="footer_wrap">
               <div class="footer_friends">friends</div>
-                <a href="https://ijto.or.kr/korean/"><img src="../img/제주관광공사로고.jpg" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
-                <a href="https://www.jdcdutyfree.com/"><img src="../img/제주면세점.jpg" alt="제주면세점" width="150" height="150" title="면세점"></a>
-                <a href="https://www.skyscanner.co.kr/"><img src="../img/스카이스케너로고.jpg" alt="스카이스케너" width="150" height="150" title="항공권"></a>
-                <a href="https://www.agoda.com/"><img src="../img/아고다로고.jpg" alt="아고다" width="150" height="150" title="숙박"></a>
-                <a href="https://www.myrealtrip.com/"><img src="../img/마리트로고.jpg" alt="마이리틀트립" width="150" height="150" title="투어티켓"></a>
-                <a href="https://www.billycar.co.kr/"><img src="../img/빌리카로고.jpg" alt="빌리카" width="150" height="150" title="렌터카"></a>
+                <a href="https://ijto.or.kr/korean/"><img src="./img/제주관광공사로고.png" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
+                <a href="https://www.jdcdutyfree.com/"><img src="./img/제주면세점.png" alt="제주면세점" width="150" height="150" title="면세점"></a>
+                <a href="https://www.skyscanner.co.kr/"><img src="./img/스카이스케너로고.png" alt="스카이스케너" width="150" height="150" title="항공권"></a>
+                <a href="https://www.agoda.com/"><img src="./img/아고다로고.png" alt="아고다" width="150" height="150" title="숙박"></a>
+                <a href="https://www.myrealtrip.com/"><img src="./img/마리트로고.png" alt="마이리틀트립" width="150" height="150" title="투어티켓"></a>
+                <a href="https://www.billycar.co.kr/"><img src="./img/빌리카로고.png" alt="빌리카" width="150" height="150" title="렌터카"></a>
              </div>
             <div class="footer_footer">
               <p>(주) WWG</p>
               <p>주소 :  서울 마포구 신촌로 176 3층<br>
-              대표 : 정준희 | 개인정보책임자 : 길재우<br>
-              사업자등록번호 : 302-5 | 통신판매업신고번호 : 3025<br>
-              Copyright GC COMPANY Corp. All rights reserved.</p>
+                                      대표 : 정준희 | 개인정보책임자 : 길재우<br>
+                                      사업자등록번호 : 302-5 | 통신판매업신고번호 : 3025<br>
+                 Copyright GC COMPANY Corp. All rights reserved.</p>
             </div>
         </footer>
     </div>

@@ -17,6 +17,7 @@ public class QnaController{
 	//글작성폼
 	@RequestMapping("qnawriteform.do")
 	public String qnawriteform() {
+		System.out.println("qnawriteform성공");
 		return "qna/qnaWrite";
 	}
 	
@@ -24,11 +25,17 @@ public class QnaController{
 	@RequestMapping("qnawrite.do")
 	public String qnainsert(Qna qna, Model model) {
 		
+		System.out.println("qnawrite까지는 왔음");
+		
 		//글작성성공여부확인하기위해서
 		int result = qs.insert(qna);
 		
+		System.out.println("service에 있는 insert사용하겠다고신호OK");
+		
 		//값 공유
 		model.addAttribute("result", result);
+		
+		System.out.println("result값 공유했음");
 		
 		return "qna/qnaWriteTest";
 	}
