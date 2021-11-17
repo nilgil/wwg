@@ -11,7 +11,24 @@
 		<result property="notice_content"   column="notice_content" />
 		<result property="notice_regdate"     column="notice_regdate" />
 		<result property="notice_hit" column="notice_hit" />
-</resultMap>
+</resultMap> 
+
+<!-- <select id="list" parameterType="hashMap" resultMap="boardResult"> -->
+	<select id="list" parameterType="notice" resultMap="noticeresult">
+		select * from (select a.*,rowNum rn from (
+			select * from comm_notice
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				notice_title like '%'||#{keyword}||'%' or
+				notice_content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by notice_no desc) a )
+			where rn between #{startRow} and #{endRow}
+	</select>
 
 <insert id="insert" parameterType="notice">
 		insert into comm_notice values (#{notice_no},#{member_id},#{notice_title},
@@ -19,5 +36,19 @@
 
 </insert>
 
+<select id="getTotal" parameterType="notice" resultType="int">
+		select count(*) from comm_notice 
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				notice_title like '%'||#{keyword}||'%' or
+				notice_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+	
 </mapper>
 

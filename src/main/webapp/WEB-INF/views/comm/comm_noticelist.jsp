@@ -6,7 +6,7 @@
 <a href="./BoardForm.do">글쓰기</a>  <br>
 글갯수 : ${listcount} 개 <br>
 
-<%
+<%-- <%
 	int count = ((Integer)request.getAttribute("listcount")).intValue();
 %>
 글갯수 : <%=count %> 개 <br>
@@ -84,7 +84,7 @@
 
 </c:if>
 
-</center>
+</center> --%>
 
 
 

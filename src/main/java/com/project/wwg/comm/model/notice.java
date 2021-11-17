@@ -8,9 +8,50 @@ public class notice {
 	private String member_id;       // foreign key (임시)
 	private String notice_title;    // 공지사항 제목
 	private String notice_content;  // 공지사항 내용
-	private Date date;              // 공지사항 생성일자
+	private Date notice_regdate;    // 공지사항 생성일자
 	private int notice_hit;         // 공지사항 조회수
+	
+	// page
+	private int startRow;
+	private int endRow;
+	
+	// 검색
+	private String search;
+	
+	public int getStartRow() {
+		return startRow;
+	}
 
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	private String keyword;
+	
 	public int getNotice_no() {
 		return notice_no;
 	}
@@ -43,12 +84,13 @@ public class notice {
 		this.notice_content = notice_content;
 	}
 
-	public Date getDate() {
-		return date;
+
+	public Date getNotice_regdate() {
+		return notice_regdate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setNotice_regdate(Date notice_regdate) {
+		this.notice_regdate = notice_regdate;
 	}
 
 	public int getNotice_hit() {
