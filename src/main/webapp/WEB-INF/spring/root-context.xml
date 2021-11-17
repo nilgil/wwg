@@ -22,7 +22,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis_config.xml"/>
-        <property name="mapperLocations" value="classpath:sql/**/*.xml"/>
+        <property name="mapperLocations" value="classpath:mappers/**/*.xml"/>
     </bean>
 
     <!-- SqlSession 빈 등록,  -->
@@ -32,5 +32,6 @@
 
 <!--    <bean id="springSecurityFilterChain"-->
 <!--          class="org.springframework.web.filter.DelegatingFilterProxy"/>-->
+
 
 </beans>

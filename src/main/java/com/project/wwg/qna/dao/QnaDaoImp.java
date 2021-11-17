@@ -14,10 +14,12 @@ public class QnaDaoImp implements QnaDao{
 	@Autowired
 	private SqlSessionTemplate st;
 	
+
 	public List<Qna> list(){
 		return st.selectList("qnans.list");
 	}
 
+	//글작성
 	public int insert(Qna qna) {
 		// TODO Auto-generated method stub
 		return st.insert("qnans.insert", qna);
@@ -28,15 +30,24 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		return st.selectOne("qnans.select", qna_no);
 	}
+    
 
 	public int update(Qna qna) {
 		// TODO Auto-generated method stub
 		return st.update("qnans.update", qna);
 	}
+    
 
 	public int delete(int qna_no) {
 		// TODO Auto-generated method stub
 		return st.delete("qnans.delete", qna_no);
 	}
+
+	@Override
+	public int getMaxNum() {
+		// TODO Auto-generated method stub
+		return st.selectOne("qnans.getMaxNum");
+	}
+	
 
 }
