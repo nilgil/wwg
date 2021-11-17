@@ -49,6 +49,7 @@ public class FoodBoardServiceImpl implements FoodBoardService {
 		return dao.delete(food_no);
 	}
 
+	// 글 번호 증가
 	@Override
 	public int getMaxNum() {
 		return dao.getMaxNum();

@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="foodMapper">
-	<resultMap id="foodResult"      type="foodboard">
+	<resultMap id="foodResult"      type="FoodBoard">
 		<result property="food_no"	     column="food_no" />
 		<result property="username"    column="username" />
 		<result property="food_title"   column="food_title" />
@@ -19,13 +19,21 @@
 		#{food_title},#{food_content},0,sysdate,0)
 	</insert>
 
+	<select id="select" parameterType="int" resultType="FoodBoard">
+		select * from trip_food where food_no=#{food_no}
+	</select>
+<!-- 글번호 증가 -->
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(food_no),0) + 1 from trip_food
+	</select>
+
 <!-- 글갯수 -->
 	<select id="count" resultType="int">
 		select count(*) from trip_food
 	</select>
 	
 <!-- 글목록 / alias="FoodBoard" -->
-	<select id="list" parameterType="foodboard" resultMap="foodResult">
+	<select id="list" parameterType="FoodBoard" resultMap="foodResult">
 		select * from (select FoodBoard.*,rowNum rn from (
 			select * from trip_food
 		<where>
@@ -37,7 +45,7 @@
 				content like '%'||#{keyword}||'%'
 			</if>
 		</where>			
-			 ) FoodBoard )
+			 order by food_no desc) FoodBoard )
 			where rn between #{startRow} and #{endRow}
 	</select>
 	

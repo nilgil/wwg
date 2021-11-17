@@ -27,12 +27,14 @@ public class FoodBoardController {
 	
 	// 글작성
 	@RequestMapping("foodwrite.do")
-	public String foodwrite(FoodBoard foodboard, Model model) {
+	public String foodwrite(FoodBoard foodboard, Model model, HttpServletRequest request) {
 		System.out.println("in");
 		System.out.println("food_title:"+foodboard.getFood_title());
 		
+		int food_no = foodboard.getFood_no();
+		int number = service.getMaxNum();
+		foodboard.setFood_no(number);
 		int result = service.insert(foodboard);
-		
 		model.addAttribute("result", result);
 		
 		return "info/insertresult";

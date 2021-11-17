@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -7,79 +7,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목록</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-	<table border=1 align="center" width=800>
-		<caption>게시판 목록</caption>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>날짜</th>
-			<th>조회수</th>
-			<th>좋아요</th>
-		</tr>
+<table border=1 align="center" width=800>
+	<caption>게시판 목록</caption>
+			<tr>
+				<td>번호</td>
+				<td>제목</td>
+				<td>작성자</td>
+				<td>작성일</td>
+				<td>조회수</td>
+				<td>좋아요</td>
+			</tr>
+				<c:set var="no1" value="${no}"></c:set>
+				<c:forEach var="fb" items="${foodlist }">
+					<tr>
+						<td>${no1}</td>
+							<td><a href="foodcontent.do?food_no=${fb.food_no}&page=${page}">
+								${fb.food_title}
+								</a></td>
+							<td>${fb.username}</td>
+							<td><fmt:formatDate value="${fb.food_regdate}" 
+						pattern="yyyy-MM-dd HH:mm:ss"/></td>
+							<td>${fb.food_hit}</td>
+							<td>${fb.food_like}</td>
+					</tr>
+					<c:set var="no1" value="${no1-1}"></c:set>
+				</c:forEach>
+		</table>
+		<form align="center" action="${path}/foodlist/pageNum/1">
+			<select name="search">
+				<option value="subject"
+					<c:if test="${search=='food_title'}">selected="selected" </c:if>>제목</option>
+				<option value="content"
+					<c:if test="${search=='food_content'}">selected="selected" </c:if>>내용</option>
+				<option value="writer"
+					<c:if test="${search=='username'}">selected="selected" </c:if>>작성자</option>
+				<option value="subcon"
+					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
+			</select> 
+			<input type="text" name="keyword"> 
+			<input type="submit" value="확인">
+		</form>
 		
-		<!-- 화면 출력 번호 -->
-		<c:set var="num" value="${listcount-(page-1)*10 }"/>
-		
-		<c:forEach var="f" items="${foodlist}">
-		<tr>
-			<td>${num}
-				<c:set var="num" value="${num-1}"/>
-			</td>
-			<td>
-			<a href="foodcontent.do?food_no=${f.food_no}&page=${page}">
-				${f.food_title}
-			</a>
-			</td>
-			<td>${f.username}</td>
-			<td>
-				<fmt:formatDate value="${f.food_regdate}" 
-						pattern="yyyy-MM-dd HH:mm:ss"/>
-			</td>
-			<td>${f.food_hit}</td>
-			<td>${f.food_like}</td>
-		</tr>
-		</c:forEach>	
-	</table>
-
-<!-- 페이지 처리 -->
-<center>
-<c:if test="${listcount > 0}">
-
-	<!-- 1page로 이동 -->
-	<a href="foodlist.do?page=1" style="text-decoration:none"> << </a>
-	
-	<!-- 이전 블럭으로 이동 -->
-	<c:if test="${startPage > 10 }">
-		<a href="foodlist.do?page=${startPage-10}">[이전]</a>
-	</c:if>
-	
-	<!-- 각 블럭에 10개의 페이지 출력 -->
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-		<c:if test="${i == page }">		<!-- 현재 페이지 -->
-			[${i}]
-		</c:if>
-		<c:if test="${i != page }">		<!-- 현재 페이지가 아닌 경우 -->
-			<a href="foodlist.do?page=${i}">[${i}]</a>
-		</c:if>
-	</c:forEach>
-	
-	<!-- 다음 블럭으로 이동 -->
-	<c:if test="${endPage < pageCount }">
-		<a href="foodlist.do?page=${startPage+10}">[다음]</a>
-	</c:if>
-	
-	<!-- 마지막 페이지로 이동 -->
-	<a href="foodlist.do?page=${pageCount }" 
-		style="text-decoration:none"> >> </a>
-	
-</c:if>
-</center>
-	<a href="foodform.do">글작성</a>
-	글갯수 : ${listcount }
+		<center>
+			<c:if test="${not empty keyword}">
+				<c:if test="${pp.startPage > pp.pagePerBlk }">
+					<li><a href="${path }/foodlist/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+						href="${path }/foodlist/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pp.endPage < pp.totalPage}">
+					<li><a href="${path }/foodlist/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
+				</c:if>
+			</c:if>
+			<c:if test="${empty keyword}">
+				<c:if test="${pp.startPage > pp.pagePerBlk }">
+					<li><a href="${path }/foodlist/pageNum/${pp.startPage - 1}">이전</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+						href="${path }/foodlist/pageNum/${i}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pp.endPage < pp.totalPage}">
+					<li><a href="${path }/foodlist/pageNum/${pp.endPage + 1}">다음</a></li>
+				</c:if>
+		  </c:if>
+		</center>
+		<div align="center">
+			<a href="${path}/foodform.do" class="btn btn-info">글 입력</a>
+		</div>
 </body>
 </html>
