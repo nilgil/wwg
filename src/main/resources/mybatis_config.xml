@@ -15,7 +15,9 @@
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
         <!-- -->
         <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>
+        <!-- 이소정  -->
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
+        <!--  -->
         <typeAlias type="com.project.wwg.comm.model.notice" alias="notice"/>
     </typeAliases>
 </configuration>

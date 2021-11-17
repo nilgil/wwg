@@ -27,6 +27,9 @@ body{
     margin: 20px;
     color: rgb(217, 221, 224);
 }
+.footer_friends{
+	font-size: small;
+}
 .footer_footer{
     margin: 20px;
     font-size: small;
