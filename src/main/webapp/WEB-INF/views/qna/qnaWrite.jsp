@@ -24,11 +24,11 @@
 
 <%-- <jsp:include page="navbar.jsp"></jsp:include> --%>
 
-<%-- 
+
     <!-- navbar -->
     <nav class="navbar">
         <div class="navbar_logo"><a href="mainPage.html"><img src="./img/jlogo.png"> 혼저옵서예</a></div>
-        <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div>
+ <%--        <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
         
         <ul class="navbar_menu">
 
@@ -94,7 +94,7 @@
         </a>
         
         </nav>
- --%>
+
     <!-- 여기서부터 write center -->
     <div class="write_center">
     <form action="qnawrite.do" method="post">
@@ -113,7 +113,7 @@
     </div>     
     
      <div class="write_main">
-      <table id="write_table" class="table table-hover" action="qnaWriteTest">
+      <table id="write_table" class="table table-hover">
         <h2>문의글 작성</h2>
         <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
         <thead>
@@ -122,10 +122,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+<!--         <tr>
             <td>아이디</td>
             <td><input type="text" name="username" required="required" size="10" ></td>
-        </tr>
+        </tr> -->
         <tr>
             <td>제목</td>
             <td><input type="text" name="qna_title" required="required" size="60" maxlength="70"></td>

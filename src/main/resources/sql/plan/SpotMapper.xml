@@ -3,19 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="spot">
-    <select id="getSpotsList" resultType="Spot" parameterType="Integer">
-        <![CDATA[
-        SELECT *
-        FROM (
-                 SELECT a.*, ROWNUM as rnum
-                 FROM (
-                          SELECT *
-                          FROM plan_item
-                          ORDER BY title DESC) a)
-        WHERE rnum >= 1
-          and rnum <= 3
-        ]]>
-    </select>
+    <!--    <select id="getSpotsList" resultType="Spot" parameterType="Integer">-->
+    <!--        <![CDATA[-->
+    <!--        SELECT *-->
+    <!--        FROM (-->
+    <!--                 SELECT a.*, ROWNUM as rnum-->
+    <!--                 FROM (-->
+    <!--                          SELECT *-->
+    <!--                          FROM plan_item-->
+    <!--                          ORDER BY title DESC) a)-->
+    <!--        WHERE rnum >= 1-->
+    <!--          and rnum <= 3-->
+    <!--        ]]>-->
+    <!--    </select>-->
 
     <select id="searchSpot" resultType="Spot" parameterType="String">
         select *
@@ -24,23 +24,30 @@
     </select>
 
     <insert id="insertSpot" parameterType="Spot">
-        insert into plan_spot (title, info, lat, lng, address, photo, phone)
+        insert into plan_spot
         values (#{title}, #{info}, #{lat}, #{lng}, #{address}, #{photo}, #{phone})
     </insert>
 
-    <insert id="insertSpots" parameterType="Spot">
-        insert into plan_spot (title, info, lat, lng, address, photo, phone)
-        values
-        <foreach collection="list" item="spot" separator=",">
-            (#{spot.title}, #{spot.info}, #{spot.lat}, #{spot.lng}, #{spot.address}, #{spot.photo}, #{spot.phone})
+    <update id="insertSpots" parameterType="java.util.List">
+        <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+            INTO plan_spot
+            VALUES (
+            #{spot.title}
+            , #{spot.info}
+            , #{spot.lat}
+            , #{spot.lng}
+            , #{spot.address}
+            , #{spot.photo}
+            , #{spot.phone}
+            )
         </foreach>
-    </insert>
+    </update>
 
-    <delete id="deleteSpot" parameterType="String">
-        delete
-        from plan_spot
-        where id = #{id}
-    </delete>
+    <!--    <delete id="deleteSpot" parameterType="String">-->
+    <!--        delete-->
+    <!--        from plan_spot-->
+    <!--        where id = #{id}-->
+    <!--    </delete>-->
 
     <delete id="deleteAllSpots">
         delete

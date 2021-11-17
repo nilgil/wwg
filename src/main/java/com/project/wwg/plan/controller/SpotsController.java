@@ -1,7 +1,7 @@
 package com.project.wwg.plan.controller;
 
 import com.project.wwg.plan.dto.Spot;
-import com.project.wwg.plan.service.SpotService;
+import com.project.wwg.plan.service.SpotsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +15,17 @@ import java.util.List;
  * @author giri
  */
 @Controller
-@RequestMapping("/spot/*")
-public class SpotController {
+@RequestMapping("/spots/*")
+public class SpotsController {
 
-    private SpotService spotService;
+    private SpotsServiceImpl spotService;
 
     @Autowired
-    public SpotController(SpotService spotService) {
+    public SpotsController(SpotsServiceImpl spotService) {
         this.spotService = spotService;
     }
 
-    // ----------------------------- Form 이동 -----------------------------
+// ----------------------------- Form 이동 -----------------------------
 
     @GetMapping("insert")
     public String insertSpotForm() {
@@ -71,8 +71,8 @@ public class SpotController {
      */
     @GetMapping("reset")
     public String resetAllSpotsFromApi() {
-        int result = spotService.resetAllSpots();
-        System.out.println("Items Reset From API Result = " + result);
+        int result = spotService.resetAllSpotsFromApi();
+        System.out.println("Reset All Spots From API >> Result = " + result + " Spots Exist");
         return "/plan/resetAllSpotsResult";
     }
 

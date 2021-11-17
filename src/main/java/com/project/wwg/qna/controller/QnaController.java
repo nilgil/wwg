@@ -23,7 +23,7 @@ public class QnaController{
 	
 	//글작성
 	@RequestMapping("qnawrite.do")
-	public String qnainsert(Qna qna, Model model) {
+	public String qnainsert(Qna qna, Model model) throws Exception {
 		
 		System.out.println("qnawrite까지는 왔음");
 		

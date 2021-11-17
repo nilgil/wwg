@@ -1,12 +1,11 @@
 package com.project.wwg.plan.service;
 
-import com.project.wwg.plan.dao.SpotDao;
+import com.project.wwg.plan.dao.SpotsDao;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -18,81 +17,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SpotServiceImpl implements SpotService {
+public class SpotsServiceImpl {
 
-    private final SpotDao spotDao;
+    private final SpotsDao spotsDao;
     private final JSONParser parser = new JSONParser();
     private List<Spot> spots;
 
-    @Autowired
-    public SpotServiceImpl(SpotDao spotDao) {
-        this.spotDao = spotDao;
+    public SpotsServiceImpl(SpotsDao spotsDao) {
+        this.spotsDao = spotsDao;
     }
 
     // ----------------------------- Spot CRUD -----------------------------
 
     /**
-     * 검색어로 Spot 검색하여 list로 반환
+     * [C] Spot 1개 등록
      *
-     * @param keyword
-     * @return
      */
-    @Override
-    public List<Spot> searchSpots(String keyword) {
-        return spotDao.searchSpots(keyword);
-    }
-
-    /**
-     * Spot 1개 등록
-     *
-     * @param spot
-     * @return
-     */
-    @Override
     public void insertSpot(Spot spot) {
-        spotDao.insertSpot(spot);
+        spotsDao.insertSpot(spot);
     }
 
     /**
-     * Spot 여러 개 등록
+     * [C] Spot 여러 개 등록
      *
-     * @param spots
-     * @return
      */
-    @Override
     public int insertSpots(List<Spot> spots) {
-        return spotDao.insertSpots(spots);
+        return spotsDao.insertSpots(spots);
     }
 
     /**
-     * id로 Spot 1개 삭제
+     * [R] 검색어로 Spot 검색하여 list로 반환
      *
-     * @param id
      */
-    @Override
+    public List<Spot> searchSpots(String keyword) {
+        return spotsDao.searchSpots(keyword);
+    }
+
+    /**
+     * [D] id로 Spot 1개 삭제
+     *
+     */
     public void deleteSpot(String id) {
-        spotDao.deleteSpot(id);
+        spotsDao.deleteSpot(id);
     }
 
     /**
-     * 모든 Spot 삭제
+     * [D] 모든 Spot 삭제
      *
-     * @return
      */
-    @Override
     public int deleteAllSpots() {
-        return spotDao.deleteAllSpots();
+        return spotsDao.deleteAllSpots();
     }
 
-    // ------------------------------ API 관련 ------------------------------
-
     /**
-     * API의 모든 Spots DB에 저장
+     * [ETC] API의 모든 Spots를 파싱하여 DB에 저장
      *
-     * @return 저장된 Item의 개수 리턴
+     * @return 저장된 Spot의 개수 리턴
      */
-    @Override
-    public int resetAllSpots() {
+    public int resetAllSpotsFromApi() {
         spots = new ArrayList<Spot>();
         int result = 0;
         try {
@@ -104,30 +86,28 @@ public class SpotServiceImpl implements SpotService {
                 jsonToList(searchSpotsFromApi(i));
             }
             deleteAllSpots();
-            result = spotDao.insertSpots(spots);
+            result = insertSpots(spots);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // ------------------------------ API 관련 ------------------------------
+
     /**
-     * API에서 1페이지 Spots 조회
+     * API의 1페이지 Spots 조회
      *
-     * @return
      */
-    @Override
     public String searchSpotsFromApi() {
         return searchSpotsFromApi(1);
     }
 
     /**
-     * API에서 n페이지 Spots 조회
+     * API의 n페이지 Spots 조회
      *
-     * @param page
-     * @return json형식의 String 리턴
+     * @return JSON 형식의 String response 리턴
      */
-    @Override
     public String searchSpotsFromApi(int page) {
         StringBuilder sb = new StringBuilder();
 
@@ -157,11 +137,10 @@ public class SpotServiceImpl implements SpotService {
     }
 
     /**
-     * API에서 1페이지 조회하여 pageCount값 찾기
+     * API의 1페이지 조회하여 pageCount값 찾기
      *
      * @return json형식의 String 리턴
      */
-    @Override
     public int getPageCountFromApi() {
         String response = searchSpotsFromApi();
         int pageCount = 0;
@@ -175,50 +154,42 @@ public class SpotServiceImpl implements SpotService {
     }
 
     /**
-     * 여러 Spot들이 담긴 String response를 파싱하여 List에 담기
-     *
-     * @param response
-     * @return Item들이 담긴 List 객체
+     * JSON 타입의 String response를 파싱하여 List에 담기
      */
-    @Override
     public void jsonToList(String response) {
         try {
             JSONObject responseObj = (JSONObject) parser.parse(response);
             JSONArray jsonArray = (JSONArray) responseObj.get("items");
 
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject currentObj = (JSONObject) jsonArray.get(i);
+            for (Object obj : jsonArray) {
+                JSONObject currentObj = (JSONObject) obj;
 
+                /* Title */
                 String title = (String) currentObj.get("title");
                 if (title == null) {
-                    System.out.println("title 없음");
-                    continue;
+                    title = "--";
                 }
 
+                /* Info */
                 String info = (String) currentObj.get("introduction");
-                if (info == null) {
+                if (info == null)
                     info = "--";
-                }
 
+                /* Lat,Lng */
                 Double latD = (Double) currentObj.get("latitude");
-                if (latD == null) {
-                    System.out.println("lat 없음");
-                    continue;
-                }
-                double lat = latD.doubleValue();
-
                 Double lngD = (Double) currentObj.get("longitude");
-                if (lngD == null) {
-                    System.out.println("lng 없음");
+                if (latD == null || latD == 0 || lngD == null || lngD == 0) {
                     continue;
                 }
-                double lng = lngD.doubleValue();
+                double lat = latD;
+                double lng = lngD;
 
+                /* Address */
                 String address = (String) currentObj.get("roadaddress");
-                if (address == null) {
+                if (address == null)
                     address = "--";
-                }
 
+                /* Photo */
                 String photo = "";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
                 if (photo1 != null) {
@@ -231,11 +202,13 @@ public class SpotServiceImpl implements SpotService {
                     photo = "--";
                 }
 
+                /* Phone */
                 String phone = (String) currentObj.get("phoneno");
                 if (phone == null) {
                     phone = "--";
                 }
 
+<<<<<<< HEAD:src/main/java/com/project/wwg/plan/service/SpotServiceImpl.java
 
 				/*
 				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
@@ -243,14 +216,14 @@ public class SpotServiceImpl implements SpotService {
 				 */
 
                 System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
+=======
+>>>>>>> ad29fc6eb87ed2cf22a308ef2a912efa4a603a85:src/main/java/com/project/wwg/plan/service/SpotsServiceImpl.java
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
 
             }
-            System.out.println(spots.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
