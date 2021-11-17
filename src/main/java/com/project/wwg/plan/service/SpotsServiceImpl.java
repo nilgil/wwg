@@ -208,7 +208,7 @@ public class SpotsServiceImpl {
                     phone = "--";
                 }
 
-<<<<<<< HEAD:src/main/java/com/project/wwg/plan/service/SpotServiceImpl.java
+
 
 				/*
 				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
@@ -216,8 +216,8 @@ public class SpotsServiceImpl {
 				 */
 
                 System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
-=======
->>>>>>> ad29fc6eb87ed2cf22a308ef2a912efa4a603a85:src/main/java/com/project/wwg/plan/service/SpotsServiceImpl.java
+
+
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
 

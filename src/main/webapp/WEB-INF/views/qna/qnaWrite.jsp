@@ -122,10 +122,12 @@
         </tr>
         </thead>
         <tbody>
+        
 <!--         <tr>
             <td>아이디</td>
             <td><input type="text" name="username" required="required" size="10" ></td>
         </tr> -->
+        
         <tr>
             <td>제목</td>
             <td><input type="text" name="qna_title" required="required" size="60" maxlength="70"></td>
