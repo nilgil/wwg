@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MybatisSpotDao implements SpotDao {
+public class MybatisSpotsDao implements SpotsDao {
 
     private SqlSession sqlSession;
 
     @Autowired
-    public MybatisSpotDao(SqlSession sqlSession) {
+    public MybatisSpotsDao(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
 
