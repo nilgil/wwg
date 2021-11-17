@@ -10,5 +10,7 @@ public interface notice_dao {
 
 	int getTotal(notice board);
 
+	int insert(notice board);
+
 
 }

@@ -24,4 +24,9 @@ public class notice_servicelmpl implements notice_service {
 		return nd.getTotal(board);
 	}
 
+	@Override
+	public int insert(notice board) {
+		return nd.insert(board);
+	}
+
 }

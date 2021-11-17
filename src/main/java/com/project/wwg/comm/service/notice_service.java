@@ -11,5 +11,7 @@ public interface notice_service {
 
 	int getTotal(notice board);
 
+	int insert(notice board);
+
 	
 }

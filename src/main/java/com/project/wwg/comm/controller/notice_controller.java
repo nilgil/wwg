@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.wwg.comm.model.notice;
 import com.project.wwg.comm.service.notice_PagingPgm;
 import com.project.wwg.comm.service.notice_service;
+import com.project.wwg.info.dto.FoodBoard;
 
 @Controller
 public class notice_controller {
@@ -49,7 +50,123 @@ public class notice_controller {
 		model.addAttribute("search", board.getSearch());
 		model.addAttribute("keyword", board.getKeyword());
 		
-		return "comm/comm_noticelist";
+		return "comm/comm_noticetest";
 	}
 
+	// 글작성 폼
+		@RequestMapping("/comm_noticeinsertform")
+		public String comm_noticeinsertform() {
+			return "comm/comm_noticeinsertform";
+		}
+		
+		// 글작성
+		@RequestMapping("/comm_noticeinsert")
+		public String noticeinsert(notice board, Model model) {
+
+			System.out.println("제목:"+board.getNotice_title());
+			System.out.println("내용:"+board.getNotice_content());
+			
+			int result = ns.insert(board);
+			
+			model.addAttribute("result", result);
+			
+			return "comm/comm_noticetest";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
