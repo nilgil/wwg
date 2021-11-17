@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.wwg.info.dto.FoodBoard;
 import com.project.wwg.info.service.FoodBoardService;
+import com.project.wwg.info.service.PagingPgm;
 
 @Controller
 public class FoodBoardController {
@@ -39,34 +40,30 @@ public class FoodBoardController {
 	
 	// 글목록
 	@RequestMapping("foodlist.do")
-	public String foodlist(HttpServletRequest request, Model model) {
-		int page = 1;		// 현재 페이지 번호
-		int limit = 10;		// 한 페이지에 출력할 데이터 갯수
-		
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
+	public String foodlist(String pageNum, FoodBoard foodboard, Model model) {
+		final int rowPerPage = 10;
+		if(pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
 		}
-		
 		// 총 데이터 갯수
-		int listcount = service.getCount();
+		int currentPage = Integer.parseInt(pageNum);
 		
-		List<FoodBoard> foodlist = service.getFoodList(page);
+		int total = service.getTotal(foodboard);	// 검색
+		int startRow = (currentPage - 1) * rowPerPage + 1;
+		int endRow = startRow + rowPerPage - 1;
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+		foodboard.setStartRow(startRow);
+		foodboard.setEndRow(endRow);
 		
-		// 총 페이지
-		int pageCount = listcount/limit+((listcount%limit==0)? 0 : 1);
-		
-		int startPage = ((page-1)/10 * limit + 1);
-		int endPage = startPage + 10 - 1;
-		
-		if(endPage > pageCount)
-			endPage = pageCount;
-		
-		model.addAttribute("page", page);
-		model.addAttribute("listcount", listcount);
+		int no = total - startRow + 1;
+		List<FoodBoard> foodlist = service.foodlist(foodboard);
 		model.addAttribute("foodlist", foodlist);
-		model.addAttribute("pageCount", pageCount);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
+		model.addAttribute("no", no);
+		model.addAttribute("pp", pp);
+		// 검색
+		model.addAttribute("search", foodboard.getSearch());
+		model.addAttribute("keyword", foodboard.getKeyword());
+		
 		return "info/foodlist";
 	}
 	

@@ -3,6 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="foodMapper">
+	<resultMap id="foodResult"      type="foodboard">
+		<result property="food_no"	     column="food_no" />
+		<result property="username"    column="username" />
+		<result property="food_title"   column="food_title" />
+		<result property="food_content"   column="food_content" />
+		<result property="food_photo"     column="food_photo" />
+		<result property="food_regdate" column="food_regdate" />
+		<result property="food_hit"    column="food_hit" />
+	</resultMap>
 
 <!-- 글작성 / alias="FoodBoard" -->
 	<insert id="insert" parameterType="FoodBoard">
@@ -16,12 +25,34 @@
 	</select>
 	
 <!-- 글목록 / alias="FoodBoard" -->
-	<select id="list" parameterType="int" resultType="FoodBoard">
-		<![CDATA[
-		select * from ( select rownum rnum, FoodBoard.* from (
-		select * from trip_food order by food_no desc) FoodBoard )
-		where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page}*10)
-		]]>
-	</select>	
+	<select id="list" parameterType="foodboard" resultMap="foodResult">
+		select * from (select FoodBoard.*,rowNum rn from (
+			select * from trip_food
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				subject like '%'||#{keyword}||'%' or
+				content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 ) FoodBoard )
+			where rn between #{startRow} and #{endRow}
+	</select>
+	
+	
+	<select id="getTotal" parameterType="FoodBoard" resultType="int">
+		select count(*) from trip_food 
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				food_title like '%'||#{keyword}||'%' or
+				food_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
 
 </mapper>
