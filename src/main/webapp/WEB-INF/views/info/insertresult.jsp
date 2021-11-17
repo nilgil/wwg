@@ -10,14 +10,14 @@
 </head>
 <body>
 
-<c:if test="${result == 1 }">
+<c:if test="${result > 0 }">
 	<script>
 		alert("글작성 성공");
 		location.href="foodlist.do";
 	</script>
 </c:if>
 
-<c:if test="${result != 1 }">
+<c:if test="${result <= 0 }">
 	<script>
 		alert("글작성 실패");
 		history.go(-1);
