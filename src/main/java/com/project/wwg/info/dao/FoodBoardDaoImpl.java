@@ -18,7 +18,7 @@ public class FoodBoardDaoImpl implements FoodBoardDao {
 	// 총 데이터 갯수
 	@Override
 	public List<FoodBoard> foodlist(FoodBoard foodboard) {
-		return session.selectList("foodMapper.list", foodboard);
+		return session.selectList("foodMapper.foodlist", foodboard);
 	}
 	
 	// 글갯수

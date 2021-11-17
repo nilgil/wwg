@@ -33,7 +33,7 @@
 	</select>
 	
 <!-- 글목록 / alias="FoodBoard" -->
-	<select id="list" parameterType="FoodBoard" resultMap="foodResult">
+	<select id="foodlist" parameterType="FoodBoard" resultMap="foodResult">
 		select * from (select FoodBoard.*,rowNum rn from (
 			select * from trip_food
 		<where>
@@ -41,8 +41,8 @@
 				${search} like '%'||#{keyword}||'%'
 			</if>
 			<if test="keyword != null and search=='subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
+				food_title like '%'||#{keyword}||'%' or
+				food_content like '%'||#{keyword}||'%'
 			</if>
 		</where>			
 			 order by food_no desc) FoodBoard )

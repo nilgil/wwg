@@ -40,8 +40,13 @@ public class FoodBoardController {
 		return "info/insertresult";
 	}
 	
-	// 글목록
 	@RequestMapping("foodlist.do")
+	public String initList() {
+		return "redirect:foodlist.do/pageNum/1";
+	}
+	
+	// 글목록
+	@RequestMapping("foodlist.do/pageNum/{pageNum}")
 	public String foodlist(String pageNum, FoodBoard foodboard, Model model) {
 		final int rowPerPage = 10;
 		if(pageNum == null || pageNum.equals("")) {
@@ -57,7 +62,7 @@ public class FoodBoardController {
 		foodboard.setStartRow(startRow);
 		foodboard.setEndRow(endRow);
 		
-		int no = total - startRow + 1;
+		int no = total - startRow + 1;	// 화면 출력 번호
 		List<FoodBoard> foodlist = service.foodlist(foodboard);
 		model.addAttribute("foodlist", foodlist);
 		model.addAttribute("no", no);
