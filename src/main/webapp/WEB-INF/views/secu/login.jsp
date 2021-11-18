@@ -2,6 +2,7 @@
          pageEncoding="utf-8" isELIgnored="false"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,12 @@
 <form action="/login" method="post">
     <input type="text" name="id" placeholder="아이디">
     <input type="password" name="pw" placeholder="비밀번호">
-    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+<%--
+    <label>${_csrf.token}
+    <input name="${_csrf.parameterName}" type="checkbox" checked="checked" value="${_csrf.token}">
+    </label>
+--%>
+    <s:csrfInput/>
     <button type="submit">로그인</button>
 </form>
 
