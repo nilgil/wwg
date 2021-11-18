@@ -12,5 +12,13 @@ public interface notice_dao {
 
 	int insert(notice board);
 
+	notice select(int num);
+
+	void selectUpdate(int num);
+
+	int update(notice notice);
+
+	int delete(int notice_no);
+
 
 }

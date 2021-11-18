@@ -19,19 +19,16 @@
 	<c:set var="num" value="${listcount - (page-1) * 10 }"/>
 	<c:forEach var="b" items="${list}">
 	<tr>
-		<td>${num}
-			<c:set var="num" value="${num-1}"/>
+		<td>${b.notice_no}
 		</td>
 		<td>	
-			
-<%-- <a href="./BoardDetailAction.do?board_num=${b.board_num}&page=${page}">						
-</a> --%>	
-        ${b.notice_title}		
+		<a href="${path}/noticeview/notice_no/${b.notice_no}/pageNum/${pp.currentPage}">
+		${b.notice_title}</a>		
 		</td>
 		<td>${b.member_id}</td>		
 		<td>		
 			<fmt:formatDate value="${b.notice_regdate}"
-							pattern="yyyy-MM-dd HH:mm:ss EEE요일"/>		
+							pattern="yyyy-MM-dd EEE요일  HH:mm:ss "/>		
 		</td>
 		<td>${b.notice_hit}</td>
 	</tr>

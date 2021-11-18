@@ -31,7 +31,7 @@
 	</select>
 
 <insert id="insert" parameterType="notice">
-		insert into comm_notice values ('3','아이디',#{notice_title},
+		insert into comm_notice values ('4','아이디',#{notice_title},
 		#{notice_content},sysdate,0,'n')
 
 </insert>
@@ -49,6 +49,26 @@
 		</where>
 	</select>
 	
+
+	<select id="select" parameterType="int" resultType="notice">
+		select * from comm_notice where notice_no=#{notice_no}
+	</select>
+	
+	<update id="selectUpdate" parameterType="int">
+		update comm_notice set notice_hit = notice_hit+1 where notice_no=#{notice_no}
+	</update>
+	
+	<update id="update" parameterType="notice">
+		update comm_notice set notice_title=#{notice_title},
+			notice_content=#{notice_content}
+			where notice_no=#{notice_no}
+			
+	</update>
+	
+	<update id="delete" parameterType="int">
+		delete from comm_notice where notice_no=#{notice_no}
+		
+	</update>
 	
 </mapper>
 
