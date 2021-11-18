@@ -208,19 +208,8 @@ public class SpotsServiceImpl {
                     phone = "--";
                 }
 
-
-
-                /*
-                 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
-                 * spots.add(spot);
-                 */
-
-                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
-
-
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
-
             }
         } catch (Exception e) {
             e.printStackTrace();

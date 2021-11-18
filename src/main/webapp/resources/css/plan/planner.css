@@ -1,53 +1,56 @@
 #wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 100%;
 }
 
 header {
     text-align: center;
     height: 10%;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 #container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 100%;
+    height: 90%;
 }
 
 #content-header {
     display: flex;
     width: 100%;
     height: 8%;
-    border: 1px solid black;
 }
 
 #content-body {
     display: flex;
     width: 100%;
     height: 92%;
-
 }
 
 #plans {
     display: flex;
     flex-direction: column;
-    width: 18%;
-    border: 1px solid black;
+    width: 15%;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .plan-item {
     display: flex;
+    justify-content: space-around;
     align-items: center;
-    height: 90px;
-    border: 1px solid black;
+    height: 75px;
+    border-bottom: 1px solid black;
 }
 
 .plan-item img {
     padding-left: 6px;
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
 }
 
 .plan-item div {
@@ -55,20 +58,25 @@ header {
     flex-direction: column;
     justify-content: space-evenly;
     position: relative;
-    width: 100%;
+    width: 60%;
     height: 100%;
     line-height: 15px;
     padding-left: 10px;
-    padding-right: 13px;
+    padding-right: 5px;
+}
+
+.plan-item div:nth-child(3) {
+    text-align: center;
+    width: 8%;
+    font-size: 40px;
+    font-weight: lighter;
+    padding-right: 10px;
 }
 
 .plan-item p {
     margin: 0;
 }
 
-.plan-item p:nth-child(2) {
-    font-size: 13px;
-}
 .plan-item span {
     position: absolute;
     right: 10px;
@@ -87,12 +95,14 @@ header {
 #pick {
     display: flex;
     flex-direction: column;
-    width: 25%;
-    border: 1px solid black;
+    width: 20%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
 }
 
 #map {
-    width: 57%;
+    width: 65%;
     border: 1px solid black;
 }
 
@@ -100,12 +110,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18%;
+    width: 15%;
+    border-left: 1px solid black;
 }
 
 #now {
     font-size: 30px;
-    width: 40%;
+    width: 35%;
     text-align: right;
 }
 
@@ -122,8 +133,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 54%;
-    border: 1px solid black;
+    width: 50%;
+    border-left: 1px solid black;
     color: dimgray;
 }
 
@@ -135,18 +146,19 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 8%;
-    font-size: 40px;
+    width: 10%;
+    font-size: 50px;
     font-weight: lighter;
-    border: 1px solid black;
+    border-left: 1px solid black;
 }
 
 #price {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20%;
-    border: 1px solid black;
+    width: 25%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 #price div {
@@ -161,18 +173,10 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 150px;
+    justify-content: center;
+    height: 70px;
     line-height: 43px;
-    border: 1px solid black;
-}
-
-#search-header {
-    background-color: darkorange;
-    width: 100%;
-    height: 28%;
-    font-size: 22px;
-    text-align: center;
-    font-weight: lighter;
+    border-bottom: 1px solid black;
 }
 
 #search-input {
@@ -180,29 +184,71 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 37%;
+    height: 50%;
 }
 
 #search-input input {
     width: 70%;
-    height: 70%;
+    height: 34px;
+    padding-left: 10px;
+    font-size: 17px;
 }
 
 #search-input span {
 }
 
 #search-input button{
-    height: 70%;
+    height: 34px;
 }
 
-#search-category {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+#search-fail {
+    display: inline-block;
     width: 100%;
-    height: 35%;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
 }
 
+/* 페이징 버튼 */
+#pageBtns {
+    text-align: center;
+}
+
+#pageBtnsUl {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+#pageBtnsUl li {
+    text-align: center;
+    float: left;
+}
+
+#pageBtnsUl li a {
+    display: block;
+    font-size: 13px;
+    padding: 9px 10px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+#pageBtnsUl li.on {
+    background: #eda712;
+}
+
+#pageBtnsUl li.on a {
+    color: #fff;
+}
+
+/* 지도 */
 #map img{
     width: 100%;
     height: 100%;

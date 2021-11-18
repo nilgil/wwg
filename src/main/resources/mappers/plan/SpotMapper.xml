@@ -19,7 +19,7 @@
         ]]>
     </select>
 
-    <select id="getSearchSpotsCount" parameterType="String" resultType="int">
+    <select id="getSearchSpotsCount" parameterType="string" resultType="_int">
         select count(*)
         from plan_spot
         where title like '%' || #{keyword} || '%'
@@ -33,7 +33,7 @@
 
     <update id="insertSpots" parameterType="java.util.List">
         <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-            INTO plan_spot
+            INTO plan_spot(title,info,lat,lng,address,photo,phone)
             VALUES (
             #{spot.title}
             , #{spot.info}
