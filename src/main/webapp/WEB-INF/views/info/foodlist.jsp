@@ -24,7 +24,7 @@
 				<c:forEach var="fb" items="${foodlist }">
 					<tr>
 						<td>${no1}</td>
-							<td><a href="foodcontent.do?food_no=${fb.food_no}&page=${page}">
+							<td><a href="${path }/foodcontent.do/food_no/${fb.food_no}/pageNum/${pp.currentPage}">
 								${fb.food_title}
 								</a></td>
 							<td>${fb.username}</td>
