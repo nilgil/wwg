@@ -20,9 +20,15 @@ public class notice_controller {
 
 	@Autowired
 	private notice_service ns;
+	
+	// 글목록 첫페이지 실행
+		@RequestMapping("noticelist")
+		public String initList() {
+			return "redirect:noticelist/pageNum/1";
+		}
 
-	@RequestMapping("/noticelist")
-	public String list(String pageNum, notice board, Model model) {
+	@RequestMapping("/noticelist/pageNum/{pageNum}")
+	public String list(@PathVariable String pageNum, notice notice, Model model) {
 		
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (pageNum == null || pageNum.equals("")) {
@@ -31,26 +37,26 @@ public class notice_controller {
 		int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호
 		
 		// int total = bs.getTotal();
-		int total = ns.getTotal(board); // 검색 (데이터 갯수)
+		int total = ns.getTotal(notice); // 검색 (데이터 갯수)
 		
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		
 		notice_PagingPgm pp = new notice_PagingPgm(total, rowPerPage, currentPage);
-		board.setStartRow(startRow);
-		board.setEndRow(endRow);
+		notice.setStartRow(startRow);
+		notice.setEndRow(endRow);
 		// List<Board> list = bs.list(startRow, endRow);
 		int no = total - startRow + 1;		// 화면 출력 번호
-		List<notice> list = ns.list(board);
+		List<notice> list = ns.list(notice);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
 		// 검색
-		model.addAttribute("search", board.getSearch());
-		model.addAttribute("keyword", board.getKeyword());
+		model.addAttribute("search", notice.getSearch());
+		model.addAttribute("keyword", notice.getKeyword());
 		
-		return "comm/comm_noticetest";
+		return "comm/comm_noticelist";
 	}
 
 	// 글작성 폼
@@ -59,20 +65,28 @@ public class notice_controller {
 			return "comm/comm_noticeinsertform";
 		}
 		
-		// 글작성
+	// 글작성
 		@RequestMapping("/comm_noticeinsert")
-		public String noticeinsert(notice board, Model model) {
+		public String noticeinsert(notice notice, Model model) {
 
-			System.out.println("제목:"+board.getNotice_title());
-			System.out.println("내용:"+board.getNotice_content());
+			System.out.println("제목:"+notice.getNotice_title());
+			System.out.println("내용:"+notice.getNotice_content());
 			
-			int result = ns.insert(board);
+			int result = ns.insert(notice);
 			
 			model.addAttribute("result", result);
 			
-			return "comm/comm_noticetest";
+			return "comm/comm_noticeinsertalert";
 		}
-		
+	// 상세페이지	
+		@RequestMapping("/noticeview/notice_no/{notice_no}/pageNum/{pageNum}")
+		public String view(@PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+			ns.selectUpdate(notice_no);
+			notice notice = ns.select(notice_no);
+			model.addAttribute("notice", notice);
+			model.addAttribute("pageNum", pageNum);
+			return "comm/comm_noticeview";
+		}	
 		
 		
 		

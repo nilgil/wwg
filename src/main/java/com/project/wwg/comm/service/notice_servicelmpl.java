@@ -29,4 +29,15 @@ public class notice_servicelmpl implements notice_service {
 		return nd.insert(board);
 	}
 
+	@Override
+	public notice select(int notice_no) {
+		return nd.select(notice_no);
+	}
+
+	@Override
+	public void selectUpdate(int notice_no) {
+		nd.selectUpdate(notice_no);
+		
+	}
+
 }

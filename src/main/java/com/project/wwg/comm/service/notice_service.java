@@ -13,5 +13,10 @@ public interface notice_service {
 
 	int insert(notice board);
 
+
+	void selectUpdate(int notice_no);
+
+	notice select(int notice_no);
+
 	
 }
