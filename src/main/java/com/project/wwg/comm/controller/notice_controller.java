@@ -15,6 +15,7 @@ import com.project.wwg.comm.service.notice_PagingPgm;
 import com.project.wwg.comm.service.notice_service;
 import com.project.wwg.info.dto.FoodBoard;
 
+
 @Controller
 public class notice_controller {
 
@@ -87,7 +88,40 @@ public class notice_controller {
 			model.addAttribute("pageNum", pageNum);
 			return "comm/comm_noticeview";
 		}	
+	// 수정폼	
+		@RequestMapping("/noticeupdateform/notice_no/{notice_no}/pageNum/{pageNum}")
+		public String updateForm(@PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+			notice notice = ns.select(notice_no);
+			model.addAttribute("notice", notice);
+			model.addAttribute("pageNum", pageNum);
+			return "comm/comm_noticeupdateform";
+		}
+	// 수정	
+		@RequestMapping("/noticeupdate/pageNum/{pageNum}")
+		public String update(notice notice, @PathVariable String pageNum, Model model) {
+			int result = ns.update(notice);
+			model.addAttribute("result", result);
+			model.addAttribute("pageNum", pageNum);
+			return "comm/comm_noticeupdate";
+		}
 		
+	// 삭제폼	
+//		@RequestMapping("/noticedeleteForm/notice_no/{notice_no}/pageNum/{pageNum}")
+//		public String deleteForm(@PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+//			notice notice = ns.select(notice_no);
+//			model.addAttribute("notice", notice);
+//			model.addAttribute("pageNum", pageNum);
+//			return "comm/comm_noticedeleteform";
+//		}
+		
+    // 삭제
+		@RequestMapping("/noticedelete/notice_no/{notice_no}/pageNum/{pageNum}")
+		public String delete(@PathVariable int notice_no, String pageNum, Model model) {
+			int result = ns.delete(notice_no);
+			model.addAttribute("result", result);
+			model.addAttribute("pageNum", pageNum);
+			return "comm/comm_noticedelete";
+		}
 		
 		
 		

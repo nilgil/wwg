@@ -23,7 +23,7 @@
 				<c:forEach var="n" items="${list}">
 					<tr>
 						<td>${n.notice_no}</td>
-							<td><a href="${path}/noticeview/notice_no/${b.notice_no}/pageNum/${pp.currentPage}">
+							<td><a href="${path}/noticeview/notice_no/${n.notice_no}/pageNum/${pp.currentPage}">
 								${n.notice_title}
 								</a></td>
 							<td>${n.member_id}</td>

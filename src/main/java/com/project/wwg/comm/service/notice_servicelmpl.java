@@ -40,4 +40,14 @@ public class notice_servicelmpl implements notice_service {
 		
 	}
 
+	@Override
+	public int update(notice notice) {
+		return nd.update(notice);
+	}
+
+	@Override
+	public int delete(int notice_no) {
+		return nd.delete(notice_no);
+	}
+
 }

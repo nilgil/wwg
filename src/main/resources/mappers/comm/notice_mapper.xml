@@ -49,18 +49,25 @@
 		</where>
 	</select>
 	
-	<!-- <update id="update" parameterType="notice">
-		update comm_notice set member_id=#{member_id},notice_title=#{notice_title},
-			notice_content=#{notice_content}
-			where notice_no=#{notice_no}
-	</update> -->
-	
+
 	<select id="select" parameterType="int" resultType="notice">
 		select * from comm_notice where notice_no=#{notice_no}
 	</select>
 	
 	<update id="selectUpdate" parameterType="int">
 		update comm_notice set notice_hit = notice_hit+1 where notice_no=#{notice_no}
+	</update>
+	
+	<update id="update" parameterType="notice">
+		update comm_notice set notice_title=#{notice_title},
+			notice_content=#{notice_content}
+			where notice_no=#{notice_no}
+			
+	</update>
+	
+	<update id="delete" parameterType="int">
+		delete from comm_notice where notice_no=#{notice_no}
+		
 	</update>
 	
 </mapper>

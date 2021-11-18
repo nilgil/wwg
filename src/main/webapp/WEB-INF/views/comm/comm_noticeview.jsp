@@ -11,6 +11,20 @@
 		$('#list').load('noticelist?pageNum=${pageNum}');
 	});
 </script> -->
+
+
+<!-- id 유효성검사 -->
+
+<script type="text/javascript">
+	function chk() {
+		if (frm.passwd.value != frm.passwd2.value) {
+			alert("권한이 없습니다");
+			return false;
+		}
+	}
+</script>
+
+
 </head>
 <body>
 	<div align="center">
@@ -34,11 +48,9 @@
 
 		
 		<a href="${path}/noticelist/pageNum/${pageNum}">목록</a> 
-		<a href="updateForm.do?num=${notice.notice_no}&pageNum=${pageNum}"
-		   class="btn btn-info">수정</a> 
-		<a href="deleteForm.do?num=${notice.notice_no}&pageNum=${pageNum}"
-		   class="btn btn-info">삭제</a> 
-		<a href="insertForm.do?nm=${notice.notice_no}&pageNum=${pageNum}"
-		   class="btn btn-info">답변</a>
+		<a href="${path}/noticeupdateform/notice_no/${notice.notice_no}/pageNum/${pageNum}"
+		   >수정</a> 
+		<a href="${path}/noticedelete/notice_no/${notice.notice_no}/pageNum/${pageNum}"
+		   >삭제</a> 
 </body>
 </html>

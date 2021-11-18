@@ -42,4 +42,14 @@ public class notice_daolmpl implements notice_dao {
 		
 	}
 
+	@Override
+	public int update(notice notice) {
+		return sst.update("noticens.update", notice);
+	}
+
+	@Override
+	public int delete(int notice_no) {
+		return sst.update("noticens.delete", notice_no);
+	}
+
 }

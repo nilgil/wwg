@@ -18,5 +18,9 @@ public interface notice_service {
 
 	notice select(int notice_no);
 
+	int update(notice notice);
+
+	int delete(int notice_no);
+
 	
 }

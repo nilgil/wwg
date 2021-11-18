@@ -16,5 +16,9 @@ public interface notice_dao {
 
 	void selectUpdate(int num);
 
+	int update(notice notice);
+
+	int delete(int notice_no);
+
 
 }
