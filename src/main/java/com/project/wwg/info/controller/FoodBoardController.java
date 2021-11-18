@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.wwg.info.dto.FoodBoard;
@@ -40,6 +41,7 @@ public class FoodBoardController {
 		return "info/insertresult";
 	}
 	
+	// 글목록 첫페이지 실행
 	@RequestMapping("foodlist.do")
 	public String initList() {
 		return "redirect:foodlist.do/pageNum/1";
@@ -47,7 +49,7 @@ public class FoodBoardController {
 	
 	// 글목록
 	@RequestMapping("foodlist.do/pageNum/{pageNum}")
-	public String foodlist(String pageNum, FoodBoard foodboard, Model model) {
+	public String foodlist(@PathVariable String pageNum, FoodBoard foodboard, Model model) {
 		final int rowPerPage = 10;
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -72,6 +74,16 @@ public class FoodBoardController {
 		model.addAttribute("keyword", foodboard.getKeyword());
 		
 		return "info/foodlist";
+	}
+	
+	// 상세페이지
+	@RequestMapping("foodcontent.do/food_no/{food_no}/pageNum/{pageNum}")
+	public String view(@PathVariable int food_no,@PathVariable String pageNum, Model model) {
+		service.selectUpdate(food_no);					// 조회수 1증가
+		FoodBoard foodboard = service.select(food_no);	// 상세 정보 구하기
+		model.addAttribute("foodboard", foodboard);
+		model.addAttribute("pageNum", pageNum);
+		return "info/foodcontent";
 	}
 	
 }
