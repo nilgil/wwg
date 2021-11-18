@@ -15,4 +15,4 @@ create table comm_notice (
 	select * from tab;
 	
 	
-	insert into comm_notice values(1,'0','title','content',sysdate,0,'n');
+	insert into comm_notice values(13,'0','title','content',sysdate,0,'n');
