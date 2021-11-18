@@ -22,14 +22,14 @@
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="permitAll"/>
 
-
+<!--        <csrf disabled="true"/>-->
         <!--폼 로그인에 대한 처리 설정-->
         <form-login
                 username-parameter="id"
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/all"
+                default-target-url="/test"
         />
         <logout
                 logout-url="/logout"
