@@ -14,11 +14,6 @@ public class QnaDaoImp implements QnaDao{
 	@Autowired
 	private SqlSessionTemplate st;
 	
-
-	public List<Qna> list(){
-		return st.selectList("qnans.list");
-	}
-
 	//글작성
 	public int insert(Qna qna) {
 		// TODO Auto-generated method stub
@@ -60,6 +55,12 @@ public class QnaDaoImp implements QnaDao{
 	public List<Qna> getQnaList(int page) {
 		// TODO Auto-generated method stub
 		return st.selectList("qnans.qna_list", page);
+	}
+
+	@Override
+	public List<Qna> list(Qna qna) {
+		// TODO Auto-generated method stub
+		return st.selectList("qnans.list", qna);
 	}
 	
 

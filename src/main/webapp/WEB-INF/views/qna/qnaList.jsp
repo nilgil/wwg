@@ -90,6 +90,7 @@
           <table class="table table-hover">
           <h2>Q&A 게시판</h2>
           <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
+          <p>총 글개수 : ${listcount}</p>  
             <thead>
              <tr>
               <th>번호</th>
@@ -102,23 +103,55 @@
             
             
             <c:if test="${not empty qna_list}">
-             <c:set var="no1" value="${no}"/>
+            <c:set var="no1" value="${no}"/>
               <c:forEach var="qna" items="${qna_list}">
+              
+              <%-- <c:set var="num" value="${listcount-(page-1)*10}"/> --%>
             
             <tbody>
              <tr>
-               <td>${no1}</td>
+               <td>
+                 ${no1}
+     <%--         <c:out value="${num}" />
+                  <c:set var="num" value="${num-1}" /> --%>
+               </td>
+               
               <td><a href="detail.html">${qna.qna_title}</a></td>
+              
               <td>${qna.username}</td>
               <td>${qna.qna_regdate}</td>
               <td>${qna.qna_hit}</td>
              </tr>
-             <tr>
-          </tbody>
-             
+     
+            </tbody>
+                <c:set var="no1" value="${no1 - 1}"></c:set>
                </c:forEach>
               </c:if>
         </table>
+        
+        <!-- 페이징처리 -->
+        <div class="qna_list_paging">
+         <c:if test="${page <= 1}">[이전]&nbsp;</c:if>
+         
+         <c:if test="${page > 1}">
+         <a href="qnalist.do?page=${page-1}">[이전]</a>&nbsp;
+         </c:if>
+         
+         <c:forEach var="a" begin="${startpage}" end="${endpage}">
+         <c:if test="${a == page }">
+         ${a}
+         </c:if>
+         <c:if test="${a != page }">
+          <a href="qnalist.do?page=${a}">${a}</a>&nbsp;
+         </c:if>
+         </c:forEach>
+         
+         <c:if test="${page >= maxpage}">[다음]</c:if>
+         <c:if test="${page < maxpage}"><a href="qnalist.do?page=${page+1}">[다음]</a></c:if>
+         
+        </div>
+        
+        
    </div>
     
     

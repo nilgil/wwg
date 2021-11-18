@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ include file="navbar.jsp"%> --%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 system.out.println(${pageContext.request.contextPath });
 
@@ -22,13 +23,14 @@ system.out.println(${pageContext.request.contextPath });
 </head>
 <body>
 
-<%-- <jsp:include page="navbar.jsp"></jsp:include> --%>
+<%-- <jsp:include page="/resources/include/navbar.jsp"></jsp:include> --%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
-
+<%-- 
     <!-- navbar -->
     <nav class="navbar">
         <div class="navbar_logo"><a href="mainPage.html"><img src="./resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
- <%--        <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
+        <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div>
         
         <ul class="navbar_menu">
 
@@ -93,7 +95,7 @@ system.out.println(${pageContext.request.contextPath });
             <i class="fas fa-bars"></i>
         </a>
         
-        </nav>
+        </nav> --%>
 
     <!-- 여기서부터 write center -->
     <div class="write_center">
@@ -143,7 +145,8 @@ system.out.println(${pageContext.request.contextPath });
      <div class="write_end_btn">
         <input class="btn btn-dark" type="button" value="미리보기">
         <input class="btn btn-dark" type="submit" value="글등록">
-        <input class="btn btn-dark" type="button" value="작성취소">
+        <input class="btn btn-dark" type="button" value="작성취소"
+        onclick="location='qnalist.do?page=${page}'">
      </div>
      
     </form>

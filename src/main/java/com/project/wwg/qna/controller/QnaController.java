@@ -77,7 +77,7 @@ public class QnaController{
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		
 		//4.한개의 page 보여줄 시작페이지 수 (1,11,21,31 ...)
-		int startpage = ( ((int) ((double) page / 10 + 0.9)) -1)*10+1;
+		int startpage = ( ((int) ((double) page / 10 + 0.9)) -1 ) * 10 + 1;
 		
 		//5.한개의 page 보여줄 끝페이지 수 (10,20,30,40 ...)
 		int endpage = maxpage;

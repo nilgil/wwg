@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
     
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -17,11 +17,11 @@
     <link rel='stylesheet' type='text/css' media='screen' href='navbar.css'>
     <script src='main.js'></script>
 </head>
-<body>
+<body> -->
 
  <!-- navbar -->
     <nav class="navbar">
-        <div class="navbar_logo"><a href="mainPage.html"><img src="./img/jlogo.png"> 혼저옵서예</a></div>
+        <div class="navbar_logo"><a href="mainPage.html"><img src="/resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
 <%--    <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
         
         <ul class="navbar_menu">
@@ -89,5 +89,5 @@
         
         </nav>
 
-</body>
-</html>
+<!-- </body> 
+</html> -->
