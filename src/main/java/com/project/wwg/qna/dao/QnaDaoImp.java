@@ -48,6 +48,19 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		return st.selectOne("qnans.getMaxNum");
 	}
+
+	//게시판 총 게시물 개수
+	@Override
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return st.selectOne("qnans.qna_count");
+	}
+
+	@Override
+	public List<Qna> getQnaList(int page) {
+		// TODO Auto-generated method stub
+		return st.selectList("qnans.qna_list", page);
+	}
 	
 
 }

@@ -24,14 +24,29 @@
  select * from qna_board where qna_no=#{qna_no}
 </select>
 
+<!-- qna_no 증가시키기 -->
 <select id="getMaxNum" resultType="int">
- select nvl(max(num),0) + 1 from board
+ select nvl(max(qna_no),0) + 1 from qna_board
 </select>
 
+<!-- 게시글 저장 -->
 <insert id="insert" parameterType="qna">
  insert into qna_board values (#{qna_no},0,#{qna_title},
  #{qna_content},sysdate,#{qna_re_ref},#{qna_re_lev},#{qna_re_seq},0)
 </insert>
+
+<!-- 게시판 총 게시물 개수-->
+<select id="qna_count" resultType="int">
+ select count(qna_no) from qna_board
+</select>
+
+<!-- 게시판목록  <![CDATA[]]>사용해서 쿼리문안에서 부등호 문자로 인식안하기위해서 -->
+<select id="qna_list" parameterType="int" resultType="qna">
+<![CDATA[
+ select * from (select rownum rnum, qna_board.* from (select * from qna_board order by qna_re_ref desc, qna_re_seq asc) qna_board) 
+ where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page}*10)
+]]>
+</select>
 
 </mapper>        
         

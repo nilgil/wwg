@@ -5,7 +5,7 @@ import java.util.List;
 import com.project.wwg.qna.model.Qna;
 
 public interface QnaDao{
-	List<Qna> list();
+	List<Qna> list(Qna qna);
 
 	int insert(Qna qna);
 
@@ -16,5 +16,9 @@ public interface QnaDao{
 	int delete(int qna_no);
 
 	int getMaxNum();
+
+	int getListCount();
+
+	List<Qna> getQnaList(int page);
 	
 }
