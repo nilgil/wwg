@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.info.dto.FoodBoard;
 import com.project.wwg.info.service.FoodBoardService;
@@ -78,12 +80,50 @@ public class FoodBoardController {
 	
 	// 상세페이지
 	@RequestMapping("foodcontent.do/food_no/{food_no}/pageNum/{pageNum}")
-	public String view(@PathVariable int food_no,@PathVariable String pageNum, Model model) {
+	public String foodcontent(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
 		service.selectUpdate(food_no);					// 조회수 1증가
 		FoodBoard foodboard = service.select(food_no);	// 상세 정보 구하기
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
 		return "info/foodcontent";
+	}
+	
+	// 글수정 폼
+	@RequestMapping("foodupdateform.do/food_no/{food_no}/pageNum/{pageNum}")
+	public String foodupdateform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
+		FoodBoard foodboard = service.select(food_no);
+		model.addAttribute("foodboard", foodboard);
+		model.addAttribute("pageNum", pageNum);
+		return "info/foodupdateform";
+	}
+	
+	//글수정
+	@RequestMapping("foodupdate.do/pageNum/{pageNum}")
+	public String foodupdate(FoodBoard foodboard, @PathVariable String pageNum, Model model) {
+		int result = service.update(foodboard);
+		model.addAttribute("result", result);
+		model.addAttribute("pageNum", pageNum);
+		return "info/foodupdate";
+	}
+	
+	// 글삭제 폼
+	@RequestMapping("fooddeleteform.do")
+//	public String fooddeleteform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
+	public String fooddeleteform() {
+//		int result = service.delete(food_no);
+//		model.addAttribute("result", result);
+//		model.addAttribute("pageNum", pageNum);
+		return "info/fooddeleteform";
+	}
+
+	// 글삭제
+	@PostMapping("fooddelete.do")
+	public String fooddelete(@RequestParam int food_no, @RequestParam String pageNum, Model model) {
+		System.out.println("food_no:"+food_no);
+		int result = service.delete(food_no);
+		model.addAttribute("result", result);
+		model.addAttribute("pageNum", pageNum);
+		return "info/fooddelete";
 	}
 	
 }

@@ -42,16 +42,19 @@ public class FoodBoardDaoImpl implements FoodBoardDao {
 		session.update("foodMapper.selectUpdate", food_no);
 	}
 
+	// 글수정
 	@Override
 	public int update(FoodBoard foodboard) {
 		return session.update("foodMapper.update", foodboard);
 	}
 
+	// 글삭제
 	@Override
 	public int delete(int food_no) {
 		return session.delete("foodMapper.delete", food_no);
 	}
 
+	// 글 번호 증가
 	@Override
 	public int getMaxNum() {
 		return session.selectOne("foodMapper.getMaxNum");
