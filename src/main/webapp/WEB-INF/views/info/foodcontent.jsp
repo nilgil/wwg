@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
+<script type="text/javascript">
+	function chk() {
+		if (frm.username.value != frm.username.value) {
+			alert("사용자가 다르면 수정할 수 없습니다");
+			frm.username.focus();
+			return false;
+		}
+	}
+</script>
 <!-- <script type="text/javascript">
 	$(function() {
 		$('#slist').load('${path}/slist/num/${board.num}')
@@ -46,13 +55,22 @@
 				<td><pre>${foodboard.food_content}</pre></td>
 			</tr>
 		</table>
-		<a href="${path}/foodlist.do/pageNum/${pageNum}" class="btn btn-info">목록</a>
-<%-- 		<a href="${path}/updateForm/num/${fb.num}/pageNum/${pageNum}"
-			class="btn btn-info">수정</a> <a
-			href="${path}/deleteForm/num/${fb.num}/pageNum/${pageNum}"
-			class="btn btn-info">삭제</a> <a
-			href="${path}/insertForm/nm/${fb.num}/pageNum/${pageNum}"
-			class="btn btn-info">답변</a> --%>
+			<div align=center>
+				<input type="button" value="목록" onClick="location.href='/foodlist.do/pageNum/${pageNum}' " >
+				
+				<form action="${path}/foodupdateform.do/food_no/${foodboard.food_no}/pageNum/${pageNum}"
+		 		method="post" name="frm" onsubmit="return chk()">
+				<input type="submit" value="수정" >
+				</form>
+				
+				<form action="${path}/fooddeleteform.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
+		 		method="post" name="frm" onsubmit="return chk()">
+				<input type="submit" value="삭제" >
+				</form>
+				
+				<input type="button" value="답변" onClick="location.href='/insertForm/nm/${foodboard.food_no}/pageNum/${pageNum}' " >
+			</div>
+			
 <%-- 		<p>
 		<form name="frm" id="frm">
 			<input type="hidden" name="replyer" value="${board.writer}">

@@ -57,13 +57,13 @@ public class notice_controller {
 		model.addAttribute("search", notice.getSearch());
 		model.addAttribute("keyword", notice.getKeyword());
 		
-		return "comm/comm_noticelist";
+		return "comm/notice/comm_noticelist";
 	}
 
 	// 글작성 폼
 		@RequestMapping("/comm_noticeinsertform")
 		public String comm_noticeinsertform() {
-			return "comm/comm_noticeinsertform";
+			return "comm/notice/comm_noticeinsertform";
 		}
 		
 	// 글작성
@@ -73,11 +73,14 @@ public class notice_controller {
 			System.out.println("제목:"+notice.getNotice_title());
 			System.out.println("내용:"+notice.getNotice_content());
 			
+			int food_no = notice.getNotice_no();
+			int number = ns.getMaxNum();
+			notice.setNotice_no(number);
 			int result = ns.insert(notice);
 			
 			model.addAttribute("result", result);
 			
-			return "comm/comm_noticeinsertalert";
+			return "comm/notice/comm_noticeinsertalert";
 		}
 	// 상세페이지	
 		@RequestMapping("/noticeview/notice_no/{notice_no}/pageNum/{pageNum}")
@@ -86,7 +89,7 @@ public class notice_controller {
 			notice notice = ns.select(notice_no);
 			model.addAttribute("notice", notice);
 			model.addAttribute("pageNum", pageNum);
-			return "comm/comm_noticeview";
+			return "comm/notice/comm_noticeview";
 		}	
 	// 수정폼	
 		@RequestMapping("/noticeupdateform/notice_no/{notice_no}/pageNum/{pageNum}")
@@ -94,7 +97,7 @@ public class notice_controller {
 			notice notice = ns.select(notice_no);
 			model.addAttribute("notice", notice);
 			model.addAttribute("pageNum", pageNum);
-			return "comm/comm_noticeupdateform";
+			return "comm/notice/comm_noticeupdateform";
 		}
 	// 수정	
 		@RequestMapping("/noticeupdate/pageNum/{pageNum}")
@@ -102,7 +105,7 @@ public class notice_controller {
 			int result = ns.update(notice);
 			model.addAttribute("result", result);
 			model.addAttribute("pageNum", pageNum);
-			return "comm/comm_noticeupdate";
+			return "comm/notice/comm_noticeupdate";
 		}
 		
 	// 삭제폼	
@@ -120,7 +123,7 @@ public class notice_controller {
 			int result = ns.delete(notice_no);
 			model.addAttribute("result", result);
 			model.addAttribute("pageNum", pageNum);
-			return "comm/comm_noticedelete";
+			return "comm/notice/comm_noticedelete";
 		}
 		
 		

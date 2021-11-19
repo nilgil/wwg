@@ -14,16 +14,18 @@ public class QnaServiceImp implements QnaService{
 	@Autowired
 	private QnaDao qd;
 	
-	public List<Qna> list(){
-		return qd.list();
+	public List<Qna> list(Qna qna){
+		return qd.list(qna);
 	}
-
+    
+	//게시글작성
 	@Override
 	public int insert(Qna qna) {
 		// TODO Auto-generated method stub
 		return qd.insert(qna);
 	}
 
+	//상세페이지
 	@Override
 	public Qna select(int qna_no) {
 		// TODO Auto-generated method stub
@@ -42,8 +44,30 @@ public class QnaServiceImp implements QnaService{
 		return qd.delete(qna_no);
 	}
 	
+	//seq대신
 	public int getMaxNum() {
 		return qd.getMaxNum();
 	}
+
+	@Override
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return qd.getListCount();
+	}
+
+	//게시글목록
+	@Override
+	public List<Qna> getPageList(int page) {
+		// TODO Auto-generated method stub
+		return qd.getQnaList(page);
+	}
+
+	//조회수
+	@Override
+	public void hitupdate(int qna_no) {
+		// TODO Auto-generated method stub
+		qd.hitupdate(qna_no);
+	}
+
 	
 }

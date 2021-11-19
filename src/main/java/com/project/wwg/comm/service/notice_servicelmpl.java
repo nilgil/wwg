@@ -50,4 +50,9 @@ public class notice_servicelmpl implements notice_service {
 		return nd.delete(notice_no);
 	}
 
+	@Override
+	public int getMaxNum() {
+		return nd.getMaxNum();
+	}
+
 }

@@ -14,7 +14,7 @@
 <c:if test="${result > 0}">
 <script type="text/javascript">
 alert("입력성공");
-/* location.href="list"; */
+location.href="qnalist.do";
 </script>
 </c:if>
 

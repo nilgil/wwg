@@ -52,4 +52,9 @@ public class notice_daolmpl implements notice_dao {
 		return sst.update("noticens.delete", notice_no);
 	}
 
+	@Override
+	public int getMaxNum() {
+		return sst.selectOne("noticens.getMaxNum");
+	}
+
 }
