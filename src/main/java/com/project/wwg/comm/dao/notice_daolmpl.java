@@ -31,4 +31,25 @@ public class notice_daolmpl implements notice_dao {
 		return sst.insert("noticens.insert",board);
 	}
 
+	@Override
+	public notice select(int notice_no) {
+		return sst.selectOne("noticens.select", notice_no);
+	}
+
+	@Override
+	public void selectUpdate(int notice_no) {
+		sst.update("noticens.selectUpdate", notice_no);
+		
+	}
+
+	@Override
+	public int update(notice notice) {
+		return sst.update("noticens.update", notice);
+	}
+
+	@Override
+	public int delete(int notice_no) {
+		return sst.update("noticens.delete", notice_no);
+	}
+
 }
