@@ -1,49 +1,69 @@
-const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-let departure = new Date($('#departure').text()); // 출발일
-let days = $('#hiddenDays').val(); // 여행기간
-let week = WEEKEND[departure.getDay()]; // 요일
-let planOfDays; // 각 날짜별 플랜 저장해둘 객체 배열
-let globalCurrentPage;
-let searchKeyword;
 let token;
 let header;
+const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+let departure = new Date($('#hiddenDeparture').val()); // 출발일
+let days = $('#hiddenDays').val(); // 총 여행기간
+let week = WEEKEND[departure.getDay()]; // 현재 Day의 요일
+let planOfDays; // 각 날짜별 플랜 저장해둘 객체 배열
+let chooseDay; // 현재 선택한 Day
+let searchKeyword;
+let chooseDayPlans;
+let spots = [];
+let totalPrice;
 
 // 날짜별 정보
 let day = class {
+    departure;
+    week;
+    plans = [];
+
     constructor(departure, week) {
         this.departure = departure;
         this.week = week;
-        this.plans = "";
     }
 };
 
+// 관광지 정보
+let spot = class {
+    title;
+    photo;
+    rating;
+    price;
+
+    constructor(title, photo, rating) {
+        this.title = title;
+        this.photo = photo;
+        this.rating = rating;
+    }
+}
+
 // INIT
 $(document).ready(function () {
-    // 요일 화면 출력
+
+    // security용 token, header
+    token = $("meta[name='_csrf']").attr("content");
+    header = $("meta[name='_csrf_header']").attr("content");
+
+    // 현재 Day,날짜,요일 출력
+    $('#now').text("Day1");
+    $('#departure').text(dateFormatter(departure));
     $('#week').text(week);
 
     // 날짜별 플랜 객체 생성
     planOfDays = []; //배열 선언
+    chooseDay = 1;
     for (let i = 0; i < days; i++) {
         let dep = new Date(departure);
         dep.setDate(dep.getDate() + i);
         planOfDays[i] = new day(dateFormatter(dep), WEEKEND[dep.getDay()]);
     }
 
-    // 검색창 엔터키 이벤트
-    $("#search-keyword").keydown(function (keyNum) {
-        if (keyNum.keyCode == 13) {
-            $("#searchBtn").click()
-        }
-    })
-
-    // security 403 해결
-    token = $("meta[name='_csrf']").attr("content");
-    header = $("meta[name='_csrf_header']").attr("content");
+    makeDays();
 
     // 관광지 출력
     makeSpots("", "1");
 });
+
 
 // 관광지 화면 출력
 function makeSpots(keyword, pageNum) {
@@ -67,21 +87,22 @@ function makeSpots(keyword, pageNum) {
         if (jsonPageInfo.count > 0) {
             for (let i = 0; i < jsonSpots.length; i++) {
                 let current = jsonSpots[i];
-                let $photo = current.photo;
-                let $title = current.title;
-                let $rating = current.rating;
+                let title = current.title;
+                let photo = current.photo;
+                let rating = current.rating;
+                spots[i] = new spot(title, photo, rating);
+
                 $('#search-result').append(
                     "<div class='plan-item'>" +
-                    "   <img src='" + $photo + "'/>\n" +
+                    "   <img src='" + photo + "'/>\n" +
                     "   <div>\n" +
-                    "       <p onclick='viewSpotDetail()'>" + $title + "</p></a>\n" +
-                    "       <p>👍🏻  " + $rating + "</p>\n" +
+                    "       <p onclick='viewSpotDetail('" + title + "')'>" + title + "</p></a>\n" +
+                    "       <p>👍🏻  " + rating + "</p>\n" +
                     "   </div>" +
                     "   <div>" +
-                    "       <p onclick='spotToPlan()'>+</p>" +
+                    "       <p id='" + i + "' onclick=\"spotToPlan('" + title + "'," + i + ")\">+</p>" +
                     "   </div>" +
-                    "</div>" +
-                    "</a>"
+                    "</div>"
                 );
             }
 
@@ -145,8 +166,6 @@ function paging(resultCount, resultDiv, pageDiv, currentPage) {
         if ($id == "next") selectedPage = next;
         if ($id == "prev") selectedPage = prev;
 
-        //전역변수에 선택한 페이지 번호를 담는다...
-        globalCurrentPage = selectedPage;
         //페이징 표시 재호출
         paging(resultCount, resultDiv, pageDiv, selectedPage);
         //글 목록 표시 재호출
@@ -154,38 +173,110 @@ function paging(resultCount, resultDiv, pageDiv, currentPage) {
     });
 }
 
+// 관광지 검색 처리
 function clickSearchBtn() {
     searchKeyword = $('#search-keyword').val();
     makeSpots(searchKeyword, "1");
 }
 
-function spotToPlan() {
-
+// 관광지 + 눌러서 플랜에 추가
+function spotToPlan(title, spotNum) {
+    chooseDayPlans = planOfDays[chooseDay - 1].plans;
+    chooseDayPlans.push(spots[spotNum]);
+    makePlans(chooseDayPlans);
 }
 
-function viewSpotDetail() {
-
+// Day의 플랜들 출력
+function makePlans(chooseDayPlans) {
+    $('#plans').empty();
+    for (let i = 0; i < chooseDayPlans.length; i++) {
+        let currentPlan = chooseDayPlans[i];
+        $('#plans').append(
+            "<div class='day-plans'>" +
+            "   <img src='" + currentPlan.photo + "'/>\n" +
+            "   <div>\n" +
+            "       <p onclick='viewSpotDetail('" + currentPlan.title + "')'>" + currentPlan.title + "</p></a>\n" +
+            "       <p class='price-box'>" +
+            "           <input class='price-in' onblur='calculateTotalPrice()' type='text' placeholder='예상 비용'>" +
+            "       </p>\n" +
+            "   </div>" +
+            "   <div>" +
+            "       <p class='remove-plan' onclick=\"removePlan('" + currentPlan.title + "'," + i + ")\">-</p>" +
+            "   </div>" +
+            "</div>"
+        );
+    }
 }
 
-// Day 변경시 실행
+// 플랜의 관광지 - 눌러서 플랜에서 제거
+function removePlan(title, i) {
+    chooseDayPlans.splice(i, 1);
+    makePlans(chooseDayPlans);
+}
+
+// 현재 Day 변경
 function changeDay(i) {
+    chooseDay = i;
+    chooseDayPlans = planOfDays[chooseDay - 1].plans;
     $('#now').text("Day" + i);
-    changePlan(i);
-}
-
-function changePlan(i) {
     $('#departure').text(planOfDays[i - 1].departure);
     $('#week').text(planOfDays[i - 1].week);
+    makePlans(chooseDayPlans)
 }
 
-
+// 여행 기간 1일 추가
 function dayPlus() {
+    days = Number(days) + 1;
+    let dep = new Date(departure);
+    dep.setDate(dep.getDate() + planOfDays.length);
+    planOfDays.push(new day(dateFormatter(dep), WEEKEND[dep.getDay()]))
+    makeDays();
 }
 
+// 여행 기간 1일 감소
 function dayMinus() {
+    days = Number(days) - 1;
+    if (chooseDay == planOfDays.length)
+        changeDay(1);
+    planOfDays.splice(planOfDays.length - 1, 1);
+    let dep = new Date(departure);
+    dep.setDate(dep.getDate() + planOfDays.length);
+    makeDays();
 }
 
+// 여행 기간에 맞춰 Day 출력
+function makeDays() {
+    $('#days').empty();
+    for (let i = 1; i <= days; i++) {
+        $('#days').append(
+            "<div onClick='changeDay(" + i + ")'>Day" + i + "</div>"
+        )
+    }
+}
 
+// 예상 경비 총액 계산
+function calculateTotalPrice() {
+    console.log("hi")
+}
+
+function viewSpotDetail(title) {
+
+}
+
+// -------------------- 이벤트 관련 --------------------
+
+// 검색창 엔터키 이벤트
+$("#search-keyword").keydown(function (keyNum) {
+    if (keyNum.keyCode == 13) {
+        $("#searchBtn").click()
+    }
+})
+
+
+
+// ----------------------- 유틸 ----------------------
+
+// 날짜 포맷변경
 function dateFormatter(date) {
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2);

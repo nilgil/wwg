@@ -17,26 +17,25 @@
     </header>
     <div id="container">
         <input id="hiddenDays" type="hidden" value="${days}"/>
+        <input id="hiddenDeparture" type="hidden" value="${departure}"/>
         <div id="content-header">
             <div id="now-day">
-                <div id="now">Day1</div>
+                <div id="now"></div>
                 <div id="date">
-                    <div id="departure">${departure}</div>
-                    <div id="week">요일</div>
+                    <div id="departure"></div>
+                    <div id="week"></div>
                 </div>
             </div>
             <div id="days">
-                <c:forEach var="i" begin="1" end="${days}" step="1">
-                    <div onclick="changeDay(${i})">Day${i}</div>
-                </c:forEach>
             </div>
             <div id="day-controll">
                 <div onclick="dayPlus()">+</div>
                 <div onclick="dayMinus()">-</div>
             </div>
             <div id="price">
-                <div>예상 경비 :</div>
-                <div>325,000 원</div>
+                <div>예상 경비</div>
+                <div id="priceOut"></div>
+                <div>원</div>
             </div>
         </div>
 

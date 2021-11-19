@@ -38,6 +38,46 @@ header {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
+.day-plans{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 75px;
+    border-bottom: 1px solid black;
+}
+.day-plans img {
+    padding-left: 6px;
+    width: 50px;
+    height: 50px;
+}
+
+.day-plans div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: relative;
+    width: 80%;
+    height: 100%;
+    line-height: 15px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+.day-plans div:nth-child(2) {
+    font-size: 15px;
+    margin: 0;
+}
+.day-plans div:nth-child(3) {
+    text-align: center;
+    width: 8%;
+    font-size: 40px;
+    font-weight: lighter;
+    padding-right: 10px;
+}
+
+.day-plans p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 .plan-item {
     display: flex;
@@ -164,7 +204,6 @@ header {
 #price div {
     width: 50%;
     font-size: 25px;
-    color: saddlebrown;
     font-weight: lighter;
     text-align: center;
 }
@@ -252,4 +291,11 @@ header {
 #map img{
     width: 100%;
     height: 100%;
+}
+
+.price-in {
+    width: 100px;
+}
+.price-btn:hover, .remove-plan:hover {
+    cursor: pointer;
 }
