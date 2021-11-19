@@ -22,6 +22,7 @@
 	<div align="center">
 		<h2>게시글 글수정</h2>
 		<form action="${path}/noticeupdate/pageNum/${pageNum}" method="post">
+		<input type="hidden" name="notice_no" value="${notice.notice_no}"> 
 			<!-- onsubmit="return chk()"> -->
 			<table class="table table-striped">
 				<tr>
