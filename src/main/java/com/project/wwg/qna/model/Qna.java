@@ -11,11 +11,15 @@ public class Qna{
     private String username;
     private String qna_title;
     private String qna_content;
-    private Date qna_regdate;
+    private Date qna_regdate; //시간
     private int qna_re_ref;  //부모 댓글 번호
     private int qna_re_lev;  //자식 댓글 순서
     private int qna_re_seq;  //댓글 오름차순 순서
-    private int qna_hit;
+    private int qna_hit;     //조회수
+    
+    //검색
+    private String search;
+    private String keyword;
     
     
 //	public int getQna_no() {

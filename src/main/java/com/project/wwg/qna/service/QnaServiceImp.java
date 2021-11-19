@@ -25,6 +25,7 @@ public class QnaServiceImp implements QnaService{
 		return qd.insert(qna);
 	}
 
+	//상세페이지
 	@Override
 	public Qna select(int qna_no) {
 		// TODO Auto-generated method stub
@@ -43,6 +44,7 @@ public class QnaServiceImp implements QnaService{
 		return qd.delete(qna_no);
 	}
 	
+	//seq대신
 	public int getMaxNum() {
 		return qd.getMaxNum();
 	}
@@ -58,6 +60,13 @@ public class QnaServiceImp implements QnaService{
 	public List<Qna> getPageList(int page) {
 		// TODO Auto-generated method stub
 		return qd.getQnaList(page);
+	}
+
+	//조회수
+	@Override
+	public void hitupdate(int qna_no) {
+		// TODO Auto-generated method stub
+		qd.hitupdate(qna_no);
 	}
 
 	

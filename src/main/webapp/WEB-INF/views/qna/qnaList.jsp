@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
     
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
 
    <!-- navbar -->
    <nav class="navbar">
-    <div class="navbar_logo"><a href="mainPage.html"><img src="../img/제주도로고2 copy.png"> 혼저옵서예</a></div>
+    <div class="navbar_logo"><a href="mainPage.html"><img src="/resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
     <ul class="navbar_menu">
         <li>
             <div class="dropdown">
@@ -84,8 +85,9 @@
     
     </nav>
     
+    
+    
    <!-- center -->
-   
    <div class="table">
           <table class="table table-hover">
           <h2>Q&A 게시판</h2>
@@ -102,32 +104,33 @@
             </thead>
             
             
-            <c:if test="${not empty qna_list}">
+            <c:if test="${not empty qnalist}">
             <c:set var="no1" value="${no}"/>
-              <c:forEach var="qna" items="${qna_list}">
+              <c:forEach var="qna" items="${qnalist}">
               
-              <%-- <c:set var="num" value="${listcount-(page-1)*10}"/> --%>
-            
             <tbody>
              <tr>
-               <td>
-                 ${no1}
-     <%--         <c:out value="${num}" />
-                  <c:set var="num" value="${num-1}" /> --%>
-               </td>
+              <td>${no1}</td>
                
-              <td><a href="detail.html">${qna.qna_title}</a></td>
+              <td><a href="${path}/views/qna_no/${qna.qna_no}/page/${page}">${qna.qna_title}</a></td>
               
               <td>${qna.username}</td>
               <td>${qna.qna_regdate}</td>
               <td>${qna.qna_hit}</td>
              </tr>
-     
+   
             </tbody>
-                <c:set var="no1" value="${no1 - 1}"></c:set>
+                <c:set var="no1" value="${no1-1}"></c:set>
                </c:forEach>
               </c:if>
         </table>
+        
+        
+        <!-- 글작성버튼 -->
+          <div class="write_btn">
+            <a href="qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
+          </div>
+        
         
         <!-- 페이징처리 -->
         <div class="qna_list_paging">
@@ -152,7 +155,27 @@
         </div>
         
         
+        <!-- 목록검색기능 -->
+        <form action="${path}/views/qnaList/page/1">
+        <div class="search_bar">
+            <select class="search">
+                <option value="title"
+                <c:if test="${search=='qna_title'}"> selected="selected" </c:>> 제목 </option>
+                <option value="content"
+                <c:if test="${search=='qna_content'}"> selected="selected" </c:>> 내용 </option>
+                <option value="writer"
+                <c:if test="${search=='username'}"> selected="selected" </c:>> 작성자 </option>
+                <option value="titcon"
+                <c:if test="${search=='qna_titcon'}"> selected="selected" </c:>> 제목+내용 </option>
+            </select> 
+            <input type="text" name="keyword"> 
+            <input class="btn btn-dark" type="submit" value="검색">
+        </div>
+        </form>
+        
    </div>
+   
+   ${path}
     
     
    <!-- footer -->
@@ -161,12 +184,12 @@
           <div class="footer_menu">이메일 문의 | 개인정보취급방침 | 마케팅 문의 | 채용정보</div>
            <div class="footer_wrap">
             <div class="footer_friends">friends</div>
-              <a href="https://ijto.or.kr/korean/"><img src="../img/제주관광공사로고.jpg" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
-              <a href="https://www.jdcdutyfree.com/"><img src="../img/제주면세점.jpg" alt="제주면세점" width="150" height="150" title="면세점"></a>
-              <a href="https://www.skyscanner.co.kr/"><img src="../img/스카이스케너로고.jpg" alt="스카이스케너" width="150" height="150" title="항공권"></a>
-              <a href="https://www.agoda.com/"><img src="../img/아고다로고.jpg" alt="아고다" width="150" height="150" title="숙박"></a>
-              <a href="https://www.myrealtrip.com/"><img src="../img/마리트로고.jpg" alt="마이리틀트립" width="150" height="150" title="투어티켓"></a>
-              <a href="https://www.billycar.co.kr/"><img src="../img/빌리카로고.jpg" alt="빌리카" width="150" height="150" title="렌터카"></a>
+              <a href="https://ijto.or.kr/korean/"><img src="/resources/img/qna/제주관광공사로고.png" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
+              <a href="https://www.jdcdutyfree.com/"><img src="/resources/img/qna/제주면세점.png" alt="제주면세점" width="150" height="150" title="면세점"></a>
+              <a href="https://www.skyscanner.co.kr/"><img src="/resources/img/qna/스카이스케너로고.png" alt="스카이스케너" width="150" height="150" title="항공권"></a>
+              <a href="https://www.agoda.com/"><img src="/resources/img/qna/아고다로고.png" alt="아고다" width="150" height="150" title="숙박"></a>
+              <a href="https://www.myrealtrip.com/"><img src="/resources/img/qna/마리트로고.png" alt="마이리틀트립" width="150" height="150" title="투어티켓"></a>
+              <a href="https://www.billycar.co.kr/"><img src="/resources/img/qna/빌리카로고.png" alt="빌리카" width="150" height="150" title="렌터카"></a>
            </div>
           <div class="footer_footer">
             <p>(주) WWG</p>

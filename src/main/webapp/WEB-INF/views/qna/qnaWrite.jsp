@@ -146,7 +146,7 @@ system.out.println(${pageContext.request.contextPath });
         <input class="btn btn-dark" type="button" value="미리보기">
         <input class="btn btn-dark" type="submit" value="글등록">
         <input class="btn btn-dark" type="button" value="작성취소"
-        onclick="location='qnalist.do?page=${page}'">
+        onclick="location='qnalist.do'">
      </div>
      
     </form>

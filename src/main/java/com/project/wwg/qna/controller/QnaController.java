@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.QnaService;
@@ -19,12 +22,14 @@ public class QnaController{
 	@Autowired
 	private QnaService qs; //service 인터페이스
 	
+	
 	//글작성폼
 	@RequestMapping("qnawriteform.do")
 	public String qnawriteform() {
 		System.out.println("qnawriteform성공");
 		return "qna/qnaWrite";
 	}
+	
 	
 	//글작성
 	@RequestMapping("qnawrite.do")
@@ -53,6 +58,7 @@ public class QnaController{
 		
 		return "qna/qnaWriteTest";
 	}
+	
 	
 	//글목록list
 	@RequestMapping("qnalist.do")
@@ -86,11 +92,11 @@ public class QnaController{
 		if(endpage > startpage + 10 -1) 
 			endpage = startpage + 10 -1;
 		
-		//qna_no값
-		int no = qs.getMaxNum();
+		//게시물번호 설정
+		int no = listcount - (page-1) * limit;
 		
-		//list
-		List<Qna> qna_list = qs.getPageList(page);
+		//list test
+//		List<Qna> qna_list = qs.list(qna);
 		
 		//값공유
 		model.addAttribute("page", page); //현재페이지num
@@ -99,11 +105,12 @@ public class QnaController{
 		model.addAttribute("maxpage", maxpage); //총 게시물개수
 		model.addAttribute("listcount", listcount); //총 리스트
 		model.addAttribute("qnalist", qnalist); //list화
-		model.addAttribute("qna_list", qna_list); //test중
-		model.addAttribute("no", no); //qna_no값
+//		model.addAttribute("qna_list", qna_list); //test중
+		model.addAttribute("no", no); 
 		
 		return "qna/qnaList";
 	}
+	
 	
 	//글작성 성공시 list넘어감
 	@RequestMapping("/qnaList")
@@ -113,6 +120,40 @@ public class QnaController{
 //		return "redirect:qna/qnaList/page/1";
 	}
 	
+	
+	//상세페이지
+	@RequestMapping("/views/qna_no/{qna_no}/page/{page}")
+	public String qnadetail(@PathVariable int qna_no,
+			                @PathVariable String page,
+			                Model model, Qna qna, HttpServletRequest request) {
+		
+		System.out.println("상세페이지호출 cont까지 옴");
+		
+		//조회수
+		qs.hitupdate(qna_no);
+		System.out.println("조회수 올라감");
+		
+		//qna_no 일치하면 상세페이지 이동
+		Qna qnalist = qs.select(qna_no);
+		System.out.println("상세페이지 호출성공!");
+		
+		
+		model.addAttribute("qnalist", qnalist);
+		model.addAttribute("page", page);
+		System.out.println("상세페이지에 값공유 성공!");
+		
+		return "qna/qnaDetail";
+	}
+	
+	//목록검색
+	@RequestMapping("/qnaList/page/{page}")
+	public String qnasearch(Model model, Qna qna) {
+		
+		model.addAttribute("search", qna.getSearch());
+		model.addAttribute("keyword", qna.getKeyword());
+		
+		return "qna/qnaList";
+	}
 	
 	
 	

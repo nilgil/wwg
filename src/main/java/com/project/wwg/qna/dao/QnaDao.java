@@ -20,5 +20,7 @@ public interface QnaDao{
 	int getListCount();
 
 	List<Qna> getQnaList(int page);
+
+	void hitupdate(int qna_no);
 	
 }

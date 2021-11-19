@@ -12,6 +12,8 @@ public interface QnaService{
 	
 	Qna select(int qna_no);
 	
+	void hitupdate(int qna_no);
+	
 	int update(Qna qna);
 	
 	int delete(int qna_no);

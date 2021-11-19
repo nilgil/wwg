@@ -21,6 +21,7 @@ public class QnaDaoImp implements QnaDao{
 		// st.sqlDML("xml네임.id값",매개변수)
 	}
 
+	//상세페이지
 	public Qna select(int qna_no) {
 		// TODO Auto-generated method stub
 		return st.selectOne("qnans.select", qna_no);
@@ -38,6 +39,7 @@ public class QnaDaoImp implements QnaDao{
 		return st.delete("qnans.delete", qna_no);
 	}
 
+	//seq대신사용
 	@Override
 	public int getMaxNum() {
 		// TODO Auto-generated method stub
@@ -61,6 +63,13 @@ public class QnaDaoImp implements QnaDao{
 	public List<Qna> list(Qna qna) {
 		// TODO Auto-generated method stub
 		return st.selectList("qnans.list", qna);
+	}
+
+	//조회수
+	@Override
+	public void hitupdate(int qna_no) {
+		// TODO Auto-generated method stub
+		st.update("qnans.hitupdate", qna_no);
 	}
 	
 
