@@ -8,7 +8,6 @@
 header {
     text-align: center;
     height: 10%;
-    border-bottom: 1px solid black;
 }
 
 #container {
@@ -16,11 +15,11 @@ header {
     flex-direction: column;
     width: 100%;
     height: 90%;
+    border: 1px solid black;
 }
 
 #content-header {
     display: flex;
-    width: 100%;
     height: 8%;
 }
 
@@ -33,39 +32,49 @@ header {
 #plans {
     display: flex;
     flex-direction: column;
-    width: 15%;
-    border-left: 1px solid black;
+    width: 20%;
     border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
-.day-plans{
+
+#plans::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+.day-plans {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 75px;
+    height: 100px;
     border-bottom: 1px solid black;
 }
+
 .day-plans img {
-    padding-left: 6px;
-    width: 50px;
-    height: 50px;
+    padding-left: 5px;
+    width: 90px;
+    height: 90px;
 }
 
-.day-plans div{
+.day-plans div {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     position: relative;
     width: 80%;
     height: 100%;
-    line-height: 15px;
+    line-height: 25px;
     padding-left: 10px;
     padding-right: 5px;
 }
+
 .day-plans div:nth-child(2) {
-    font-size: 15px;
+    font-size: 19px;
     margin: 0;
+    height: 100%;
 }
+
 .day-plans div:nth-child(3) {
     text-align: center;
     width: 8%;
@@ -117,41 +126,21 @@ header {
     margin: 0;
 }
 
-.plan-item span {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 20px;
-    border: 1px solid black;
-    border-radius: 50%;
-    box-sizing: border-box;
-    width: 22px;
-    height: 22px;
-    text-align: center;
-    line-height: 22px;
-    background-color: ghostwhite;
-}
-
 #pick {
     display: flex;
     flex-direction: column;
     width: 20%;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
     border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
 }
 
-#map {
-    width: 65%;
-    border: 1px solid black;
-}
 
 #now-day {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15%;
-    border-left: 1px solid black;
+    width: 20%;
 }
 
 #now {
@@ -173,7 +162,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 50%;
+    width: 45%;
     border-left: 1px solid black;
     color: dimgray;
 }
@@ -186,10 +175,11 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 10%;
+    width: 5%;
     font-size: 50px;
     font-weight: lighter;
     border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 #price {
@@ -236,7 +226,7 @@ header {
 #search-input span {
 }
 
-#search-input button{
+#search-input button {
     height: 34px;
 }
 
@@ -247,7 +237,6 @@ header {
     font-size: 20px;
     margin-top: 40px;
     margin-bottom: 40px;
-
 }
 
 /* 페이징 버튼 */
@@ -287,15 +276,38 @@ header {
     color: #fff;
 }
 
+#title {
+    width: 25%;
+    border-right: 1px solid black;
+}
+
+#title p {
+    font-size: 20px;
+    text-align: center;
+}
+
+#submit {
+    width: 5%;
+}
+
+#submit p {
+    font-size: 20px;
+    text-align: center;
+}
+
 /* 지도 */
-#map img{
+
+#map {
+    width: 60%;
+    border-top: 1px solid black;
+}
+
+#map img {
     width: 100%;
     height: 100%;
 }
 
-.price-in {
-    width: 100px;
-}
-.price-btn:hover, .remove-plan:hover {
+.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover {
     cursor: pointer;
 }
+

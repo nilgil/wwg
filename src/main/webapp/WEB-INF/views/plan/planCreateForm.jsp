@@ -29,14 +29,11 @@
             <div id="days">
             </div>
             <div id="day-controll">
-                <div onclick="dayPlus()">+</div>
-                <div onclick="dayMinus()">-</div>
+                <div id="day-plus" onclick="dayPlus()">+</div>
+                <div id="day-minus" onclick="dayMinus()">-</div>
             </div>
-            <div id="price">
-                <div>예상 경비</div>
-                <div id="priceOut"></div>
-                <div>원</div>
-            </div>
+            <div id="title"><p>유저가 지정한 플랜명</p></div>
+            <div id="submit"><p>저장</p></div>
         </div>
 
         <div id="content-body">

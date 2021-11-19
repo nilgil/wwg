@@ -9,7 +9,6 @@ let chooseDay; // 현재 선택한 Day
 let searchKeyword;
 let chooseDayPlans;
 let spots = [];
-let totalPrice;
 
 // 날짜별 정보
 let day = class {
@@ -28,7 +27,6 @@ let spot = class {
     title;
     photo;
     rating;
-    price;
 
     constructor(title, photo, rating) {
         this.title = title;
@@ -58,6 +56,7 @@ $(document).ready(function () {
         planOfDays[i] = new day(dateFormatter(dep), WEEKEND[dep.getDay()]);
     }
 
+    // 여행 기간에 따른 Days 출력
     makeDays();
 
     // 관광지 출력
@@ -90,17 +89,18 @@ function makeSpots(keyword, pageNum) {
                 let title = current.title;
                 let photo = current.photo;
                 let rating = current.rating;
-                spots[i] = new spot(title, photo, rating);
+                spots[i] = new spot(title, photo, rating, 0);
+                console.log(spots[i]);
 
                 $('#search-result').append(
                     "<div class='plan-item'>" +
-                    "   <img src='" + photo + "'/>\n" +
+                    "   <img onclick='viewSpotDetail('" + title + "')' src='" + photo + "'/>\n" +
                     "   <div>\n" +
-                    "       <p onclick='viewSpotDetail('" + title + "')'>" + title + "</p></a>\n" +
+                    "       <p class='spot-title' onclick='viewSpotDetail('" + title + "')'>" + title + "</p></a>\n" +
                     "       <p>👍🏻  " + rating + "</p>\n" +
                     "   </div>" +
                     "   <div>" +
-                    "       <p id='" + i + "' onclick=\"spotToPlan('" + title + "'," + i + ")\">+</p>" +
+                    "       <p class='add-plan' onclick=\"spotToPlan('" + title + "'," + i + ")\">+</p>" +
                     "   </div>" +
                     "</div>"
                 );
@@ -193,12 +193,9 @@ function makePlans(chooseDayPlans) {
         let currentPlan = chooseDayPlans[i];
         $('#plans').append(
             "<div class='day-plans'>" +
-            "   <img src='" + currentPlan.photo + "'/>\n" +
+            "   <img onclick='viewSpotDetail('" + currentPlan.title + "')' src='" + currentPlan.photo + "'/>\n" +
             "   <div>\n" +
-            "       <p onclick='viewSpotDetail('" + currentPlan.title + "')'>" + currentPlan.title + "</p></a>\n" +
-            "       <p class='price-box'>" +
-            "           <input class='price-in' onblur='calculateTotalPrice()' type='text' placeholder='예상 비용'>" +
-            "       </p>\n" +
+            "       <p class='spot-title' onclick='viewSpotDetail('" + currentPlan.title + "')'>" + currentPlan.title + "</p></a>\n" +
             "   </div>" +
             "   <div>" +
             "       <p class='remove-plan' onclick=\"removePlan('" + currentPlan.title + "'," + i + ")\">-</p>" +
@@ -249,15 +246,12 @@ function makeDays() {
     $('#days').empty();
     for (let i = 1; i <= days; i++) {
         $('#days').append(
-            "<div onClick='changeDay(" + i + ")'>Day" + i + "</div>"
+            "<div class='day-btn' onClick='changeDay(" + i + ")'>Day" + i + "</div>"
         )
     }
 }
 
-// 예상 경비 총액 계산
-function calculateTotalPrice() {
-    console.log("hi")
-}
+
 
 function viewSpotDetail(title) {
 
@@ -271,7 +265,6 @@ $("#search-keyword").keydown(function (keyNum) {
         $("#searchBtn").click()
     }
 })
-
 
 
 // ----------------------- 유틸 ----------------------

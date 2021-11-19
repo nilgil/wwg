@@ -21,18 +21,8 @@ public class Plan {
     private Date departure;
     private int days;
     private String plans;
-    private int totalExpense;
     private int hit;
     private int like;
     private Date regDate;
 
-//
-//    public void setDeparture(Date departure) {
-//        this.departure = departure;
-//        setDepartureWeek();
-//    }
-//
-//    public void setDepartureWeek() {
-//        this.departureWeek = this.departure.toLocalDate().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-//    }
 }
