@@ -22,5 +22,7 @@ public interface notice_service {
 
 	int delete(int notice_no);
 
+	int getMaxNum();
+
 	
 }

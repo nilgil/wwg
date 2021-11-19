@@ -20,5 +20,7 @@ public interface notice_dao {
 
 	int delete(int notice_no);
 
+	int getMaxNum();
+
 
 }
