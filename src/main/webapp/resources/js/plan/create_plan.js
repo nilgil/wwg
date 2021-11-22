@@ -232,13 +232,15 @@ function dayPlus() {
 
 // 여행 기간 1일 감소
 function dayMinus() {
-    days = Number(days) - 1;
-    if (chooseDay == planOfDays.length)
-        changeDay(1);
-    planOfDays.splice(planOfDays.length - 1, 1);
-    let dep = new Date(departure);
-    dep.setDate(dep.getDate() + planOfDays.length);
-    makeDays();
+    if (days > 1) {
+        days = Number(days) - 1;
+        if (chooseDay == planOfDays.length)
+            changeDay(1);
+        planOfDays.splice(planOfDays.length - 1, 1);
+        let dep = new Date(departure);
+        dep.setDate(dep.getDate() + planOfDays.length);
+        makeDays();
+    }
 }
 
 // 여행 기간에 맞춰 Day 출력
@@ -251,11 +253,33 @@ function makeDays() {
     }
 }
 
-
-
 function viewSpotDetail(title) {
 
 }
+
+
+// -------------------- 지도 관련 --------------------
+var container = document.getElementById('map');
+var options = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    level: 10
+};
+
+var map = new kakao.maps.Map(container, options);
+
+var mapTypeControl = new kakao.maps.MapTypeControl();
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+// var points = [
+//     for(let i=0; i<)
+//     new kakao.maps.LatLng(33.452278, 126.567803)
+//
+// ];
+
+
 
 // -------------------- 이벤트 관련 --------------------
 

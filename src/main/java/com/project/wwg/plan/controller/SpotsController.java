@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 아이템 컨트롤러
+ * 관광지 데이터 컨트롤러
  *
  * @author giri
  */
@@ -38,9 +38,8 @@ public class SpotsController {
 
     // ----------------------------- Spot CRUD -----------------------------
 
-
     /**
-     * title로 Spot 검색하여 검색 결과, 결과 개수 등 리턴
+     * [R] title로 Spot 검색한 List와 Page객체 (검색어, 페이지번호, 결과 개수)를 JSON 타입으로 리턴
      */
     @PostMapping(value = "/search", produces = "application/json; charset=utf8")
     @ResponseBody
