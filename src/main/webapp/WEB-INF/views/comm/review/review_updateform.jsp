@@ -21,27 +21,27 @@
 <body>
 	<div align="center">
 		<h2>게시글 글수정</h2>
-		<form action="${path}/noticeupdate/pageNum/${pageNum}" method="post">
-		<input type="hidden" name="notice_no" value="${notice.notice_no}"> 
+		<form action="${path}/reviewupdate/pageNum/${pageNum}" method="post">
+		<input type="hidden" name="review_no" value="${review.review_no}"> 
 			<!-- onsubmit="return chk()"> -->
 			<table class="table table-striped">
 				<tr>
 					<td>번호</td>
-					<td>${notice.notice_no}</td>
+					<td>${review.review_no}</td>
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="notice_title" required="required"
-						value="${notice.notice_title}"></td>
+					<td><input type="text" name="review_title" required="required"
+						value="${review.review_title}"></td>
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td>${notice.member_id}</td>
+					<td>${review.member_id}</td>
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="5" cols="30" name="notice_content" required="required">
-		     ${notice.notice_content}
+			<td><textarea rows="5" cols="30" name="review_content" required="required">
+		     ${review.review_content}
 		    </textarea>
 						</td>
 				</tr>

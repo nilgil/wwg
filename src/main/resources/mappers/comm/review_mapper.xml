@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewns">
+
+<resultMap id="reviewresult"      type="review"> 
+		<result property="review_no"	     column="review_no" />
+		<result property="member_id"    column="member_id" />
+		<result property="review_title"   column="review_title" />
+		<result property="review_content"   column="review_content" />
+		<result property="review_regdate"     column="review_regdate" />
+		<result property="review_hit" column="review_hit" />
+		<result property="review_photo" column="review_photo" />
+</resultMap> 
+
+<!-- 리스트 출력 -->
+	<select id="list" parameterType="review" resultMap="reviewresult"> 
+		select * from (select a.*,rowNum rn from (
+			select * from comm_review
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				review_title like '%'||#{keyword}||'%' or
+				review_content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by review_no desc) a )
+			where rn between #{startRow} and #{endRow}
+	</select>
+
+<!-- 글작성 -->
+
+<!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
+<!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
+
+<insert id="insert" parameterType="review">
+		insert into comm_review values (#{review_no},'아이디',#{review_title},
+		#{review_content},sysdate,0,'photo_path')
+
+</insert>
+
+<!-- 글번호 증가 -->
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(review_no),0) + 1 from comm_review
+	</select>
+
+<!-- 목록 검색기능 -->	
+<select id="getTotal" parameterType="review" resultType="int">
+		select count(*) from comm_review
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				review_title like '%'||#{keyword}||'%' or
+				review_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+<!-- review_no로 유효성검사 -->
+	<select id="select" parameterType="int" resultType="review">
+		select * from comm_review where review_no=#{review_no}
+	</select>
+	
+<!-- 조회수증가 -->
+	<update id="selectUpdate" parameterType="int">
+		update comm_review set review_hit = review_hit+1 where review_no=#{review_no}
+	</update>
+	
+<!-- 수정 -->	
+	<update id="update" parameterType="review">
+		update comm_review set review_title=#{review_title},
+			review_content=#{review_content}
+			where review_no=#{review_no}
+	</update>
+	
+<!-- 삭제 -->	
+	<update id="delete" parameterType="int">
+		delete from comm_review where review_no=#{review_no}
+	</update>
+	
+</mapper>
+
