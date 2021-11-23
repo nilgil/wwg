@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +38,8 @@
 					<c:set var="no1" value="${no1-1}"></c:set>
 				</c:forEach>
 		</table>
+		
+		<!-- 검색 기능 -->
 		<form align="center" action="${path}/foodlist.do/pageNum/1">
 			<select name="search">
 				<option value="food_title"
@@ -51,6 +55,7 @@
 			<input type="submit" value="확인">
 		</form>
 		
+		<!-- 페이지 넘기기 기능 -->
 		<center>
 			<c:if test="${not empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
@@ -77,6 +82,7 @@
 				</c:if>
 		  </c:if>
 		</center>
+		
 		<div align="center">
 			<a href="${path}/foodform.do" class="btn btn-info">글 작성</a>
 		</div>

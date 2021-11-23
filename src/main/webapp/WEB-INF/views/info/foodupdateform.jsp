@@ -24,14 +24,13 @@
 		<td>${foodboard.username}</td>
 	</tr>
 	<tr><th>내용</th>
-		<td><textarea cols=40 rows=5 name="food_content" required="required">${foodboard.food_content}
-		</textarea></td>
+		<td><textarea cols=40 rows=5 name="food_content" required="required">${foodboard.food_content}</textarea></td>
 	</tr>
 	<tr><th>파일첨부</th>
 	</tr>
 	<tr><td colspan=2 align=center>
 			<input type=button value="글목록"
-			onClick="location.href='foodlist.do' ">
+			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
 			<input type=submit value="글작성">
 			<input type=reset value="취소">
 		</td>

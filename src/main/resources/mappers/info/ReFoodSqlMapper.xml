@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="refoodMapper">
+
+	<resultMap id="refoodResult"      		type="ReFoodBoard">
+		<result property="food_re_no"	    column="food_re_no" />
+		<result property="rfood_no"	     	column="rfood_no" />
+		<result property="username"    		column="username" />
+		<result property="food_re_content"  column="food_re_content" />
+		<result property="food_re_regdate" 	column="food_re_regdate" />
+	</resultMap>
+	
+	<select id="foodlist" parameterType="int" resultMap="refoodResult">
+		select * from trip_food_reply where rfood_no=#{rfood_no} order by food_re_no
+	</select>
+	
+	<insert id="insert" parameterType="ReFoodBoard">
+		<selectKey keyProperty="food_re_no" order="BEFORE" resultType="int">
+			select nvl(max(food_re_no),0) + 1 from trip_food_reply
+		</selectKey>
+		insert into trip_food_reply values (#{food_re_no},#{rfood_no},0,
+			#{food_re_content},sysdate)
+	</insert>
+	
+	<update id="update" parameterType="ReFoodBoard">
+		update trip_food_reply set food_re_content=#{food_re_content},
+			food_re_regdate=sysdate where food_re_no=#{food_re_no} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from trip_food_reply where food_re_no=#{food_re_no}
+	</delete>
+	
+</mapper>
