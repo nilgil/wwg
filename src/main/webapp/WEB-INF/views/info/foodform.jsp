@@ -12,7 +12,7 @@
 <table border=1 width=400 align=center>
 	<caption>글작성</caption>
 	<tr><th>작성자명</th>
-<%-- 		<td>${username}</td> --%>
+		<%-- <td>${foodboard.username}</td> --%>	<!-- ${sessionScope.username} -->
 	</tr>
 	<tr><th>제목</th>
 		<td><input type=text name="food_title"></td>
