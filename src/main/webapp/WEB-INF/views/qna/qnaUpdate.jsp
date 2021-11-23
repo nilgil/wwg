@@ -28,7 +28,7 @@
                 <tr><th>회원문의</th></tr>
             </thead>
             <tbody>
-                <tr><td>Q&A</td></tr>
+                <tr><td><a href="/qnalist.do">Q&A</a></td></tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </tbody>

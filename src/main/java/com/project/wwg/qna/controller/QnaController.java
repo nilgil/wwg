@@ -112,8 +112,8 @@ public class QnaController{
 	
 	
 	//상세페이지
-	@RequestMapping("/qna_detail/qna_no/{qna_no}/page/{page}/no/{no}")
-	public String qnaDetail(@PathVariable int qna_no, @PathVariable String page, @PathVariable String no, Model model, Qna qna, HttpServletRequest request) {
+	@RequestMapping("/qna_detail/qna_no/{qna_no}/page/{page}/no/{no1}")
+	public String qnaDetail(@PathVariable int qna_no, @PathVariable String page, @PathVariable int no1, Model model, Qna qna, HttpServletRequest request) {
 		System.out.println("상세페이지호출controller");
 		//조회수
 		qs.hitupdate(qna_no);
@@ -121,7 +121,7 @@ public class QnaController{
 		Qna qnalist = qs.select(qna_no);
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
-		model.addAttribute("no", no);
+		model.addAttribute("no", no1);
 		return "qna/qnaDetail";
 	}
 	

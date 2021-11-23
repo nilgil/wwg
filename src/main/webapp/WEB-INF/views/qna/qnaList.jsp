@@ -23,9 +23,9 @@
                        <tr><th>회원문의</th></tr>
                      </thead>
                      <tbody>
-                       <tr><td><a href="qna_board.html">Q&A</a></td></tr>
-                       <tr><td>Q&A</td></tr>
-                       <tr><td>Q&A</td></tr>
+                       <tr><td><a href="/qnalist.do">Q&A</a></td></tr>
+                       <tr><td></td></tr>
+                       <tr><td></td></tr>
                      </tbody>
                  </table>
       </div>
@@ -54,7 +54,7 @@
              <tr>
               <td>${no1}</td>
 
-              <td><a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no}">${qna.qna_title}</a></td>
+              <td><a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no1}">${qna.qna_title}</a></td>
               
               <td>${qna.username}</td>
               <td>${qna.qna_regdate}</td>

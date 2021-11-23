@@ -18,7 +18,7 @@
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">숙소</a>
-                    <a class="dropdown-item" href="#">맛집</a>
+                    <a class="dropdown-item" href="/foodlist.do">맛집</a>
                     <a class="dropdown-item" href="#">여행지</a>
                 </div>
                 </div>
@@ -30,7 +30,7 @@
                     <a href="#">커뮤니티</a>
                 </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">공지사항</a>
+                <a class="dropdown-item" href="/noticelist">공지사항</a>
                 <a class="dropdown-item" href="#">여행후기</a>
                 <a class="dropdown-item" href="#">동행구해요</a>
             </div>
@@ -43,7 +43,7 @@
                 <a href="#">여행계획</a>
             </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">계획짜기</a>
+            <a class="dropdown-item" href="/planner*">계획짜기</a>
             <a class="dropdown-item" href="#">계획게시판</a>
         </div>
         </div>
@@ -55,7 +55,7 @@
                 <a href="#">회원문의</a>
             </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Q&A</a>
+            <a class="dropdown-item" href="/qnalist.do">Q&A</a>
         </div>
         </div>
     </li>
