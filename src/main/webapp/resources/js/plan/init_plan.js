@@ -6,9 +6,19 @@ Date.prototype.toDateInputValue = (function () {
 });
 
 $(document).ready(function () {
-    $('#depDate').val(new Date().toDateInputValue());
+    $('#departureIn').val(new Date().toDateInputValue());
 });
 
+
+function checkDays() {
+    if ($('#dayIn').val() == "") {
+        alert("여행 기간을 입력하세요.");
+        $('#dayIn').focus();
+        return false;
+    } else {
+        $("#initForm").submit();
+    }
+}
 
 // function fetchPage(name) {
 //     fetch(name).then(function (response) {

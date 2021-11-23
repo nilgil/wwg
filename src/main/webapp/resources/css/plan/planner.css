@@ -276,12 +276,11 @@ header {
     color: #fff;
 }
 
-#title {
+#title-box {
     width: 25%;
-    border-right: 1px solid black;
 }
 
-#title p {
+#title-box p {
     font-size: 20px;
     text-align: center;
 }
@@ -295,15 +294,78 @@ header {
     text-align: center;
 }
 
-/* 지도 */
+#title-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+#title {
+    border: none;
+    border-right: 1px solid black;
+    padding-left: 20px;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+/* 지도 */
 #map {
     width: 60%;
     height: 100%;
+    border-top: 1px solid black;
 }
 
-
-.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover {
+.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover, #submit, #close-box {
     cursor: pointer;
 }
 
+
+/* 디테일 뷰 */
+#detail-view {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+}
+
+#detail-img {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: auto;
+    height: 350px;
+}
+
+#detail-box {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 280px;
+}
+
+#detail-title-box {
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+#detail-rating-box {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+#detail-info-box {
+    margin: 30px 150px 30px 150px;
+    font-size: 18px;
+}
+
+#close-box {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    font-size: 30px;
+}

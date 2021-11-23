@@ -1,5 +1,6 @@
 package com.project.wwg.plan.dao;
 
+import com.project.wwg.plan.dto.Plan;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,12 @@ public class MybatisPlannerDao implements PlannerDao {
     }
 
 
+    @Override
+    public void insertPlan(Plan plan) {
+        try {
+            sqlSession.insert("plan.insertPlan", plan);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
