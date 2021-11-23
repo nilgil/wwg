@@ -1,5 +1,6 @@
 package com.project.wwg.plan.dao;
 
+import com.project.wwg.plan.dto.Page;
 import com.project.wwg.plan.dto.Spot;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,16 @@ public class MybatisSpotsDao implements SpotsDao {
     /**
      * 검색어로 Spot 검색하여 리스트 반환
      *
-     * @param keyword
      * @return
      */
     @Override
-    public List<Spot> searchSpots(String keyword) {
-        return sqlSession.selectList("spot.searchSpot", keyword);
+    public List<Spot> searchSpots(Page page) {
+        return sqlSession.selectList("spot.searchSpots", page);
+    }
+
+    @Override
+    public int getSearchSpotsCount(String keyword) {
+        return sqlSession.selectOne("spot.getSearchSpotsCount", keyword);
     }
 
     /**
@@ -58,6 +63,7 @@ public class MybatisSpotsDao implements SpotsDao {
 
     /**
      * id로 Spot 삭제
+     *
      * @param id
      */
     @Override
