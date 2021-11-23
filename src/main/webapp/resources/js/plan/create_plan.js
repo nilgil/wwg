@@ -9,6 +9,7 @@ let chooseDay; // 현재 선택한 Day
 let searchKeyword;
 let chooseDayPlans;
 let spots = [];
+let map;
 
 // 날짜별 정보
 let day = class {
@@ -27,11 +28,15 @@ let spot = class {
     title;
     photo;
     rating;
+    lat;
+    lng;
 
-    constructor(title, photo, rating) {
+    constructor(title, photo, rating, lat, lng) {
         this.title = title;
         this.photo = photo;
         this.rating = rating;
+        this.lat = lat;
+        this.lng = lng;
     }
 }
 
@@ -61,6 +66,9 @@ $(document).ready(function () {
 
     // 관광지 출력
     makeSpots("", "1");
+
+    // 지도 생성
+    createMap();
 });
 
 
@@ -89,8 +97,9 @@ function makeSpots(keyword, pageNum) {
                 let title = current.title;
                 let photo = current.photo;
                 let rating = current.rating;
-                spots[i] = new spot(title, photo, rating, 0);
-                console.log(spots[i]);
+                let lat = current.lat;
+                let lng = current.lng;
+                spots[i] = new spot(title, photo, rating, lat, lng);
 
                 $('#search-result').append(
                     "<div class='plan-item'>" +
@@ -105,6 +114,8 @@ function makeSpots(keyword, pageNum) {
                     "</div>"
                 );
             }
+
+            createMap();
 
             // 페이징 처리
             let resultCount = jsonPageInfo.count;
@@ -257,29 +268,62 @@ function viewSpotDetail(title) {
 
 }
 
+// 지도 생성
+function createMap() {
 
-// -------------------- 지도 관련 --------------------
-var container = document.getElementById('map');
-var options = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 10
-};
+    let container = document.getElementById('map');
+    let options = {
+        center: new kakao.maps.LatLng(33.380690, 126.545383),
+        level: 10
+    };
 
-var map = new kakao.maps.Map(container, options);
+    map = new kakao.maps.Map(container, options);
 
-var mapTypeControl = new kakao.maps.MapTypeControl();
-map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+    // 지도 타입 컨트롤
+    let mapTypeControl = new kakao.maps.MapTypeControl();
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-var zoomControl = new kakao.maps.ZoomControl();
-map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    // 줌 컨트롤
+    let zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-// var points = [
-//     for(let i=0; i<)
-//     new kakao.maps.LatLng(33.452278, 126.567803)
-//
-// ];
+    createMarker();
+}
 
+// 마커 생성, 인포윈도우
+function createMarker() {
+    let points = [];
+    let marker = [];
 
+    for (let i = 0; i < spots.length; i++) {
+        points.push(new kakao.maps.LatLng(spots[i].lat, spots[i].lng));
+        marker.push(new kakao.maps.Marker({position: points[i]}));
+        marker[i].setMap(map);
+
+        // 인포윈도우 생성
+        let iwContent = '<div style="padding:5px;">' + spots[i].title + '</div>';
+
+        let infowindow = new kakao.maps.InfoWindow({
+            content: iwContent
+        });
+
+        // 마커에 마우스오버 이벤트를 등록합니다
+        kakao.maps.event.addListener(marker[i], 'mouseover', function () {
+            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+            infowindow.open(map, marker[i]);
+        });
+
+        // 마커에 마우스아웃 이벤트를 등록합니다
+        kakao.maps.event.addListener(marker[i], 'mouseout', function () {
+            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+            infowindow.close();
+        });
+
+        // $("#plan-item").mouseover(function () {
+        //     infowindow.open(map, marker[i]);
+        // });
+    }
+}
 
 // -------------------- 이벤트 관련 --------------------
 
@@ -289,6 +333,8 @@ $("#search-keyword").keydown(function (keyNum) {
         $("#searchBtn").click()
     }
 })
+
+// 관광지 마우스오버시 마커 변경
 
 
 // ----------------------- 유틸 ----------------------
