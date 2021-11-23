@@ -1,16 +1,19 @@
 package com.project.wwg.plan.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.wwg.plan.dto.Page;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.service.SpotsServiceImpl;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * 아이템 컨트롤러
+ * 관광지 데이터 컨트롤러
  *
  * @author giri
  */
@@ -35,18 +38,25 @@ public class SpotsController {
 
     // ----------------------------- Spot CRUD -----------------------------
 
-
-
     /**
-     * title로 Spot 검색
+     * [R] title로 Spot 검색한 List와 Page객체 (검색어, 페이지번호, 결과 개수)를 JSON 타입으로 리턴
      */
-    @GetMapping("/title/{keyword}")
-    public String searchSpots(@PathVariable String keyword, Model model) {
-        List<Spot> spots = spotService.searchSpots(keyword);
-        model.addAttribute("items", spots);
-        System.out.println("검색어 : " + keyword);
-        System.out.println("Result : " + spots);
-        return "/plan/spotsList";
+    @PostMapping(value = "/search", produces = "application/json; charset=utf8")
+    @ResponseBody
+    public String getSearchSpotsByPage(String keyword, int pageNum) throws JsonProcessingException {
+        List<Spot> spots = spotService.searchSpots(keyword, pageNum);
+        int searchCount = spotService.getSearchSpotsCount(keyword);
+        Page page = new Page(keyword, pageNum, searchCount);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String result = mapper.writeValueAsString(spots);
+        String pageInfo = mapper.writeValueAsString(page);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", result);
+        jsonObject.put("page_info", pageInfo);
+
+        return jsonObject.toJSONString();
     }
 
     @PostMapping("/insert")
