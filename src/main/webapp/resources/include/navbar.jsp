@@ -3,25 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
     
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>네이게이션바</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src="https://kit.fontawesome.com/6e837646d1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel='stylesheet' type='text/css' media='screen' href='navbar.css'>
-    <script src='main.js'></script>
-</head>
-<body> -->
-
+    
  <!-- navbar -->
     <nav class="navbar">
-        <div class="navbar_logo"><a href="mainPage.html"><img src="/resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
+        <div class="navbar_logo"><a href="/mainpage.do"><img src="/resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
 <%--    <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
         
         <ul class="navbar_menu">

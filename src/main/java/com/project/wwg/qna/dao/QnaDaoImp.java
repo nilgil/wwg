@@ -71,6 +71,21 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		st.update("qnans.hitupdate", qna_no);
 	}
+
+	//답글lev증가
+	@Override
+	public void refEdit(Qna qna) {
+		// TODO Auto-generated method stub
+		st.update("qnans.qna_lev", qna);
+	}
+
+	//답글달기
+	@Override
+	public void qnaCommentOk(Qna qna) {
+		// TODO Auto-generated method stub
+		st.insert("qnans.insertCom", qna);
+	}
+
 	
 
 }

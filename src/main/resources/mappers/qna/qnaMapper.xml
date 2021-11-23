@@ -39,7 +39,7 @@ select * from qna_board order by qna_no
 
 <!-- 게시글 저장 -->
 <insert id="insert" parameterType="qna">
- insert into qna_board values (#{qna_no},0,#{qna_title},
+ insert into qna_board values (#{qna_no},#{username},#{qna_title},
  #{qna_content},sysdate,#{qna_re_ref},#{qna_re_lev},#{qna_re_seq},0)
 </insert>
 
@@ -55,6 +55,36 @@ select * from qna_board order by qna_no
  where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page}*10)
 ]]>
 </select>
+
+<!-- 글수정 -->
+<update id="update" parameterType="qna">
+  update qna_board set qna_title=#{qna_title},
+ qna_content=#{qna_content} where qna_no=#{qna_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id="delete" parameterType="qna">
+ delete from qna_board where qna_no=#{qna_no}
+</delete>
+
+<!-- 댓글lev증가 -->
+<update id="qna_lev" parameterType="qna">
+ update qna_board set
+ qna_re_seq=qna_re_seq + 1
+ where qna_re_ref=#{qna_re_ref} and qna_re_seq &gt; #{qna_re_seq}
+</update>
+
+<!-- 댓글작성 -->
+<insert id="insertCom" parameterType="qna">
+<selectKey keyProperty="qna_seq" order="BEFORE" resultType="int">
+			select nvl(max(qna_no),0) + 1 from qna_board
+</selectKey>
+ insert into qna_board 
+ <!-- (qna_no, username, qna_title, qna_content, sysdate, qna_re_ref, qna_re_lev, qna_re_seq, qna_hit) -->
+ values (#{qna_seq}, #{qna_no}, #{username}, #{qna_title}, #{qna_content}, sysdate, #{qna_re_ref}, #{qna_re_lev}, #{qna_re_seq},0)
+ 
+</insert>
+
 
 </mapper>        
         

@@ -23,4 +23,10 @@ public interface QnaDao{
 
 	void hitupdate(int qna_no);
 	
+	void refEdit(Qna qna);
+
+	void qnaCommentOk(Qna qna);
+	
+	
+	
 }

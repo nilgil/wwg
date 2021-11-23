@@ -70,4 +70,26 @@ public class QnaServiceImp implements QnaService{
 	}
 
 	
+	@Override
+	public void insertCom(Qna qna) {
+		// TODO Auto-generated method stub
+		System.out.println("insertCom service까지옴");
+		
+		//seq 1 증가
+		qd.refEdit(qna);
+		
+		System.out.println("insertCom refEdit까지옴");
+		
+		//
+		qna.setQna_re_lev(qna.getQna_re_lev()+1); //부모보다 1증가
+		qna.setQna_re_seq(qna.getQna_re_seq()+1); //seq증가
+		System.out.println("insertCom lev, seq증가");
+		
+		//
+		qd.qnaCommentOk(qna);
+		System.out.println("insertCom qnaCommentOK까지옴");
+	}
+
+
+	
 }

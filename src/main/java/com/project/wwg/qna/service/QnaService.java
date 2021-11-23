@@ -23,6 +23,9 @@ public interface QnaService{
 	int getListCount();
 
 	List<Qna> getPageList(int page);
+	
+	void insertCom(Qna qna);
+	
 
 
 }

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    background-image : url('${path}/resources/img/qna/main제주말.jpg');
+    background-size: 900px 900px;
+}
+.a{
+    text-decoration: none;
+    color: black;
+}
+.update_center{
+	flex: 1;
+    padding: 50px;
+    margin: 60px auto;
+    justify-content: center;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 150px 900px;
+    grid-template-rows: 1fr 42px;
+    grid-template-areas: 'side update_table';
+}
+.side{
+    grid-area: side;
+}
+#side_menu{
+    padding: 10%;
+    width: 151px;
+    height: 210px;
+    margin-top: 57%;
+}
+#side_menu thead{
+    /* color: cadetblue; */
+    background-color: #F4D160;
+}
+table{
+    background-color: #fffffff5;
+}
+.update_table{
+    grid-area: update_table;
+}
+.update_end_btn{
+    display: flex;
+    justify-content: center;
+    grid-area: table_btn;
+}
+.update_end_btn div{
+    margin: 5px;
+}
