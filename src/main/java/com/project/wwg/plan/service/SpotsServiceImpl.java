@@ -1,6 +1,7 @@
 package com.project.wwg.plan.service;
 
 import com.project.wwg.plan.dao.SpotsDao;
+import com.project.wwg.plan.dto.Page;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
 import org.json.simple.JSONArray;
@@ -31,7 +32,6 @@ public class SpotsServiceImpl {
 
     /**
      * [C] Spot 1개 등록
-     *
      */
     public void insertSpot(Spot spot) {
         spotsDao.insertSpot(spot);
@@ -39,7 +39,6 @@ public class SpotsServiceImpl {
 
     /**
      * [C] Spot 여러 개 등록
-     *
      */
     public int insertSpots(List<Spot> spots) {
         return spotsDao.insertSpots(spots);
@@ -47,15 +46,18 @@ public class SpotsServiceImpl {
 
     /**
      * [R] 검색어로 Spot 검색하여 list로 반환
-     *
      */
-    public List<Spot> searchSpots(String keyword) {
-        return spotsDao.searchSpots(keyword);
+    public List<Spot> searchSpots(String keyword, int pageNum) {
+        Page page = new Page(keyword,pageNum);
+        return spotsDao.searchSpots(page);
+    }
+
+    public int getSearchSpotsCount(String keyword) {
+        return spotsDao.getSearchSpotsCount(keyword);
     }
 
     /**
      * [D] id로 Spot 1개 삭제
-     *
      */
     public void deleteSpot(String id) {
         spotsDao.deleteSpot(id);
@@ -63,7 +65,6 @@ public class SpotsServiceImpl {
 
     /**
      * [D] 모든 Spot 삭제
-     *
      */
     public int deleteAllSpots() {
         return spotsDao.deleteAllSpots();
@@ -97,7 +98,6 @@ public class SpotsServiceImpl {
 
     /**
      * API의 1페이지 Spots 조회
-     *
      */
     public String searchSpotsFromApi() {
         return searchSpotsFromApi(1);
@@ -208,19 +208,8 @@ public class SpotsServiceImpl {
                     phone = "--";
                 }
 
-
-
-				/*
-				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
-				 * spots.add(spot);
-				 */
-
-                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
-
-
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
