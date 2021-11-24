@@ -22,5 +22,7 @@
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
         <!-- 류상균 -->
         <typeAlias type="com.project.wwg.comm.model.notice" alias="notice"/>
+        <typeAlias type="com.project.wwg.comm.model.review" alias="review"/>
+        <typeAlias type="com.project.wwg.comm.model.review_reply" alias="rr"/>
     </typeAliases>
 </configuration>

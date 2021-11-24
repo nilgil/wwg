@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class review {
 	
-	private int review_no;          // 후기게시판 번호
-	private String member_id;       // foreign key
+	private int review_no;  //num         // 후기게시판 번호
+	private String member_id;  //writer     // foreign key
 	private String review_title;    // 후기게시판 제목
 	private String review_content;  // 후기게시판 내용
 	private Date review_regdate;    // 후기게시판 생성일자
@@ -21,6 +21,6 @@ public class review {
 	
 	// 검색
 	private String search;
-	
+	private String keyword;
 
 }
