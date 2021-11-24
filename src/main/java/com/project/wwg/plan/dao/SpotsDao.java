@@ -18,11 +18,11 @@ public interface SpotsDao {
 
     int getSearchSpotsCount(String keyword);
 
-    void insertSpot(Spot spot);
+    int insertSpot(Spot spot);
 
     int insertSpots(List<Spot> spots);
 
-    void deleteSpot(String id);
+    int deleteSpot(String id);
 
     int deleteAllSpots();
 }

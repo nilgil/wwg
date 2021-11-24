@@ -76,7 +76,7 @@ public class PlannerController {
         List<Plan> plansByUser = plannerService.getPlansByUser(username);
         model.addAttribute("plans", plansByUser);
 
-        logger.debug("Get Plans By User | Plans : {}",plansByUser);
+        logger.debug("Get Plans By User | PlansCount : {}, Plans : {}",plansByUser.size(),plansByUser);
         return "/plan/myPlan";
     }
 

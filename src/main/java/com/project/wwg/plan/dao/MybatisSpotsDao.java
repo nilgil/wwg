@@ -50,8 +50,8 @@ public class MybatisSpotsDao implements SpotsDao {
      * @return
      */
     @Override
-    public void insertSpot(Spot spot) {
-        sqlSession.insert("spot.insertSpot", spot);
+    public int insertSpot(Spot spot) {
+        return sqlSession.insert("spot.insertSpot", spot);
     }
 
     /**
@@ -71,8 +71,8 @@ public class MybatisSpotsDao implements SpotsDao {
      * @param id
      */
     @Override
-    public void deleteSpot(String id) {
-        sqlSession.delete("spot.deleteSpot", id);
+    public int deleteSpot(String id) {
+        return sqlSession.delete("spot.deleteSpot", id);
     }
 
     /**
