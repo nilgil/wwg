@@ -20,8 +20,12 @@ public class MybatisSpotsDao implements SpotsDao {
 
     @Override
     public List<Spot> getSpotsList(int startRow, int endRow) {
-
         return null;
+    }
+
+    @Override
+    public Spot searchSpotOne(String title){
+        return sqlSession.selectOne("spot.searchSpotOne", title);
     }
 
     /**

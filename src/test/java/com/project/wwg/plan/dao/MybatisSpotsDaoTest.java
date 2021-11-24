@@ -5,23 +5,24 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ContextConfiguration(locations = "../../../../../../resources/")
 class MybatisSpotsDaoTest {
 
-    private SqlSession sqlSession;
     ApplicationContext ac = new GenericXmlApplicationContext("root-context.xml");
+
+    private SqlSession sqlSession;
+
+    @BeforeEach
+    void beforeEach() {
+        sqlSession = (SqlSession) ac.getBean("sqlsession");
+    }
 
     @Test
     @DisplayName("모든 빈 출력하기")
@@ -31,11 +32,6 @@ class MybatisSpotsDaoTest {
             Object bean = ac.getBean(beanDefinitionName);
             System.out.println("bean = " + bean);
         }
-    }
-
-    @BeforeEach
-    void beforeEach() {
-        sqlSession = (SqlSession) ac.getBean("session");
     }
 
     @Test
@@ -55,7 +51,7 @@ class MybatisSpotsDaoTest {
         spots.add(spot1);
         spots.add(spot2);
         spots.add(spot3);
-        int result = sqlSession.insert("spot.insertSpots",spots);
+        int result = sqlSession.insert("spot.insertSpots", spots);
         System.out.println("result = " + result);
         assertThat(result).isEqualTo(3);
     }

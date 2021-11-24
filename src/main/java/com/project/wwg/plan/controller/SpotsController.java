@@ -43,7 +43,7 @@ public class SpotsController {
      */
     @PostMapping(value = "/search", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String getSearchSpotsByPage(String keyword, int pageNum) throws JsonProcessingException {
+    public String getSearchSpotsByPage(String keyword, int pageNum) throws Exception {
         List<Spot> spots = spotService.searchSpots(keyword, pageNum);
         int searchCount = spotService.getSearchSpotsCount(keyword);
         Page page = new Page(keyword, pageNum, searchCount);
@@ -59,12 +59,33 @@ public class SpotsController {
         return jsonObject.toJSONString();
     }
 
+    @PostMapping(value = "/searchOne", produces = "application/json; charset=utf8")
+    @ResponseBody
+    public String getSearchSpotOne(String title) throws Exception {
+        Spot spot = spotService.searchSpotOne(title);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String result = mapper.writeValueAsString(spot);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", result);
+
+        return jsonObject.toJSONString();
+    }
+
+    /**
+     * [C] Spot 추가
+     */
     @PostMapping("/insert")
     public String insertSpot(@RequestBody Spot spot) {
         spotService.insertSpot(spot);
         return "/plan/spotsList";
     }
 
+
+    /**
+     * [D] id로 Spot 제거
+     */
     @GetMapping("/id/{id}")
     public String deleteSpot(String id) {
         spotService.deleteSpot(id);

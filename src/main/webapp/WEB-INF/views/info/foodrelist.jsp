@@ -31,7 +31,7 @@
 		var food_re_content = $('#tt_'+id).val();
 		var formData = "food_re_no="+id+'&food_re_content='+food_re_content
 			+"&rfood_no=${foodboard.food_no}";
-		$.post('${path}/repUpdate',formData, function(data) {
+		$.post('${path}/foodreUpdate',formData, function(data) {
 			$('#foodrelist').html(data);
 		});
 	}
@@ -40,7 +40,7 @@
 	}
 	function del(food_re_no,rfood_no) {
 		var formData="food_re_no="+food_re_no+"&rfood_no="+rfood_no;
-		$.post("${path}/repDelete",formData, function(data) {
+		$.post("${path}/foodreDelete",formData, function(data) {
 			$('#foodrelist').html(data);
 		});
 	}

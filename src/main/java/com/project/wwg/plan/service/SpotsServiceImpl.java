@@ -45,6 +45,13 @@ public class SpotsServiceImpl {
     }
 
     /**
+     * [R] 검색어로 Spot 1개 반환
+     */
+    public Spot searchSpotOne(String title) {
+        return spotsDao.searchSpotOne(title);
+    }
+
+    /**
      * [R] 검색어로 Spot 검색하여 list로 반환
      */
     public List<Spot> searchSpots(String keyword, int pageNum) {
@@ -52,6 +59,9 @@ public class SpotsServiceImpl {
         return spotsDao.searchSpots(page);
     }
 
+    /**
+     * [R] 검색어 결과 개수 반환
+     */
     public int getSearchSpotsCount(String keyword) {
         return spotsDao.getSearchSpotsCount(keyword);
     }
