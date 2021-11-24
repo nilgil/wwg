@@ -92,14 +92,14 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 75px;
+    height: 65px;
     border-bottom: 1px solid black;
 }
 
 .plan-item img {
-    padding-left: 6px;
-    width: 65px;
-    height: 65px;
+    padding-left: 3px;
+    width: 60px;
+    height: 60px;
 }
 
 .plan-item div {
@@ -203,9 +203,9 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70px;
     line-height: 43px;
     border-bottom: 1px solid black;
+    height: 30px;
 }
 
 #search-input {
@@ -213,12 +213,17 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 50%;
+    height: 100%;
+}
+
+#search-result {
+    overflow: scroll;
 }
 
 #search-input input {
-    width: 70%;
-    height: 34px;
+    border: none;
+    width: 100%;
+    height: 100%;
     padding-left: 10px;
     font-size: 17px;
 }
@@ -227,7 +232,8 @@ header {
 }
 
 #search-input button {
-    height: 34px;
+    height: 30px;
+    width: 45px;
 }
 
 #search-fail {
@@ -242,6 +248,7 @@ header {
 /* 페이징 버튼 */
 #pageBtns {
     text-align: center;
+    height: 30px;
 }
 
 #pageBtnsUl {
@@ -260,7 +267,7 @@ header {
 
 #pageBtnsUl li a {
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     padding: 9px 10px;
     border-right: solid 1px #ccc;
     box-sizing: border-box;
@@ -335,15 +342,15 @@ header {
 }
 
 #detail-img {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 50px;
     width: auto;
-    height: 350px;
+    height: 300px;
 }
 
 #detail-box {
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     width: 100%;
     height: 280px;
 }

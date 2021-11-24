@@ -20,7 +20,8 @@
         <br>
         <div id="howdays">
             <p>몇일?</p>
-            <input id="dayIn" name="days" type="number">
+            <input hidden="hidden"/>
+            <input id="dayIn" name="days" onkeydown="">
         </div>
         <br><br>
         <div id="submit" onclick="checkDays()">플랜 만들기</div>

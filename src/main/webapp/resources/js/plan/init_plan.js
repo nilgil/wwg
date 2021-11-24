@@ -12,13 +12,22 @@ $(document).ready(function () {
 
 function checkDays() {
     if ($('#dayIn').val() == "") {
-        alert("여행 기간을 입력하세요.");
+        alert("여행 기간을 입력해주세요.");
         $('#dayIn').focus();
         return false;
-    } else {
-        $("#initForm").submit();
+    } else if($('#dayIn').val() < 1){
+        alert("1이상의 숫자를 입력해주세요.");
+        $('#dayIn').focus();
+        return false;
     }
+        $("#initForm").submit();
 }
+
+$("#dayIn").keydown(function (keyNum) {
+    if (keyNum.keyCode == 13) {
+        checkDays();
+    }
+})
 
 // function fetchPage(name) {
 //     fetch(name).then(function (response) {

@@ -19,6 +19,10 @@ public class Page {
         this("", pageNum);
     }
 
+    public Page(int pageNum, int searchCount) {
+        this("", pageNum, searchCount);
+    }
+
     public Page(String keyword, int pageNum) {
         this(keyword, pageNum, 0);
     }

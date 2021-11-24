@@ -9,4 +9,30 @@
         values (#{username}, #{title}, #{departure}, #{days}, #{plans})
     </insert>
 
+    <select id="getPlansByUser" parameterType="string" resultType="Plan">
+        select *
+        from plan
+        where username = #{username}
+    </select>
+
+    <select id="getAllPlansList" parameterType="Page" resultType="Plan">
+        <![CDATA[
+        select *
+        from (
+                 SELECT a.*, ROWNUM as rnum
+                 FROM (
+                          SELECT *
+                          FROM plan
+                          ORDER BY regdate desc) a)
+        WHERE rnum >= #{startRow}
+          and rnum <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="getAllPlansCount" resultType="_int">
+        select count(*)
+        from plan
+        where pub = 0
+    </select>
+
 </mapper>
