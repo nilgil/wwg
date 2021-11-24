@@ -4,6 +4,12 @@
 
 <mapper namespace="spot">
 
+    <select id="searchSpotOne" parameterType="string" resultType="Spot">
+        select *
+        from plan_spot
+        where title = #{title}
+    </select>
+
     <select id="searchSpots" parameterType="Page" resultType="Spot">
         <![CDATA[
         select *
