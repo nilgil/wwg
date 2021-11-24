@@ -64,5 +64,10 @@ public class FoodBoardDaoImpl implements FoodBoardDao {
 	public void updateRe(FoodBoard foodboard) {
 		session.update("foodMapper.updateRe", foodboard);
 	}
+	
+	@Override
+	public void like(int food_no) {
+		session.update("foodMapper.like", food_no);
+	}
 
 }
