@@ -19,8 +19,15 @@ public interface QnaDao{
 
 	int getListCount();
 
-	List<Qna> getQnaList(int page);
+	List<Qna> getQnaList(Qna qna);
 
 	void hitupdate(int qna_no);
+	
+	void refEdit(Qna qna);
+
+	void qnaCommentOk(Qna qna);
+
+	int getTotal(Qna qna);
+
 	
 }

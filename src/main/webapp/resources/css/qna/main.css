@@ -17,13 +17,9 @@ body{
     margin: 0%;
     display: flex;
     flex-direction: column;
-    /* min-height: 150vh; */
     background-image : url('/resources/img/qna/main해녀.jpg');
     background-size: 900px 900px;
     font-family: 'paybooc-Bold';
-}
-.center{
-    flex: 1;
 }
 a{
     text-decoration: none;
@@ -31,14 +27,15 @@ a{
 }
 
 /* center grid 작업 */
-.center{
+.mainpage_center{
+	flex: 1;
     padding: 50px;
     margin: 400px auto;
     justify-content: center;
     display: grid;
     /* grid-gap: 1px; 혹시 몰라서 안지움 */
     /* height: 100vh; 혹시 몰라서 안지움 */
-    grid-template-columns: 400px 400px 300px;
+    grid-template-columns: 500px 500px 350px;
     grid-template-rows: 350px 450px 450px 600px;
     grid-template-areas: 'center_main1 center_main5 aside_login'
                          'center_main2 center_main2 notice'
@@ -46,7 +43,7 @@ a{
                          'center_main4 center_main4 aside2' ;                     
     margin-top: 5%;
 }
-.center div{
+.mainpage_center div{
     background-color: #fffffff5;
     padding: 20px;
 }
@@ -63,7 +60,7 @@ a{
 .center_main2 ul li{
     color: gainsboro;
     list-style: none;
-	width: 234px;
+	width: 301px;
 	height: 264px;
     margin-left: 5px;
     float: left;
@@ -72,7 +69,7 @@ a{
     display: table-caption;
 }
 .center_main2 ul li img{
-    width: 230px;
+    width: 280px;
     height: 250px;
     margin-left: -18px;
 }
@@ -80,7 +77,7 @@ a{
     grid-area: center_main3;
 }
 .center_main3 img{
-    width: 700px;
+    width: 900px;
     height: 200px;
     float: none;
     margin: 30px;
@@ -138,9 +135,13 @@ a{
     width: auto;
 }
 .login_btn{
-    width: 283px;
+    width: 341px;
     margin: -5%;
     font-size:12px;
+}
+.login_btn a{
+    font-size: larger;
+    margin: 2%;
 }
 
 /* 사진 슬라이드 부트스트랩 + css add  */
@@ -151,28 +152,9 @@ a{
     height: 400px;
 }
 
-/* 로그인 div 안에서 grid 작업 */
-/* #login{
-    display: grid;
-    grid-template-columns: 86px 86px 86px;
-    grid-template-rows: 86px;
-    grid-template-areas:'login_btn join_btn find_btn' ;  
-} */
-
-/* grid 설정 */
-/* .login_btn{
-    grid-area: login_btn;
-}
-.join_btn{
-    grid-area: join_btn;
-}
-.find_btn{
-    grid-area: find_btn;
-}  */
 
 
 /* 반응형 웹 기능 */
 @media screen and (max-width: 48rem){
 
 }
-

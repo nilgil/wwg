@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.wwg.qna.dao.QnaDao;
 import com.project.wwg.qna.model.Qna;
 
+
 @Service
 public class QnaServiceImp implements QnaService{
 	
@@ -57,9 +58,8 @@ public class QnaServiceImp implements QnaService{
 
 	//게시글목록
 	@Override
-	public List<Qna> getPageList(int page) {
-		// TODO Auto-generated method stub
-		return qd.getQnaList(page);
+	public List<Qna> getPageList(Qna qna) {		
+		return qd.getQnaList(qna);
 	}
 
 	//조회수
@@ -68,6 +68,36 @@ public class QnaServiceImp implements QnaService{
 		// TODO Auto-generated method stub
 		qd.hitupdate(qna_no);
 	}
+
+	
+	@Override
+	public void insertCom(Qna qna) {
+		// TODO Auto-generated method stub
+		System.out.println("insertCom service까지옴");
+		
+		//seq 1 증가
+		qd.refEdit(qna);
+		
+		System.out.println("insertCom refEdit까지옴");
+		
+		//
+		qna.setQna_re_lev(qna.getQna_re_lev()+1); //부모보다 1증가
+		qna.setQna_re_seq(qna.getQna_re_seq()+1); //seq증가
+		System.out.println("insertCom lev, seq증가");
+		
+		//
+		qd.qnaCommentOk(qna);
+		System.out.println("insertCom qnaCommentOK까지옴");
+	}
+
+	@Override
+	public int getTotal(Qna qna) {
+		// TODO Auto-generated method stub
+		return qd.getTotal(qna);
+	}
+	
+
+
 
 	
 }

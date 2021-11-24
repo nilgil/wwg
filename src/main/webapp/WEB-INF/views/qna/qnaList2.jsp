@@ -7,32 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Q&A게시판 목록</title>
-   <%@ include file="/resources/include/headTag.jsp"%>
+    <title>Q&A게시판 목록호출</title>
+   <%@ include file="/resources/include/headTag.jsp"%> 
 </head>
 <body>
 
-   <!-- navbar -->
-   <%@ include file="/resources/include/navbar.jsp"%>
-    
     <!-- center -->
-   <div class="qnalist_center">
-     <div class="side"> 
-                <table id="side_menu" class="table table-hover">
-                     <thead>
-                       <tr><th>회원문의</th></tr>
-                     </thead>
-                     <tbody>
-                       <tr><td><a href="/qnalist.do">Q&A</a></td></tr>
-                       <tr><td></td></tr>
-                       <tr><td></td></tr>
-                     </tbody>
-                 </table>
-      </div>
+   <div class="qnalist_center2">
+
    
-   <div class="table">
+   <div class="table2">
           <table class="table table-hover">
-          <h2>Q&A 게시판</h2>
+          <h2>Q&A 게시글 목록</h2>
           <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
           <p>총 글개수 : ${listcount}</p>  
             <thead>
@@ -69,13 +55,13 @@
         
         
         <!-- 글작성버튼 -->
-          <div class="qnalist_write_btn">
-            <a href="qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
+          <div class="qnalist_write_btn2">
+            <a href="/qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
           </div>
         
         
         <!-- 페이징처리 -->
-        <div class="qna_list_paging">
+        <div class="qna_list_paging2">
          <c:if test="${page <= 1}">[이전]&nbsp;</c:if>
          
          <c:if test="${page > 1}">
@@ -97,31 +83,24 @@
         
         
         <!-- 목록검색기능 -->
-        <form action="qnalist.do">
-        <input type="hidden" name="page" value="${page}">
-        <div class="search_bar">
-            <select name="search">
-                <option value="qna_title"
+        <form action="${path }/views/qna/qnaList/page/1">
+        <div class="search_bar2">
+            <select class="search">
+                <option value="title"
                 <c:if test="${search=='qna_title'}"> selected="selected"</c:if> > 제목 </option>
-                <option value="qna_content"
+                <option value="content"
                 <c:if test="${search=='qna_content'}"> selected="selected"</c:if> > 내용 </option>
-                <option value="username"
+                <option value="writer"
                 <c:if test="${search=='username'}"> selected="selected" </c:if> > 작성자 </option>
-                <option value="qna_titcon"
+                <option value="titcon"
                 <c:if test="${search=='qna_titcon'}"> selected="selected" </c:if> > 제목+내용 </option>
             </select> 
             <input type="text" name="keyword"> 
             <input class="btn btn-dark" type="submit" value="검색">
         </div>
         </form>
-        
    </div>
-   
    </div>
-    
-    
-   <!-- footer -->
-   <%@ include file="/resources/include/footerbar.jsp"%>
 
 </body>
 </html>
