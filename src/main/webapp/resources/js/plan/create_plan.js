@@ -1,7 +1,8 @@
 let token;
 let header;
 const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-let departure = new Date($('#hiddenDeparture').val()); // 출발일
+let username = $('#hiddenUsername').val();
+let departure = new Date($('#hiddenDepartureL').val()); // 출발일
 let days = $('#hiddenDays').val(); // 총 여행기간
 let week = WEEKEND[departure.getDay()]; // 현재 Day의 요일
 let planOfDays; // 각 날짜별 플랜 저장해둘 객체 배열
@@ -10,9 +11,10 @@ let searchKeyword;
 let chooseDayPlans;
 let spots = [];
 let map;
+let spotDetail;
 
 // 날짜별 정보
-let day = class {
+let Day = class {
     departure;
     week;
     plans = [];
@@ -24,7 +26,7 @@ let day = class {
 };
 
 // 관광지 정보
-let spot = class {
+let Spot = class {
     title;
     photo;
     rating;
@@ -40,12 +42,51 @@ let spot = class {
     }
 }
 
+// submit
+function submitPlan() {
+    let plans = [];
+    let titles;
+    for (let i = 0; i < planOfDays.length; i++) {
+        let temp = planOfDays[i].plans;
+        titles = [];
+        for (let j = 0; j < temp.length; j++) {
+            titles.push(temp[j].title);
+        }
+        plans.push(titles);
+    }
+    let jsonPlans = JSON.stringify(plans);
+
+    $.ajax({
+        type: "POST",
+        url: "/planner/create_success",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        data: {
+            "days": days,
+            "departure": dateFormatter(departure),
+            "username": username,
+            "title": $("#title").val(),
+            "plans": jsonPlans
+        },
+        success: function (data) {
+            location.replace(data);
+        },
+        error: function (xhr, status) {
+            alert(status);
+        }
+    })
+}
+
 // INIT
 $(document).ready(function () {
 
     // security용 token, header
     token = $("meta[name='_csrf']").attr("content");
     header = $("meta[name='_csrf_header']").attr("content");
+
+    // 디테일 뷰 숨기기
+    $('#detail-view').hide();
 
     // 현재 Day,날짜,요일 출력
     $('#now').text("Day1");
@@ -58,7 +99,7 @@ $(document).ready(function () {
     for (let i = 0; i < days; i++) {
         let dep = new Date(departure);
         dep.setDate(dep.getDate() + i);
-        planOfDays[i] = new day(dateFormatter(dep), WEEKEND[dep.getDay()]);
+        planOfDays[i] = new Day(dateFormatter(dep), WEEKEND[dep.getDay()]);
     }
 
     // 여행 기간에 따른 Days 출력
@@ -70,7 +111,6 @@ $(document).ready(function () {
     // 지도 생성
     createMap();
 });
-
 
 // 관광지 화면 출력
 function makeSpots(keyword, pageNum) {
@@ -94,18 +134,18 @@ function makeSpots(keyword, pageNum) {
         if (jsonPageInfo.count > 0) {
             for (let i = 0; i < jsonSpots.length; i++) {
                 let current = jsonSpots[i];
-                let title = current.title;
+                let title = current.title.trim();
                 let photo = current.photo;
                 let rating = current.rating;
                 let lat = current.lat;
                 let lng = current.lng;
-                spots[i] = new spot(title, photo, rating, lat, lng);
+                spots[i] = new Spot(title, photo, rating, lat, lng);
 
                 $('#search-result').append(
                     "<div class='plan-item'>" +
                     "   <img onclick='viewSpotDetail('" + title + "')' src='" + photo + "'/>\n" +
                     "   <div>\n" +
-                    "       <p class='spot-title' onclick='viewSpotDetail('" + title + "')'>" + title + "</p></a>\n" +
+                    "       <p class='spot-title' onclick=\"viewSpotDetail(" + `'${title}'` + ")\">" + title + "</p></a>\n" +
                     "       <p>👍🏻  " + rating + "</p>\n" +
                     "   </div>" +
                     "   <div>" +
@@ -206,7 +246,7 @@ function makePlans(chooseDayPlans) {
             "<div class='day-plans'>" +
             "   <img onclick='viewSpotDetail('" + currentPlan.title + "')' src='" + currentPlan.photo + "'/>\n" +
             "   <div>\n" +
-            "       <p class='spot-title' onclick='viewSpotDetail('" + currentPlan.title + "')'>" + currentPlan.title + "</p></a>\n" +
+            "       <p class='spot-title' onclick=\"viewSpotDetail(" + `'${currentPlan.title}'` + ")\">" + currentPlan.title + "</p></a>\n" +
             "   </div>" +
             "   <div>" +
             "       <p class='remove-plan' onclick=\"removePlan('" + currentPlan.title + "'," + i + ")\">-</p>" +
@@ -237,7 +277,7 @@ function dayPlus() {
     days = Number(days) + 1;
     let dep = new Date(departure);
     dep.setDate(dep.getDate() + planOfDays.length);
-    planOfDays.push(new day(dateFormatter(dep), WEEKEND[dep.getDay()]))
+    planOfDays.push(new Day(dateFormatter(dep), WEEKEND[dep.getDay()]))
     makeDays();
 }
 
@@ -265,7 +305,30 @@ function makeDays() {
 }
 
 function viewSpotDetail(title) {
+    $.ajax({
+        method: "POST",
+        url: "/spots/searchOne",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        data: {title: title},
+        dataType: "json"
+    }).done(function (data) {
+        let detailSpot = JSON.parse(data.result);
 
+        $('#detail-img').attr('src', detailSpot.photo);
+        $('#detail-title').text(detailSpot.title);
+        $('#detail-info').text(detailSpot.info);
+        $('#detail-rating').text("👍🏻 "+detailSpot.rating);
+
+        $('#map').hide();
+        $('#detail-view').show();
+    });
+}
+
+function detailToMap() {
+    $('#detail-view').hide();
+    $('#map').show();
 }
 
 // 지도 생성
@@ -319,13 +382,15 @@ function createMarker() {
             infowindow.close();
         });
 
-        // $("#plan-item").mouseover(function () {
-        //     infowindow.open(map, marker[i]);
-        // });
+        kakao.maps.event.addListener(marker[i], 'click', function () {
+            viewSpotDetail(spots[i].title);
+        });
+
     }
 }
 
-// -------------------- 이벤트 관련 --------------------
+
+// -------------------- 그 외 --------------------
 
 // 검색창 엔터키 이벤트
 $("#search-keyword").keydown(function (keyNum) {
@@ -333,11 +398,6 @@ $("#search-keyword").keydown(function (keyNum) {
         $("#searchBtn").click()
     }
 })
-
-// 관광지 마우스오버시 마커 변경
-
-
-// ----------------------- 유틸 ----------------------
 
 // 날짜 포맷변경
 function dateFormatter(date) {

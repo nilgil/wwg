@@ -19,27 +19,27 @@
 				<td>작성일</td>
 				<td>조회수</td>
 			</tr>
-				<c:set var="no" value="${notice_no}"></c:set>
+				<c:set var="no" value="${review_no}"></c:set>
 				<c:forEach var="n" items="${list}">
 					<tr>
-						<td>${n.notice_no}</td>
-							<td><a href="${path}/noticeview/notice_no/${n.notice_no}/pageNum/${pp.currentPage}">
-								${n.notice_title}
+						<td>${n.review_no}</td>
+							<td><a href="${path}/reviewview/review_no/${n.review_no}/pageNum/${pp.currentPage}">
+								${n.review_title}
 								</a></td>
 							<td>${n.member_id}</td>
-							<td><fmt:formatDate value="${n.notice_regdate}" 
+							<td><fmt:formatDate value="${n.review_regdate}" 
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<td>${n.notice_hit}</td>
+							<td>${n.review_hit}</td>
 					</tr>
 					<c:set var="no1" value="${no-1}"></c:set>
 				</c:forEach>
 		</table>
-		<form align="center" action="${path}/noticelist/pageNum/1">
+		<form align="center" action="${path}/reviewlist/pageNum/1">
 			<select name="search">
-				<option value="notice_title"
-					<c:if test="${search=='notice_title'}">selected="selected" </c:if>>제목</option>
-				<option value="notice_content"
-					<c:if test="${search=='notice_content'}">selected="selected" </c:if>>내용</option>
+				<option value="review_title"
+					<c:if test="${search=='review_title'}">selected="selected" </c:if>>제목</option>
+				<option value="review_content"
+					<c:if test="${search=='review_content'}">selected="selected" </c:if>>내용</option>
 				<option value="member_id"
 					<c:if test="${search=='member_id'}">selected="selected" </c:if>>작성자</option>
 				<option value="subcon"
@@ -52,31 +52,31 @@
 		<center>
 			<c:if test="${not empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="${path }/noticelist/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
+					<li><a href="${path }/reviewlist/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/noticelist/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+						href="${path }/reviewlist/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="${path }/noticelist/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
+					<li><a href="${path }/reviewlist/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
 				</c:if>
 			</c:if>
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="${path }/noticelist/pageNum/${pp.startPage - 1}">이전</a></li>
+					<li><a href="${path }/reviewlist/pageNum/${pp.startPage - 1}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/noticelist/pageNum/${i}">${i}</a></li>
+						href="${path }/reviewlist/pageNum/${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="${path }/noticelist/pageNum/${pp.endPage + 1}">다음</a></li>
+					<li><a href="${path }/reviewlist/pageNum/${pp.endPage + 1}">다음</a></li>
 				</c:if>
 		  </c:if>
 		</center>
 		<div align="center">
-			<a href="${path}/comm_noticeinsertform" class="btn btn-info">글 작성</a>
+			<a href="${path}/comm_reviewinsertform" class="btn btn-info">글 작성</a>
 		</div>
 </body>
 </html>

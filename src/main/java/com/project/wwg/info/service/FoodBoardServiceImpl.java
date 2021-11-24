@@ -56,10 +56,13 @@ public class FoodBoardServiceImpl implements FoodBoardService {
 	public int getMaxNum() {
 		return dao.getMaxNum();
 	}
-
+	
 	@Override
 	public void updateRe(FoodBoard foodboard) {
 		dao.updateRe(foodboard);
 	}
 
+	public void like(int food_no) {
+		dao.like(food_no);
+	}
 }

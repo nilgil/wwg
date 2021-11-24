@@ -10,13 +10,13 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("입력 성공");
-			location.href = "noticelist";
+			alert("삭제 성공");
+			location.href = "${path}/reviewlist/pageNum/1";
 		</script>
 	</c:if>
-	<c:if test="${result <= 0 }">
+	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("입력 실패");
+			alert("삭제 실패");
 			history.go(-1);
 		</script>
 	</c:if>

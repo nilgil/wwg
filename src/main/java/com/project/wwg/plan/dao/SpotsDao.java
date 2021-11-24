@@ -12,6 +12,8 @@ import java.util.List;
 public interface SpotsDao {
     List<Spot> getSpotsList(int startRow, int endRow);
 
+    Spot searchSpotOne(String title);
+
     List<Spot> searchSpots(Page page);
 
     int getSearchSpotsCount(String keyword);

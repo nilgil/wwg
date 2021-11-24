@@ -46,12 +46,33 @@
 				return false;
 			}
 			var frmData = $('#frm').serialize();		  
-			$.post('${path}/sInsert', frmData, function(data) {
+			$.post('${path}/foodreInsert', frmData, function(data) {
 				$('#foodrelist').html(data);
 				frm.food_re_content.value = '';
 			});
 		});
 	});
+</script>
+
+<!-- 좋아요 버튼 -->
+<script type="text/javascript">
+var username = '${foodboard.username}';
+var session = '${sessionScope.username}';
+$(function() {	
+	$("#like").submit(function(){
+    	if(username == session){
+        	alert("사용자가 같으면 좋아요를 할수 없습니다.");
+        	history.go(-1);
+        	
+    	}else if{(username != session)
+        	alert("좋아요.");
+        	history.go(-1);
+        
+    	}
+
+        }
+    });
+});
 </script>
 
 </head>
@@ -82,21 +103,27 @@
 		 		method="post" name="chk" id="chk1">
 				<input type="submit" value="수정" >
 				</form>
-				
+
 				<form action="${path}/fooddeleteform.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
 		 		method="post" name="chk" id="chk2">
 				<input type="submit" value="삭제" >
 				</form>
+				
+				<form action="/foodlike.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
+				method="post" id="like">
+				<input type="submit" value="좋아요">
+				</form>
 			</div>
 			
 		<!-- 댓글 작성 -->
-		<p>
+		<div align=center>
 		<form name="frm" id="frm">
 			<input type="hidden" name="username" value="${foodboard.username}">
 			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 댓글 :
 			<textarea rows="3" cols="50" name="food_re_content"></textarea>
 			<input type="button" value="확인" id="repInsert">
 		</form>
+		</div>
 		
 		<!-- 댓글 list 불러오는곳 -->
 		<div id="foodrelist"></div>
