@@ -22,6 +22,6 @@
         <!-- 류상균 -->
         <typeAlias type="com.project.wwg.comm.model.notice" alias="notice"/>
         <typeAlias type="com.project.wwg.comm.model.review" alias="review"/>
-        <typeAlias type="com.project.wwg.comm.model.review_reply" alias="rr"/>
+        <typeAlias type="com.project.wwg.comm.model.review_replydto" alias="rr"/>
     </typeAliases>
 </configuration>

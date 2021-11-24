@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 import com.project.wwg.comm.dao.review_reply_dao;
 
 //import board1.model.ReplyBoard;
-import com.project.wwg.comm.model.review_reply;
+import com.project.wwg.comm.model.review_replydto;
 
 @Service
 public class review_reply_servicelmpl implements review_reply_service {
 	@Autowired
 	private review_reply_dao rrd;
 
-	public List<review_reply> list(int review_no) {
+	public List<review_replydto> list(int review_no) {
 		return rrd.list(review_no);
 	}
 
-	public void insert(review_reply rr) {
+	public void insert(review_replydto rr) {
 		rrd.insert(rr);
 	}
 
@@ -27,7 +27,7 @@ public class review_reply_servicelmpl implements review_reply_service {
 		rrd.delete(review_re_no);
 	}
 
-	public void update(review_reply rr) {
+	public void update(review_replydto rr) {
 		rrd.update(rr);
 	}
 }

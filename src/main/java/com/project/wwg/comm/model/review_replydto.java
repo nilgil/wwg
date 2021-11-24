@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class review_reply {
+public class review_replydto {
 	
 	private int review_re_no;  //rno        // 후기게시판 댓글의 번호
 	private int review_no;     //bno        // 후기게시판 게시글의 번호
