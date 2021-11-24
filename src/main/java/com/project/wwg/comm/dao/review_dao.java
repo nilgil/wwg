@@ -23,5 +23,7 @@ public interface review_dao {
 
 	int getMaxNum();
 
+	void like(int review_no);
+
 
 }

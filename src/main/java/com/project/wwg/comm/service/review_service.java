@@ -24,5 +24,7 @@ public interface review_service {
 
 	int getMaxNum();
 
+	void like(int review_no);
+
 	
 }

@@ -34,7 +34,23 @@ $(function(){
 	});
 });	
 </script>
-
+<!-- 좋아요 버튼 -->
+<script type="text/javascript">
+var username = '${foodboard.username}';
+var session = '${sessionScope.username}';
+$(function() {	
+	$("#like").submit(function(){
+    	if(username == session){
+        	alert("사용자가 같으면 좋아요를 할수 없습니다.")
+        	history.go(-1)
+        else(username != session)
+        	alert("좋아요.")
+        	history.go(-1)
+        return false;
+        }
+    });
+});
+</script>
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
 	$(function() {
@@ -75,13 +91,16 @@ $(function(){
 				<td>내용</td>
 				<td><pre>${review.review_content}</pre></td>
 			</tr>
+			<form action="/review_like/review_no/{review_no}/pageNum/{pageNum}" 
+			method="post" id="like"> <input type="submit" value="좋아요">
+			</form>
 
 		
 		<a href="${path}/reviewlist/pageNum/${pageNum}">목록</a> 
 		<a href="${path}/reviewupdateform/review_no/${review.review_no}/pageNum/${pageNum}"
 		   >수정</a> 
 		<a href="${path}/reviewdelete/review_no/${review.review_no}/pageNum/${pageNum}"
-		   >삭제</a> 
+		   >삭제</a>
 		   </div>
 		 
 		<!-- 댓글 작성 -->   

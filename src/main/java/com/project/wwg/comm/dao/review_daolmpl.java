@@ -58,4 +58,9 @@ public class review_daolmpl implements review_dao {
 		return sst.selectOne("reviewns.getMaxNum");
 	}
 
+	@Override
+	public void like(int review_no) {
+		sst.update("reviewns.like",review_no );
+	}
+
 }
