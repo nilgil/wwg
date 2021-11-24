@@ -31,19 +31,19 @@ public class ReFoodBoardController {
 	}
 
 	// 댓글 저장
-	@RequestMapping("sInsert")
+	@RequestMapping("foodreInsert")
 	public String sInsert(ReFoodBoard ReFoodBoard, Model model) {
 		rfs.insert(ReFoodBoard);
 		return "redirect:foodrelist/food_no/" + ReFoodBoard.getRfood_no();
 	}
 
-	@RequestMapping("repDelete")
+	@RequestMapping("foodreDelete")
 	public String delete(ReFoodBoard ReFoodBoard, Model model) {
 		rfs.delete(ReFoodBoard.getFood_re_no());
 		return "redirect:foodrelist/food_no/" + ReFoodBoard.getRfood_no();
 	}
 
-	@RequestMapping("repUpdate")
+	@RequestMapping("foodreUpdate")
 	public String repUpdate(ReFoodBoard ReFoodBoard, Model model) {
 		rfs.update(ReFoodBoard);
 		return "redirect:foodrelist/food_no/" + ReFoodBoard.getRfood_no();

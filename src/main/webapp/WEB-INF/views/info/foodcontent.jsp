@@ -46,7 +46,7 @@
 				return false;
 			}
 			var frmData = $('#frm').serialize();		  
-			$.post('${path}/sInsert', frmData, function(data) {
+			$.post('${path}/foodreInsert', frmData, function(data) {
 				$('#foodrelist').html(data);
 				frm.food_re_content.value = '';
 			});
@@ -61,12 +61,15 @@ var session = '${sessionScope.username}';
 $(function() {	
 	$("#like").submit(function(){
     	if(username == session){
-        	alert("사용자가 같으면 좋아요를 할수 없습니다.")
-        	history.go(-1)
-        else(username != session)
-        	alert("좋아요.")
-        	history.go(-1)
-        return false;
+        	alert("사용자가 같으면 좋아요를 할수 없습니다.");
+        	history.go(-1);
+        	
+    	}else if{(username != session)
+        	alert("좋아요.");
+        	history.go(-1);
+        
+    	}
+
         }
     });
 });

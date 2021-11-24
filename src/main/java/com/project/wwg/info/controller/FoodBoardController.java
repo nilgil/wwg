@@ -130,10 +130,8 @@ public class FoodBoardController {
     @RequestMapping("foodlike.do")
     public String recommend (@RequestParam int food_no, Model model) {
 		service.like(food_no);					// 좋아요 1증가
-		
         model.addAttribute("food_no", food_no);
-    
-        return "redirect:foodcontent.do/food_no/{food_no}/pageNum/{pageNum}/";
+        return "redirect:foodlist.do";
     }
 
 	
