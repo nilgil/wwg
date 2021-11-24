@@ -36,19 +36,19 @@ public class review_reply_controller {
 		return "comm/review/review_view";
 	}
 
-	@RequestMapping("/sInsert")
+	@RequestMapping("/review_reply_insert")
 	public String sInsert(review_reply rr, Model model) {
 		rrs.insert(rr);
 		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
 	}
 
-	@RequestMapping("/repDelete")
+	@RequestMapping("/review_reply_delete")
 	public String delete(review_reply rr, Model model) {
 		rrs.delete(rr.getReview_re_no());
 		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
 	}
 
-	@RequestMapping("/repUpdate")
+	@RequestMapping("/review_reply_update")
 	public String repUpdate(review_reply rr, Model model) {
 		rrs.update(rr);
 		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
