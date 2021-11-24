@@ -2,41 +2,44 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 
-<!-- jQuery문 설정 불러오기 -->
-<script src="${path}/js/info/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <script type="text/javascript">
-	$(function() {
-		$('#list').load('reviewlist?pageNum=${pageNum}');
-	});
-</script> -->
+<title>상세페이지</title>
 
+<!-- jQuery문 설정 불러오기 -->
+<script src="${path}/js/info/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
-<!-- id 유효성검사 -->
-
+<!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
-	function chk() {
-		if (frm.passwd.value != frm.passwd2.value) {
-			alert("권한이 없습니다");
+var member_id = '${review.member_id}';
+var session = '${sessionScope.member_id}';
+$(function(){
+	$("#chk1").submit(function(){
+		if (username != session) {
+			alert("사용자가 다르면 수정할 수 없습니다");
 			return false;
-		}
-	}
+		}				
+	});
+	$("#chk2").submit(function(){
+		if (username != session) {
+			alert("사용자가 다르면 삭제할 수 없습니다");
+			return false;
+		}				
+	});
+});	
 </script>
 
+<!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
-	/* 	window.onload=function() {
-	
-	 } */
 	$(function() {
 		$('#review_reply').load('${path}/review_reply/review_no/${review.review_no}')
-//		$('#list').load('${path}/list/pageNum/${pageNum}');
+	
 		$('#review_reply_insert').click(function() {
 			if (!frm.review_re_content.value) {
 				alert('댓글 입력후에 클릭하시오');
@@ -44,8 +47,6 @@
 				return false;
 			}
 			var frmData = $('frm').serialize();
-			// var frmData = 'replyer='+frm.replyer.value+'&bno='+
-			//				  frm.bno.value+'&replytext='+frm.replytext.value;				  
 			$.post('${path}/review_reply_insert', frmData, function(data) {
 				$('#review_reply').html(data);
 				frm.review_re_content.value = '';
@@ -81,16 +82,18 @@
 		   >수정</a> 
 		<a href="${path}/reviewdelete/review_no/${review.review_no}/pageNum/${pageNum}"
 		   >삭제</a> 
-		   
-		<p>
+		   </div>
+		 
+		<!-- 댓글 작성 -->   
+		<p><p>
 		<form name="frm" id="frm">
 			<input type="hidden" name="member_id" value="${review.member_id}">
-			<input type="hidden" name="review_no" value="${review.review_no}"> 댓글 :
+			<input type="hidden" name="review_fno" value="${review.review_no}"> 댓글 :
 			<textarea rows="3" cols="50" name="review_re_content"></textarea>
 			<input type="button" value="확인" id="review_reply_insert">
 		</form>
+	
+		<!-- 댓글 list 불러오는곳 -->
 		<div id="review_reply"></div>
-		<!-- <div id="list"></div> -->
-	</div>
 </body>
 </html>

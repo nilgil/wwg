@@ -2,16 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 
-<!-- jQuery문 설정 불러오기 -->
-<script src="${path}/js/info/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상세</title>
+<!-- jQuery문 설정 불러오기 -->
+<script src="${path}/js/info/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
+<!-- 댓글 수정, 삭제 기능 -->
 <script type="text/javascript">
 	$(function() {
 		$('.edit1').click(function() {
@@ -27,7 +31,7 @@
 	function up(id) {
 		var review_re_content = $('#tt_'+id).val();
 		var formData = "review_re_no="+id+'&review_re_content='+review_re_content
-			+"&review_no=${review.review_no}";
+			+"&review_fno=${review.review_no}";
 		$.post('${path}/review_reply_update',formData, function(data) {
 			$('#review_reply').html(data);
 		});
@@ -35,8 +39,8 @@
 	function lst() {
 		$('#review_reply').load('${path}/review_reply/review_no/${review.review_no}');
 	}
-	function del(review_re_no,review_no) {
-		var formData="review_re_no="+review_re_no+"&review_no="+review_no;
+	function del(review_re_no,review_fno) {
+		var formData="review_re_no="+review_re_no+"&review_fno="+review_fno;
 		$.post("${path}/review_reply_delete",formData, function(data) {
 			$('#review_reply').html(data);
 		});
@@ -44,9 +48,9 @@
 </script>
 </head>
 <body>
-	<div class="container" align="center">
-		<h2 class="text-primary">댓글</h2>
-		<table class="table table-bordered">
+
+		<h2>댓글</h2>
+		<table>
 			<tr>
 				<td>작성자</td>
 				<td>내용</td>
@@ -57,14 +61,16 @@
 				<tr>
 					<td>${rr.member_id}</td>
 					<td id="td_${rr.review_re_no}">${rr.review_re_content}</td>
+					<td><fmt:formatDate value="${rr.review_re_regdate}"
+						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${rr.review_re_no}">
 						<c:if test="${rr.member_id==review.member_id }">
 							<input type="button" value="수정" class="edit1" id="${rr.review_re_no}">
-							<input type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_no})">
+							<input type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
 						</c:if></td>
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
+
 </body>
 </html>
