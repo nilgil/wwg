@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.wwg.comm.model.review;
 
 //ReplyBoard;
-import com.project.wwg.comm.model.review_reply;
+import com.project.wwg.comm.model.review_replydto;
 
 //BoardService;
 import com.project.wwg.comm.service.review_service;
@@ -27,30 +27,30 @@ public class review_reply_controller {
 	@Autowired
 	private review_service rs;
 
-	@RequestMapping("/review_view/review_no/{review_no}")
+	@RequestMapping("/review_reply/review_no/{review_no}")
 	public String slist(@PathVariable int review_no, Model model) {
 		review review = rs.select(review_no);
-		List<review_reply> review_view = rrs.list(review_no);
-		model.addAttribute("review_view", review_view);
+		List<review_replydto> review_replydto = rrs.list(review_no);
+		model.addAttribute("review_replydto", review_replydto);
 		model.addAttribute("review", review);
-		return "comm/review/review_view";
+		return "comm/review/review_reply";
 	}
 
 	@RequestMapping("/review_reply_insert")
-	public String sInsert(review_reply rr, Model model) {
+	public String sInsert(review_replydto rr, Model model) {
 		rrs.insert(rr);
-		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
+		return "redirect:comm/review/review_reply/review_no/" + rr.getReview_no();
 	}
 
 	@RequestMapping("/review_reply_delete")
-	public String delete(review_reply rr, Model model) {
+	public String delete(review_replydto rr, Model model) {
 		rrs.delete(rr.getReview_re_no());
-		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
+		return "redirect:comm/review/review_reply/review_no/" + rr.getReview_no();
 	}
 
 	@RequestMapping("/review_reply_update")
-	public String repUpdate(review_reply rr, Model model) {
+	public String repUpdate(review_replydto rr, Model model) {
 		rrs.update(rr);
-		return "redirect:comm/review/review_view/review_no/" + rr.getReview_no();
+		return "redirect:comm/review/review_reply/review_no/" + rr.getReview_no();
 	}
 }

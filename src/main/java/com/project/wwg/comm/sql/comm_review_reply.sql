@@ -15,6 +15,8 @@ create table comm_review_reply (
 ALTER TABLE comm_review_reply ADD CONSTRAINT member_id   -- member_id foreign key 생성
 FOREIGN KEY(member_id) REFERENCES member(member_id);
 
+insert into comm_review_reply values(1,'2','아이디','content',sysdate);
+
 
 	
 	

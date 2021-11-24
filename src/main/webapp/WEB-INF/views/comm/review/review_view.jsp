@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src="/comm/jquery"/>
+
+<!-- jQuery문 설정 불러오기 -->
+<script src="${path}/js/info/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -32,19 +35,19 @@
 	
 	 } */
 	$(function() {
-		$('#review_view').load('${path}/review_view/review_no/${review.review_no}')
+		$('#review_reply').load('${path}/review_reply/review_no/${review.review_no}')
 //		$('#list').load('${path}/list/pageNum/${pageNum}');
-		$('#repInsert').click(function() {
+		$('#review_reply_insert').click(function() {
 			if (!frm.review_re_content.value) {
 				alert('댓글 입력후에 클릭하시오');
 				frm.review_re_content.focus();
 				return false;
 			}
-			var frmData = $('form').serialize();
+			var frmData = $('frm').serialize();
 			// var frmData = 'replyer='+frm.replyer.value+'&bno='+
 			//				  frm.bno.value+'&replytext='+frm.replytext.value;				  
-			$.post('${path}/sInsert', frmData, function(data) {
-				$('#review_view').html(data);
+			$.post('${path}/review_reply_insert', frmData, function(data) {
+				$('#review_reply').html(data);
 				frm.review_re_content.value = '';
 			});
 		});
@@ -84,9 +87,9 @@
 			<input type="hidden" name="member_id" value="${review.member_id}">
 			<input type="hidden" name="review_no" value="${review.review_no}"> 댓글 :
 			<textarea rows="3" cols="50" name="review_re_content"></textarea>
-			<input type="button" value="확인" id="repInsert">
+			<input type="button" value="확인" id="review_reply_insert">
 		</form>
-		<div id="review_view"></div>
+		<div id="review_reply"></div>
 		<!-- <div id="list"></div> -->
 	</div>
 </body>
