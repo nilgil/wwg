@@ -17,6 +17,7 @@ public class notice {
 	
 	// 검색
 	private String search;
+	private String keyword;
 	
 	public int getStartRow() {
 		return startRow;
@@ -50,7 +51,6 @@ public class notice {
 		this.keyword = keyword;
 	}
 
-	private String keyword;
 	
 	public int getNotice_no() {
 		return notice_no;

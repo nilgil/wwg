@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-     location.href="/noticedelete/pageNum/{pageNum}";
+     location.href="/reviewdelete/pageNum/{pageNum}";
 </script>
 </head>
 </body>

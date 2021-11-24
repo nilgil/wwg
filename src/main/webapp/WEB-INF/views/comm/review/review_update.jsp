@@ -11,7 +11,7 @@
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
 			alert("수정 성공");
-			location.href = "${path}/noticelist/pageNum/${pageNum}";
+			location.href = "${path}/reviewlist/pageNum/${pageNum}";
 		</script>
 	</c:if>
 	<c:if test="${result <= 0 }">
