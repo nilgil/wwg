@@ -18,7 +18,8 @@
 		location.href="${path}/delete/qna_no/${qnalist.qna_no}";
 		alert("삭제되었습니다.");
 	}else{
-		location.href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/{no}";
+		history.go(-1);
+		/* location.href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/{no1}"; */
 	}
 /* } */
 </script>

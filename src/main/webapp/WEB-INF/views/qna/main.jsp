@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <%@ include file="/resources/include/headTag.jsp"%>
+<style>
+body{
+    background-image : url('/resources/img/qna/main하르방.jpg');
+    background-size: 900px 900px;
+}
+</style>
 </head>
 
 <body>
@@ -141,9 +147,16 @@
 
 <div class="aside1">동행구해요<hr></div>
 
-<div class="aside2">Q&A<hr>
 
+<div class="aside2">Q&A<hr>
+<ul>
+<c:forEach var="qna" items="${qnalist}">
+<li>안녕하세요</li>
+<li>${qna.qna_title}</li>
+</c:forEach>
+</ul>
 </div>
+
 
 </div>
 

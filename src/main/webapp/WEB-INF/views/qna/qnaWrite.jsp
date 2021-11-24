@@ -18,7 +18,7 @@
 <%@ include file="/resources/include/navbar.jsp"%>
 
     <!-- center -->
-   <form action="qnawrite.do" method="post">
+   <form action="/qnawrite.do" method="post">
     <div class="write_center">
     <div class="side"> 
         <table id="side_menu" class="table table-hover">
@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td>내용</td>
-            <td><textarea rows="25" cols="70" name="qna_content" required="required" maxlength="5000"></textarea></td>
+            <td><textarea id="" rows="25" cols="70" name="qna_content" required="required" maxlength="5000"></textarea></td>
         </tr>
         </tbody>
       </table>

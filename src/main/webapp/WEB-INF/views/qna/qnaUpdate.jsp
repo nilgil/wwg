@@ -20,7 +20,11 @@
 
 
 <!-- center -->
-   <form action="/qna_update/page/${page}" method="post">
+   <form action="qna_update" method="post">
+   <!-- hidden으로 넘기면 DTO 필드와 같으면 따로 매개변수 안잡아도됨...?-->
+   <input type="hidden" name="qna_no" value="${qnalist.qna_no}" >
+   <input type="hidden" name="page" value="${page}" >
+   
     <div class="update_center">
      <div class="side"> 
         <table id="side_menu" class="table table-hover">

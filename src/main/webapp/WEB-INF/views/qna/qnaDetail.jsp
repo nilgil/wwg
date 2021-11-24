@@ -13,9 +13,9 @@
 
 <%@ include file="/resources/include/headTag.jsp"%>
 
-<script defer type="text/javascript">
+<script type="text/javascript">
 $(function(){
-	$('#qna_list').load('qnalist.do?page=${page}');
+	$('#qna_list').load('/qnalist2.do?page=${page}');
 });
 </script>
 
@@ -68,14 +68,15 @@ $(function(){
                 onclick="location='${path}/qna_commentForm/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                 
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
-                onclick="location='${path}/qna_updateform/qna_no/${qnalist.qna_no}/page/${page}'"></div>
+                onclick="location='${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}'"></div>
                 
                 <div><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
                 onclick="location='${path}/qna_deletecheck/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                </div>
+               
+               <div id="qna_list"></div>
+               
               </div>
-            
-            <div id="qna_list"></div>
             
             </div>
            <!-- footer -->

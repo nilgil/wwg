@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.wwg.qna.model.Qna;
 
+
 @Repository
 public class QnaDaoImp implements QnaDao{
 	
@@ -52,11 +53,12 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		return st.selectOne("qnans.qna_count");
 	}
-
+	
+    //list목록
 	@Override
-	public List<Qna> getQnaList(int page) {
+	public List<Qna> getQnaList(Qna qna) {
 		// TODO Auto-generated method stub
-		return st.selectList("qnans.qna_list", page);
+		return st.selectList("qnans.qna_list", qna);
 	}
 
 	@Override
@@ -86,6 +88,11 @@ public class QnaDaoImp implements QnaDao{
 		st.insert("qnans.insertCom", qna);
 	}
 
+	@Override
+	public int getTotal(Qna qna) {
+		// TODO Auto-generated method stub
+		return st.selectOne("qnans.getTotal", qna);
+	}
 	
 
 }

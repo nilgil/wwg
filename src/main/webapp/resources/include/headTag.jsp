@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<script defer src="${path}/resources/js/qna/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script defer src="https://kit.fontawesome.com/6e837646d1.js"crossorigin="anonymous"></script>
 <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -21,5 +21,6 @@
 <link rel='stylesheet' media='screen' href='${path}/resources/css/qna/qnalist.css'>
 <link rel='stylesheet' media='screen' href='${path}/resources/css/qna/update.css'>
 <link rel='stylesheet' media='screen' href='${path}/resources/css/qna/comment.css'>
+<link rel='stylesheet' media='screen' href='${path}/resources/css/qna/list.css'>
 
 

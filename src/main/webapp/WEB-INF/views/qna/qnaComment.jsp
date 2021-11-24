@@ -20,9 +20,16 @@
 
 
 <!-- center -->
+
         <div class="comment_center">
         
             <div class="side"> 
+            <form method="post" action="qna_comment.do">
+            <input type="hidden" name="page" value="${page}">
+            <input type="hidden" name="qna_re_ref" value="${qnalist.qna_re_ref}">
+            <input type="hidden" name="qna_re_lev" value="${qnalist.qna_re_lev}">
+            <input type="hidden" name="qna_re_seq" value="${qnalist.qna_re_seq}">
+            
                 <table id="side_menu" class="table table-hover">
                      <thead>
                        <tr><th>회원문의</th></tr>
@@ -74,15 +81,15 @@
           </tr>
           <tr>
             <td colspan="2" align="center">
-            <input type="button" class="btn btn-dark" value="답글등록"
-            onclick="location='/qna_comment/page/${page}'">
+            <input type="submit" class="btn btn-dark" value="답글등록">
             <input type="button" class="btn btn-dark" value="취소"
-            onclick="location='qnalist.do'"></td>
+            onclick="location='/qnalist.do?page=${page}'"></td>
           </tr>
           
           </table>
+          </form>
           
-          <div class="board_list">{여기는 목록 리스트 호출할거임}</div>
+          <div id="board_list">{여기는 목록 리스트 호출할거임}</div>
             
           </div>
           </div>

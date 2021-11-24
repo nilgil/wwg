@@ -20,50 +20,29 @@ body{
     text-decoration: none;
     color: black;
 }
-.qnalist_center{
+.qnalist_center2{
     flex: 1;
     padding: 50px;
     margin: 400px auto;
     justify-content: center;
-    display: grid;
-    grid-gap: 20px;
-    /* height: 100vh; */
-    grid-template-columns: 150px 900px;
-    grid-template-rows: 1020px;
-    grid-template-areas: 'side table';
     margin-top: 5%;
+    margin-bottom: -20%;
 }
-/* .container div{
-    background-color: seashell;
-    padding: 20px;
-} */
-.side{
-    grid-area: side;
-}
-#side_menu{
-    padding: 10%;
-    width: 151px;
-    height: 210px;
-    margin-top: 57%;
-}
-#side_menu thead{
-    /* color: cadetblue; */
-    background-color: #F4D160;
-}
-.search_bar{
+.search_bar2{
     display: flex;
     justify-content: center;
     height: 40px;
 }
-table{
+table2{
     background-color: #fffffff5;
+    justify-content: center;
 }
-.qna_list_paging{
+.qna_list_paging2{
 	display: flex;
 	justify-content: center;
 	margin: 15px;
 }
-.qnalist_write_btn{
+.qnalist_write_btn2{
 	display: flex;
     justify-content: right;
     margin: 15px;
@@ -71,11 +50,5 @@ table{
 
 /* 반응형 웹 기능 */
 @media screen and (max-width: 48rem){
-.side_menu{
-display: none;
-}
-/* .search_bar{
-    display: none;
-} */
 
 }
