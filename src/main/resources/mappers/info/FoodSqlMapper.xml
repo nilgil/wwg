@@ -11,12 +11,13 @@
 		<result property="food_photo"     column="food_photo" />
 		<result property="food_regdate" column="food_regdate" />
 		<result property="food_hit"    column="food_hit" />
+		<result property="food_like"    column="food_like" />
 	</resultMap>
 
 <!-- 글작성 / alias="FoodBoard" -->
 	<insert id="insert" parameterType="FoodBoard">
         insert into trip_food values(#{food_no},0,
-		#{food_title},#{food_content},0,sysdate,0)
+		#{food_title},#{food_content},0,sysdate,0,0)
 	</insert>
 
 <!-- 상세페이지 -->
@@ -81,5 +82,10 @@
 	<delete id="delete" parameterType="int">
 		delete from trip_food where food_no=#{food_no}
 	</delete>
+	
+<!-- 좋아요 -->
+	<update id="like" parameterType="FoodBoard">
+		update trip_food set food_like=food_like+1 where food_no=#{food_no}
+	</update>
 
 </mapper>
