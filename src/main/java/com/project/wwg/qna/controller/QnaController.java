@@ -115,6 +115,7 @@ public class QnaController{
 		model.addAttribute("maxpage", maxpage); //총 게시물개수
 		model.addAttribute("listcount", listcount); //총 리스트
 		model.addAttribute("qnalist", qnalist); //list화
+		model.addAttribute("qna", qna); 		
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
 		
@@ -205,6 +206,23 @@ public class QnaController{
 		model.addAttribute("page", page);
 		model.addAttribute("no", no1);
 		return "qna/qnaDetail";
+	}
+	
+	
+	//수정 session 체크
+	//${path}/qna_updatecheck?qna_no=${qnalist.qna_no}&page=${page}'
+	@RequestMapping("/qna_updatecheck")
+	public String qnaUpdateCheck(Qna qna, String page, Model model) {
+		System.out.println("수정 session체크");
+		
+		Qna qnalist = qs.select(qna.getQna_no());
+		System.out.println("수정 session qnalist호출");
+		
+		model.addAttribute("qnalist", qnalist);
+		model.addAttribute("page", page);
+		System.out.println("수정 session 공유");
+		
+		return "qna/qnaUpdateRecheck";
 	}
 	
 	//수정폼

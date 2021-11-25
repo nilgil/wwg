@@ -2,17 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
 <title>Q&A 게시판 답글페이지</title>
-
 <%@ include file="/resources/include/headTag.jsp"%>
-
+<link rel='stylesheet' media='screen' href='/css/qna/comment.css'>
 </head>
+
 <body>
 
 <!-- navbar -->
@@ -92,8 +93,6 @@
           
           </table>
           </form>
-          
-          <div id="board_list">{여기는 목록 리스트 호출할거임}</div>
             
           </div>
           </div>

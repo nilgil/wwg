@@ -7,11 +7,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Q&A 게시판 상세페이지</title>
 
+<head>
+<title>Q&A 게시판 상세페이지</title>
 <%@ include file="/resources/include/headTag.jsp"%>
+<link rel='stylesheet' media='screen' href='/css/qna/detail.css'>
 
 <script type="text/javascript">
 $(function(){
@@ -19,8 +19,8 @@ $(function(){
 });
 </script>
 
-
 </head>
+
 <body>
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
@@ -68,9 +68,10 @@ $(function(){
                 onclick="location='${path}/qna_commentForm?qna_no=${qnalist.qna_no}&page=${page}'"></div>
                 
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
-                onclick="location='${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}'"></div>
+                onclick="location='${path}/qna_updatecheck?qna_no=${qnalist.qna_no}&page=${page}'"></div>
+                <%-- onclick="location='${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}'"></div> --%>
                 
-                <div><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
+                <div id="del"><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
                 onclick="location='${path}/qna_deletecheck/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                </div>
                
