@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
 <meta charset="UTF-8">
 <title>글작성</title>
+<!-- <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script> -->
+<!-- CKeditor 적용 -->
+<script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 <form method=post action="foodwrite.do">
@@ -15,12 +17,15 @@
 		<%-- <td>${foodboard.username}</td> --%>	<!-- ${sessionScope.username} -->
 	</tr>
 	<tr><th>제목</th>
-		<td><input type=text name="food_title"></td>
+		<td><input type=text name="food_title" required="required"></td>
 	</tr>
 	<tr><th>내용</th>
-		<td><textarea rows=100 id="content" name="food_content"></textarea></td>
-	</tr>
-	<tr><th>파일첨부</th>
+		<td><textarea id="content" name="food_content"></textarea>
+		<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/food/imageUpload.do'
+			});
+		</script></td>
 	</tr>
 	<tr><td colspan=2 align=center>
 			<input type=button value="글목록"
@@ -30,7 +35,6 @@
 		</td>
 	</tr>
 </table>
-<script src="${pageContext.request.contextPath}/js/info/ckeditor.js"></script>
 </form>
 
 </body>
