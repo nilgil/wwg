@@ -30,7 +30,4 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-<!--    <bean id="springSecurityFilterChain"-->
-<!--          class="org.springframework.web.filter.DelegatingFilterProxy"/>-->
-
 </beans>

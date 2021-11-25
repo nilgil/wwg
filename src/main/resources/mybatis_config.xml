@@ -11,6 +11,7 @@
         <!-- 길재우 -->
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
         <typeAlias type="com.project.wwg.secu.dto.UserDetailsDto" alias="UserDetailsDto"/>
+        <typeAlias type="com.project.wwg.secu.dto.UsersDto" alias="UsersDto"/>
         <!-- 안영길 -->
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
         <typeAlias type="com.project.wwg.plan.dto.Plan" alias="Plan"/>

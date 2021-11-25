@@ -32,10 +32,12 @@ public class SecuController {
     @PostMapping("/userSignUpProcess")
     public String userSignUp(Model model,
                              @RequestParam(name = "username") String username,
-                             @RequestParam(name = "password") String password)
+                             @RequestParam(name = "password") String password,
+                             @RequestParam(name = "realname") String realname,
+                             @RequestParam(name = "location") String location)
     {
-        LOG.info(username +", "+ password);
-        if(userSignUpService.userSignUp(username, password)){
+        LOG.info(username +", "+ password+", "+ realname+", "+ location);
+        if(userSignUpService.userSignUp(username, password, realname, location)){
             LOG.info("signsUp success");
             return"home";
         }
@@ -69,4 +71,6 @@ public class SecuController {
     public String test() {
         return "secu/dbTest";
     }
+
+
 }
