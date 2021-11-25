@@ -14,6 +14,7 @@ public class review {
 	private Date review_regdate;    // 후기게시판 생성일자
 	private int review_hit;         // 후기게시판 조회수
 	private String review_photo;    // 후기게시판 업로드 사진 경로
+	private int review_like;
 	
 	// page
 	private int startRow;
