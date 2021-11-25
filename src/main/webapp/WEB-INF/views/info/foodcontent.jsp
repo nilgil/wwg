@@ -15,7 +15,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
-<script type="text/javascript">  
+<!-- <script type="text/javascript">  
     var username = '${foodboard.username}';
     var session = '${sessionScope.username}';
 	$(function(){
@@ -32,7 +32,7 @@
 			}				
 		});
 	});	
-</script>
+</script> -->
 
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
