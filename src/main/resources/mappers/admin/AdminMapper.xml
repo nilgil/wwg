@@ -5,10 +5,15 @@
 
 <mapper namespace="AdminMapper">
     <select id="getUserList" resultType="UsersDto">
-        select username, location, realname from USERS
+        select distinct users.username, users.location, users.realname from USERS,AUTHORITIES where
+            users.USERNAME IN (select username from AUTHORITIES where AUTHORITY='ROLE_USER')
     </select>
 
-    <delete id="deleteUser" parameterType="UsersDto">
-        delete
+    <delete id="deleteUserAuth" parameterType="String">
+        delete from AUTHORITIES where USERNAME =#{username}
+    </delete>
+
+    <delete id="deleteUsername" parameterType="String">
+        delete from USERS where USERNAME =#{username}
     </delete>
 </mapper>

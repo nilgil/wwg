@@ -29,8 +29,10 @@ public class AdminPageController {
         List<UsersDto> userList = new ArrayList<UsersDto>();
         LOG.info("aproach to memberList");
         userList =memberListTakingService.getUserList(userList);
+        userList.forEach(e->{
+            LOG.info(e.getUsername());
+        });
         LOG.info("end");
-        model.addAttribute("test","senbon sakura");
         model.addAttribute("memberList", userList);
         return"admin/memberList";
     }
