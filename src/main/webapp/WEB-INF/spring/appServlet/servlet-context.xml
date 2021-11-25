@@ -12,6 +12,7 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/include/**" location="/resources/include/" />
+	<resources mapping="/resources/admin/**" location="/resources/admin/"/>
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />

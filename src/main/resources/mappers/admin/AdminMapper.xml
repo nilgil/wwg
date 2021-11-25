@@ -3,8 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="adminMapper">
+<mapper namespace="AdminMapper">
     <select id="getUserList" resultType="UsersDto">
-        select username, location, realname from users
+        select username, location, realname from USERS
     </select>
+
+    <delete id="deleteUser" parameterType="UsersDto">
+        delete
+    </delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.project.wwg.admin.pageController;
 
 import com.project.wwg.admin.service.MemberListTakingService;
+import com.project.wwg.secu.dto.UsersDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,9 +26,12 @@ public class AdminPageController {
 
     @GetMapping("/memberList")
     public String memberList(Model model) {
+        List<UsersDto> userList = new ArrayList<UsersDto>();
         LOG.info("aproach to memberList");
-        
+        userList =memberListTakingService.getUserList(userList);
+        LOG.info("end");
         model.addAttribute("test","senbon sakura");
+        model.addAttribute("memberList", userList);
         return"admin/memberList";
     }
 }
