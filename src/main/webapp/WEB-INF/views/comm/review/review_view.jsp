@@ -13,7 +13,6 @@
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
@@ -34,23 +33,26 @@ $(function(){
 	});
 });	
 </script>
+
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
-var username = '${foodboard.username}';
-var session = '${sessionScope.username}';
+var username = '${review.member_id}';
+var session = '${sessionScope.member_id}';
 $(function() {	
 	$("#like").submit(function(){
-    	if(username == session){
-        	alert("사용자가 같으면 좋아요를 할수 없습니다.")
-        	history.go(-1)
-        else(username != session)
-        	alert("좋아요.")
-        	history.go(-1)
-        return false;
+    	if(member_id == session){
+        	alert("사용자가 같으면 좋아요를 할수 없습니다.");
+        	history.go(-1);
+        	
+    	}else if{(member_id != session)
+        	alert("좋아요.");
+        	history.go(-1);
+
         }
     });
 });
 </script>
+
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
 	$(function() {
@@ -62,7 +64,7 @@ $(function() {
 				frm.review_re_content.focus();
 				return false;
 			}
-			var frmData = $('frm').serialize();
+			var frmData = $('#frm').serialize();
 			$.post('${path}/review_reply_insert', frmData, function(data) {
 				$('#review_reply').html(data);
 				frm.review_re_content.value = '';

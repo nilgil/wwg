@@ -53,12 +53,7 @@ public class review_servicelmpl implements review_service {
 
 	@Override
 	public int getMaxNum() {
-		return rd.getMaxNum(); 
-	}
-
-	@Override
-	public void like(int review_no) {
-		rd.like(review_no);
+		return rd.getMaxNum();
 	}
 
 }

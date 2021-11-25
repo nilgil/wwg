@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +20,7 @@
 				<td>작성자</td>
 				<td>작성일</td>
 				<td>조회수</td>
+				<td>좋아요</td>
 			</tr>
 				<c:set var="no" value="${review_no}"></c:set>
 				<c:forEach var="n" items="${list}">

@@ -12,7 +12,6 @@
 <title>상세</title>
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 
 <!-- 댓글 수정, 삭제 기능 -->
