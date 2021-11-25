@@ -13,7 +13,7 @@ body{
     flex-direction: column;
     /* min-height: 150vh; */
     font-family: 'paybooc-Bold';
-    background-image : url('/resources/img/qna/main해녀2.jpg');
+    background-image : url('/img/qna/main해녀2.jpg');
     background-size: 900px 900px;
 }
 .a{

@@ -6,15 +6,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
 <title>Q&A 상세페이지 수정폼</title>
-
 <%@ include file="/resources/include/headTag.jsp"%>
-
+<link rel='stylesheet' media='screen' href='/css/qna/update.css'>
 </head>
-<body>
 
+<body>
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
 

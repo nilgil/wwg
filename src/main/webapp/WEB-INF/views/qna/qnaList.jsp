@@ -6,12 +6,14 @@
     
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Q&A게시판 목록</title>
-   <%@ include file="/resources/include/headTag.jsp"%>
-</head>
-<body>
 
+<head>
+<title>Q&A게시판 목록</title>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link rel='stylesheet' media='screen' href='/css/qna/qnalist.css'>
+</head>
+
+<body>
    <!-- navbar -->
    <%@ include file="/resources/include/navbar.jsp"%>
     
@@ -54,7 +56,14 @@
              <tr>
               <td>${no1}</td>
 
-              <td><a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no1}">${qna.qna_title}</a></td>
+              <td>
+              <c:if test="${qna.qna_re_lev != 0}"> 
+						<c:forEach var="q" begin="1" end="${qna.qna_re_lev}">
+							&nbsp;&nbsp;
+						</c:forEach>
+						<img src="/img/qna/replyd-brands.svg" width="22" height="22">	
+		      </c:if>
+              <a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no1}">${qna.qna_title}</a></td>
               
               <td>${qna.username}</td>
               <td>${qna.qna_regdate}</td>

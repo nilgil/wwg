@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>글수정 성공폼</title>
 </head>
-<body>
 
+<body>
 <c:if test="${result > 0}">
 	<script type="text/javascript">
 		alert("수정성공");
