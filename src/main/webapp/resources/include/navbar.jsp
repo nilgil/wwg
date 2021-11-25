@@ -6,7 +6,7 @@
     
  <!-- navbar -->
     <nav class="navbar">
-        <div class="navbar_logo"><a href="/mainpage.do"><img src="/resources/img/qna/jlogo.png"> 혼저옵서예</a></div>
+        <div class="navbar_logo"><a href="/mainpage.do"><img src="/img/qna/jlogo.png"> 혼저옵서예</a></div>
 <%--    <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
         
         <ul class="navbar_menu">
@@ -74,5 +74,3 @@
         
         </nav>
 
-<!-- </body> 
-</html> -->

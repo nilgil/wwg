@@ -65,7 +65,7 @@ $(function(){
             
                <div class="table_btn">
                 <div><input class="btn btn-dark" type="button" id="de_comment" value="답글"
-                onclick="location='${path}/qna_commentForm/qna_no/${qnalist.qna_no}/page/${page}'"></div>
+                onclick="location='${path}/qna_commentForm?qna_no=${qnalist.qna_no}&page=${page}'"></div>
                 
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
                 onclick="location='${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}'"></div>
