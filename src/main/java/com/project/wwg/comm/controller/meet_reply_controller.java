@@ -47,7 +47,7 @@ public class meet_reply_controller {
 	@RequestMapping("/meet_reply_delete")
 	public String delete(meet_replydto rr, Model model) {
 		mrs.delete(rr.getMeet_re_no());
-		return "redirect:comm/meet/meet_reply/meet_no/" + rr.getMeet_fno();
+		return "redirect:meet_reply/meet_no/" + rr.getMeet_fno();
 	}
 
 	@RequestMapping("/meet_reply_update")

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,10 +82,14 @@ public class review_controller {
 		
 	// 글작성
 		@RequestMapping("/comm_reviewinsert")
-		public String reviewinsert(review review, Model model) {
+		public String reviewinsert(Principal principal, review review, Model model) {
 
 			System.out.println("제목:"+review.getReview_title());
 			System.out.println("내용:"+review.getReview_content());
+			
+			String username = principal.getName(); // 로그인후 유저네임 넘기기
+			System.out.println("username:"+username);
+			review.setMember_id(username); // 로그인후 유저네임 넘기기
 			
 			int review_no = review.getReview_no();
 			int number = rs.getMaxNum();

@@ -21,7 +21,7 @@
 		<selectKey keyProperty="review_re_no" order="BEFORE" resultType="int">
 			select nvl(max(review_re_no),0) + 1 from comm_review_reply
 		</selectKey>
-		insert into comm_review_reply values(#{review_re_no},#{review_fno},'아이디',
+		insert into comm_review_reply values(#{review_re_no},#{review_fno},#{member_id},
 			#{review_re_content},sysdate)
 	</insert>
 	

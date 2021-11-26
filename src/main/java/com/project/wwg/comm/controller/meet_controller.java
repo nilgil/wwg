@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,10 +82,14 @@ public class meet_controller {
 		
 	// 글작성
 		@RequestMapping("/comm_meetinsert")
-		public String meetinsert(meet meet, Model model) {
+		public String meetinsert(Principal principal, meet meet, Model model) {
 
 			System.out.println("제목:"+meet.getMeet_title());
 			System.out.println("내용:"+meet.getMeet_content());
+			
+			String username = principal.getName(); // 로그인후 유저네임 넘기기
+			System.out.println("username:"+username);
+			meet.setMember_id(username); // 로그인후 유저네임 넘기기
 			
 			int meet_no = meet.getMeet_no();
 			int number = ms.getMaxNum();

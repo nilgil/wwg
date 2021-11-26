@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
@@ -10,23 +12,25 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
+<a>${user.username}님 환영합니다.</a>
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
+var session = '${user.username}';
 var member_id = '${meet.member_id}';
-var session = '${sessionScope.member_id}';
+console.log(member_id);
 $(function(){
 	$("#chk1").submit(function(){
-		if (username != session) {
+		if (member_id != session) {
 			alert("사용자가 다르면 수정할 수 없습니다");
 			return false;
 		}				
 	});
 	$("#chk2").submit(function(){
-		if (username != session) {
+		if (member_id != session) {
 			alert("사용자가 다르면 삭제할 수 없습니다");
 			return false;
 		}				
@@ -36,18 +40,13 @@ $(function(){
 
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
-var username = '${meet.member_id}';
-var session = '${sessionScope.member_id}';
+var session = '${user.username}';
+var member_id = '${meet.member_id}';
 $(function() {	
 	$("#like").submit(function(){
     	if(member_id == session){
         	alert("사용자가 같으면 좋아요를 할수 없습니다.");
-        	history.go(-1);
-        	
-    	}else if{(member_id != session)
-        	alert("좋아요.");
-        	history.go(-1);
-
+        	return false;
         }
     });
 });
@@ -93,22 +92,35 @@ $(function() {
 				<td>내용</td>
 				<td><pre>${meet.meet_content}</pre></td>
 			</tr>
-			<form action="/meetlike?meet_no=${meet.meet_no}&pageNum=${pageNum}" 
-			method="post" id="like"> <input type="submit" value="좋아요">
-			</form>
-
-		
-		<a href="${path}/meetlist/pageNum/${pageNum}">목록</a> 
-		<a href="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"
-		   >수정</a> 
-		<a href="${path}/meetdelete/meet_no/${meet.meet_no}/pageNum/${pageNum}"
-		   >삭제</a>
 		   </div>
+		   <div align=center>
+		<input type="button" value="목록"
+			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
+
+		<form
+			action="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"
+			method="post" name="chk" id="chk1">
+			<input type="submit" value="수정">
+		</form>
+
+		<form
+			action="${path}/meetdelete/meet_no/${meet.meet_no}/pageNum/${pageNum}"
+			method="post" name="chk" id="chk2">
+			<input type="submit" value="삭제">
+		</form>
+
+		<form
+			action="/meetlike?meet_no=${meet.meet_no}&pageNum=${pageNum}"
+			method="post" id="like">
+			<input type="submit" value="좋아요">
+		</form>
+	</div>
+		   
 		 
 		<!-- 댓글 작성 -->   
 		<p><p>
 		<form name="frm" id="frm">
-			<input type="hidden" name="member_id" value="${meet.member_id}">
+			<input type="hidden" name="member_id" value="${user.username}">
 			<input type="hidden" name="meet_fno" value="${meet.meet_no}"> 댓글 :
 			<textarea rows="3" cols="50" name="meet_re_content"></textarea>
 			<input type="button" value="확인" id="meet_reply_insert">

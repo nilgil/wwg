@@ -21,7 +21,7 @@
 		<selectKey keyProperty="meet_re_no" order="BEFORE" resultType="int">
 			select nvl(max(meet_re_no),0) + 1 from comm_meet_reply
 		</selectKey>
-		insert into comm_meet_reply values(#{meet_re_no},#{meet_fno},'아이디',
+		insert into comm_meet_reply values(#{meet_re_no},#{meet_fno},#{member_id},
 			#{meet_re_content},sysdate)
 	</insert>
 	

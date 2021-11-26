@@ -38,7 +38,7 @@
 <!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
 
 <insert id="insert" parameterType="meet">
-		insert into comm_meet values (#{meet_no},'아이디',#{meet_title},
+		insert into comm_meet values (#{meet_no},#{member_id},#{meet_title},
 		#{meet_content},sysdate,0,'photo_path',0)
 
 </insert>

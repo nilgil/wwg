@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
@@ -46,6 +48,7 @@
 	}
 </script>
 </head>
+ ${user.username}님 환영합니다.
 <body>
 
 		<h2>댓글</h2>
@@ -63,7 +66,7 @@
 					<td><fmt:formatDate value="${rr.review_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${rr.review_re_no}">
-						<c:if test="${rr.member_id==review.member_id }">
+						<c:if test="${rr.member_id==user.username }">
 							<input type="button" value="수정" class="edit1" id="${rr.review_re_no}">
 							<input type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
 						</c:if></td>

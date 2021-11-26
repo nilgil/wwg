@@ -39,17 +39,17 @@ public class review_reply_controller {
 
 	// 댓글 저장
 	@RequestMapping("/review_reply_insert")
-	public String insert(review_replydto rrdto, Model model) {
+	public String insert( review_replydto rrdto, Model model) {
 		rrs.insert(rrdto);
 		return "redirect:review_reply/review_no/" + rrdto.getReview_fno();
 	}
-
+	// 댓글 삭제
 	@RequestMapping("/review_reply_delete")
 	public String delete(review_replydto rr, Model model) {
 		rrs.delete(rr.getReview_re_no());
-		return "redirect:comm/review/review_reply/review_no/" + rr.getReview_fno();
+		return "redirect:review_reply/review_no/" + rr.getReview_fno();
 	}
-
+	// 댓글 수정
 	@RequestMapping("/review_reply_update")
 	public String update(review_replydto rr, Model model) {
 		rrs.update(rr);
