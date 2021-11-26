@@ -14,5 +14,8 @@ public class DeleteMemberDao {
     protected SqlSession sqlSession;
     protected final String NAMESPACE = "AdminMapper.";
 
-
+    public void deleteMember(String username){
+        sqlSession.delete(NAMESPACE+"deleteUserAuth", username);
+        sqlSession.delete(NAMESPACE+"deleteUsername", username);
+    }
 }

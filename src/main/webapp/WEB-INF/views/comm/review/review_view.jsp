@@ -93,7 +93,7 @@ $(function() {
 				<td>내용</td>
 				<td><pre>${review.review_content}</pre></td>
 			</tr>
-			<form action="/review_like/review_no/{review_no}/pageNum/{pageNum}" 
+			<form action="/revlike?review_no=${review.review_no}&pageNum=${pageNum}" 
 			method="post" id="like"> <input type="submit" value="좋아요">
 			</form>
 
