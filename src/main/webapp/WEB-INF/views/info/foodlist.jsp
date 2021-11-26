@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
