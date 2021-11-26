@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
@@ -15,9 +17,10 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
-<!-- <script type="text/javascript">  
+<script type="text/javascript">
+	var session = '${user.username}';
     var username = '${foodboard.username}';
-    var session = '${sessionScope.username}';
+    console.log(username);
 	$(function(){
 		$("#chk1").submit(function(){
 			if (username != session) {
@@ -32,7 +35,7 @@
 			}				
 		});
 	});	
-</script> -->
+</script>
 
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
@@ -56,25 +59,17 @@
 
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
+var session = '${user.username}';
 var username = '${foodboard.username}';
-var session = '${sessionScope.username}';
 $(function() {	
 	$("#like").submit(function(){
     	if(username == session){
         	alert("사용자가 같으면 좋아요를 할수 없습니다.");
-        	history.go(-1);
-        	
-    	}else if{(username != session)
-        	alert("좋아요.");
-        	history.go(-1);
-        
-    	}
-
+        	return false;
         }
     });
 });
 </script>
-
 </head>
 <body>
 	<table border=1 width=400 align="center">
@@ -118,7 +113,7 @@ $(function() {
 		<!-- 댓글 작성 -->
 		<div align=center>
 		<form name="frm" id="frm">
-			<input type="hidden" name="username" value="${foodboard.username}">
+			<input type="hidden" name="username" value="${user.username}">
 			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 댓글 :
 			<textarea rows="3" cols="50" name="food_re_content"></textarea>
 			<input type="button" value="확인" id="repInsert">
