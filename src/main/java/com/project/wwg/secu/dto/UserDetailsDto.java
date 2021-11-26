@@ -26,6 +26,8 @@ public class UserDetailsDto implements UserDetails {
         this.password = password;
     }
 
+
+
     // setter
     public void setAuthorities(List<String> authList) {
 

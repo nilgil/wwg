@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>글작성</title>
+<!-- CKeditor 적용 -->
+<script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -24,9 +26,12 @@
 		<td>${foodboard.username}</td>
 	</tr>
 	<tr><th>내용</th>
-		<td><textarea cols=40 rows=5 name="food_content" required="required">${foodboard.food_content}</textarea></td>
-	</tr>
-	<tr><th>파일첨부</th>
+		<td><textarea id="content" name="food_content">${foodboard.food_content}</textarea>
+		<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/food/imageUpload.do'
+			});
+		</script></td>
 	</tr>
 	<tr><td colspan=2 align=center>
 			<input type=button value="글목록"

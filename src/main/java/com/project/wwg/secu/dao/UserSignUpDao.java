@@ -1,6 +1,7 @@
 package com.project.wwg.secu.dao;
 
 import com.project.wwg.secu.dto.UserDetailsDto;
+import com.project.wwg.secu.dto.UsersDto;
 import com.project.wwg.secu.service.UserSignUpService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,13 +18,13 @@ public class UserSignUpDao {
         this.sqlSession = sqlSession;
     }
 
-    public boolean isUserHere(String username,UserDetailsDto userDetails){
-        userDetails = sqlSession.selectOne(NAMESPACE+"getUserInfos", username);
-        LOG.info(userDetails != null);
-        return userDetails != null;
+    public boolean isUserHere(String username,UsersDto users){
+        users = sqlSession.selectOne(NAMESPACE+"getUserInfos", username);
+        LOG.info(users == null);
+        return users != null;
     }
 
-    public void addUser(UserDetailsDto userDetails){
-        sqlSession.insert(NAMESPACE+"addUser", userDetails);
+    public void addUser(UsersDto users){
+        sqlSession.insert(NAMESPACE+"addUser", users);
     }
 }

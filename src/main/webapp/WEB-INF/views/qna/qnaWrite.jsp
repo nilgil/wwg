@@ -5,15 +5,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>글작성폼</title>
-    <%@ include file="/resources/include/headTag.jsp"%>
-    
+<title>글작성폼</title>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link rel='stylesheet' media='screen' href='/css/qna/write.css'>
 </head>
+
 <body>
-
-<%-- <jsp:include page="/resources/include/navbar.jsp"></jsp:include> --%>
-
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
 

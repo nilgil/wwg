@@ -11,6 +11,8 @@
 <form action="${pageContext.request.contextPath}/userSignUpProcess" method="post">
     <input type="text" name="username" placeholder="pleas type username you wants">
     <input type="password" name="password" placeholder="pleas type password you wants">
+    <input type="text" name="realname" placeholder="please type your name">
+    <input type="text" name="location" placeholder="please type the location you live.">
     <s:csrfInput/>
     <button>회원가입</button>
 </form>
