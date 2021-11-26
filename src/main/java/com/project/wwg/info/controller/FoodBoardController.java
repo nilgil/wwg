@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,21 +39,34 @@ public class FoodBoardController {
 	
 	// 글작성 폼
 	@RequestMapping("foodform.do")
-	public String foodform() {
+	public String foodform(Principal principal, Model model) {
+		
+		/*
+		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
+		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
+		 */		 		
 		return "info/foodform";
 	}
 	
 	// 글작성
 	@RequestMapping("foodwrite.do")
-	public String foodwrite(FoodBoard foodboard, Model model, HttpServletRequest request) {
+	public String foodwrite(Principal principal, FoodBoard foodboard, Model model, HttpServletRequest request) {
 		System.out.println("in");
 		System.out.println("food_title:"+foodboard.getFood_title());
-		
+
+		String username = principal.getName(); // 로그인후 유저네임 넘기기
+		System.out.println("username:"+username);
+		 
 		int food_no = foodboard.getFood_no();
 		int number = service.getMaxNum();
+		
 		foodboard.setFood_no(number);
+		
+		foodboard.setUsername(username); // 로그인후 유저네임 넘기기
+		 		
 		int result = service.insert(foodboard);
 		model.addAttribute("result", result);
+		/* model.addAttribute("username", username); */
 		
 		return "info/insertresult";
 	}
