@@ -25,5 +25,7 @@
         <typeAlias type="com.project.wwg.comm.model.notice" alias="notice"/>
         <typeAlias type="com.project.wwg.comm.model.review" alias="review"/>
         <typeAlias type="com.project.wwg.comm.model.review_replydto" alias="rr"/>
+        <typeAlias type="com.project.wwg.comm.model.meet" alias="meet"/>
+        <typeAlias type="com.project.wwg.comm.model.meet_replydto" alias="mr"/>
     </typeAliases>
 </configuration>

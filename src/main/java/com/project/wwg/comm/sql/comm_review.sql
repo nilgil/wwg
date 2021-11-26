@@ -8,7 +8,8 @@ create table comm_review (
 	review_content varchar2(4000) not null,  -- 후기게시판 내용
 	review_regdate date not null,            -- 후기게시판 생성일자
 	review_hit number default 0,             -- 후기게시판 조회수
-	review_photo varchar2(200) not null      -- 업로드된 사진 경로
+	review_photo varchar2(200) not null,     -- 업로드된 사진 경로
+	review_like number default 0             -- 좋아요
 	);               
 	
 	select * from comm_review;
