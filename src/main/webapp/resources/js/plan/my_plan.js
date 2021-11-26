@@ -48,13 +48,13 @@ function getThumbnails(firstSpots) {
         }
     })
 }
-
-function printPlans(thumbnails) {
-    return new Promise(function (resolve, reject) {
-        for (const thumbnail of thumbnails) {
-            console.log(thumbnail);
-            $('#plans-box').append(`<div class='plan'><div id='plan-img'><img src="${thumbnail}" alt="https://via.placeholder.com/150"/></div><div id='plan-info'></div></div>`);
-        }
-        resolve(planOfDays);
-    });
-}
+//
+// function printPlans(thumbnails) {
+//     return new Promise(function (resolve, reject) {
+//         for (const thumbnail of thumbnails) {
+//             console.log(thumbnail);
+//             $('#plans-box').append(`<div class='plan'><div id='plan-img'><img src="${thumbnail}" alt="https://via.placeholder.com/150"/></div><div id='plan-info'></div></div>`);
+//         }
+//         resolve(planOfDays);
+//     });
+// }

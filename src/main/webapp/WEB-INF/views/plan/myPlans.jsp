@@ -14,7 +14,7 @@
     <title>Title</title>
     <link rel='stylesheet' type='text/css' href='/css/plan/my_plan.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <%--    <script defer src="/js/plan/my_plan.js"></script>--%>
+<%--    <script defer src="/js/plan/my_plan.js"></script>--%>
 </head>
 <body>
 <input id="userName" type="hidden" value="${userName}"/>
