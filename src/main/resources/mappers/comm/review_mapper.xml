@@ -38,7 +38,7 @@
 
 <insert id="insert" parameterType="review">
 		insert into comm_review values (#{review_no},'아이디',#{review_title},
-		#{review_content},sysdate,0,'photo_path')
+		#{review_content},sysdate,0,'photo_path',0)
 
 </insert>
 

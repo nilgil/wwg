@@ -53,6 +53,6 @@ public class review_reply_controller {
 	@RequestMapping("/review_reply_update")
 	public String update(review_replydto rr, Model model) {
 		rrs.update(rr);
-		return "redirect:comm/review/review_reply/review_no/" + rr.getReview_fno();
+		return "redirect:review_reply/review_no/" + rr.getReview_fno();
 	}
 }
