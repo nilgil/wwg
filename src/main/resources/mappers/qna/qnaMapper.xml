@@ -113,6 +113,13 @@ select qna_title from qna_board where like
 		</where>
 </select>
  
+<select id="ComCount" parameterType="qna" resultType="int">
+ select count(qna_ComCount) from qna_board where qna_re_ref = 
+</select> 
+
+<select id="qnaMain" parameterType="qna" resultType="qna">
+ select * from (select * from qna_board where qna_re_lev = 0 order by qna_regdate desc) where rownum &lt;= 5
+</select>
 
 </mapper>        
         

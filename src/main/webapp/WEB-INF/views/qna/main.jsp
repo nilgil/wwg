@@ -157,13 +157,18 @@
 
 
 <div class="aside2">Q&A<hr>
+
 <ul>
 <c:forEach var="qna" items="${qnalist}">
-<li>안녕하세요</li>
+<%-- <c:if test="${qna.qna_no eq 1}"> --%>
+
 <li>${qna.qna_title}</li>
+
+<%-- </c:if> --%>
 </c:forEach>
 </ul>
 </div>
+
 
 
 </div>

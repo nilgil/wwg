@@ -24,8 +24,13 @@ public class QnaController{
 	
 	//메인페이지
 	@RequestMapping("mainpage.do")
-	public String mainpage(Qna qna, Model model) {
-        List<Qna> qnalist = new ArrayList<Qna>();
+	public String mainpage(Model model) {
+        
+		List<Qna> qnalist = null;
+        qnalist = qs.getQnaMain(); 
+        
+        System.out.println(qnalist);
+        
 		model.addAttribute("qnalist", qnalist);
 		return "qna/main";
 	}
@@ -164,7 +169,6 @@ public class QnaController{
 //			page = "1";
 //		}
 		int currentPage = page;
-		// int total = bs.getTotal();
 		int total = qs.getTotal(qna); // 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;

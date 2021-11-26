@@ -22,11 +22,12 @@ var username = "${qnalist.username}";
 var session = "${sessionScope.username}";
 
 	if(username != session){
-		alert("사용자가 다르면 수정할 수 없습니다"); 
+		alert("사용자가 다르면 삭제할 수 없습니다"); 
 		history.go(-1);
-	}
+	} 
 /* function check(){ */
 	
+		
 	if(username == session){	
     if(confirm("정말 삭제하시겠습니까?")==true){
 		location.href="${path}/delete/qna_no/${qnalist.qna_no}";

@@ -19,23 +19,27 @@
 
 <script type="text/javascript">
 
-System.out.println("qnaUpdateRecheck 까지 옴");
 
-/* var username = "${qnalist.username}";
+
+var username = "${qnalist.username}";
 var session = "${sessionScope.username}";
 
-	if(username != session){
+username = 1;
+session = 1;
+
+/* 	if(username != session){
 		alert("사용자가 다르면 수정할 수 없습니다"); 
 		history.go(-1);
-	} */
+	}  */
 	
-	var username = session;
+/* 	var username = 1;
+	var session = 1;  */
 	
 	if(username == session){	
-/* 		location.href="${path}/delete/qna_no/${qnalist.qna_no}"; */
+	
 		location.href="${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}";
-		       /*         ${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}' */
-	}
+		   
+	}   
 
 </script>
 

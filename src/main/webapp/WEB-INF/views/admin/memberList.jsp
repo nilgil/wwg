@@ -4,6 +4,7 @@
 <head>
     <title>Title</title>
 </head>
+
 <body>
 ${test}
 <c:forEach var="i" items="${memberList}">
@@ -15,5 +16,7 @@ ${test}
     <button class="user-del">삭제</button>
 </c:forEach>
 </body>
+
 <script src="${pageContext.request.contextPath}/resources/admin/memberList.js"></script>
+
 </html>
