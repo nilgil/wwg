@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -75,34 +74,24 @@ public class PlannerController {
      * 내 플랜 관리 이동
      */
     @GetMapping("/my")
-    public String myPlan(Principal principal, Model model) {
+    public String myPlan(Principal principal, Model model) throws ParseException {
         String userName = principal.getName();
-        model.addAttribute("userName", userName);
-
-        log.debug("Move to My Plans | Username : {}", userName);
-        return "/plan/myPlans";
-    }
-
-    @GetMapping("/my/plans")
-    @ResponseBody
-    public String getMyPlans(String userName) throws ParseException {
         List<Plan> plansByUser = plannerService.getPlansByUser(userName);
-        List<String> firstSpots = new ArrayList<String>();
-        for (Plan plan : plansByUser) {
+
+        String[] firstSpots = new String[plansByUser.size()];
+        for (int i = 0; i < plansByUser.size(); i++) {
             JSONParser jsonParser = new JSONParser();
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(plan.getPlans());
-            JSONArray jsonArray2 = (JSONArray) jsonArray.get(0);
-            firstSpots.add(String.valueOf(jsonArray2.get(0)));
+            JSONArray arrayDeep1 = (JSONArray) jsonParser.parse(plansByUser.get(i).getPlans());
+            JSONArray arrayDeep2 = (JSONArray) arrayDeep1.get(0);
+            firstSpots[i] = String.valueOf(arrayDeep2.get(0));
         }
-        List<String> thumbnails = plannerService.getThumbnails(firstSpots);
+        String[] thumbnails = plannerService.getThumbnails(firstSpots);
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("thumbnails", thumbnails);
-        jsonObject.put("plans", plansByUser);
-
-        String jsonMyPlans = jsonObject.toJSONString();
-        log.debug("Get My Plan for View | My Plans : {}", jsonMyPlans);
-        return jsonMyPlans;
+        model.addAttribute("userName", userName);
+        model.addAttribute("plans", plansByUser);
+        model.addAttribute("thumbnails", thumbnails);
+        log.debug("Get My Plans | My Plans : {}, Thumbnails : {}", plansByUser, thumbnails);
+        return "/plan/myPlans";
     }
 
     // --------------------------- 플랜 게시판 ----------------------------
