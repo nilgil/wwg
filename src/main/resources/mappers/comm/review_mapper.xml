@@ -83,4 +83,9 @@
 		delete from comm_review where review_no=#{review_no}
 	</update>
 	
+	<!-- 좋아요 -->
+	<update id="like" parameterType="review">
+		update comm_review set review_like=review_like+1 where review_no=#{review_no}
+	</update>
+	
 </mapper>
