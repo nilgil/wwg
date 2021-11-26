@@ -55,5 +55,8 @@ public class review_servicelmpl implements review_service {
 	public int getMaxNum() {
 		return rd.getMaxNum();
 	}
-
+	
+	public void like(int review_no) {
+		rd.like(review_no);
+	}
 }

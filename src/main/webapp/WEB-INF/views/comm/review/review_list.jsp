@@ -33,6 +33,7 @@
 							<td><fmt:formatDate value="${n.review_regdate}" 
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td>${n.review_hit}</td>
+							<td>${n.review_like}</td>
 					</tr>
 					<c:set var="no1" value="${no-1}"></c:set>
 				</c:forEach>

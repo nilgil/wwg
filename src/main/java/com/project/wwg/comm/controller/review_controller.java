@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.comm.model.review;
 import com.project.wwg.comm.service.review_PagingPgm;
@@ -124,98 +125,13 @@ public class review_controller {
 			return "comm/review/review_delete";
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// 좋아요
+	    @RequestMapping("revlike")
+	    public String recommend (@RequestParam int review_no, Model model) {
+			rs.like(review_no);					// 좋아요 1증가
+	        model.addAttribute("review_no", review_no);
+	        return "redirect:reviewlist/pageNum/1";
+	    }		
 		
 		
 }
