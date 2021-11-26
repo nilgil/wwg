@@ -23,13 +23,10 @@ public class QnaController{
 	private QnaService qs; //service 인터페이스
 	
 	//메인페이지
-	@RequestMapping("mainpage.do")
-	public String mainpage(Model model) {
-        
-		List<Qna> qnalist = null;
+	@RequestMapping("/")
+	public String mainpage(Qna qna, Model model) {
+	    List<Qna> qnalist = null;
         qnalist = qs.getQnaMain(); 
-        
-        System.out.println(qnalist);
         
 		model.addAttribute("qnalist", qnalist);
 		return "qna/main";

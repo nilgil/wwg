@@ -1,6 +1,6 @@
 package com.project.wwg.plan.dao;
 
-import com.project.wwg.plan.dto.Page;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +18,31 @@ public class MybatisPlannerDao implements PlannerDao {
         this.sqlSession = sqlSession;
     }
 
+
+    // ------------------------------------ [C] ------------------------------------
     @Override
-    public void insertPlan(Plan plan) {
-        sqlSession.insert("plan.insertPlan", plan);
+    public int insertPlan(Plan plan) {
+        return sqlSession.insert("plan.insertPlan", plan);
     }
 
+    // ------------------------------------ [R] ------------------------------------
     @Override
     public List<Plan> getPlansByUser(String username) {
         return sqlSession.selectList("plan.getPlansByUser", username);
     }
 
     @Override
-    public List<Plan> getAllPlansList(Page page) {
-        return sqlSession.selectList("plan.getAllPlansList",page);
+    public List<Plan> getAllPlansList(PageInfo pageInfo) {
+        return sqlSession.selectList("plan.getAllPlansList",pageInfo);
     }
 
     @Override
     public int getAllPlansCount() {
         return sqlSession.selectOne("plan.getAllPlansCount");
     }
+
+    // ------------------------------------ [U] ------------------------------------
+
+
+    // ------------------------------------ [D] ------------------------------------
 }

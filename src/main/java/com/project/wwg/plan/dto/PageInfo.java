@@ -3,7 +3,7 @@ package com.project.wwg.plan.dto;
 import lombok.Data;
 
 @Data
-public class Page {
+public class PageInfo {
     private int pageNum;
     private int div;
     private int startRow;
@@ -11,23 +11,23 @@ public class Page {
     private int count;
     private String keyword;
 
-    public Page() {
+    public PageInfo() {
         this(1);
     }
 
-    public Page(int pageNum) {
+    public PageInfo(int pageNum) {
         this("", pageNum);
     }
 
-    public Page(int pageNum, int searchCount) {
+    public PageInfo(int pageNum, int searchCount) {
         this("", pageNum, searchCount);
     }
 
-    public Page(String keyword, int pageNum) {
+    public PageInfo(String keyword, int pageNum) {
         this(keyword, pageNum, 0);
     }
 
-    public Page(String keyword, int pageNum, int searchCount) {
+    public PageInfo(String keyword, int pageNum, int searchCount) {
         this.pageNum = pageNum;
         this.div = 8;
         this.startRow = (this.pageNum - 1) * div + 1;

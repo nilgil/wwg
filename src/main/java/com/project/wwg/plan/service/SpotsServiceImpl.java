@@ -1,7 +1,7 @@
 package com.project.wwg.plan.service;
 
 import com.project.wwg.plan.dao.SpotsDao;
-import com.project.wwg.plan.dto.Page;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
 import org.json.simple.JSONArray;
@@ -33,8 +33,8 @@ public class SpotsServiceImpl {
     /**
      * [C] Spot 1개 등록
      */
-    public void insertSpot(Spot spot) {
-        spotsDao.insertSpot(spot);
+    public int insertSpot(Spot spot) {
+       return spotsDao.insertSpot(spot);
     }
 
     /**
@@ -55,8 +55,8 @@ public class SpotsServiceImpl {
      * [R] 검색어로 Spot 검색하여 list로 반환
      */
     public List<Spot> searchSpots(String keyword, int pageNum) {
-        Page page = new Page(keyword,pageNum);
-        return spotsDao.searchSpots(page);
+        PageInfo pageInfo = new PageInfo(keyword,pageNum);
+        return spotsDao.searchSpots(pageInfo);
     }
 
     /**
@@ -69,8 +69,8 @@ public class SpotsServiceImpl {
     /**
      * [D] id로 Spot 1개 삭제
      */
-    public void deleteSpot(String id) {
-        spotsDao.deleteSpot(id);
+    public int deleteSpot(String id) {
+        return spotsDao.deleteSpot(id);
     }
 
     /**
@@ -104,7 +104,7 @@ public class SpotsServiceImpl {
         return result;
     }
 
-    // ------------------------------ API 관련 ------------------------------
+    // ---------------------------- API 연동 관련 ----------------------------
 
     /**
      * API의 1페이지 Spots 조회

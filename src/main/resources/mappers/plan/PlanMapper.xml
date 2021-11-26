@@ -15,7 +15,7 @@
         where username = #{username}
     </select>
 
-    <select id="getAllPlansList" parameterType="Page" resultType="Plan">
+    <select id="getAllPlansList" parameterType="PageInfo" resultType="Plan">
         <![CDATA[
         select *
         from (
