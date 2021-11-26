@@ -1,31 +1,27 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <head>
     <title>Planner</title>
+    <%@ include file="/resources/include/headTag.jsp" %>
+    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
+    <script defer src="/js/plan/create_plan.js"></script>
     <link rel='stylesheet' type='text/css' href='/css/plan/create_plan.css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5375710c5345c7b4704ecd71a402404e"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5375710c5345c7b4704ecd71a402404e&libraries=clusterer,drawing"></script>
-    <script defer src="/js/plan/create_plan.js"></script>
 </head>
 <body>
 <div id="wrapper">
-    <header>
-        <h1>Header</h1>
-    </header>
-    <s:csrfInput/>
     <input name="days" id="hiddenDays" type="hidden" value="${plan.days}"/>
     <input name="username" id="hiddenUsername" type="hidden" value="${plan.username}"/>
     <input id="hiddenDepartureL" type="hidden" value="${plan.departure}"/>
     <input name="departure" id="hiddenDeparture" type="hidden"/>
     <input name="plans" id="hiddenPlans" type="hidden"/>
+    <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
         <div id="content-header">
             <div id="now-day">
@@ -84,6 +80,7 @@
             </div>
         </div>
     </div>
+    <%@ include file="/resources/include/footerbar.jsp" %>
 </div>
 </body>
 </html>

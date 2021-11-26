@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="container">
-    <form id="initForm" method="post" action="/planner/create_plan">
+    <form id="initForm" method="post" action="/plan/create">
         <s:csrfInput/>
         <input name="username" type="hidden" value="${username}"/>
         <div id="calendar">
