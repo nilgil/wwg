@@ -1,6 +1,6 @@
 package com.project.wwg.plan.dao;
 
-import com.project.wwg.plan.dto.Page;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 
 import java.util.List;
@@ -14,15 +14,15 @@ public interface SpotsDao {
 
     Spot searchSpotOne(String title);
 
-    List<Spot> searchSpots(Page page);
+    List<Spot> searchSpots(PageInfo pageInfo);
 
     int getSearchSpotsCount(String keyword);
 
-    void insertSpot(Spot spot);
+    int insertSpot(Spot spot);
 
     int insertSpots(List<Spot> spots);
 
-    void deleteSpot(String id);
+    int deleteSpot(String id);
 
     int deleteAllSpots();
 }

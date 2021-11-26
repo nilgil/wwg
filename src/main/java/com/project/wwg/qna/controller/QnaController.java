@@ -23,7 +23,7 @@ public class QnaController{
 	private QnaService qs; //service 인터페이스
 	
 	//메인페이지
-	@RequestMapping("mainpage.do")
+	@RequestMapping("/")
 	public String mainpage(Qna qna, Model model) {
         List<Qna> qnalist = new ArrayList<Qna>();
 		model.addAttribute("qnalist", qnalist);
