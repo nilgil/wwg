@@ -168,10 +168,10 @@ public class FoodBoardController {
     		byte[] bytes = upload.getBytes();
     		
     		//이미지 경로 생성
-    		String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
+    		String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
     		String ckUploadPath = path + uid + "_" + fileName;
     		File folder = new File(path);
-    		System.out.println("path:"+path);
+    		System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
     		//해당 디렉토리 확인
     		if(!folder.exists()){
     			try{
@@ -212,7 +212,7 @@ public class FoodBoardController {
     throws ServletException, IOException{
     	
     	//서버에 저장된 이미지 경로
-    	String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 이미지 
+    	String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
     	System.out.println("path:"+path);
     	String sDirPath = path + uid + "_" + fileName;
     	
