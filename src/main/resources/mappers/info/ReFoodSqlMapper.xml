@@ -20,7 +20,7 @@
 		<selectKey keyProperty="food_re_no" order="BEFORE" resultType="int">
 			select nvl(max(food_re_no),0) + 1 from trip_food_reply
 		</selectKey>
-		insert into trip_food_reply values (#{food_re_no},#{rfood_no},0,
+		insert into trip_food_reply values(#{food_re_no},#{rfood_no},#{username},
 			#{food_re_content},sysdate)
 	</insert>
 	

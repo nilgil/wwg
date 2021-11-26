@@ -1,16 +1,22 @@
 package com.project.wwg.plan.dao;
 
-import com.project.wwg.plan.dto.Page;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
-import com.project.wwg.plan.dto.Spot;
 
 import java.util.List;
 
 public interface PlannerDao {
-    void insertPlan(Plan plan);
+    // ------------------ [C] ------------------
+    int insertPlan(Plan plan);
+
+    // ------------------ [R] ------------------
     List<Plan> getPlansByUser(String username);
 
-    List<Plan> getAllPlansList(Page page);
+    List<Plan> getAllPlansList(PageInfo pageInfo);
 
     int getAllPlansCount();
+
+    // ------------------ [U] ------------------
+
+    // ------------------ [D] ------------------
 }

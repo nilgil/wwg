@@ -1,10 +1,12 @@
 package com.project.wwg.plan.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.wwg.plan.dto.Page;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.service.SpotsServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +21,9 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/spots*")
+@Slf4j
 public class SpotsController {
-
+    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     private SpotsServiceImpl spotService;
 
     @Autowired
@@ -43,18 +46,18 @@ public class SpotsController {
      */
     @PostMapping(value = "/search", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String getSearchSpotsByPage(String keyword, int pageNum) throws Exception {
-        List<Spot> spots = spotService.searchSpots(keyword, pageNum);
+    public String getSearchSpotsByPage(String keyword, int page) throws Exception {
+        List<Spot> spots = spotService.searchSpots(keyword, page);
         int searchCount = spotService.getSearchSpotsCount(keyword);
-        Page page = new Page(keyword, pageNum, searchCount);
+        PageInfo pageInfo = new PageInfo(keyword, page, searchCount);
 
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(spots);
-        String pageInfo = mapper.writeValueAsString(page);
+        String pageInfoString = mapper.writeValueAsString(pageInfo);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", result);
-        jsonObject.put("page_info", pageInfo);
+        jsonObject.put("page_info", pageInfoString);
 
         return jsonObject.toJSONString();
     }
@@ -62,15 +65,18 @@ public class SpotsController {
     @PostMapping(value = "/searchOne", produces = "application/json; charset=utf8")
     @ResponseBody
     public String getSearchSpotOne(String title) throws Exception {
+        log.debug("Search Title Keyword : {}",title);
         Spot spot = spotService.searchSpotOne(title);
 
-        ObjectMapper mapper = new ObjectMapper();
-        String result = mapper.writeValueAsString(spot);
+        String result = gson.toJson(spot);
+        log.debug("Search Result : {}", result);
+        return result;
+    }
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("result", result);
-
-        return jsonObject.toJSONString();
+    @PostMapping(value = "/searchArray", produces = "application/json; charset=utf8")
+    @ResponseBody
+    public String searchSpotsByTitles(String[] titles) {
+        return null;
     }
 
     /**
@@ -78,7 +84,8 @@ public class SpotsController {
      */
     @PostMapping("/insert")
     public String insertSpot(@RequestBody Spot spot) {
-        spotService.insertSpot(spot);
+        int result = spotService.insertSpot(spot);
+
         return "/plan/spotsList";
     }
 
@@ -88,7 +95,7 @@ public class SpotsController {
      */
     @GetMapping("/id/{id}")
     public String deleteSpot(String id) {
-        spotService.deleteSpot(id);
+        int result = spotService.deleteSpot(id);
         return "/plan/spotsList";
     }
 

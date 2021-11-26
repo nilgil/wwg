@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
@@ -62,7 +64,7 @@
 					<td><fmt:formatDate value="${ReFoodBoard.food_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${ReFoodBoard.food_re_no}">
-						<c:if test="${ReFoodBoard.username==foodboard.username }">
+						<c:if test="${ReFoodBoard.username==user.username }">
 							<input type="button" value="수정" class="edit1" id="${ReFoodBoard.food_re_no}">
 							<input type="button" value="삭제"	 onclick="del(${ReFoodBoard.food_re_no},${ReFoodBoard.rfood_no})">
 						</c:if></td>

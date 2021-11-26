@@ -16,7 +16,7 @@
 
 <!-- 글작성 / alias="FoodBoard" -->
 	<insert id="insert" parameterType="FoodBoard">
-        insert into trip_food values(#{food_no},0,
+        insert into trip_food values(#{food_no},#{username},
 		#{food_title},#{food_content},0,sysdate,0,0)
 	</insert>
 

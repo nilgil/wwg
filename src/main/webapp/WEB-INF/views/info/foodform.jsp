@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +12,14 @@
 <script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script>
 </head>
 <body>
+
+
+
 <form method=post action="foodwrite.do">
 <table border=1 width=1000 align=center>
 	<caption>글작성</caption>
 	<tr><th>작성자명</th>
-		<%-- <td>${foodboard.username}</td> --%>	<!-- ${sessionScope.username} -->
+		<td>${user.username}</td>
 	</tr>
 	<tr><th>제목</th>
 		<td><input type=text name="food_title" required="required"></td>

@@ -34,7 +34,7 @@
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/test"
+                default-target-url="/"
         />
         <logout
                 logout-url="/logout"
