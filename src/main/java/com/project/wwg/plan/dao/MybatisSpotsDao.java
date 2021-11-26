@@ -1,6 +1,6 @@
 package com.project.wwg.plan.dao;
 
-import com.project.wwg.plan.dto.Page;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,8 @@ public class MybatisSpotsDao implements SpotsDao {
      * @return
      */
     @Override
-    public List<Spot> searchSpots(Page page) {
-        return sqlSession.selectList("spot.searchSpots", page);
+    public List<Spot> searchSpots(PageInfo pageInfo) {
+        return sqlSession.selectList("spot.searchSpots", pageInfo);
     }
 
     @Override

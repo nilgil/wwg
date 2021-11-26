@@ -7,7 +7,7 @@
 
     <!-- jdbc 설정을 담은 jdbc.properties 파일을 불러온다. -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-
+    <context:component-scan base-package="com.project.wwg" />
     <!-- DataSource 구현 클래스 BasicDataSource 빈 등록 -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">

@@ -13,7 +13,6 @@ public class Plan {
     private String username;
     private int idx;
     private String title;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date departure;
     private int days;
     private String plans;
