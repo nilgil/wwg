@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +11,13 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("수정 성공");
-			location.href = "${path}/reviewlist/pageNum/${pageNum}";
+			alert("입력 성공");
+			location.href = "meetlist";
 		</script>
 	</c:if>
 	<c:if test="${result <= 0 }">
 		<script type="text/javascript">
-			alert("수정 실패");
+			alert("입력 실패");
 			history.go(-1);
 		</script>
 	</c:if>

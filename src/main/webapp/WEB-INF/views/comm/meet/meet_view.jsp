@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
-<s:authentication property="principal" var="user" />
+		<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 
@@ -20,7 +20,7 @@
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
 var session = '${user.username}';
-var member_id = '${review.member_id}';
+var member_id = '${meet.member_id}';
 console.log(member_id);
 $(function(){
 	$("#chk1").submit(function(){
@@ -41,7 +41,7 @@ $(function(){
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
 var session = '${user.username}';
-var member_id = '${review.member_id}';
+var member_id = '${meet.member_id}';
 $(function() {	
 	$("#like").submit(function(){
     	if(member_id == session){
@@ -55,18 +55,18 @@ $(function() {
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
 	$(function() {
-		$('#review_reply').load('${path}/review_reply/review_no/${review.review_no}')
+		$('#meet_reply').load('${path}/meet_reply/meet_no/${meet.meet_no}')
 	
-		$('#review_reply_insert').click(function() {
-			if (!frm.review_re_content.value) {
+		$('#meet_reply_insert').click(function() {
+			if (!frm.meet_re_content.value) {
 				alert('댓글 입력후에 클릭하시오');
-				frm.review_re_content.focus();
+				frm.meet_re_content.focus();
 				return false;
 			}
 			var frmData = $('#frm').serialize();
-			$.post('${path}/review_reply_insert', frmData, function(data) {
-				$('#review_reply').html(data);
-				frm.review_re_content.value = '';
+			$.post('${path}/meet_reply_insert', frmData, function(data) {
+				$('#meet_reply').html(data);
+				frm.meet_re_content.value = '';
 			});
 		});
 	});
@@ -76,59 +76,57 @@ $(function() {
 <body>
 	<div align="center">
 		<h2>게시글 상세정보</h2>
-		<tr>
-			<td>제목</td>
-			<td>${review.review_title}</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${review.member_id}</td>
-		</tr>
-		<tr>
-			<td>조회수</td>
-			<td>${review.review_hit}</td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><pre>${review.review_content}</pre></td>
-		</tr>
-
-	</div>
-	<div align=center>
+			<tr>
+				<td>제목</td>
+				<td>${meet.meet_title}</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td>${meet.member_id}</td>
+			</tr>
+			<tr>
+				<td>조회수</td>
+				<td>${meet.meet_hit}</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><pre>${meet.meet_content}</pre></td>
+			</tr>
+		   </div>
+		   <div align=center>
 		<input type="button" value="목록"
 			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
 
 		<form
-			action="${path}/reviewupdateform/review_no/${review.review_no}/pageNum/${pageNum}"
+			action="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk1">
 			<input type="submit" value="수정">
 		</form>
 
 		<form
-			action="${path}/reviewdelete/review_no/${review.review_no}/pageNum/${pageNum}"
+			action="${path}/meetdelete/meet_no/${meet.meet_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk2">
 			<input type="submit" value="삭제">
 		</form>
 
 		<form
-			action="/revlike?review_no=${review.review_no}&pageNum=${pageNum}"
+			action="/meetlike?meet_no=${meet.meet_no}&pageNum=${pageNum}"
 			method="post" id="like">
 			<input type="submit" value="좋아요">
 		</form>
 	</div>
-
-	<!-- 댓글 작성 -->
-	<p>
-	<p>
-	<form name="frm" id="frm">
-		<input type="hidden" name="member_id" value="${user.username}">
-		<input type="hidden" name="review_fno" value="${review.review_no}">
-		댓글 :
-		<textarea rows="3" cols="50" name="review_re_content"></textarea>
-		<input type="button" value="확인" id="review_reply_insert">
-	</form>
-
-	<!-- 댓글 list 불러오는곳 -->
-	<div id="review_reply"></div>
+		   
+		 
+		<!-- 댓글 작성 -->   
+		<p><p>
+		<form name="frm" id="frm">
+			<input type="hidden" name="member_id" value="${user.username}">
+			<input type="hidden" name="meet_fno" value="${meet.meet_no}"> 댓글 :
+			<textarea rows="3" cols="50" name="meet_re_content"></textarea>
+			<input type="button" value="확인" id="meet_reply_insert">
+		</form>
+	
+		<!-- 댓글 list 불러오는곳 -->
+		<div id="meet_reply"></div>
 </body>
 </html>
