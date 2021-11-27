@@ -36,7 +36,7 @@
 <!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
 
 <insert id="insert" parameterType="notice">
-		insert into comm_notice values (#{notice_no},'아이디',#{notice_title},
+		insert into comm_notice values (#{notice_no},#{member_id},#{notice_title},
 		#{notice_content},sysdate,0,'n')
 
 </insert>

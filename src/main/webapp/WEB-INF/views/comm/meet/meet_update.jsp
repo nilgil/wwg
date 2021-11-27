@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+		<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
 			alert("수정 성공");
-			location.href = "${path}/reviewlist/pageNum/${pageNum}";
+			location.href = "${path}/meetlist/pageNum/${pageNum}";
 		</script>
 	</c:if>
 	<c:if test="${result <= 0 }">

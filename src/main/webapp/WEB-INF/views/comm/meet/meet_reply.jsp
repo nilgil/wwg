@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+		<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,25 +30,24 @@
 		});
 	});
 	function up(id) {
-		var review_re_content = $('#tt_'+id).val();
-		var formData = "review_re_no="+id+'&review_re_content='+review_re_content
-			+"&review_fno=${review.review_no}";
-		$.post('${path}/review_reply_update',formData, function(data) {
-			$('#review_reply').html(data);
+		var meet_re_content = $('#tt_'+id).val();
+		var formData = "meet_re_no="+id+'&meet_re_content='+meet_re_content
+			+"&meet_fno=${meet.meet_no}";
+		$.post('${path}/meet_reply_update',formData, function(data) {
+			$('#meet_reply').html(data);
 		});
 	}
 	function lst() {
-		$('#review_reply').load('${path}/review_reply/review_no/${review.review_no}');
+		$('#meet_reply').load('${path}/meet_reply/meet_no/${meet.meet_no}');
 	}
-	function del(review_re_no,review_fno) {
-		var formData="review_re_no="+review_re_no+"&review_fno="+review_fno;
-		$.post("${path}/review_reply_delete",formData, function(data) {
-			$('#review_reply').html(data);
+	function del(meet_re_no,meet_fno) {
+		var formData="meet_re_no="+meet_re_no+"&meet_fno="+meet_fno;
+		$.post("${path}/meet_reply_delete",formData, function(data) {
+			$('#meet_reply').html(data);
 		});
 	}
 </script>
 </head>
- ${user.username}님 환영합니다.
 <body>
 
 		<h2>댓글</h2>
@@ -59,16 +58,16 @@
 				<td>수정일</td>
 				<td></td>
 			</tr>
-			<c:forEach var="rr" items="${review_reply}">
+			<c:forEach var="mr" items="${meet_reply}">
 				<tr>
-					<td>${rr.member_id}</td>
-					<td id="td_${rr.review_re_no}">${rr.review_re_content}</td>
-					<td><fmt:formatDate value="${rr.review_re_regdate}"
+					<td>${mr.member_id}</td>
+					<td id="td_${mr.meet_re_no}">${mr.meet_re_content}</td>
+					<td><fmt:formatDate value="${mr.meet_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					<td id="btn_${rr.review_re_no}">
-						<c:if test="${rr.member_id==user.username }">
-							<input type="button" value="수정" class="edit1" id="${rr.review_re_no}">
-							<input type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
+					<td id="btn_${mr.meet_re_no}">
+						<c:if test="${mr.member_id==user.username }">
+							<input type="button" value="수정" class="edit1" id="${mr.meet_re_no}">
+							<input type="button" value="삭제"	 onclick="del(${mr.meet_re_no},${mr.meet_fno})">
 						</c:if></td>
 				</tr>
 			</c:forEach>

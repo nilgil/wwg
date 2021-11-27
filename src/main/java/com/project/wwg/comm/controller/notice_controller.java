@@ -1,5 +1,6 @@
 package com.project.wwg.comm.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,10 +68,14 @@ public class notice_controller {
 		
 	// 글작성
 		@RequestMapping("/comm_noticeinsert")
-		public String noticeinsert(notice notice, Model model) {
+		public String noticeinsert(Principal principal, notice notice, Model model) {
 
 			System.out.println("제목:"+notice.getNotice_title());
 			System.out.println("내용:"+notice.getNotice_content());
+			
+			String username = principal.getName(); // 로그인후 유저네임 넘기기
+			System.out.println("username:"+username);
+			notice.setMember_id(username); // 로그인후 유저네임 넘기기
 			
 			int notice_no = notice.getNotice_no();
 			int number = ns.getMaxNum();
@@ -124,95 +129,6 @@ public class notice_controller {
 			model.addAttribute("pageNum", pageNum);
 			return "comm/notice/comm_noticedelete";
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

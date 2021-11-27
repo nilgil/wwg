@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="meetns">
+
+<resultMap id="meetresult"      type="meet"> 
+		<result property="meet_no"	     column="meet_no" />
+		<result property="member_id"    column="member_id" />
+		<result property="meet_title"   column="meet_title" />
+		<result property="meet_content"   column="meet_content" />
+		<result property="meet_regdate"     column="meet_regdate" />
+		<result property="meet_hit" column="meet_hit" />
+		<result property="meet_photo" column="meet_photo" />
+		<result property="meet_like" column="meet_like" />
+</resultMap> 
+
+<!-- 리스트 출력 -->
+	<select id="list" parameterType="meet" resultMap="meetresult"> 
+		select * from (select a.*,rowNum rn from (
+			select * from comm_meet
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				meet_title like '%'||#{keyword}||'%' or
+				meet_content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by meet_no desc) a )
+			where rn between #{startRow} and #{endRow}
+	</select>
+
+<!-- 글작성 -->
+
+<!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
+<!-- '아이디' 부분 나중에 수정요망!!!!!!!!!!!!! -->
+
+<insert id="insert" parameterType="meet">
+		insert into comm_meet values (#{meet_no},#{member_id},#{meet_title},
+		#{meet_content},sysdate,0,'photo_path',0)
+
+</insert>
+
+<!-- 글번호 증가 -->
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(meet_no),0) + 1 from comm_meet
+	</select>
+
+<!-- 목록 검색기능 -->	
+<select id="getTotal" parameterType="meet" resultType="int">
+		select count(*) from comm_meet
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				meet_title like '%'||#{keyword}||'%' or
+				meet_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+<!-- meet_no로 유효성검사 -->
+	<select id="select" parameterType="int" resultType="meet">
+		select * from comm_meet where meet_no=#{meet_no}
+	</select>
+	
+<!-- 조회수증가 -->
+	<update id="selectUpdate" parameterType="int">
+		update comm_meet set meet_hit = meet_hit+1 where meet_no=#{meet_no}
+	</update>
+	
+<!-- 수정 -->	
+	<update id="update" parameterType="meet">
+		update comm_meet set meet_title=#{meet_title},
+			meet_content=#{meet_content}
+			where meet_no=#{meet_no}
+	</update>
+	
+<!-- 삭제 -->	
+	<update id="delete" parameterType="int">
+		delete from comm_meet where meet_no=#{meet_no}
+	</update>
+	
+	<!-- 좋아요 -->
+	<update id="like" parameterType="meet">
+		update comm_meet set meet_like=meet_like +1 where meet_no=#{meet_no}
+	</update>
+	
+</mapper>
