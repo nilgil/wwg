@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="mrns">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="mrResult"          type="mr">
+		<result property="meet_re_no"	      column="meet_re_no" />          <!-- rno -->
+		<result property="meet_fno"    	  column="meet_fno" />             <!-- bno -->
+		<result property="member_id"    column="member_id" />                   <!-- replyer -->
+		<result property="meet_re_content"  column="meet_re_content" />     <!-- replytext -->
+		<result property="meet_re_regdate"    column="meet_re_regdate" />   <!-- regdate -->
+	</resultMap>
+	
+	<select id="list" parameterType="int" resultMap="mrResult">
+		select * from comm_meet_reply where meet_fno=#{meet_fno} order by meet_re_no
+	</select>
+	
+	<insert id="insert" parameterType="mr">
+		<selectKey keyProperty="meet_re_no" order="BEFORE" resultType="int">
+			select nvl(max(meet_re_no),0) + 1 from comm_meet_reply
+		</selectKey>
+		insert into comm_meet_reply values(#{meet_re_no},#{meet_fno},#{member_id},
+			#{meet_re_content},sysdate)
+	</insert>
+	
+	<update id="update" parameterType="mr">
+		update comm_meet_reply set meet_re_content=#{meet_re_content} where meet_re_no=#{meet_re_no} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_meet_reply where meet_re_no=#{meet_re_no}
+	</delete>
+</mapper>
