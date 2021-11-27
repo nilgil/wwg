@@ -13,6 +13,10 @@ body{
     flex-direction: column;
     background-color : #ffffff;
 }
+.a{
+    text-decoration: none;
+    color: black;
+}
 .memberList_center{
 	flex: 1;
     padding: 50px;
@@ -21,11 +25,11 @@ body{
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 150px 900px;
-    grid-template-rows: 1fr 42px;
-    grid-template-areas: 'memberList_side write_table';
+    grid-template-rows: 1fr;
+    grid-template-areas: 'memberList_side memberList_table';
 }
 .memberList_side{
-    grid-area: side;
+    grid-area: memberList_side;
 }
 #side_menu{
     padding: 10%;
@@ -36,4 +40,10 @@ body{
 #side_menu thead{
     /* color: cadetblue; */
     background-color: #F4D160;
+}
+.memberList_table{
+	grid-area: memberList_table;
+}
+table{
+    background-color: #fffffff5;
 }

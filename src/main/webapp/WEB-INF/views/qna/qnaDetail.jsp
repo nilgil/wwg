@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 
@@ -10,13 +11,14 @@
 
 <head>
 <title>Q&A 게시판 상세페이지</title>
-<script type="text/javascript">
+<%@ include file="/resources/include/headTag.jsp"%>
+<link rel='stylesheet' media='screen' href='/css/qna/detail.css'>
+
+<script defer type="text/javascript">
 $(function(){
 	$('#qna_list').load('/qnalist2.do?page=${page}');
 });
 </script>
-<%@ include file="/resources/include/headTag.jsp"%>
-<link rel='stylesheet' media='screen' href='/css/qna/detail.css'>
 </head>
 
 <body>
@@ -46,11 +48,7 @@ $(function(){
                    <tr>
                     <th>게시물번호:${no1}</th>
                     <th>작성자:${qnalist.username}</th>
-                    <th>댓글수:
-                    <c:if test="${qnalist.qna_no} eq ${qnalist.qna_re_ref}"> 
-                    
-                    </c:if>
-                    </th>
+                    <th>댓글수:${qna_re_lev.size()}</th>
                     <th>조회수:${qnalist.qna_hit}</th>
                     <th>날짜:${qnalist.qna_regdate}</th>
                    </tr>
@@ -65,10 +63,12 @@ $(function(){
                 </tbody>
             </table>
             
+            
                <div class="table_btn">
                 <div><input class="btn btn-dark" type="button" id="de_comment" value="답글"
                 onclick="location='${path}/qna_commentForm?qna_no=${qnalist.qna_no}&page=${page}'"></div>
-                
+             
+             
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
                 onclick="location='${path}/qna_updatecheck?qna_no=${qnalist.qna_no}&page=${page}'"></div>
                
@@ -81,8 +81,9 @@ $(function(){
               </div>
             
             </div>
+            
            <!-- footer -->
            <%@ include file="/resources/include/footerbar.jsp"%>
-<%-- onclick="location='${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}'"></div> --%>
+
 </body>
 </html>
