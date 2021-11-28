@@ -46,10 +46,11 @@ public class SpotsController {
      */
     @PostMapping(value = "/search", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String getSearchSpotsByPage(String keyword, int page) throws Exception {
-        List<Spot> spots = spotService.searchSpots(keyword, page);
+    public String getSearchSpotsByPage(String keyword, int pageNum) throws Exception {
+        log.debug("good!");
+        List<Spot> spots = spotService.searchSpots(keyword, pageNum);
         int searchCount = spotService.getSearchSpotsCount(keyword);
-        PageInfo pageInfo = new PageInfo(keyword, page, searchCount);
+        PageInfo pageInfo = new PageInfo(keyword, pageNum, searchCount);
 
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(spots);

@@ -12,17 +12,15 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <head>
     <title>Title</title>
+    <%@ include file="/resources/include/headTag.jsp" %>
     <link rel='stylesheet' type='text/css' href='/css/plan/my_plan.css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%--    <script defer src="/js/plan/my_plan.js"></script>--%>
 </head>
 <body>
 <input id="userName" type="hidden" value="${userName}"/>
 <div id="wrapper">
+    <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
-        <header>
-            <h1>Header</h1>
-        </header>
         <div id="plans-box">
             <c:forEach items="${plans}" var="plan" varStatus="st">
                 <div class='plan'>
@@ -30,12 +28,14 @@
                         <img src="${thumbnails[st.index]}" alt="https://via.placeholder.com/150"/>
                     </div>
                     <div id='plan-info'>
-                            ${plan.title}
+                        <div id="day-info"><${plan.departure}/div>
+                        <div id="title-info">${plan.title}</div>
                     </div>
                 </div>
             </c:forEach>
         </div>
     </div>
+    <%@ include file="/resources/include/footerbar.jsp" %>
 </div>
 </body>
 </html>
