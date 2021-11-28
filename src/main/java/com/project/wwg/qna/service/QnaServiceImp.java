@@ -15,7 +15,7 @@ public class QnaServiceImp implements QnaService{
 	@Autowired
 	private QnaDao qd;
 	
-	public List<Qna> list(Qna qna){
+	public List<Qna> list(Qna qna){ 
 		return qd.list(qna);
 	}
     
@@ -94,6 +94,18 @@ public class QnaServiceImp implements QnaService{
 	public int getTotal(Qna qna) {
 		// TODO Auto-generated method stub
 		return qd.getTotal(qna);
+	}
+	
+	
+	public int getComment(Qna qna) {
+		// TODO Auto-generated method stub
+		return qd.getComCount(qna);
+	}
+
+	@Override
+	public List<Qna> getQnaMain() {
+		// TODO Auto-generated method stub
+		return qd.getQnaMain();
 	}
 	
 

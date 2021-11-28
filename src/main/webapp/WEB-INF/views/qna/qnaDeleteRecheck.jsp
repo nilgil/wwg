@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 
 
 
@@ -16,27 +17,25 @@
 </head>
 <body>
 
+<!-- 방법 2 -->
 <script type="text/javascript">
 
 var username = "${qnalist.username}";
-var session = "${sessionScope.username}";
+var session = "${user.username}";
 
 	if(username != session){
-		alert("사용자가 다르면 수정할 수 없습니다"); 
+		alert("사용자가 다르면 삭제할 수 없습니다"); 
 		history.go(-1);
-	}
-/* function check(){ */
-	
+	} 
+
 	if(username == session){	
-    if(confirm("정말 삭제하시겠습니까?")==true){
+		
+        if(confirm("정말 삭제하시겠습니까?")==true){
 		location.href="${path}/delete/qna_no/${qnalist.qna_no}";
 		alert("삭제되었습니다.");
-	}else{
-		history.go(-1);
-		/* location.href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/{no1}"; */
 	}
 	}
-/* } */
+
 </script>
 
 </body>

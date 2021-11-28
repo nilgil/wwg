@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 
@@ -93,7 +95,7 @@
       </div>
 </div>
 
-<div class="aside_login">로그인<hr>
+<div class="aside_login">${user.username}님 환영합니다.<hr>
 <!--     <form id="login" action="/action_page.php">
         <div class="form-group">
           <label for="usr">아이디</label>
@@ -109,19 +111,17 @@
       </form> -->
       
     <form action="/login" method="post">
-    <div class="form-group">
-    <label for="usr">아이디</label>
-    <input type="text" class="form-control" name="id" placeholder="아이디">
+    <div class="main_profile"><img alt="이미지1" src="/img/qna/프로필사진1.png" width="90" height="90"></div>
+    <div class="login_id">
+    ${user.username}님 | 내정보
     </div>
-    <div class="form-group">
-    <label for="pwd">비밀번호</label>
-    <input type="password" class="form-control" name="pw" placeholder="비밀번호">
+    <div class="logout_btn">
+    <input type="button" name="logout" value="로그아웃">
     </div>
     <s:csrfInput/>
-    <div class="login_btn"><button type="submit" class="btn btn-success" >로그인</button>
-     <a href="#">회원가입</a> | 
-     <a href="#">아이디/비밀번호 찾기</a></div>
-</form>
+     <div class="quit_share"><a href="#">회원탈퇴</a> | 
+     <a href="#">친구공유</a></div>
+    </form>
 </div>
 
 <div class="notice">공지사항<hr>
@@ -159,11 +159,7 @@
 
 <ul>
 <c:forEach var="qna" items="${qnalist}">
-<%-- <c:if test="${qna.qna_no eq 1}"> --%>
-
 <li>${qna.qna_title}</li>
-
-<%-- </c:if> --%>
 </c:forEach>
 </ul>
 </div>

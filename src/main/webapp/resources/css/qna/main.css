@@ -151,6 +151,21 @@ a{
 .carousel-inner .carousel-item img{
     height: 400px;
 }
+.main_profile{
+	display: inline-block;
+}
+.login_id{
+	display: inline-block;
+}
+.logout_btn{
+	display: inline-block;
+}
+.quit_share{
+	display: inline-block;
+}
+.aside_login form{
+	background-color: #ffffff;
+}
 
 
 

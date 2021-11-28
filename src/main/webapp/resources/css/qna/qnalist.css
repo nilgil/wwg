@@ -57,6 +57,10 @@ body{
 }
 table{
     background-color: #fffffff5;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
 }
 .qna_list_paging{
 	display: flex;
@@ -67,6 +71,9 @@ table{
 	display: flex;
     justify-content: right;
     margin: 15px;
+}
+textarea{
+	resize: none;
 }
 
 /* 반응형 웹 기능 */
