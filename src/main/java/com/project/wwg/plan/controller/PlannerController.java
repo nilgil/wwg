@@ -6,7 +6,6 @@ import com.project.wwg.plan.dto.Plan;
 import com.project.wwg.plan.service.PlannerServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +40,8 @@ public class PlannerController {
         String userName = principal.getName();
         model.addAttribute("userName", userName);
 
-        log.info("Start Plan Init | Username : {}", userName);
-        return "/plan/planInitForm";
+        log.debug("Start Plan Init | Username : {}", userName);
+        return "/plan/init-plan";
     }
 
     /**
@@ -53,7 +52,7 @@ public class PlannerController {
         model.addAttribute("plan", plan);
 
         log.debug("Create Detail Plan | Departure : {}, Days : {}", plan.getDeparture(), plan.getDays());
-        return "/plan/planCreateForm";
+        return "plan/create_plan";
     }
 
     /**
@@ -65,7 +64,7 @@ public class PlannerController {
         plannerService.insertPlan(plan);
 
         log.debug("Create Plan Success | Plan : {}", plan);
-        return "/planner/my";
+        return "/plan/my";
     }
 
     // ----------------------------- 내 플랜 ------------------------------
@@ -91,7 +90,7 @@ public class PlannerController {
         model.addAttribute("plans", plansByUser);
         model.addAttribute("thumbnails", thumbnails);
         log.debug("Get My Plans | My Plans : {}, Thumbnails : {}", plansByUser, thumbnails);
-        return "/plan/myPlans";
+        return "/plan/my-plan";
     }
 
     // --------------------------- 플랜 게시판 ----------------------------
