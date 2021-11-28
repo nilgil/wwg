@@ -1,5 +1,6 @@
 package com.project.wwg.qna.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
@@ -21,14 +23,31 @@ public class QnaController{
 	
 	@Autowired
 	private QnaService qs; //service 인터페이스
+
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String mainpage(Qna qna, Model model) {
-        List<Qna> qnalist = new ArrayList<Qna>();
+	public String mainpage(Qna qna, Model model) { 
+	    List<Qna> qnalist = new ArrayList<Qna>();
+	    qnalist = qs.getQnaMain();
+	    
+	    System.out.println(qnalist);
+	    System.out.println("여기까지옴");
+	    
 		model.addAttribute("qnalist", qnalist);
+		
 		return "qna/main";
 	}
+	
+//	//로그인후 메인페이지
+//		@RequestMapping("/loginMain")
+//		public String loginMainPage(Qna qna, Model model) {
+//			List<Qna> qnalist = new ArrayList<Qna>();
+//	        qnalist = qs.getQnaMain(); 
+//	        
+//			model.addAttribute("qnalist", qnalist);
+//			return "qna/loginMain";
+//		}
 	
 	
 	//글작성폼
@@ -41,8 +60,10 @@ public class QnaController{
 	
 	//글작성
 	@RequestMapping("qnawrite.do")
-	public String qnaInsert(Qna qna, Model model) throws Exception {
+	public String qnaInsert(Principal principal, Qna qna, Model model) throws Exception {
 		System.out.println("qnawrite까지는 왔음");
+		
+		String username = principal.getName(); // 로그인후 유저네임 넘기기
 		//qna_no 증가
 //		int num = qna.getQna_no();
 //		System.out.println("qna_no 가져옴");
@@ -50,9 +71,10 @@ public class QnaController{
 //		System.out.println("증가시킨 seq number에 할당함");	
 //		qna.setQna_no(number);
 //		System.out.println("number값을 qna_no에 set함");
+		qna.setUsername(username); // 로그인후 유저네임 넘기기
 		int result = qs.insert(qna);
-//		System.out.println("service에 있는 insert사용하겠다고신호OK");
 		model.addAttribute("result", result);
+		
 		return "qna/qnaWriteResult";
 	}
 	
@@ -164,7 +186,6 @@ public class QnaController{
 //			page = "1";
 //		}
 		int currentPage = page;
-		// int total = bs.getTotal();
 		int total = qs.getTotal(qna); // 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -190,7 +211,7 @@ public class QnaController{
 		model.addAttribute("search", qna.getSearch());
 		model.addAttribute("keyword", qna.getKeyword());
 		
-		System.out.println("list호출");
+		System.out.println("list2호출");
 		return "qna/qnaList2";
 	}
 	
@@ -283,7 +304,7 @@ public class QnaController{
 		return "qna/qnaComment";
 	}
 	
-	//답글등록-구현실패 
+	//답글등록
 	@RequestMapping("qna_comment.do")
 	public String insertComment(String page, Qna qna, Model model) {
 		System.out.println("답글등록controller");
@@ -297,13 +318,9 @@ public class QnaController{
 	//통합검색
 	@RequestMapping("total_search.do")
 	public String totalSearcg() {
-		
-		
-		
+	
 		return "qna/totalSearch";
 	}
-	
-	
 	
 	
 	

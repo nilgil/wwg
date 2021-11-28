@@ -6,8 +6,6 @@ let userName = $('#userName').val();
 let thumbnails = [];
 
 $(document).ready(function () {
-    token = $("meta[name='_csrf']").attr("content");
-    header = $("meta[name='_csrf_header']").attr("content");
     initFunction().then(printPlans);
 });
 

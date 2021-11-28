@@ -93,6 +93,18 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		return st.selectOne("qnans.getTotal", qna);
 	}
+
+	@Override
+	public int getComCount(Qna qna) {
+		// TODO Auto-generated method stub
+		return st.selectOne("qnans.ComCount", qna);
+	}
+
+	@Override
+	public List<Qna> getQnaMain() {
+		// TODO Auto-generated method stub
+		return st.selectList("qnans.qnaMain");
+	}
 	
 
 }

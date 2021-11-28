@@ -4,7 +4,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 html,body{
     height: 100%;
 }
@@ -12,14 +11,13 @@ body{
     margin: 0%;
     display: flex;
     flex-direction: column;
-    background-image : url('/img/qna/main제주말.jpg');
-    background-size: 900px 900px;
+    background-color : #ffffff;
 }
 .a{
     text-decoration: none;
     color: black;
 }
-.update_center{
+.memberList_center{
 	flex: 1;
     padding: 50px;
     margin: 60px auto;
@@ -27,11 +25,11 @@ body{
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 150px 900px;
-    grid-template-rows: 1fr 42px;
-    grid-template-areas: 'side update_table';
+    grid-template-rows: 1fr;
+    grid-template-areas: 'memberList_side memberList_table';
 }
-.side{
-    grid-area: side;
+.memberList_side{
+    grid-area: memberList_side;
 }
 #side_menu{
     padding: 10%;
@@ -43,24 +41,9 @@ body{
     /* color: cadetblue; */
     background-color: #F4D160;
 }
+.memberList_table{
+	grid-area: memberList_table;
+}
 table{
     background-color: #fffffff5;
-    border-width: 2px;
-    border-style: outset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-}
-.update_table{
-    grid-area: update_table;
-}
-.update_end_btn{
-    display: flex;
-    justify-content: center;
-    grid-area: table_btn;
-}
-.update_end_btn div{
-    margin: 5px;
-}
-textarea{
-	resize: none;
 }

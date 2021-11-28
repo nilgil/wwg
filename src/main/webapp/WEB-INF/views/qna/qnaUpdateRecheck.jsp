@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 
 
 
@@ -16,28 +17,20 @@
 </head>
 <body>
 
-
+<!-- 방법 1 -->
+<c:if test="${qnalist.username != user.username}">
 <script type="text/javascript">
-
-System.out.println("qnaUpdateRecheck 까지 옴");
-
-/* var username = "${qnalist.username}";
-var session = "${sessionScope.username}";
-
-	if(username != session){
-		alert("사용자가 다르면 수정할 수 없습니다"); 
-		history.go(-1);
-	} */
-	
-	var username = session;
-	
-	if(username == session){	
-/* 		location.href="${path}/delete/qna_no/${qnalist.qna_no}"; */
-		location.href="${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}";
-		       /*         ${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}' */
-	}
-
+	alert("사용자가 다르면 수정할 수 없습니다");
+	history.go(-1);
 </script>
+</c:if>
+
+<c:if test="${qnalist.username == user.username}">
+<script type="text/javascript">
+    location.href = "${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}";
+</script>
+</c:if>
+
 
 </body>
 </html>

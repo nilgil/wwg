@@ -58,10 +58,7 @@ function submitPlan() {
 
     $.ajax({
         type: "POST",
-        url: "/planner/create_success",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-        },
+        url: "/plan/success",
         data: {
             "days": days,
             "departure": dateFormatter(departure),
@@ -80,11 +77,6 @@ function submitPlan() {
 
 // INIT
 $(document).ready(function () {
-
-    // security용 token, header
-    token = $("meta[name='_csrf']").attr("content");
-    header = $("meta[name='_csrf_header']").attr("content");
-
     // 디테일 뷰 숨기기
     $('#detail-view').hide();
 
@@ -119,11 +111,11 @@ function makeSpots(keyword, pageNum) {
     $.ajax({
         method: "POST",
         url: "/spots/search",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-        },
         data: {keyword: keyword, pageNum: pageNum},
-        dataType: "json"
+        dataType: "json",
+        error: function (xhr, status) {
+            alert(status);
+        }
     }).done(function (data) {
         $('#search-result').empty();
 
@@ -308,18 +300,13 @@ function viewSpotDetail(title) {
     $.ajax({
         method: "POST",
         url: "/spots/searchOne",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-        },
         data: {title: title},
         dataType: "json"
-    }).done(function (data) {
-        let detailSpot = JSON.parse(data.result);
-
-        $('#detail-img').attr('src', detailSpot.photo);
-        $('#detail-title').text(detailSpot.title);
-        $('#detail-info').text(detailSpot.info);
-        $('#detail-rating').text("👍🏻 "+detailSpot.rating);
+    }).done(function (response) {
+        $('#detail-img').attr('src', response.photo);
+        $('#detail-title').text(response.title);
+        $('#detail-info').text(response.info);
+        $('#detail-rating').text("👍🏻 " + response.rating);
 
         $('#map').hide();
         $('#detail-view').show();

@@ -29,5 +29,11 @@ public interface QnaDao{
 
 	int getTotal(Qna qna);
 
+	int getComCount(Qna qna);
+
+	List<Qna> getQnaMain();
+
+
+
 	
 }
