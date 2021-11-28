@@ -26,7 +26,7 @@ public class QnaController{
 
 	
 	//메인페이지
-	@RequestMapping("/mainpage.do")
+	@RequestMapping("/")
 	public String mainpage(Qna qna, Model model) { 
 	    List<Qna> qnalist = new ArrayList<Qna>();
 	    qnalist = qs.getQnaMain();

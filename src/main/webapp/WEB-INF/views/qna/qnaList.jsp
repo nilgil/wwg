@@ -20,6 +20,7 @@
     
     <!-- center -->
    <div class="qnalist_center">
+   
      <div class="side"> 
                 <table id="side_menu" class="table table-hover">
                      <thead>
