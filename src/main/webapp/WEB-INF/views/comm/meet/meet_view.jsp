@@ -95,7 +95,7 @@ $(function() {
 		   </div>
 		   <div align=center>
 		<input type="button" value="목록"
-			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
+			onClick="location.href='/meetlist/pageNum/${pageNum}' ">
 
 		<form
 			action="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"

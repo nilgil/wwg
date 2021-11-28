@@ -21,12 +21,15 @@
 <%-- <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/> --%>
 </head>
 <body>
+<!-- CKeditor 적용 -->
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
 	<div align="center">
 		<h2>게시글 글수정</h2>
 		<form action="${path}/meetupdate/pageNum/${pageNum}" method="post">
 		<input type="hidden" name="meet_no" value="${meet.meet_no}"> 
 			<!-- onsubmit="return chk()"> -->
-			<table class="table table-striped">
+			<table border=1 width=800 align=center>
 				<tr>
 					<td>번호</td>
 					<td>${meet.meet_no}</td>
@@ -42,9 +45,13 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="5" cols="30" name="meet_content" required="required">
+			<td><textarea rows="5" cols="30" name="meet_content" id="content" required="required">
 		     ${meet.meet_content}
-		    </textarea>
+		    </textarea><script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/comm/imageupload'
+			});
+		</script>
 						</td>
 				</tr>
 				<tr>
