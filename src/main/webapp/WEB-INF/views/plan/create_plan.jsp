@@ -6,7 +6,6 @@
 <head>
     <title>Planner</title>
     <%@ include file="/resources/include/headTag.jsp" %>
-    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
     <script defer src="/js/plan/create_plan.js"></script>
     <link rel='stylesheet' type='text/css' href='/css/plan/create_plan.css'>
     <script type="text/javascript"
