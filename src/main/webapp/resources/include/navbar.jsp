@@ -1,13 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
     
     
  <!-- navbar -->
     <nav class="navbar">
-        <div class="navbar_logo"><a href="/mainpage.do"><img src="/img/qna/jlogo.png"> 혼저옵서예</a></div>
-<%--    <div class="navbar_logo"><a href="mainPage.html"><img src="${path}/img/jlogo.png"> 혼저옵서예</a></div> --%>
+        <div class="navbar_logo"><a href="/"><img src="/img/qna/jlogo.png"> 혼저옵서예</a></div>
+
         
         <ul class="navbar_menu">
 

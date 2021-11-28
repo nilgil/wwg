@@ -28,6 +28,10 @@ public interface QnaService{
 	void insertCom(Qna qna);
 	
 	int getTotal(Qna qna);
+	
+	int getComment(Qna qna);
+
+	List<Qna> getQnaMain();
 
 
 

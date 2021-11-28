@@ -25,6 +25,9 @@ public class Qna{
     private String search;
     private String keyword;
     
+    //댓글수
+    private int qna_ComCount;
+    
     
 	public int getQna_no() {
 		return qna_no;
