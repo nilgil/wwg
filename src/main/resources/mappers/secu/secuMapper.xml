@@ -12,4 +12,12 @@
         select authority from authorities where username = #{username}
     </select>
 
+    <insert id="addUser" parameterType="UsersDto">
+        insert all
+            into users(username, password, enabled, location, realname )
+            values(#{username}, #{password}, 1, #{location}, #{realname})
+        into authorities(authorities.username ,authorities.authority) values(#{username}, 'ROLE_USER')
+        SELECT * from dual
+    </insert>
+
 </mapper>

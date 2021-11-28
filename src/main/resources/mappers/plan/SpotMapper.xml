@@ -3,34 +3,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="spot">
-    <!--    <select id="getSpotsList" resultType="Spot" parameterType="Integer">-->
-    <!--        <![CDATA[-->
-    <!--        SELECT *-->
-    <!--        FROM (-->
-    <!--                 SELECT a.*, ROWNUM as rnum-->
-    <!--                 FROM (-->
-    <!--                          SELECT *-->
-    <!--                          FROM plan_item-->
-    <!--                          ORDER BY title DESC) a)-->
-    <!--        WHERE rnum >= 1-->
-    <!--          and rnum <= 3-->
-    <!--        ]]>-->
-    <!--    </select>-->
 
-    <select id="searchSpot" resultType="Spot" parameterType="String">
+    <select id="searchSpotOne" parameterType="string" resultType="Spot">
         select *
+        from plan_spot
+        where title = #{title}
+    </select>
+
+    <select id="getThumbnails" parameterType="java.util.List" resultType="java.util.List">
+        select photo from plan_spot where title in (
+        <foreach collection="list" item="title" separator=",">
+            #{title}
+        </foreach>)
+    </select>
+
+    <select id="searchSpots" parameterType="PageInfo" resultType="Spot">
+        <![CDATA[
+        select *
+        from (
+                 SELECT a.*, ROWNUM as rnum
+                 FROM (
+                          SELECT *
+                          FROM plan_spot
+                          where title like '%' || #{keyword} || '%'
+                          ORDER BY title) a)
+        WHERE rnum >= #{startRow}
+          and rnum <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="getSearchSpotsCount" parameterType="string" resultType="_int">
+        select count(*)
         from plan_spot
         where title like '%' || #{keyword} || '%'
     </select>
 
+
     <insert id="insertSpot" parameterType="Spot">
-        insert into plan_spot
+        insert into plan_spot (title, info, lat, lng, address, photo, phone)
         values (#{title}, #{info}, #{lat}, #{lng}, #{address}, #{photo}, #{phone})
     </insert>
 
     <update id="insertSpots" parameterType="java.util.List">
         <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-            INTO plan_spot
+            INTO plan_spot(title,info,lat,lng,address,photo,phone)
             VALUES (
             #{spot.title}
             , #{spot.info}

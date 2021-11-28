@@ -1,0 +1,53 @@
+body{
+    display: flex;
+    flex-direction: column;
+    /* min-height: 150vh; */
+    margin: 0 auto; 
+ }
+ .footer_body{
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+ }
+.footer_body .footer_bar{
+    /* margin-top: 100%; */
+    background-color: rgb(60, 60, 63);
+    padding: 8px 12px;
+    display: block;
+    /* width: 100%; */
+    height: 410px;
+
+}
+.footer_menu{
+    font-weight: bold;
+    margin: 20px;
+    color: rgb(217, 221, 224);
+}
+.footer_wrap{
+    margin: 20px;
+    color: rgb(217, 221, 224);
+}
+.footer_friends{
+	font-size: small;
+}
+.footer_footer{
+    margin: 20px;
+    font-size: small;
+    color: rgb(217, 221, 224);
+}
+
+
+/* 반응형 웹 기능 */
+@media screen and (max-width: 48rem){
+    .footer_bar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+}
+@media screen and (max-width: 64rem) {
+.footer_wrap img{
+        width: 90px; 
+        height: 90px;
+    }
+}

@@ -1,5 +1,6 @@
 package com.project.wwg.plan.dao;
 
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,27 @@ public class MybatisSpotsDao implements SpotsDao {
 
     @Override
     public List<Spot> getSpotsList(int startRow, int endRow) {
-
         return null;
+    }
+
+    @Override
+    public Spot searchSpotOne(String title){
+        return sqlSession.selectOne("spot.searchSpotOne", title);
     }
 
     /**
      * 검색어로 Spot 검색하여 리스트 반환
      *
-     * @param keyword
      * @return
      */
     @Override
-    public List<Spot> searchSpots(String keyword) {
-        return sqlSession.selectList("spot.searchSpot", keyword);
+    public List<Spot> searchSpots(PageInfo pageInfo) {
+        return sqlSession.selectList("spot.searchSpots", pageInfo);
+    }
+
+    @Override
+    public int getSearchSpotsCount(String keyword) {
+        return sqlSession.selectOne("spot.getSearchSpotsCount", keyword);
     }
 
     /**
@@ -41,8 +50,8 @@ public class MybatisSpotsDao implements SpotsDao {
      * @return
      */
     @Override
-    public void insertSpot(Spot spot) {
-        sqlSession.insert("spot.insertSpot", spot);
+    public int insertSpot(Spot spot) {
+        return sqlSession.insert("spot.insertSpot", spot);
     }
 
     /**
@@ -58,11 +67,12 @@ public class MybatisSpotsDao implements SpotsDao {
 
     /**
      * id로 Spot 삭제
+     *
      * @param id
      */
     @Override
-    public void deleteSpot(String id) {
-        sqlSession.delete("spot.deleteSpot", id);
+    public int deleteSpot(String id) {
+        return sqlSession.delete("spot.deleteSpot", id);
     }
 
     /**

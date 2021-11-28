@@ -14,24 +14,105 @@
 <result property="qna_re_lev" column="qna_re_lev" />
 <result property="qna_re_seq" column="qna_re_seq" />
 <result property="qna_hit" column="qna_hit" />
-</resultMap> -->
+</resultMap>  -->
+
+
 
 <select id="list" resultType="qna">
- select * from qna_board order by qna_no
+select * from qna_board order by qna_no
 </select>
 
+<!-- qna_no 상세페이지  -->
 <select id="select" parameterType="int" resultType="qna">
  select * from qna_board where qna_no=#{qna_no}
 </select>
 
+<!-- 조회수 -->
+<update id="hitupdate" parameterType="int">
+ update qna_board set qna_hit = qna_hit+1 where qna_no=#{qna_no}
+</update>
+
+<!-- seq 대신 사용 1추가 
 <select id="getMaxNum" resultType="int">
- select nvl(max(num),0) + 1 from board
+ select nvl(max(qna_no),0) + 1 from qna_board
+</select> -->
+
+<!-- 게시글 저장 -->
+<insert id="insert" parameterType="qna">
+ insert into qna_board values (qna_board_seq.nextval,#{username},#{qna_title},
+ #{qna_content},sysdate,qna_board_seq.nextval,#{qna_re_lev},#{qna_re_seq},0)
+</insert>
+
+<!-- 게시판 총 게시물 개수-->
+<select id="qna_count" resultType="int">
+ select count(qna_no) from qna_board
 </select>
 
-<insert id="insert" parameterType="qna">
- insert into qna_board values (#{qna_no},0,#{qna_title},
- #{qna_content},sysdate,#{qna_re_ref},#{qna_re_lev},#{qna_re_seq},0)
+<!-- 게시판목록  <![CDATA[]]>사용해서 쿼리문안에서 부등호 문자로 인식안하기위해서 -->
+<select id="qna_list" parameterType="qna" resultType="qna">
+ select * from (select rownum rnum, qna_board.* from (select * from qna_board 
+        <where>
+			<if test="keyword != null and search!='qna_titcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='qna_titcon'">
+				qna_title like '%'||#{keyword}||'%' or
+				qna_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+ order by qna_re_ref desc, qna_re_seq asc) qna_board) 
+ where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+<!-- <![CDATA[
+ select * from (select rownum rnum, qna_board.* from (select * from qna_board order by QNA_NO desc) qna_board) 
+ where rnum >= ((#{page}-1) * 10+1) and rnum <= (#{page}*10)
+]]> -->
+</select>
+
+<!-- 글수정 -->
+<update id="update" parameterType="qna">
+  update qna_board set qna_title=#{qna_title},
+ qna_content=#{qna_content} where qna_no=#{qna_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id="delete" parameterType="qna">
+ delete from qna_board where qna_no=#{qna_no}
+</delete>
+
+<!-- 댓글lev증가 -->
+<update id="qna_lev" parameterType="qna">
+ update qna_board set
+ qna_re_seq=qna_re_seq + 1
+ where qna_re_ref=#{qna_re_ref} and qna_re_seq &gt; #{qna_re_seq}
+</update>
+
+<!-- 답글작성 -->
+<insert id="insertCom" parameterType="qna">
+ insert into qna_board 
+ values (qna_board_seq.nextval, #{username}, #{qna_title}, #{qna_content}, sysdate, #{qna_re_ref}, #{qna_re_lev}, #{qna_re_seq},0)
 </insert>
+
+ 
+ <!-- 통합검색 -->
+<select id="selectAll" parameterType="qna" resultType="qna">
+select qna_title from qna_board where like 
+
+</select>
+
+	
+<select id="getTotal" parameterType="qna" resultType="int">
+		select count(*) from qna_board
+		<where>
+			<if test="keyword != null and search !='qna_titcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='qna_titcon'">
+				qna_title like '%'||#{keyword}||'%' or
+				qna_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+</select>
+ 
 
 </mapper>        
         

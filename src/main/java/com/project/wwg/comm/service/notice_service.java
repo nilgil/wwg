@@ -13,5 +13,16 @@ public interface notice_service {
 
 	int insert(notice board);
 
+
+	void selectUpdate(int notice_no);
+
+	notice select(int notice_no);
+
+	int update(notice notice);
+
+	int delete(int notice_no);
+
+	int getMaxNum();
+
 	
 }

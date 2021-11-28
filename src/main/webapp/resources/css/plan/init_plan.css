@@ -1,0 +1,39 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#initForm{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#calendar {
+    text-align: center;
+    width: 100%;
+}
+
+#howdays {
+    text-align: center;
+    width: 100%;
+}
+
+
+#departureIn{
+    width: 150px;
+}
+#dayIn{
+    width: 60px;
+}
+
+#submit {
+    border: 1px solid black;
+    text-align: center;
+}

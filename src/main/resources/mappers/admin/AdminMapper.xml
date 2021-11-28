@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMapper">
+    <select id="getUserList" resultType="UsersDto">
+        select distinct users.username, users.location, users.realname from USERS,AUTHORITIES where
+            users.USERNAME IN (select username from AUTHORITIES where AUTHORITY='ROLE_USER')
+    </select>
+
+    <delete id="deleteUserAuth" parameterType="String">
+        delete from AUTHORITIES where USERNAME =#{username}
+    </delete>
+
+    <delete id="deleteUsername" parameterType="String">
+        delete from USERS where USERNAME =#{username}
+    </delete>
+</mapper>

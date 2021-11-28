@@ -1,6 +1,7 @@
 package com.project.wwg.plan.service;
 
 import com.project.wwg.plan.dao.SpotsDao;
+import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
 import org.json.simple.JSONArray;
@@ -31,39 +32,49 @@ public class SpotsServiceImpl {
 
     /**
      * [C] Spot 1개 등록
-     *
      */
-    public void insertSpot(Spot spot) {
-        spotsDao.insertSpot(spot);
+    public int insertSpot(Spot spot) {
+       return spotsDao.insertSpot(spot);
     }
 
     /**
      * [C] Spot 여러 개 등록
-     *
      */
     public int insertSpots(List<Spot> spots) {
         return spotsDao.insertSpots(spots);
     }
 
     /**
-     * [R] 검색어로 Spot 검색하여 list로 반환
-     *
+     * [R] 검색어로 Spot 1개 반환
      */
-    public List<Spot> searchSpots(String keyword) {
-        return spotsDao.searchSpots(keyword);
+    public Spot searchSpotOne(String title) {
+        return spotsDao.searchSpotOne(title);
+    }
+
+    /**
+     * [R] 검색어로 Spot 검색하여 list로 반환
+     */
+    public List<Spot> searchSpots(String keyword, int pageNum) {
+        PageInfo pageInfo = new PageInfo(keyword,pageNum);
+        return spotsDao.searchSpots(pageInfo);
+    }
+
+    /**
+     * [R] 검색어 결과 개수 반환
+     */
+    public int getSearchSpotsCount(String keyword) {
+        return spotsDao.getSearchSpotsCount(keyword);
     }
 
     /**
      * [D] id로 Spot 1개 삭제
-     *
      */
-    public void deleteSpot(String id) {
-        spotsDao.deleteSpot(id);
+    public int deleteSpot(String id) {
+        return spotsDao.deleteSpot(id);
     }
 
     /**
      * [D] 모든 Spot 삭제
-     *
      */
     public int deleteAllSpots() {
         return spotsDao.deleteAllSpots();
@@ -93,11 +104,10 @@ public class SpotsServiceImpl {
         return result;
     }
 
-    // ------------------------------ API 관련 ------------------------------
+    // ---------------------------- API 연동 관련 ----------------------------
 
     /**
      * API의 1페이지 Spots 조회
-     *
      */
     public String searchSpotsFromApi() {
         return searchSpotsFromApi(1);
@@ -208,19 +218,8 @@ public class SpotsServiceImpl {
                     phone = "--";
                 }
 
-
-
-				/*
-				 * Spot spot = new Spot(title, info, lat, lng, address, photo, phone, id);
-				 * spots.add(spot);
-				 */
-
-                System.out.println(title + "\n" + info + "\n" + lat + "\n" + lng + "\n" + address + "\n" + photo + "\n" + phone);
-
-
                 Spot spot = new Spot(title, info, lat, lng, address, photo, phone);
                 spots.add(spot);
-
             }
         } catch (Exception e) {
             e.printStackTrace();

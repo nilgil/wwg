@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 150vh; */
+    font-family: 'paybooc-Bold';
+    background-image : url('/img/qna/main해녀2.jpg');
+    background-size: 900px 900px;
+}
+.a{
+    text-decoration: none;
+    color: black;
+}
+.qnalist_center2{
+    flex: 1;
+    padding: 50px;
+    margin: 400px auto;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: -20%;
+}
+.search_bar2{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+}
+table2{
+    background-color: #fffffff5;
+    justify-content: center;
+}
+.qna_list_paging2{
+	display: flex;
+	justify-content: center;
+	margin: 15px;
+}
+.qnalist_write_btn2{
+	display: flex;
+    justify-content: right;
+    margin: 15px;
+}
+
+/* 반응형 웹 기능 */
+@media screen and (max-width: 48rem){
+
+}

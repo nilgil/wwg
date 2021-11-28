@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 150vh; */
+    font-family: 'paybooc-Bold';
+    background-image : url('/img/qna/main해녀2.jpg');
+    background-size: 900px 900px;
+}
+.a{
+    text-decoration: none;
+    color: black;
+}
+.qnalist_center{
+    flex: 1;
+    padding: 50px;
+    margin: 400px auto;
+    justify-content: center;
+    display: grid;
+    grid-gap: 20px;
+    /* height: 100vh; */
+    grid-template-columns: 150px 900px;
+    grid-template-rows: 1020px;
+    grid-template-areas: 'side table';
+    margin-top: 5%;
+}
+/* .container div{
+    background-color: seashell;
+    padding: 20px;
+} */
+.side{
+    grid-area: side;
+}
+#side_menu{
+    padding: 10%;
+    width: 151px;
+    height: 210px;
+    margin-top: 57%;
+}
+#side_menu thead{
+    /* color: cadetblue; */
+    background-color: #F4D160;
+}
+.search_bar{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+}
+table{
+    background-color: #fffffff5;
+}
+.qna_list_paging{
+	display: flex;
+	justify-content: center;
+	margin: 15px;
+}
+.qnalist_write_btn{
+	display: flex;
+    justify-content: right;
+    margin: 15px;
+}
+
+/* 반응형 웹 기능 */
+@media screen and (max-width: 48rem){
+.side_menu{
+display: none;
+}
+/* .search_bar{
+    display: none;
+} */
+
+}

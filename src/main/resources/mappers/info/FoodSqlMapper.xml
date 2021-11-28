@@ -11,17 +11,20 @@
 		<result property="food_photo"     column="food_photo" />
 		<result property="food_regdate" column="food_regdate" />
 		<result property="food_hit"    column="food_hit" />
+		<result property="food_like"    column="food_like" />
 	</resultMap>
 
 <!-- 글작성 / alias="FoodBoard" -->
 	<insert id="insert" parameterType="FoodBoard">
-        insert into trip_food values(#{food_no},0,
-		#{food_title},#{food_content},0,sysdate,0)
+        insert into trip_food values(#{food_no},#{username},
+		#{food_title},#{food_content},0,sysdate,0,0)
 	</insert>
 
+<!-- 상세페이지 -->
 	<select id="select" parameterType="int" resultType="FoodBoard">
 		select * from trip_food where food_no=#{food_no}
 	</select>
+	
 <!-- 글번호 증가 -->
 	<select id="getMaxNum" resultType="int">
 		select nvl(max(food_no),0) + 1 from trip_food
@@ -33,7 +36,7 @@
 	</select>
 	
 <!-- 글목록 / alias="FoodBoard" -->
-	<select id="list" parameterType="FoodBoard" resultMap="foodResult">
+	<select id="foodlist" parameterType="FoodBoard" resultMap="foodResult">
 		select * from (select FoodBoard.*,rowNum rn from (
 			select * from trip_food
 		<where>
@@ -41,15 +44,15 @@
 				${search} like '%'||#{keyword}||'%'
 			</if>
 			<if test="keyword != null and search=='subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
+				food_title like '%'||#{keyword}||'%' or
+				food_content like '%'||#{keyword}||'%'
 			</if>
 		</where>			
 			 order by food_no desc) FoodBoard )
 			where rn between #{startRow} and #{endRow}
 	</select>
-	
-	
+
+<!-- 글목록 검색 기능 -->	
 	<select id="getTotal" parameterType="FoodBoard" resultType="int">
 		select count(*) from trip_food 
 		<where>
@@ -62,5 +65,27 @@
 			</if>
 		</where>
 	</select>
+	
+<!-- 조회수 증가 -->	
+	<update id="selectUpdate" parameterType="int">
+		update trip_food set food_hit = food_hit+1 where food_no=#{food_no}
+	</update>
+
+<!-- 수정 기능 -->	
+	<update id="update" parameterType="FoodBoard">
+		update trip_food set username=#{username},food_title=#{food_title},
+			food_content=#{food_content}
+			where food_no=#{food_no}
+	</update>
+	
+<!-- 글삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from trip_food where food_no=#{food_no}
+	</delete>
+	
+<!-- 좋아요 -->
+	<update id="like" parameterType="FoodBoard">
+		update trip_food set food_like=food_like+1 where food_no=#{food_no}
+	</update>
 
 </mapper>

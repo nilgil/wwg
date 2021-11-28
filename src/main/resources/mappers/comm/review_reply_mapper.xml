@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="rrns">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="rrResult"          type="rr">
+		<result property="review_re_no"	      column="review_re_no" />          <!-- rno -->
+		<result property="review_fno"    	  column="review_fno" />             <!-- bno -->
+		<result property="member_id"    column="member_id" />                   <!-- replyer -->
+		<result property="review_re_content"  column="review_re_content" />     <!-- replytext -->
+		<result property="review_re_regdate"    column="review_re_regdate" />   <!-- regdate -->
+	</resultMap>
+	
+	<select id="list" parameterType="int" resultMap="rrResult">
+		select * from comm_review_reply where review_fno=#{review_fno} order by review_re_no
+	</select>
+	
+	<insert id="insert" parameterType="rr">
+		<selectKey keyProperty="review_re_no" order="BEFORE" resultType="int">
+			select nvl(max(review_re_no),0) + 1 from comm_review_reply
+		</selectKey>
+		insert into comm_review_reply values(#{review_re_no},#{review_fno},#{member_id},
+			#{review_re_content},sysdate)
+	</insert>
+	
+	<update id="update" parameterType="rr">
+		update comm_review_reply set review_re_content=#{review_re_content} where review_re_no=#{review_re_no} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_review_reply where review_re_no=#{review_re_no}
+	</delete>
+</mapper>

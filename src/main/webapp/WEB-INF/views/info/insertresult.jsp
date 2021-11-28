@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 
 <!DOCTYPE html>
 <html>
@@ -11,14 +13,14 @@
 <body>
 
 <c:if test="${result > 0 }">
-	<script>
+	<script type="text/javascript">
 		alert("글작성 성공");
 		location.href="foodlist.do";
 	</script>
 </c:if>
 
 <c:if test="${result <= 0 }">
-	<script>
+	<script type="text/javascript">
 		alert("글작성 실패");
 		history.go(-1);
 	</script>

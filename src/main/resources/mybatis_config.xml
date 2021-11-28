@@ -8,16 +8,24 @@
     </settings>
 
     <typeAliases>
-        <!--길재우-->
+        <!-- 길재우 -->
         <typeAlias type="com.project.wwg.secu.dto.TestDto" alias="TestDto"/>
         <typeAlias type="com.project.wwg.secu.dto.UserDetailsDto" alias="UserDetailsDto"/>
-        <!--안영길-->
+        <typeAlias type="com.project.wwg.secu.dto.UsersDto" alias="UsersDto"/>
+        <!-- 안영길 -->
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
-        <!-- -->
+        <typeAlias type="com.project.wwg.plan.dto.Plan" alias="Plan"/>
+        <typeAlias type="com.project.wwg.plan.dto.PageInfo" alias="PageInfo"/>
+        <!-- 정준희 -->
         <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>
-        <!-- 이소정  -->
+        <typeAlias type="com.project.wwg.info.dto.ReFoodBoard" alias="ReFoodBoard"/>
+        <!-- 이소정 -->
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
-        <!--  -->
+        <!-- 류상균 -->
         <typeAlias type="com.project.wwg.comm.model.notice" alias="notice"/>
+        <typeAlias type="com.project.wwg.comm.model.review" alias="review"/>
+        <typeAlias type="com.project.wwg.comm.model.review_replydto" alias="rr"/>
+        <typeAlias type="com.project.wwg.comm.model.meet" alias="meet"/>
+        <typeAlias type="com.project.wwg.comm.model.meet_replydto" alias="mr"/>
     </typeAliases>
 </configuration>
