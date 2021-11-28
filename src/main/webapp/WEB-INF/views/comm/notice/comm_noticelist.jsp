@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<a>${user.username}님 환영합니다.</a>
+
 </head>
 <body>
 <table border=1 align="center" width=800>
@@ -77,7 +79,13 @@
 		  </c:if>
 		</center>
 		<div align="center">
-			<a href="${path}/comm_noticeinsertform" class="btn btn-info">글 작성</a>
+		<form method=post action="${path}/comm_noticeinsertform">
+
+		<c:if test="${user.username eq admin}">
+			<input type=submit value="글작성">
+			</c:if>
+			</form>
 		</div>
+		
 </body>
 </html>

@@ -10,8 +10,12 @@
 <title>글작성</title>
 </head>
 <body>
+<a>${user.username}님 환영합니다.</a>
+<!-- jQuery문 설정 불러오기 -->
+<script src="${path}/js/info/jquery.js"></script>
 
 <form method=post action="/comm_noticeinsert">
+
 <table border=1 width=400 align=center>
 	<caption>글작성</caption>
 

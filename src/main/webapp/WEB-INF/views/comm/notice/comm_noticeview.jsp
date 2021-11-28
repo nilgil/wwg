@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
@@ -12,27 +14,6 @@
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
-
-<!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
-<script type="text/javascript">
-var session = '${user.username}';
-var member_id = '${notice.member_id}';
-console.log(member_id);
-$(function(){
-	$("#chk1").submit(function(){
-		if (member_id != session) {
-			alert("사용자가 다르면 수정할 수 없습니다");
-			return false;
-		}				
-	});
-	$("#chk2").submit(function(){
-		if (member_id != session) {
-			alert("사용자가 다르면 삭제할 수 없습니다");
-			return false;
-		}				
-	});
-});	
-</script>
 
 </head>
 <body>
@@ -58,7 +39,7 @@ $(function(){
 	<div align=center>
 		<input type="button" value="목록"
 			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
-
+<c:if test="${user.username eq admin}">
 		<form
 			action="${path}/noticeupdateform/notice_no/${notice.notice_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk1">
@@ -70,7 +51,7 @@ $(function(){
 			method="post" name="chk" id="chk2">
 			<input type="submit" value="삭제">
 		</form>
-
+</c:if>
 	</div> 
 </body>
 </html>
