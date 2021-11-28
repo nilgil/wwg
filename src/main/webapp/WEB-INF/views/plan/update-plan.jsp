@@ -6,7 +6,7 @@
 <head>
     <title>Planner</title>
     <%@ include file="/resources/include/headTag.jsp" %>
-    <script defer src="/js/plan/create_plan.js"></script>
+    <script defer src="/js/plan/update_plan.js"></script>
     <link rel='stylesheet' type='text/css' href='/css/plan/create_plan.css'>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5375710c5345c7b4704ecd71a402404e"></script>
@@ -15,9 +15,10 @@
 </head>
 <body>
 <div id="wrapper">
-    <input name="days" id="hiddenDays" type="hidden" value="${plan.days}"/>
-    <input name="username" id="hiddenUsername" type="hidden" value="${plan.username}"/>
-    <input id="hiddenDepartureL" type="hidden" value="${plan.departure}"/>
+    <input name="idx" id="hiddenIdx" type="hidden" value="${idx}"/>
+    <input name="days" id="hiddenDays" type="hidden"/>
+    <input name="username" id="hiddenUsername" type="hidden"/>
+    <input id="hiddenDepartureL" type="hidden" />
     <input name="departure" id="hiddenDeparture" type="hidden"/>
     <input name="plans" id="hiddenPlans" type="hidden"/>
     <%@ include file="/resources/include/navbar.jsp" %>
@@ -37,7 +38,9 @@
                 <div id="day-minus" onclick="dayMinus()">-</div>
             </div>
             <div id="title-box"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요."></div>
-            <div id="submit" onclick="submitPlan()"><div>저장</div></div>
+            <div id="submit" onclick="submitPlan()">
+                <div>저장</div>
+            </div>
         </div>
 
         <div id="content-body">

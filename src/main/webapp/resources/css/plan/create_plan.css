@@ -8,12 +8,12 @@ nav {
 }
 
 #container {
-    margin-top:20px;
-    margin-bottom: 50px;
+    margin-top:70px;
+    margin-bottom: 150px;
     display: flex;
     flex-direction: column;
     width: 90vw;
-    height: 650px;
+    height: 750px;
     border: 1px solid black;
     background-color: rgba(255, 255, 255, 0.9);
 }
@@ -32,6 +32,7 @@ nav {
 #plans {
     display: flex;
     flex-direction: column;
+    justify-content: start;
     width: 20%;
     border-top: 1px solid black;
     overflow: scroll;
@@ -65,7 +66,7 @@ nav {
     position: relative;
     width: 80%;
     height: 100%;
-    line-height: 25px;
+    line-height: 22px;
 }
 
 .day-plans div:nth-child(2) {
@@ -94,7 +95,7 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 60px;
+    height: 72px;
     border-bottom: 1px solid black;
 }
 
@@ -132,12 +133,51 @@ nav {
 #pick {
     display: flex;
     flex-direction: column;
-    width: 22%;
+    width: 20%;
     border-left: 1px solid black;
     border-right: 1px solid black;
     border-top: 1px solid black;
 }
 
+
+/* 페이징 버튼 */
+#pageBtns {
+    text-align: center;
+    height: 30px;
+}
+
+#pageBtnsUl {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+#pageBtnsUl li {
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+
+#pageBtnsUl li span {
+    display: block;
+    font-size: 12px;
+    padding: 9px 10px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+#pageBtnsUl li.on {
+    background: #eda712;
+}
+
+#pageBtnsUl li.on a {
+    color: #fff;
+}
 
 #now-day {
     display: flex;
@@ -164,14 +204,19 @@ nav {
 #days {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    box-sizing: border-box;
     width: 45%;
     border-left: 1px solid black;
     color: dimgray;
+    overflow: auto;
 }
 
 #days div {
     font-size: 25px;
+    margin-left: 20px;
+}
+#days div:last-child {
+    margin-right: 20px;
 }
 
 #day-controll {
@@ -219,10 +264,6 @@ nav {
     height: 100%;
 }
 
-#search-result {
-    overflow: scroll;
-}
-
 #search-input input {
     border: none;
     height: 100%;
@@ -248,44 +289,6 @@ nav {
     margin-bottom: 40px;
 }
 
-/* 페이징 버튼 */
-#pageBtns {
-    text-align: center;
-    height: 30px;
-}
-
-#pageBtnsUl {
-    text-align: center;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-right: 0;
-    list-style: none;
-    padding-inline-start: 0;
-}
-
-#pageBtnsUl li {
-    text-align: center;
-    float: left;
-}
-
-#pageBtnsUl li a {
-    display: block;
-    font-size: 12px;
-    padding: 9px 10px;
-    border-right: solid 1px #ccc;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: black;
-}
-
-#pageBtnsUl li.on {
-    background: #eda712;
-}
-
-#pageBtnsUl li.on a {
-    color: #fff;
-}
-
 #title-box {
     width: 25%;
 }
@@ -296,10 +299,14 @@ nav {
 }
 
 #submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 5%;
 }
 
-#submit p {
+#submit div {
     font-size: 20px;
     text-align: center;
 }
@@ -322,7 +329,7 @@ nav {
 
 /* 지도 */
 #map {
-    width: 58%;
+    width: 60%;
     height: 100%;
     border-top: 1px solid black;
 }
@@ -338,7 +345,7 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 58%;
+    width: 60%;
     height: 100%;
     text-align: center;
     border-top: 1px solid black;

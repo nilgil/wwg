@@ -47,7 +47,8 @@ public class SpotsController {
     @PostMapping(value = "/search", produces = "application/json; charset=utf8")
     @ResponseBody
     public String getSearchSpotsByPage(String keyword, int pageNum) throws Exception {
-        log.debug("good!");
+        log.debug("Search Spots By Keyword & PageNum | Keyword : {}, PageNum : {}", keyword, pageNum);
+
         List<Spot> spots = spotService.searchSpots(keyword, pageNum);
         int searchCount = spotService.getSearchSpotsCount(keyword);
         PageInfo pageInfo = new PageInfo(keyword, pageNum, searchCount);

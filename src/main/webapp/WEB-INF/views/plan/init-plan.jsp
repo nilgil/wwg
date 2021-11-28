@@ -16,14 +16,14 @@
             <s:csrfInput/>
             <input name="username" type="hidden" value="${username}"/>
             <div id="calendar">
-                <p>출발일?</p>
+                <p>출발일</p>
                 <input id="departureIn" name="departure" type="date">
             </div>
             <br>
             <div id="howdays">
-                <p>몇일?</p>
+                <p>여행 기간</p>
                 <input hidden="hidden"/>
-                <input id="dayIn" name="days" onkeydown="">
+                <input type="text" id="dayIn" name="days" placeholder="" /> 일
             </div>
             <br><br>
             <div id="submit" onclick="checkDays()">플랜 만들기</div>

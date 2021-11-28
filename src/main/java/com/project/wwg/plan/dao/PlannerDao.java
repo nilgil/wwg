@@ -10,6 +10,8 @@ public interface PlannerDao {
     int insertPlan(Plan plan);
 
     // ------------------ [R] ------------------
+    Plan getPlanByIdx(int idx);
+
     List<Plan> getPlansByUser(String username);
 
     List<Plan> getAllPlansList(PageInfo pageInfo);
@@ -17,6 +19,10 @@ public interface PlannerDao {
     int getAllPlansCount();
 
     // ------------------ [U] ------------------
+    int updatePlan(Plan oldPlan);
 
     // ------------------ [D] ------------------
+    int deletePlan(int idx);
+
+
 }

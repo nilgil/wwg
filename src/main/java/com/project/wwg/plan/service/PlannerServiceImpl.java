@@ -31,16 +31,30 @@ public class PlannerServiceImpl {
         plannerDao.insertPlan(plan);
     }
 
-    public List<Plan> getPlansByUser(String userName) throws ParseException {
-        return plannerDao.getPlansByUser(userName);
+    public Plan getPlanByIdx(int idx) {
+        return plannerDao.getPlanByIdx(idx);
+    }
+
+    public List<Plan> getPlansByUser(String username) throws ParseException {
+        return plannerDao.getPlansByUser(username);
     }
 
     public String[] getThumbnails(String[] firstSpots) {
         String[] thumbnails = new String[firstSpots.length];
         for (int i = 0; i < firstSpots.length; i++) {
-            thumbnails[i] = spotsDao.searchSpotOne(firstSpots[i]).getPhoto();
+            thumbnails[i] = "https://via.placeholder.com/200";
+            if (!firstSpots[i].equals("default"))
+                thumbnails[i] = spotsDao.searchSpotOne(firstSpots[i]).getPhoto();
         }
         return thumbnails;
+    }
+
+    public int updatePlan(Plan oldPlan) {
+        return plannerDao.updatePlan(oldPlan);
+    }
+
+    public int deletePlan(int idx){
+        return plannerDao.deletePlan(idx);
     }
 
     public List<Plan> getAllPlansList(PageInfo pageInfo) {

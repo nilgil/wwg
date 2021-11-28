@@ -9,10 +9,17 @@
         values (#{username}, #{title}, #{departure}, #{days}, #{plans})
     </insert>
 
+    <select id="getPlanByIdx" parameterType="_int" resultType="Plan">
+        select *
+        from plan
+        where idx = #{idx}
+    </select>
+
     <select id="getPlansByUser" parameterType="string" resultType="Plan">
         select *
         from plan
         where username = #{username}
+        order by regdate desc
     </select>
 
     <select id="getAllPlansList" parameterType="PageInfo" resultType="Plan">
@@ -34,5 +41,20 @@
         from plan
         where pub = 0
     </select>
+
+    <update id="updatePlan" parameterType="Plan">
+        update plan
+        set title=#{title},
+            days=#{days},
+            plans=${plans}
+        where idx = #{idx}
+    </update>
+
+    <delete id="deletePlan" parameterType="_int">
+        delete
+        from plan
+        where idx =
+              #{idx}
+    </delete>
 
 </mapper>

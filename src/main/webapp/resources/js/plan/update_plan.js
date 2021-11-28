@@ -1,14 +1,16 @@
 const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-let username = $('#hiddenUsername').val();
-let departure = new Date($('#hiddenDepartureL').val()); // 출발일
-let days = $('#hiddenDays').val(); // 총 여행기간
-let week = WEEKEND[departure.getDay()]; // 현재 Day의 요일
+let username;
+let departure;
+let days; // 총 여행기간
+let week; // 현재 Day의 요일
 let planOfDays; // 각 날짜별 플랜 저장해둘 객체 배열
-let chooseDay; // 현재 선택한 Day
+let chooseDay = 1; // 현재 선택한 Day
 let searchKeyword;
 let chooseDayPlans;
 let spots = [];
 let map;
+let oldPlans;
+let tempPlans = [];
 
 // 날짜별 정보
 let Day = class {
@@ -16,9 +18,10 @@ let Day = class {
     week;
     plans = [];
 
-    constructor(departure, week) {
+    constructor(departure, week, plans) {
         this.departure = departure;
         this.week = week;
+        this.plans = plans;
     }
 };
 
@@ -41,32 +44,76 @@ let Spot = class {
 
 // INIT
 $(document).ready(function () {
-    // 디테일 뷰 숨기기
-    $('#detail-view').hide();
+    let idx = $('#hiddenIdx').val();
+    $.ajax({
+        method: "GET",
+        url: `/plan/${idx}`,
+        dataType: "json",
+        success: async function (response) {
+            console.log(response);
+            $('#hiddenDays').val(response.days);
+            $('#hiddenUsername').val(response.username);
+            $('#hiddenDeparture').val(response.departure);
+            $('#hiddenUsername').val(response.username);
+            $('#title').val(response.title);
 
-    // 현재 Day,날짜,요일 출력
-    $('#now').text("Day1");
-    $('#departure').text(dateFormatter(departure));
-    $('#week').text(week);
+            oldPlans = JSON.parse(response.plans);
 
-    // 날짜별 플랜 객체 생성
-    planOfDays = []; //배열 선언
-    chooseDay = 1;
-    for (let i = 0; i < days; i++) {
-        let dep = new Date(departure);
-        dep.setDate(dep.getDate() + i);
-        planOfDays[i] = new Day(dateFormatter(dep), WEEKEND[dep.getDay()]);
-    }
+            username = $('#hiddenUsername').val();
+            days = $('#hiddenDays').val();
+            console.log(days);
+            departure = new Date($('#hiddenDeparture').val()); // 출발일
+            week = WEEKEND[departure.getDay()];
 
-    // 여행 기간에 따른 Days 출력
-    makeDays();
-    $(`#day-btn-1`).css("color","#0f74a8");
+            // 디테일 뷰 숨기기
+            $('#detail-view').hide();
+
+            // 현재 Day,날짜,요일 출력
+            $('#now').text("Day1");
+            $('#departure').text(dateFormatter(departure));
+            $('#week').text(week);
+
+            // 여행 기간에 따른 Days 출력
+            makeDays();
+
+            // 날짜별 플랜 객체 생성
+            planOfDays = []; //배열 선언
+            chooseDay = 1;
+
+            for (let i = 0; i < days; i++) {
+                let dep = new Date(departure);
+                dep.setDate(dep.getDate() + i);
+                planOfDays[i] = new Day(dateFormatter(dep), WEEKEND[dep.getDay()], oldPlans[i]);
+            }
+            chooseDayPlans = planOfDays[chooseDay - 1].plans;
+            console.log(chooseDayPlans[0]);
+
+            //@@@@@@@@@@@@@@@@@@
+            // $.ajax({
+            //     method: "POST",
+            //     url: "/plan/searchOne",
+            //     dataType: "json",
+            //     data: {"keyword": spot},
+            //     error: function (xhr, status) {
+            //         alert(status);
+            //     },
+            //     success: function (response) {
+            //         tempPlans.push(new Spot(response.title, response.photo, response.rating, response.lat, response.lng));
+            //         console.log(tempPlans);
+            //     }
+            // })
+        }
+    })
+
+
+    $(`#day-btn-1`).css("color", "#0f74a8");
 
     // 관광지 출력
     makeSpots("", "1");
 
     // 지도 생성
     createMap();
+
 });
 
 // 관광지 화면 출력
@@ -222,14 +269,14 @@ function removePlan(title, i) {
 
 // 현재 Day 변경
 function changeDay(i) {
-    $('.day-btn').css("color","dimgray");
+    $('.day-btn').css("color", "dimgray");
     chooseDay = i;
     chooseDayPlans = planOfDays[chooseDay - 1].plans;
     $('#now').text("Day" + i);
     $('#departure').text(planOfDays[i - 1].departure);
     $('#week').text(planOfDays[i - 1].week);
     makePlans(chooseDayPlans);
-    $(`#day-btn-${i}`).css("color","#0f74a8");
+    $(`#day-btn-${i}`).css("color", "#0f74a8");
 }
 
 // 여행 기간 1일 추가
@@ -259,7 +306,7 @@ function makeDays() {
     $('#days').empty();
     for (let i = 1; i <= days; i++) {
         $('#days').append(
-            "<div class='day-btn' id='day-btn-"+i+"' onClick='changeDay(" + i + ")'>Day" + i + "</div>"
+            "<div class='day-btn' id='day-btn-" + i + "' onClick='changeDay(" + i + ")'>Day" + i + "</div>"
         )
     }
 }

@@ -27,6 +27,11 @@ public class MybatisPlannerDao implements PlannerDao {
 
     // ------------------------------------ [R] ------------------------------------
     @Override
+    public Plan getPlanByIdx(int idx) {
+        return sqlSession.selectOne("plan.getPlanByIdx", idx);
+    }
+
+    @Override
     public List<Plan> getPlansByUser(String username) {
         return sqlSession.selectList("plan.getPlansByUser", username);
     }
@@ -42,7 +47,15 @@ public class MybatisPlannerDao implements PlannerDao {
     }
 
     // ------------------------------------ [U] ------------------------------------
-
+    @Override
+    public int updatePlan(Plan oldPlan) {
+        return sqlSession.update("plan.updatePlan", oldPlan);
+    }
 
     // ------------------------------------ [D] ------------------------------------
+    @Override
+    public int deletePlan(int idx) {
+        return sqlSession.delete("plan.deletePlan", idx);
+    }
+
 }
