@@ -39,15 +39,15 @@ public class QnaController{
 		return "qna/main";
 	}
 	
-//	//로그인후 메인페이지
-//		@RequestMapping("/loginMain")
-//		public String loginMainPage(Qna qna, Model model) {
-//			List<Qna> qnalist = new ArrayList<Qna>();
-//	        qnalist = qs.getQnaMain(); 
-//	        
-//			model.addAttribute("qnalist", qnalist);
-//			return "qna/loginMain";
-//		}
+	//로그인후 메인페이지
+		@RequestMapping("/loginMain")
+		public String loginMainPage(Qna qna, Model model) {
+			List<Qna> qnalist = new ArrayList<Qna>();
+	        qnalist = qs.getQnaMain(); 
+	        
+			model.addAttribute("qnalist", qnalist);
+			return "qna/loginMain";
+		}
 	
 	
 	//글작성폼
