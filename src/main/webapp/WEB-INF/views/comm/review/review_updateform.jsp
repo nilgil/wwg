@@ -9,24 +9,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- <script type="text/javascript">
-	function chk() {
-		if (frm.passwd.value != frm.passwd2.value) {
-			alert("암호가 다르면 수정할 수 없습니다");
-			frm.passwd2.focus();
-			return false;
-		}
-	}
-</script> -->
-<%-- <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/> --%>
 </head>
 <body>
+<!-- CKeditor 적용 -->
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
 	<div align="center">
 		<h2>게시글 글수정</h2>
 		<form action="${path}/reviewupdate/pageNum/${pageNum}" method="post">
 		<input type="hidden" name="review_no" value="${review.review_no}"> 
-			<!-- onsubmit="return chk()"> -->
-			<table class="table table-striped">
+			<table border=1 width=800 align=center>
 				<tr>
 					<td>번호</td>
 					<td>${review.review_no}</td>
@@ -42,10 +34,13 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="5" cols="30" name="review_content" required="required">
-		     ${review.review_content}
-		    </textarea>
-						</td>
+			<td><textarea rows="5" cols="30" name="review_content"  id="content" required="required">
+		     ${review.review_content}</textarea>
+		    <script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/comm/imageupload'
+			});
+		</script></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="확인"></td>
