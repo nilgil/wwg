@@ -117,6 +117,7 @@ $(function() {
 				<td>내용</td>
 				<td><pre>${foodboard.food_content}</pre></td>
 			</tr>
+			</tbody>
 		</table>
 		
 	        <div class="foodcont_btns" align=center>
@@ -137,12 +138,12 @@ $(function() {
 				<input class="btn btn-danger" type="submit" value="좋아요">
 				</form>
 	          </div>
-			</tbody>
+			
 			
 		</div>	
 			
 		<!-- 댓글 작성 -->
-		<div class="foodcont_relp" align=center>
+		<div class="foodcont_repl" align=center>
 		<form name="frm" id="frm">
 			<input type="hidden" name="username" value="${user.username}">
 			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 

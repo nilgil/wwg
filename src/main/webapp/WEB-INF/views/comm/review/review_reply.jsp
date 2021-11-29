@@ -48,11 +48,11 @@
 	}
 </script>
 </head>
- ${user.username}님 환영합니다.
 <body>
+ ${user.username}님 환영합니다.
 
 		<h2>댓글</h2>
-		<table>
+		<table class="table table-striped">
 			<tr>
 				<td>작성자</td>
 				<td>내용</td>
@@ -67,8 +67,8 @@
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${rr.review_re_no}">
 						<c:if test="${rr.member_id==user.username }">
-							<input type="button" value="수정" class="edit1" id="${rr.review_re_no}">
-							<input type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
+							<input class="btn btn-outline-warning btn-sm" type="button" value="수정" class="edit1" id="${rr.review_re_no}">
+							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
 						</c:if></td>
 				</tr>
 			</c:forEach>
