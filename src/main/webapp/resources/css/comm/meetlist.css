@@ -4,7 +4,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 html,body{
     height: 100%;
 }
@@ -14,21 +13,26 @@ body{
     flex-direction: column;
     background-image : url('/img/qna/main제주말.jpg');
     background-size: 900px 900px;
+    font-family: 'paybooc-Bold';
 }
-.a{
+a{
     text-decoration: none;
-    color: black;
+    color: rgb(49, 48, 41);
 }
-.write_center{
-	flex: 1;
+.c_meetlist_center{
+    flex: 1;
     padding: 50px;
-    margin: 60px auto;
+    margin: 400px auto;
     justify-content: center;
     display: grid;
     grid-gap: 20px;
+    /* grid-gap: 1px; 혹시 몰라서 안지움 */
+    /* height: 100vh; 혹시 몰라서 안지움 */
     grid-template-columns: 150px 900px;
-    grid-template-rows: 1fr 42px;
-    grid-template-areas: 'side write_table';
+    grid-template-rows: 1fr;
+    grid-template-areas: 'side c_meetlist_table' ;                     
+    margin-top: 5%;
+
 }
 .side{
     grid-area: side;
@@ -38,29 +42,39 @@ body{
     width: 151px;
     height: 210px;
     margin-top: 57%;
+    background-color: #fffffff5;
+    border-radius: 5px;
+
 }
 #side_menu thead{
     /* color: cadetblue; */
     background-color: #F4D160;
 }
-table{
+.c_meetlist_table{
+    grid-area: c_meetlist_table;
+}
+#c_m_table1{
     background-color: #fffffff5;
-    border-width: 2px;
-/*     border-style: outset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial; */
 }
-.write_table{
-    grid-area: write_table;
+.c_m_write_btn{
+        display: flex;
+        justify-content: right;
+        margin: 15px;
 }
-.write_end_btn{
+.c_m_paging{
+    display: flex;
+	justify-content: center;
+	margin: 15px;
+}
+.c_m_search{
     display: flex;
     justify-content: center;
-    margin: 15px;
+    height: 40px;
 }
-.write_end_btn div{
-    margin: 5px;
+.c_m_search input{
+	border-radius: 5px;
+	border-style: none;
 }
-textarea{
-	resize: none;
+.c_m_search select{
+	border-radius: 5px;
 }

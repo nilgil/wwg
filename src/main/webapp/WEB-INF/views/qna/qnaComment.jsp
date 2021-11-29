@@ -69,14 +69,17 @@
                   
                 </table>
 
+
+            
           <table id="table_2" class="table table-hover">
            <thead>
             <tr><th>※답글작성※</th></tr>
            </thead>
            <tr>
             <td>작성자</td>
-            <td><input type="text" name="username" value="운영자"></td>
-          </tr>
+            <td><input type="text" name="username" value="${user.username }"></td>
+           </tr>
+          
           <tr>
             <td>답글 제목</td>
             <td><input type="text" name="qna_title" required="required" size="60" maxlength="70"></td>

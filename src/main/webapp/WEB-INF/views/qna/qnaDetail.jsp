@@ -48,7 +48,7 @@ $(function(){
                    <tr>
                     <th>게시물번호:${no1}</th>
                     <th>작성자:${qnalist.username}</th>
-                    <th>댓글수:${qna_re_lev.size()}</th>
+                    <th>댓글수:</th>
                     <th>조회수:${qnalist.qna_hit}</th>
                     <th>날짜:${qnalist.qna_regdate}</th>
                    </tr>
@@ -56,7 +56,7 @@ $(function(){
                   
                   <tbody>
                    <tr>
-                    <td colspan="5" text-align="center">
+                    <td colspan="5" text-align="center" >
                         <pre>${qnalist.qna_content}</pre>
                     </td>
                    </tr>

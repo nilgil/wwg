@@ -53,6 +53,8 @@ public class notice_controller {
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
+		
+		model.addAttribute("admin", "user2");
 		// 검색
 		model.addAttribute("search", notice.getSearch());
 		model.addAttribute("keyword", notice.getKeyword());
@@ -93,6 +95,7 @@ public class notice_controller {
 			notice notice = ns.select(notice_no);
 			model.addAttribute("notice", notice);
 			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("admin", "user2");
 			return "comm/notice/comm_noticeview";
 		}	
 	// 수정폼	

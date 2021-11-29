@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
 
@@ -119,7 +121,7 @@
     </div>
     <s:csrfInput/>
     <div class="login_btn"><button type="submit" class="btn btn-success" >로그인</button>
-     <a href="#">회원가입</a> | 
+     <a href="/userSignUp">회원가입</a> | 
      <a href="#">아이디/비밀번호 찾기</a></div>
 </form>
 </div>
