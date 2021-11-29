@@ -12,7 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
-<a>${user.username}님 환영합니다.</a>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link defer rel='stylesheet' media='screen' href='/css/comm/review_view.css'>
+
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
@@ -74,10 +76,35 @@ $(function() {
 
 </head>
 <body>
-	<div align="center">
-		<h2>게시글 상세정보</h2>
+<!-- navbar -->
+<%@ include file="/resources/include/navbar.jsp"%>
+<a>${user.username}님 환영합니다.</a>
+
+
+<!-- center -->
+<div class="reviewlist_center">
+
+	<div class="side"> 
+			<table id="side_menu" class="table table-hover">
+		 <thead>
+		   <tr><th>커뮤니티</th></tr>
+		 </thead>
+		 <tbody>
+		   <tr><td><a href="/noticelist">공지사항</a></td></tr>
+		   <tr><td><a href="/reviewlist">여행후기</a></td></tr>
+		   <tr><td><a href="/meetlist">동행구해요</a></td></tr>
+		 </tbody>
+	 </table>
+	</div>
+
+
+	<div class="review_view_table">
+	<table id="r_view_table1" class="table table-hover">
+	<h2>여행후기 게시판</h2>
+	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+		<tbody>
 		<tr>
-			<td>제목</td>
+			<td width="90">제목</td>
 			<td>${review.review_title}</td>
 		</tr>
 		<tr>
@@ -92,43 +119,54 @@ $(function() {
 			<td>내용</td>
 			<td><pre>${review.review_content}</pre></td>
 		</tr>
-
-	</div>
-	<div align=center>
-		<input type="button" value="목록"
-			onClick="location.href='/foodlist.do/pageNum/${pageNum}' ">
+		</tbody>
+	</table>
+	
+	<div class="r_view_btns">
+		<input type="button" value="목록" class="btn btn-dark"
+			onClick="location.href='/reviewlist/pageNum/${pageNum}' ">
 
 		<form
 			action="${path}/reviewupdateform/review_no/${review.review_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk1">
-			<input type="submit" value="수정">
+			<input class="btn btn-dark" type="submit" value="수정">
 		</form>
 
 		<form
 			action="${path}/reviewdelete/review_no/${review.review_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk2">
-			<input type="submit" value="삭제">
+			<input class="btn btn-dark" type="submit" value="삭제">
 		</form>
 
 		<form
 			action="/revlike?review_no=${review.review_no}&pageNum=${pageNum}"
 			method="post" id="like">
-			<input type="submit" value="좋아요">
+			<input class="btn btn-dark" type="submit" value="좋아요">
 		</form>
 	</div>
 
+	</div>
+	
+
 	<!-- 댓글 작성 -->
-	<p>
-	<p>
+	<div class="r_view_repl" align=center>
 	<form name="frm" id="frm">
 		<input type="hidden" name="member_id" value="${user.username}">
 		<input type="hidden" name="review_fno" value="${review.review_no}">
-		댓글 :
-		<textarea rows="3" cols="50" name="review_re_content"></textarea>
-		<input type="button" value="확인" id="review_reply_insert">
+		<p>댓글쓰기 :</p>
+		<div><textarea class="form-control"  rows="3" cols="50" name="review_re_content"></textarea></div>
+		<div><input class="btn btn-outline-secondary" type="button" value="확인" id="review_reply_insert"></div>
 	</form>
+	</div>
 
 	<!-- 댓글 list 불러오는곳 -->
-	<div id="review_reply"></div>
+	<div class="view_rep_list" id="review_reply"></div>
+
+</div>
+
+	
+<!-- footer -->
+<%@ include file="/resources/include/footerbar.jsp"%>
+
 </body>
 </html>

@@ -11,7 +11,7 @@ body{
     margin: 0%;
     display: flex;
     flex-direction: column;
-    background-image : url('/img/qna/main제주로.jpg');
+    background-image : url('/img/qna/main제주말.jpg');
     background-size: 900px 900px;
     font-family: 'paybooc-Bold';
 }
@@ -19,7 +19,7 @@ a{
     text-decoration: none;
     color: rgb(49, 48, 41);
 }
-.foodcontent_center{
+.review_update_center{
     flex: 1;
     padding: 50px;
     margin: 400px auto;
@@ -30,16 +30,11 @@ a{
     /* height: 100vh; 혹시 몰라서 안지움 */
     grid-template-columns: 150px 900px;
     grid-template-rows: 1fr 180px 1fr;
-    grid-template-areas: 'side foodcontent_table' 
-                         'side foodcont_repl'
-                         'side food_rel_list';                     
+    grid-template-areas: 'side reviewupdate_table';                     
     margin-top: 5%;
 }
 .side{
     grid-area: side;
-}
-.side{
-	border-radius: 5px;
 }
 #side_menu{
     padding: 10%;
@@ -54,43 +49,10 @@ a{
     /* color: cadetblue; */
     background-color: #F4D160;
 }
-.foodcontent_table{
-	grid-area:foodcontent_table;
+.reviewupdate_table{
+	grid-area:reviewupdate_table;
 }
-#foodcont_table1{
+#r_up_table1{
 	background-color: #fffffff5;
-}
-.foodcont_btns{
-	display: flex;
-	justify-content: center;
-}
-.foodcont_btns input{
-	margin:10px;
-}
-.foodcont_relp{
-	grid-area:foodcont_relp;
-	background-color: #fffffff5;
-	border-radius: 10px;
-}
-.foodcont_repl textarea{
-	width:500px;
-	height:120px;
-}
-.foodcont_repl p{
-	margin: 10px;
-	display: inline-block;
-}
-.foodcont_repl div{
-	display: inline-table;
-}
-.food_rel_list{
-	grid-area:food_rel_list;
-	background-color: #fffffff5;
-	border-radius: 10px;
-}
-form#frm{
-	margin: 25px;
-}
-input{
-	size:10px;
+	border-radius: 5px;
 }

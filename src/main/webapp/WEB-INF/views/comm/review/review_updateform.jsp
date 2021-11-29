@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link defer rel='stylesheet' media='screen' href='/css/comm/review_update.css'>
+
 
 <!-- <script type="text/javascript">
 	function chk() {
@@ -21,19 +24,41 @@
 <%-- <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/> --%>
 </head>
 <body>
-	<div align="center">
-		<h2>게시글 글수정</h2>
+
+<!-- navbar -->
+<%@ include file="/resources/include/navbar.jsp"%>
+
+<!-- center -->
+<div class="review_update_center">
+
+	<div class="side"> 
+		<table id="side_menu" class="table table-hover">
+		 <thead>
+		   <tr><th>커뮤니티</th></tr>
+		 </thead>
+		 <tbody>
+		   <tr><td><a href="/noticelist">공지사항</a></td></tr>
+		   <tr><td><a href="/reviewlist">여행후기</a></td></tr>
+		   <tr><td><a href="/meetlist">동행구해요</a></td></tr>
+		 </tbody>
+	 </table>
+	</div>
+
+	<div class="reviewupdate_table">
 		<form action="${path}/reviewupdate/pageNum/${pageNum}" method="post">
 		<input type="hidden" name="review_no" value="${review.review_no}"> 
 			<!-- onsubmit="return chk()"> -->
-			<table class="table table-striped">
+			<table id="r_up_table1" class="table table-hover" >
+            <h2>여행후기 글수정</h2>
+            <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+			
 				<tr>
 					<td>번호</td>
 					<td>${review.review_no}</td>
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="review_title" required="required"
+					<td><input type="text" name="review_title" required="required" size="60"
 						value="${review.review_title}"></td>
 				</tr>
 				<tr>
@@ -42,13 +67,13 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="5" cols="30" name="review_content" required="required">
+			<td><textarea rows="25" cols="70" name="review_content" required="required" maxlength="284">
 		     ${review.review_content}
 		    </textarea>
 						</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit" value="확인"></td>
+					<td colspan="2" align="center"><input class="btn btn-dark" type="submit" value="확인"></td>
 				</tr>
 			</table>
 		</form>

@@ -31,8 +31,8 @@
                 </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="/noticelist">공지사항</a>
-                <a class="dropdown-item" href="#">여행후기</a>
-                <a class="dropdown-item" href="#">동행구해요</a>
+                <a class="dropdown-item" href="/reviewlist">여행후기</a>
+                <a class="dropdown-item" href="/meetlist">동행구해요</a>
             </div>
             </div>
         </li>
