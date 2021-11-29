@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link defer rel='stylesheet' media='screen' href='/css/info/foodrelist.css'>
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
@@ -49,14 +50,16 @@
 </script>
 </head>
 <body>
-<table border=1 width=300 align="center">
-	<caption>댓글 목록</caption>
+<table id="f_Re_table" class="table table-striped" width=300 align="center">
+	       <thead>
 			<tr>
 				<td>작성자</td>
 				<td>내용</td>
 				<td>작성일</td>
 				<td></td>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="ReFoodBoard" items="${foodrelist}">
 				<tr>
 					<td>${ReFoodBoard.username}</td>
@@ -65,11 +68,12 @@
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${ReFoodBoard.food_re_no}">
 						<c:if test="${ReFoodBoard.username==user.username }">
-							<input type="button" value="수정" class="edit1" id="${ReFoodBoard.food_re_no}">
-							<input type="button" value="삭제"	 onclick="del(${ReFoodBoard.food_re_no},${ReFoodBoard.rfood_no})">
+							<input class="btn btn-outline-warning btn-sm" type="button" value="수정" class="edit1" id="${ReFoodBoard.food_re_no}">
+							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${ReFoodBoard.food_re_no},${ReFoodBoard.rfood_no})">
 						</c:if></td>
 				</tr>
 			</c:forEach>
+			</tbody>
 </table>
 </body>
 </html>

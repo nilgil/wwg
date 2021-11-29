@@ -47,15 +47,17 @@ body{
 table{
     background-color: #fffffff5;
     border-width: 2px;
-    border-style: outset;
+/*     border-style: outset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
+    border-image: initial; */
 }
 .side{
     grid-area: side;
 }
 .detail_table{
     grid-area: detail_table;
+    width:900px;
+    
 }
 .board_list{
     grid-area: board_list;

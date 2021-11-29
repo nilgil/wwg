@@ -33,7 +33,8 @@ var session = "${user.username}";
         if(confirm("정말 삭제하시겠습니까?")==true){
 		location.href="${path}/delete/qna_no/${qnalist.qna_no}";
 		alert("삭제되었습니다.");
-	}
+	    }
+        history.go(-1);
 	}
 
 </script>
