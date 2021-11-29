@@ -118,12 +118,13 @@ $(function() {
 				<td>내용</td>
 				<td><pre>${meet.meet_content}</pre></td>
 			</tr>
+
 	        </tbody>
 		 </table>  
 		   
 		<div class="m_view_btns">
 		<input type="button" value="목록" class="btn btn-dark"
-			onClick="location.href='/meetlist/pageNum/${pageNum}' ">
+			onClick="location.href='/meetlist/pageNum/${pageNum}'">
 
 		<form
 			action="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"

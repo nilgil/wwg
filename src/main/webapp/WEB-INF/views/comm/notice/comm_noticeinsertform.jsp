@@ -10,13 +10,19 @@
 <title>글작성</title>
 <%@ include file="/resources/include/headTag.jsp"%>
 <link defer rel='stylesheet' media='screen' href='/css/comm/comm_notiinsert.css'>
+
+<!-- jQuery문 설정 불러오기 -->
+<script src="${path}/js/info/jquery.js"></script>
+
 </head>
 <body>
+
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_notinsert_center">
+<a>${user.username}님 환영합니다.</a>
 
 	<div class="side"> 
 			<table id="side_menu" class="table table-hover">
@@ -30,6 +36,7 @@
 		 </tbody>
 	 </table>
 	</div>
+
 
 <div class="c_notinsert_table" >
 <form method=post action="/comm_noticeinsert">

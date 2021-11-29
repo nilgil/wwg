@@ -16,6 +16,7 @@
 
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
+<a>${user.username}님 환영합니다.</a>
 
 
 <!-- center -->
@@ -66,10 +67,16 @@
 		</tbody>			
 		</table>
 	
-		
+		<!-- 글쓰기버튼 -->
 		<div class="c_n_write_btn">
-			<a href="${path}/comm_noticeinsertform" class="btn btn-info">글 작성</a>
+		<form method=post action="${path}/comm_noticeinsertform">
+		<c:if test="${user.username eq admin}">
+			<input class="btn btn-info" type=submit value="글작성">
+		</c:if>
+		</form>
 		</div>
+		
+
 		
 		
 		<!-- 페이징 -->
@@ -99,6 +106,7 @@
 				</c:if>
 		  </c:if>
 		</center>
+
 		</div>
 		
 		
@@ -129,5 +137,6 @@
 <!-- footer -->
 <%@ include file="/resources/include/footerbar.jsp"%>	
 	
+
 </body>
 </html>

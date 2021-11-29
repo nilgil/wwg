@@ -11,6 +11,10 @@
 <%@ include file="/resources/include/headTag.jsp"%>
 <link defer rel='stylesheet' media='screen' href='/css/comm/meetupdate.css'>
 
+<!-- CKeditor 적용 -->
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
+
 
 <!-- <script type="text/javascript">
 	function chk() {
@@ -52,7 +56,6 @@
 			<table id="m_up_table1" class="table table-hover" >
 			    <h2>동행구해요 글수정</h2>
              	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
-			
 				<tr>
 					<td>번호</td>
 					<td>${meet.meet_no}</td>
@@ -71,6 +74,11 @@
 			<td><textarea rows="25" cols="70" name="meet_content" required="required" maxlength="284" >
 		     ${meet.meet_content}
 		    </textarea>
+		    <script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/comm/imageupload'
+			});
+		    </script>
 						</td>
 				</tr>
 				<tr>

@@ -11,17 +11,9 @@
 <%@ include file="/resources/include/headTag.jsp"%>
 <link defer rel='stylesheet' media='screen' href='/css/comm/review_update.css'>
 
+<!-- CKeditor 적용 -->
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
-<!-- <script type="text/javascript">
-	function chk() {
-		if (frm.passwd.value != frm.passwd2.value) {
-			alert("암호가 다르면 수정할 수 없습니다");
-			frm.passwd2.focus();
-			return false;
-		}
-	}
-</script> -->
-<%-- <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/> --%>
 </head>
 <body>
 
@@ -51,7 +43,6 @@
 			<table id="r_up_table1" class="table table-hover" >
             <h2>여행후기 글수정</h2>
             <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
-			
 				<tr>
 					<td>번호</td>
 					<td>${review.review_no}</td>
@@ -67,10 +58,15 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="25" cols="70" name="review_content" required="required" maxlength="284">
-		     ${review.review_content}
-		    </textarea>
-						</td>
+
+			<td><textarea rows="25" cols="70" name="review_content" required="required" maxlength="284" id="content">
+		     ${review.review_content}</textarea>
+		    <script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+			CKEDITOR.replace('content',
+			{filebrowserUploadUrl:'/comm/imageupload'
+			});
+		    </script></td>
+
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input class="btn btn-dark" type="submit" value="확인"></td>
