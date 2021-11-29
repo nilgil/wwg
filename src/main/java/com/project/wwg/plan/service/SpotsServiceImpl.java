@@ -59,6 +59,15 @@ public class SpotsServiceImpl {
         return spotsDao.searchSpots(pageInfo);
     }
 
+
+    public List<Spot> searchSpotsByTitles(List<String> titleList) {
+        List<Spot> list = new ArrayList<Spot>();
+        for (String title : titleList) {
+            list.add(spotsDao.searchSpotOne(title));
+        }
+        return list;
+    }
+
     /**
      * [R] 검색어 결과 개수 반환
      */
@@ -225,4 +234,5 @@ public class SpotsServiceImpl {
             e.printStackTrace();
         }
     }
+
 }

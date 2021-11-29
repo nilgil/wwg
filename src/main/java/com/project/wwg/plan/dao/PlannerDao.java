@@ -19,7 +19,7 @@ public interface PlannerDao {
     int getAllPlansCount();
 
     // ------------------ [U] ------------------
-    int updatePlan(Plan oldPlan);
+    int updatePlan(Plan plan);
 
     // ------------------ [D] ------------------
     int deletePlan(int idx);

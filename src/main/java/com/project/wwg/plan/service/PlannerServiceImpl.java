@@ -27,8 +27,8 @@ public class PlannerServiceImpl {
         this.spotsDao = spotsDao;
     }
 
-    public void insertPlan(Plan plan) {
-        plannerDao.insertPlan(plan);
+    public int insertPlan(Plan plan) {
+        return plannerDao.insertPlan(plan);
     }
 
     public Plan getPlanByIdx(int idx) {
@@ -49,8 +49,8 @@ public class PlannerServiceImpl {
         return thumbnails;
     }
 
-    public int updatePlan(Plan oldPlan) {
-        return plannerDao.updatePlan(oldPlan);
+    public int updatePlan(Plan plan) {
+        return plannerDao.updatePlan(plan);
     }
 
     public int deletePlan(int idx){

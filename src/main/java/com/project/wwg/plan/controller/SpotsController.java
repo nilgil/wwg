@@ -3,15 +3,21 @@ package com.project.wwg.plan.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.service.SpotsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +30,7 @@ import java.util.List;
 @Slf4j
 public class SpotsController {
     private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    private final JSONParser jsonParser = new JSONParser();
     private SpotsServiceImpl spotService;
 
     @Autowired
@@ -67,7 +74,7 @@ public class SpotsController {
     @PostMapping(value = "/searchOne", produces = "application/json; charset=utf8")
     @ResponseBody
     public String getSearchSpotOne(String title) throws Exception {
-        log.debug("Search Title Keyword : {}",title);
+        log.debug("Search Title Keyword : {}", title);
         Spot spot = spotService.searchSpotOne(title);
 
         String result = gson.toJson(spot);
@@ -77,8 +84,27 @@ public class SpotsController {
 
     @PostMapping(value = "/searchArray", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String searchSpotsByTitles(String[] titles) {
-        return null;
+    public String searchSpotsByTitles(String titles) throws ParseException {
+        log.debug("searchSpotsByTitles | Parameter : titles = {}", titles);
+        if (titles.equals("[]")) {
+            return "{\"response\":\"none\"}";
+        }
+        String jsonSpots = null;
+        try {
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(titles);
+            System.out.println("jsonArray = " + jsonArray);
+            List<String> titleList = new ArrayList<String>();
+            for (int i = 0; i < jsonArray.size(); i++) {
+                titleList.add(jsonArray.get(i).toString());
+            }
+
+            List<Spot> spots = spotService.searchSpotsByTitles(titleList);
+            jsonSpots = gson.toJson(spots);
+            log.debug("searchSpotsByTitles | Response : {}", jsonSpots);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonSpots;
     }
 
     /**

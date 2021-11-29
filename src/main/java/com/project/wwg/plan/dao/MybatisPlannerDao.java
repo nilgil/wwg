@@ -48,8 +48,8 @@ public class MybatisPlannerDao implements PlannerDao {
 
     // ------------------------------------ [U] ------------------------------------
     @Override
-    public int updatePlan(Plan oldPlan) {
-        return sqlSession.update("plan.updatePlan", oldPlan);
+    public int updatePlan(Plan plan) {
+        return sqlSession.update("plan.updatePlan", plan);
     }
 
     // ------------------------------------ [D] ------------------------------------

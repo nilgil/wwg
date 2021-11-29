@@ -46,7 +46,7 @@
         update plan
         set title=#{title},
             days=#{days},
-            plans=${plans}
+            plans=#{plans}
         where idx = #{idx}
     </update>
 

@@ -16,7 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/plan*")
@@ -48,26 +52,24 @@ public class PlannerController {
     }
 
     /**
-     * 2. 유저명과 init 페이지에서 설정한 출발일, 여행기간 플랜생성 페이지로 넘기며 이동
+     * 2. 유저명, 출발일, 여행기간 정보를 가지고 플랜 생성 페이지로 이동
      */
     @PostMapping("/create")
     public String createPlan(Plan plan, Model model) throws JsonProcessingException {
         model.addAttribute("plan", plan);
 
         log.debug("Create Detail Plan | Username : {}, Departure : {}, Days : {}", plan.getUsername(), plan.getDeparture(), plan.getDays());
-        return "plan/create_plan";
+        return "/plan/planner";
     }
 
     /**
-     * 3. 플랜 만들고 저장하면 내 플랜 관리로 이동하는 경로 리턴
+     * 3. 플랜을 저장하고 내 플랜 관리로 이동
      */
-    @PostMapping("/success")
-    @ResponseBody
-    public String createSuccess(Plan plan, Model model) {
+    @PostMapping("/save")
+    public String createSuccess(Plan plan) {
         plannerService.insertPlan(plan);
-
         log.debug("Create Plan Success | Plan : {}", plan);
-        return "/plan/my";
+        return "redirect:/plan/my";
     }
 
     // ----------------------------- 내 플랜 ------------------------------
@@ -97,6 +99,7 @@ public class PlannerController {
         if (firstSpots.length != 0) {
             thumbnails = plannerService.getThumbnails(firstSpots);
         }
+
         model.addAttribute("thumbnails", thumbnails);
         model.addAttribute("username", username);
         model.addAttribute("plans", plansByUser);
@@ -105,10 +108,15 @@ public class PlannerController {
         return "/plan/my-plan";
     }
 
+
+    /**
+     * 플랜의 IDX를 가지고 Planner로 이동
+     */
     @GetMapping("/update-form/{idx}")
-    public String moveToUpdateForm(@PathVariable int idx, Model model) {
+    public String moveToUpdateForm(@PathVariable int idx, Principal principal, Model model) {
         model.addAttribute("idx", idx);
-        return "/plan/update-plan";
+        model.addAttribute("username", principal.getName());
+        return "/plan/planner";
     }
 
     /**
@@ -131,10 +139,25 @@ public class PlannerController {
         return jsonObject.toString();
     }
 
-    @PutMapping("/update")
-    public String updatePlan(Plan plan) {
+    @PutMapping(value = "/update", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @ResponseBody
+    public void updatePlan(String username, String departure, int days, String title, String plans, int idx) {
+        Date date = Date.valueOf(departure);
+        Plan plan = new Plan();
+        plan.setUsername(username);
+        plan.setDeparture(date);
+        plan.setDays(days);
+        plan.setTitle(title);
+        plan.setPlans(plans);
+        plan.setIdx(idx);
         plannerService.updatePlan(plan);
-        return "/plan/my-plan";
+    }
+
+    @GetMapping("/view/{idx}")
+    public String planViewPage(@PathVariable int idx, Model model) {
+        Plan plan = plannerService.getPlanByIdx(idx);
+        model.addAttribute("plan", plan);
+        return "/plan/view-plan";
     }
 
 
@@ -142,6 +165,7 @@ public class PlannerController {
      * idx로 플랜 삭제
      */
     @DeleteMapping("/delete")
+    @ResponseBody
     public void deletePlan(Principal principal, int idx) throws NotLogInUserException {
         if (principal == null) {
             throw new NotLogInUserException("로그인 하지 않은 상태입니다.");
