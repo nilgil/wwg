@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    background-image : url('../img/main해녀.jpg');
+    background-size: 900px 900px;
+    font-family: 'paybooc-Bold';
+}
+.center{
+    flex: 1;
+}
+a{
+    text-decoration: none;
+    color: rgb(49, 48, 41);
+}
+.signUp_center{
+    padding: 50px;
+    margin: 400px auto;
+    justify-content: center;
+    display: grid;
+    /* grid-gap: 1px; 혹시 몰라서 안지움 */
+    /* height: 100vh; 혹시 몰라서 안지움 */
+    grid-template-columns: 700px;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'signUp_table' ;                     
+    margin-top: 5%;
+
+}
+.signUp_table{
+    grid-area: signUp_table;
+}
+#signUp_table_2{
+    background-color: #fffffff5;
+}

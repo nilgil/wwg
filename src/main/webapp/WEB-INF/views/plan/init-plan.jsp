@@ -11,6 +11,7 @@
 <body>
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
+    
     <div id="container">
         <form id="initForm" method="post" action="/plan/create">
             <s:csrfInput/>
@@ -29,6 +30,7 @@
             <div id="submit" onclick="checkDays()">플랜 만들기</div>
         </form>
     </div>
+    
     <%@ include file="/resources/include/footerbar.jsp" %>
 </div>
 </body>

@@ -10,18 +10,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link defer rel='stylesheet' media='screen' href='/css/info/foodlist.css'>
 </head>
 <body>
-<table border=1 align="center" width=800>
-	<caption>게시판 목록</caption>
+
+<!-- navbar -->
+<%@ include file="/resources/include/navbar.jsp"%>
+
+
+<!-- center -->
+<div class="foodlist_center">
+
+	<div class="side"> 
+			<table id="side_menu" class="table table-hover">
+		 <thead>
+		   <tr><th>여행정보</th></tr>
+		 </thead>
+		 <tbody>
+		   <tr><td><a href="#">숙소</a></td></tr>
+		   <tr><td><a href="/foodlist.do">맛집</a></td></tr>
+		   <tr><td><a href="#">여행지</a></td></tr>
+		 </tbody>
+	 </table>
+	</div>
+
+	<div class="foodlist_table">
+    <table id="f_table" class="table table-hover" align="center" width=900>
+		<h2>맛집 정보 게시판</h2>
+		<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+	    <p>총 글개수 : ${listcount}</p>
+	    <thead>
 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>작성일</td>
-				<td>조회수</td>
-				<td>좋아요</td>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>좋아요</th>
 			</tr>
+		</thead>
+
+		<tbody>
 				<c:set var="no1" value="${no}"></c:set>
 				<c:forEach var="fb" items="${foodlist }">
 					<tr>
@@ -34,12 +64,50 @@
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td>${fb.food_hit}</td>
 							<td>${fb.food_like}</td>
-					</tr>
-					<c:set var="no1" value="${no1-1}"></c:set>
-				</c:forEach>
-		</table>
-		
+						</tr>
+						<c:set var="no1" value="${no1-1}"></c:set>
+					</c:forEach>
+				</tbody>		
+			</table>
+
+			<div class="f_write_btn" align="center">
+				<a href="${path}/foodform.do" class="btn btn-info">글 작성</a>
+			</div>
+			
+
+			<!-- 페이지 넘기기 기능 -->
+			<div class="foodlist_paging">
+			<center>
+				<c:if test="${not empty keyword}">
+					<c:if test="${pp.startPage > pp.pagePerBlk }">
+						<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+						<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+							href="${path }/foodlist.do/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+					</c:forEach>
+					<c:if test="${pp.endPage < pp.totalPage}">
+						<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
+					</c:if>
+				</c:if>
+				<c:if test="${empty keyword}">
+					<c:if test="${pp.startPage > pp.pagePerBlk }">
+						<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}">이전</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+						<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+							href="${path }/foodlist.do/pageNum/${i}">${i}</a></li>
+					</c:forEach>
+					<c:if test="${pp.endPage < pp.totalPage}">
+						<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}">다음</a></li>
+					</c:if>
+			  </c:if>
+			</center>
+		    </div>	
+
+
 		<!-- 검색 기능 -->
+		<div class="foodlist_search">
 		<form align="center" action="${path}/foodlist.do/pageNum/1">
 			<select name="search">
 				<option value="food_title"
@@ -52,39 +120,15 @@
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> 
 			<input type="text" name="keyword"> 
-			<input type="submit" value="확인">
+			<input class="btn btn-dark" type="submit" value="확인">
 		</form>
-		
-		<!-- 페이지 넘기기 기능 -->
-		<center>
-			<c:if test="${not empty keyword}">
-				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/foodlist.do/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
-				</c:forEach>
-				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
-				</c:if>
-			</c:if>
-			<c:if test="${empty keyword}">
-				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}">이전</a></li>
-				</c:if>
-				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/foodlist.do/pageNum/${i}">${i}</a></li>
-				</c:forEach>
-				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}">다음</a></li>
-				</c:if>
-		  </c:if>
-		</center>
-		
-		<div align="center">
-			<a href="${path}/foodform.do" class="btn btn-info">글 작성</a>
-		</div>
+	    </div>
+	    </div>
+
+	</div> 
+	
+	<!-- footer -->
+<%@ include file="/resources/include/footerbar.jsp"%>
+	
 </body>
 </html>

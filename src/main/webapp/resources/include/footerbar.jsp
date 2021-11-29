@@ -8,8 +8,7 @@
             <div class="footer_menu">이메일 문의 | 개인정보취급방침 | 마케팅 문의 | 채용정보</div>
              <div class="footer_wrap">
               <div class="footer_friends">friends</div>
-                <a href="https://ijto.or.kr/korean/"><img src="/
-                img/qna/제주관광공사로고.png" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
+                <a href="https://ijto.or.kr/korean/"><img src="/img/qna/제주관광공사로고.png" alt="제주관광공사" width="150" height="150" title="제주관광공사"></a>
                 <a href="https://www.jdcdutyfree.com/"><img src="/img/qna/제주면세점.png" alt="제주면세점" width="150" height="150" title="면세점"></a>
                 <a href="https://www.skyscanner.co.kr/"><img src="/img/qna/스카이스케너로고.png" alt="스카이스케너" width="150" height="150" title="항공권"></a>
                 <a href="https://www.agoda.com/"><img src="/img/qna/아고다로고.png" alt="아고다" width="150" height="150" title="숙박"></a>

@@ -11,6 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>상세페이지</title>
+<%@ include file="/resources/include/headTag.jsp"%>
+<link defer rel='stylesheet' media='screen' href='/css/info/foodcontent.css'>
+<link defer rel='stylesheet' media='screen' href='/css/info/foodrelist.css'>
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
@@ -72,10 +75,34 @@ $(function() {
 </script>
 </head>
 <body>
-	<table border=1 width=400 align="center">
-	<caption>상세 페이지</caption>
+
+<!-- navbar -->
+<%@ include file="/resources/include/navbar.jsp"%>
+
+
+
+<div class="foodcontent_center" >
+
+	<div class="side"> 
+			<table id="side_menu" class="table table-hover">
+		 <thead>
+		   <tr><th>여행정보</th></tr>
+		 </thead>
+		 <tbody>
+		   <tr><td><a href="#">숙소</a></td></tr>
+		   <tr><td><a href="/foodlist.do">맛집</a></td></tr>
+		   <tr><td><a href="#">여행지</a></td></tr>
+		 </tbody>
+	 </table>
+	</div>
+
+    <div class="foodcontent_table">
+	<table id="foodcont_table1" class="table table-hover" align="center">
+	<h2>맛집 정보 게시판</h2>
+	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+	<tbody>
 			<tr>
-				<td>제목</td>
+				<td width="90">제목</td>
 				<td>${foodboard.food_title}</td>
 			</tr>
 			<tr>
@@ -91,36 +118,51 @@ $(function() {
 				<td><pre>${foodboard.food_content}</pre></td>
 			</tr>
 		</table>
-			<div align=center>
-				<input type="button" value="목록" onClick="location.href='/foodlist.do/pageNum/${pageNum}' " >
+		
+	        <div class="foodcont_btns" align=center>
+				<input class="btn btn-dark" type="button" value="목록" onClick="location.href='/foodlist.do/pageNum/${pageNum}' " >
 				
 				<form action="${path}/foodupdateform.do/food_no/${foodboard.food_no}/pageNum/${pageNum}"
 		 		method="post" name="chk" id="chk1">
-				<input type="submit" value="수정" >
+				<input class="btn btn-dark" type="submit" value="수정" >
 				</form>
 
 				<form action="${path}/fooddeleteform.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
 		 		method="post" name="chk" id="chk2">
-				<input type="submit" value="삭제" >
+				<input class="btn btn-dark" type="submit" value="삭제" >
 				</form>
 				
 				<form action="/foodlike.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
 				method="post" id="like">
-				<input type="submit" value="좋아요">
+				<input class="btn btn-danger" type="submit" value="좋아요">
 				</form>
-			</div>
+	          </div>
+			</tbody>
+			
+		</div>	
 			
 		<!-- 댓글 작성 -->
-		<div align=center>
+		<div class="foodcont_relp" align=center>
 		<form name="frm" id="frm">
 			<input type="hidden" name="username" value="${user.username}">
-			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 댓글 :
-			<textarea rows="3" cols="50" name="food_re_content"></textarea>
-			<input type="button" value="확인" id="repInsert">
+			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 
+			<p>댓글 쓰기:</p>
+			<div>
+			<textarea class="form-control" rows="3" cols="50" name="food_re_content"></textarea>
+			</div>
+			<div>
+			<input class="btn btn-outline-secondary" type="button" value="확인" id="repInsert">
+			</div>
 		</form>
 		</div>
 		
 		<!-- 댓글 list 불러오는곳 -->
-		<div id="foodrelist"></div>
+		<div id="foodrelist" class="food_rel_list"></div>
+		
+</div>		
+		
+<!-- footer -->
+<%@ include file="/resources/include/footerbar.jsp"%>
+		
 </body>
 </html>
