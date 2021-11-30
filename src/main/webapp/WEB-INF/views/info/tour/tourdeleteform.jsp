@@ -23,21 +23,20 @@
 		   <tr><th>여행정보</th></tr>
 		 </thead>
 		 <tbody>
-		   <tr><td><a href="#">숙소</a></td></tr>
+		   <tr><td><a href="/staylist.do">숙소</a></td></tr>
 		   <tr><td><a href="/foodlist.do">맛집</a></td></tr>
-		   <tr><td><a href="#">여행지</a></td></tr>
+		   <tr><td><a href="/tourlist.do">여행지</a></td></tr>
 		 </tbody>
 	 </table>
 	</div>
 	
 
-<form method=post action="fooddelete.do">
-	<input type="hidden" name="food_no" value="${param.food_no}">
+<form method=post action="tourdelete.do">
+	<input type="hidden" name="tour_no" value="${param.tour_no}">
 	<input type="hidden" name="pageNum" value="${param.pageNum}">
 	
 	<table id="f_del_table" class="table table-striped" width=400 align=center>
-	<h2>맛집 글삭제</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+	<h2>여행지 글삭제</h2>
 	<thead>
 	<tr><th>글을 삭제하시겠습니까?</th></tr>
 	</thead>

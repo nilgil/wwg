@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="retourMapper">
+
+	<resultMap id="retourResult"      		type="ReTourBoard">
+		<result property="tour_re_no"	    column="tour_re_no" />
+		<result property="rtour_no"	     	column="rtour_no" />
+		<result property="username"    		column="username" />
+		<result property="tour_re_content"  column="tour_re_content" />
+		<result property="tour_re_regdate" 	column="tour_re_regdate" />
+	</resultMap>
+	
+	<select id="tourlist" parameterType="int" resultMap="retourResult">
+		select * from trip_tour_reply where rtour_no=#{rtour_no} order by tour_re_no
+	</select>
+	
+	<insert id="insert" parameterType="ReTourBoard">
+		<selectKey keyProperty="tour_re_no" order="BEFORE" resultType="int">
+			select nvl(max(tour_re_no),0) + 1 from trip_tour_reply
+		</selectKey>
+		insert into trip_tour_reply values(#{tour_re_no},#{rtour_no},#{username},
+			#{tour_re_content},sysdate)
+	</insert>
+	
+	<update id="update" parameterType="ReTourBoard">
+		update trip_tour_reply set tour_re_content=#{tour_re_content},
+			tour_re_regdate=sysdate where tour_re_no=#{tour_re_no} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from trip_tour_reply where tour_re_no=#{tour_re_no}
+	</delete>
+	
+</mapper>

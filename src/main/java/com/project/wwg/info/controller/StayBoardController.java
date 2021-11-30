@@ -27,59 +27,59 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.project.wwg.info.dto.FoodBoard;
-import com.project.wwg.info.service.FoodBoardService;
+import com.project.wwg.info.dto.StayBoard;
+import com.project.wwg.info.service.StayBoardService;
 import com.project.wwg.info.service.PagingPgm;
 
 @Controller
-public class FoodBoardController {
+public class StayBoardController {
 
 	@Autowired
-	private FoodBoardService service;
+	private StayBoardService service;
 	
 	// 글작성 폼
-	@RequestMapping("foodform.do")
-	public String foodform(Principal principal, Model model) {
+	@RequestMapping("stayform.do")
+	public String stayform(Principal principal, Model model) {
 		
 		/*
 		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
 		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
 		 */		 		
-		return "info/food/foodform";
+		return "info/stay/stayform";
 	}
 	
 	// 글작성
-	@RequestMapping("foodwrite.do")
-	public String foodwrite(Principal principal, FoodBoard foodboard, Model model, HttpServletRequest request) {
+	@RequestMapping("staywrite.do")
+	public String staywrite(Principal principal, StayBoard stayboard, Model model, HttpServletRequest request) {
 		System.out.println("in");
-		System.out.println("food_title:"+foodboard.getFood_title());
+		System.out.println("stay_title:"+stayboard.getStay_title());
 
 		String username = principal.getName(); // 로그인후 유저네임 넘기기
 		System.out.println("username:"+username);
 		 
-		int food_no = foodboard.getFood_no();
+		int stay_no = stayboard.getStay_no();
 		int number = service.getMaxNum();
 		
-		foodboard.setFood_no(number);
+		stayboard.setStay_no(number);
 		
-		foodboard.setUsername(username); // 로그인후 유저네임 넘기기
+		stayboard.setUsername(username); // 로그인후 유저네임 넘기기
 		 		
-		int result = service.insert(foodboard);
+		int result = service.insert(stayboard);
 		model.addAttribute("result", result);
 		/* model.addAttribute("username", username); */
 		
-		return "info/food/foodinsertresult";
+		return "info/stay/stayinsertresult";
 	}
 	
 	// 글목록 첫페이지 실행
-	@RequestMapping("foodlist.do")
+	@RequestMapping("staylist.do")
 	public String initList() {
-		return "redirect:foodlist.do/pageNum/1";
+		return "redirect:staylist.do/pageNum/1";
 	}
 	
 	// 글목록
-	@RequestMapping("foodlist.do/pageNum/{pageNum}")
-	public String foodlist(@PathVariable String pageNum, FoodBoard foodboard, Model model) {
+	@RequestMapping("staylist.do/pageNum/{pageNum}")
+	public String staylist(@PathVariable String pageNum, StayBoard stayboard, Model model) {
 		final int rowPerPage = 10;
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -87,83 +87,83 @@ public class FoodBoardController {
 		// 총 데이터 갯수
 		int currentPage = Integer.parseInt(pageNum);
 		
-		int total = service.getTotal(foodboard);	// 검색
+		int total = service.getTotal(stayboard);	// 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		foodboard.setStartRow(startRow);
-		foodboard.setEndRow(endRow);
+		stayboard.setStartRow(startRow);
+		stayboard.setEndRow(endRow);
 		
 		int no = total - startRow + 1;	// 화면 출력 번호
-		List<FoodBoard> foodlist = service.foodlist(foodboard);
-		model.addAttribute("foodlist", foodlist);
+		List<StayBoard> staylist = service.staylist(stayboard);
+		model.addAttribute("staylist", staylist);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
 		// 검색
-		model.addAttribute("search", foodboard.getSearch());
-		model.addAttribute("keyword", foodboard.getKeyword());
+		model.addAttribute("search", stayboard.getSearch());
+		model.addAttribute("keyword", stayboard.getKeyword());
 		
-		return "info/food/foodlist";
+		return "info/stay/staylist";
 	}
 	
 	// 상세페이지
-	@RequestMapping("foodcontent.do/food_no/{food_no}/pageNum/{pageNum}")
-	public String foodcontent(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
-		service.selectUpdate(food_no);					// 조회수 1증가
-		FoodBoard foodboard = service.select(food_no);	// 상세 정보 구하기
-		model.addAttribute("foodboard", foodboard);
+	@RequestMapping("staycontent.do/stay_no/{stay_no}/pageNum/{pageNum}")
+	public String staycontent(@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+		service.selectUpdate(stay_no);					// 조회수 1증가
+		StayBoard stayboard = service.select(stay_no);	// 상세 정보 구하기
+		model.addAttribute("stayboard", stayboard);
 		model.addAttribute("pageNum", pageNum);
-		return "info/food/foodcontent";
+		return "info/stay/staycontent";
 	}
 	
 	// 글수정 폼
-	@RequestMapping("foodupdateform.do/food_no/{food_no}/pageNum/{pageNum}")
-	public String foodupdateform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
-		FoodBoard foodboard = service.select(food_no);
-		model.addAttribute("foodboard", foodboard);
+	@RequestMapping("stayupdateform.do/stay_no/{stay_no}/pageNum/{pageNum}")
+	public String stayupdateform(@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+		StayBoard stayboard = service.select(stay_no);
+		model.addAttribute("stayboard", stayboard);
 		model.addAttribute("pageNum", pageNum);
-		return "info/food/foodupdateform";
+		return "info/stay/stayupdateform";
 	}
 	
 	//글수정
-	@RequestMapping("foodupdate.do/pageNum/{pageNum}")
-	public String foodupdate(FoodBoard foodboard, @PathVariable String pageNum, Model model) {
-		int result = service.update(foodboard);
+	@RequestMapping("stayupdate.do/pageNum/{pageNum}")
+	public String stayupdate(StayBoard stayboard, @PathVariable String pageNum, Model model) {
+		int result = service.update(stayboard);
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
-		return "info/food/foodupdate";
+		return "info/stay/stayupdate";
 	}
 	
 	// 글삭제 폼
-	@RequestMapping("fooddeleteform.do")
-//	public String fooddeleteform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
-	public String fooddeleteform() {
-//		int result = service.delete(food_no);
+	@RequestMapping("staydeleteform.do")
+//	public String staydeleteform(@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+	public String staydeleteform() {
+//		int result = service.delete(stay_no);
 //		model.addAttribute("result", result);
 //		model.addAttribute("pageNum", pageNum);
-		return "info/food/fooddeleteform";
+		return "info/stay/staydeleteform";
 	}
 
 	// 글삭제
-	@PostMapping("fooddelete.do")
-	public String fooddelete(@RequestParam int food_no, @RequestParam String pageNum, Model model) {
-		System.out.println("food_no:"+food_no);
-		int result = service.delete(food_no);
+	@PostMapping("staydelete.do")
+	public String staydelete(@RequestParam int stay_no, @RequestParam String pageNum, Model model) {
+		System.out.println("stay_no:"+stay_no);
+		int result = service.delete(stay_no);
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
-		return "info/food/fooddelete";
+		return "info/stay/staydelete";
 	}
 	
 	// 좋아요
-    @RequestMapping("foodlike.do")
-    public String recommend (@RequestParam int food_no, Model model) {
-		service.like(food_no);					// 좋아요 1증가
-        model.addAttribute("food_no", food_no);
-        return "redirect:foodlist.do";
+    @RequestMapping("staylike.do")
+    public String recommend (@RequestParam int stay_no, Model model) {
+		service.like(stay_no);					// 좋아요 1증가
+        model.addAttribute("stay_no", stay_no);
+        return "redirect:staylist.do";
     }
 
     // 이미지 업로드
-    @RequestMapping(value="food/imageUpload.do", method = RequestMethod.POST)
+    @RequestMapping(value="stay/imageUpload.do", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request,
     		HttpServletResponse response, MultipartHttpServletRequest multiFile
     		, @RequestParam MultipartFile upload) throws Exception{
@@ -201,7 +201,7 @@ public class FoodBoardController {
     	
     	String callback = request.getParameter("CKEditorFuncNum");
     	printWriter = response.getWriter();
-    	String fileUrl = "/food/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+    	String fileUrl = "/stay/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
     	
     	// 업로드시 메시지 출력
     	printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
@@ -219,7 +219,7 @@ public class FoodBoardController {
     }
 
     // 서버로 전송된 이미지 뿌려주기
-    @RequestMapping(value="/food/ckImgSubmit.do")
+    @RequestMapping(value="/stay/ckImgSubmit.do")
     public void ckSubmit(@RequestParam(value="uid") String uid
     		, @RequestParam(value="fileName") String fileName
     		, HttpServletRequest request, HttpServletResponse response)

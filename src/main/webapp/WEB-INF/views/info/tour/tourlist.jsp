@@ -28,17 +28,16 @@
 		   <tr><th>여행정보</th></tr>
 		 </thead>
 		 <tbody>
-		   <tr><td><a href="#">숙소</a></td></tr>
+		   <tr><td><a href="/staylist.do">숙소</a></td></tr>
 		   <tr><td><a href="/foodlist.do">맛집</a></td></tr>
-		   <tr><td><a href="#">여행지</a></td></tr>
+		   <tr><td><a href="/tourlist.do">여행지</a></td></tr>
 		 </tbody>
 	 </table>
 	</div>
 
 	<div class="foodlist_table">
     <table id="f_table" class="table table-hover" align="center" width=900>
-		<h2>맛집 정보 게시판</h2>
-		<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+		<h2>여행지 정보 게시판</h2>
 	    <p>총 글개수 : ${listcount}</p>
 	    <thead>
 			<tr>
@@ -53,17 +52,17 @@
 
 		<tbody>
 				<c:set var="no1" value="${no}"></c:set>
-				<c:forEach var="fb" items="${foodlist }">
+				<c:forEach var="fb" items="${tourlist }">
 					<tr>
 						<td>${no1}</td>
-							<td><a href="${path }/foodcontent.do/food_no/${fb.food_no}/pageNum/${pp.currentPage}">
-								${fb.food_title}
+							<td><a href="${path }/tourcontent.do/tour_no/${fb.tour_no}/pageNum/${pp.currentPage}">
+								${fb.tour_title}
 								</a></td>
 							<td>${fb.username}</td>
-							<td><fmt:formatDate value="${fb.food_regdate}" 
+							<td><fmt:formatDate value="${fb.tour_regdate}" 
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<td>${fb.food_hit}</td>
-							<td>${fb.food_like}</td>
+							<td>${fb.tour_hit}</td>
+							<td>${fb.tour_like}</td>
 						</tr>
 						<c:set var="no1" value="${no1-1}"></c:set>
 					</c:forEach>
@@ -71,7 +70,7 @@
 			</table>
 
 			<div class="f_write_btn" align="center">
-				<a href="${path}/foodform.do" class="btn btn-info">글 작성</a>
+				<a href="${path}/tourform.do" class="btn btn-info">글 작성</a>
 			</div>
 			
 
@@ -80,26 +79,26 @@
 			<center>
 				<c:if test="${not empty keyword}">
 					<c:if test="${pp.startPage > pp.pagePerBlk }">
-						<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
+						<li><a href="${path }/tourlist.do/pageNum/${pp.startPage - 1}?search=${search}&keyword=${keyword}">이전</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 						<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-							href="${path }/foodlist.do/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+							href="${path }/tourlist.do/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${pp.endPage < pp.totalPage}">
-						<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
+						<li><a href="${path }/tourlist.do/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
 					</c:if>
 				</c:if>
 				<c:if test="${empty keyword}">
 					<c:if test="${pp.startPage > pp.pagePerBlk }">
-						<li><a href="${path }/foodlist.do/pageNum/${pp.startPage - 1}">이전</a></li>
+						<li><a href="${path }/tourlist.do/pageNum/${pp.startPage - 1}">이전</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 						<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-							href="${path }/foodlist.do/pageNum/${i}">${i}</a></li>
+							href="${path }/tourlist.do/pageNum/${i}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${pp.endPage < pp.totalPage}">
-						<li><a href="${path }/foodlist.do/pageNum/${pp.endPage + 1}">다음</a></li>
+						<li><a href="${path }/tourlist.do/pageNum/${pp.endPage + 1}">다음</a></li>
 					</c:if>
 			  </c:if>
 			</center>
@@ -108,12 +107,12 @@
 
 		<!-- 검색 기능 -->
 		<div class="foodlist_search">
-		<form align="center" action="${path}/foodlist.do/pageNum/1">
+		<form align="center" action="${path}/tourlist.do/pageNum/1">
 			<select name="search">
-				<option value="food_title"
-					<c:if test="${search=='food_title'}">selected="selected" </c:if>>제목</option>
-				<option value="food_content"
-					<c:if test="${search=='food_content'}">selected="selected" </c:if>>내용</option>
+				<option value="tour_title"
+					<c:if test="${search=='tour_title'}">selected="selected" </c:if>>제목</option>
+				<option value="tour_content"
+					<c:if test="${search=='tour_content'}">selected="selected" </c:if>>내용</option>
 				<option value="username"
 					<c:if test="${search=='username'}">selected="selected" </c:if>>작성자</option>
 				<option value="subcon"

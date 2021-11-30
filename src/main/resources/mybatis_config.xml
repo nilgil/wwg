@@ -19,6 +19,10 @@
         <!-- 정준희 -->
         <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>
         <typeAlias type="com.project.wwg.info.dto.ReFoodBoard" alias="ReFoodBoard"/>
+        <typeAlias type="com.project.wwg.info.dto.StayBoard" alias="StayBoard"/>
+        <typeAlias type="com.project.wwg.info.dto.ReStayBoard" alias="ReStayBoard"/>
+        <typeAlias type="com.project.wwg.info.dto.TourBoard" alias="TourBoard"/>
+        <typeAlias type="com.project.wwg.info.dto.ReTourBoard" alias="ReTourBoard"/>
         <!-- 이소정 -->
         <typeAlias type="com.project.wwg.qna.model.Qna" alias="qna"/>
         <!-- 류상균 -->

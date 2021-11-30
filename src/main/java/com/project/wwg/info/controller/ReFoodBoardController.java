@@ -35,7 +35,7 @@ public class ReFoodBoardController {
 		/*
 		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
 		 */		
-		return "info/foodrelist";
+		return "info/food/foodrelist";
 	}
 
 	// 댓글 저장
