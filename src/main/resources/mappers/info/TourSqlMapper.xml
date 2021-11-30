@@ -73,7 +73,7 @@
 <!-- 수정 기능 -->	
 	<update id="update" parameterType="TourBoard">
 		update trip_tour set username=#{username},tour_title=#{tour_title},
-			tour_content=#{tour_content}
+			tour_content=#{tour_content},tour_regdate=sysdate
 			where tour_no=#{tour_no}
 	</update>
 	
