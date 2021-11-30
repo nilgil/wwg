@@ -99,7 +99,6 @@ $(function() {
     <div class="foodcontent_table">
 	<table id="foodcont_table1" class="table table-hover" align="center">
 	<h2>맛집 정보 게시판</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 	<tbody>
 			<tr>
 				<td width="90">제목</td>

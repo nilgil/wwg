@@ -38,7 +38,6 @@
 <div class="c_notlist_table" >	
 <table id="c_n_table1" class="table table-hover">
         <h2>공지사항 게시판</h2>
-		<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 		<p>총 글개수 : ${listcount}</p>
 		<thead>
 			<tr>
