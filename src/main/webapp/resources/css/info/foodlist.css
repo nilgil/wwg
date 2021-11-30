@@ -66,8 +66,8 @@ a{
 	margin: 15px;
 }
 .foodlist_paging li{
-    display: contents;
-    list-style: none;
+	display: contents;
+	list-style: none;
 }
 .foodlist_search{
     display: flex;
