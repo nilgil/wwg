@@ -42,7 +42,6 @@
 			<!-- onsubmit="return chk()"> -->
 			<table id="r_up_table1" class="table table-hover" >
             <h2>여행후기 글수정</h2>
-            <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 				<tr>
 					<td>번호</td>
 					<td>${review.review_no}</td>

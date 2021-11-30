@@ -51,13 +51,18 @@ table{
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial; */
 }
+.contents{
+
+}
 .side{
     grid-area: side;
 }
 .detail_table{
     grid-area: detail_table;
     width:900px;
-    
+}
+#detail_table_2{
+	word-break: break-all;
 }
 .board_list{
     grid-area: board_list;
@@ -73,3 +78,4 @@ table{
 textarea{
 	resize: none;
 }
+

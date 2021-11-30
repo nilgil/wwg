@@ -36,8 +36,7 @@
    
    <div class="table">
           <table class="table table-hover">
-          <h2>Q&A 게시판</h2>
-          <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
+          <h2>Q&A 게시판</h2>           
           <p>총 글개수 : ${listcount}</p>  
             <thead>
              <tr>

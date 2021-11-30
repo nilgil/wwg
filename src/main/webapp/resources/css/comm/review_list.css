@@ -66,6 +66,10 @@ a{
 	justify-content: center;
 	margin: 15px;
 }
+.c_r_paging li{
+	display: contents;
+	list-style: none;
+}
 .c_r_search{
     display: flex;
     justify-content: center;

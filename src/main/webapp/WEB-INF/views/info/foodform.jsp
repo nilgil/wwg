@@ -40,7 +40,6 @@
 <form method=post action="foodwrite.do">
 <table id="foodform_table1" class="table table-hover" width=900 align=center>
 	<h2>맛집 게시판 글작성</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 	
 	<tr><th>작성자명</th>
 		<td>${user.username}</td>

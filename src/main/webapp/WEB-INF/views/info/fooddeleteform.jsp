@@ -37,7 +37,6 @@
 	
 	<table id="f_del_table" class="table table-striped" width=400 align=center>
 	<h2>맛집 글삭제</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 	<thead>
 	<tr><th>글을 삭제하시겠습니까?</th></tr>
 	</thead>
