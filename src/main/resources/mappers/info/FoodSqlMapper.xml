@@ -73,7 +73,7 @@
 <!-- 수정 기능 -->	
 	<update id="update" parameterType="FoodBoard">
 		update trip_food set username=#{username},food_title=#{food_title},
-			food_content=#{food_content}
+			food_content=#{food_content},food_regdate=sysdate
 			where food_no=#{food_no}
 	</update>
 	

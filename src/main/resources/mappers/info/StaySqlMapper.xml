@@ -73,7 +73,7 @@
 <!-- 수정 기능 -->	
 	<update id="update" parameterType="StayBoard">
 		update trip_stay set username=#{username},stay_title=#{stay_title},
-			stay_content=#{stay_content}
+			stay_content=#{stay_content},stay_regdate=sysdate
 			where stay_no=#{stay_no}
 	</update>
 	
