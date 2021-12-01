@@ -84,9 +84,8 @@ public class TourBoardController {
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
-		// 총 데이터 갯수
-		int currentPage = Integer.parseInt(pageNum);
-		
+		int tour_count = service.getTour_count();	// 게시물 갯수
+		int currentPage = Integer.parseInt(pageNum);// 총 데이터 갯수
 		int total = service.getTotal(tourboard);	// 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -96,6 +95,7 @@ public class TourBoardController {
 		
 		int no = total - startRow + 1;	// 화면 출력 번호
 		List<TourBoard> tourlist = service.tourlist(tourboard);
+		model.addAttribute("tour_count", tour_count);
 		model.addAttribute("tourlist", tourlist);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);

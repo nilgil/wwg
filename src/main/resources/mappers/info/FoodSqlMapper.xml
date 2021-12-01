@@ -30,8 +30,8 @@
 	</select>
 
 <!-- 글갯수 -->
-	<select id="count" resultType="int">
-		select count(*) from trip_food
+	<select id="food_count" resultType="int">
+		select count(food_no) from trip_food
 	</select>
 	
 <!-- 글목록 / alias="FoodBoard" -->

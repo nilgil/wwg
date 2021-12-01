@@ -22,6 +22,8 @@ public interface StayBoardService {
 	
 	int getMaxNum();
 	
+	int getStay_count();
+	
 	void updateRe(StayBoard stayboard);
 
 	void like(int stay_no);

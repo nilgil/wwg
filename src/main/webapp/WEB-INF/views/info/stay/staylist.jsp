@@ -38,7 +38,7 @@
 	<div class="foodlist_table">
     <table id="f_table" class="table table-hover" align="center" width=900>
 		<h2>숙소 정보 게시판</h2>
-	    <p>총 글개수 : ${listcount}</p>
+	    <p>총 글개수 : ${stay_count}</p>
 	    <thead>
 			<tr>
 				<th>번호</th>

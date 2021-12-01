@@ -57,6 +57,12 @@ public class FoodBoardServiceImpl implements FoodBoardService {
 		return dao.getMaxNum();
 	}
 	
+	// 게시물 갯수
+	@Override
+	public int getFood_count() {
+		return dao.getFood_count();
+	}
+	
 	@Override
 	public void updateRe(FoodBoard foodboard) {
 		dao.updateRe(foodboard);

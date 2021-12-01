@@ -22,6 +22,8 @@ public interface TourBoardDao {
 	
 	int getMaxNum();
 	
+	int getTour_count();
+	
 	void updateRe(TourBoard tourboard);
 
 	void like(int tour_no);
