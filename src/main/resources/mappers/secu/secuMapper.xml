@@ -20,4 +20,13 @@
         SELECT * from dual
     </insert>
 
+    <select id="isUserHere" parameterType="String" resultType="String">
+        SELECT USERNAME from Users where username = #{username}
+    </select>
+
+    <update id="updateInfo" parameterType="UsersDto">
+        update USERS set PASSWORD=#{password}, location=#{location}, realname=#{realname}
+            where USERNAME=#{username}
+    </update>
+
 </mapper>
