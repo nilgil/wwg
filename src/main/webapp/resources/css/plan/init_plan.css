@@ -31,20 +31,18 @@
 #howdays {
     text-align: center;
 }
-#howdays input{
-	display: flex;
-}
-#howdays .day{
-	display: flex;
-}
-
 
 #departureIn{
     width: 190px;
-
 }
 #dayIn{
-    width: 40px;
+    width: 50px;
+    float: left;
+}
+.days {
+	margin-top: 8px;
+    margin-left: 3px;
+	display: inline-block;
 }
 
 #submit {
@@ -59,7 +57,7 @@
 	background-color: #FFB740;
 }
 .main_img img{
-	margin-top:-62px;
+	margin-top:-88px;
 	width:600px;
 	height:300px;
 	border-radius: 10px 10px 0px 0px;

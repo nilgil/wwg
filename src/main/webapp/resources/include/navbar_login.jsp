@@ -32,9 +32,9 @@
                     <a href="#">여행정보</a>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">숙소</a>
+                    <a class="dropdown-item" href="/staylist.do">숙소</a>
                     <a class="dropdown-item" href="/foodlist.do">맛집</a>
-                    <a class="dropdown-item" href="#">여행지</a>
+                    <a class="dropdown-item" href="/tourlist.do">여행지</a>
                 </div>
                 </div>
             </li>

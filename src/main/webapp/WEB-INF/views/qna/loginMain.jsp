@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath }" />
@@ -21,26 +22,31 @@
 <div class="mainpage_center">
 
 <div class="center_main1">여행후기<hr>
-<ul>
-<c:forEach var="notice" items="${noticelist}">
-<li>${notice.notice_title}</li>
+<ul style="list-style-type: circle">
+<c:forEach var="review1" items="${reviewlist1}">
+<li>
+<a href="/reviewlist">${review1.review_title}
+<span class="pull-right">
+<fmt:formatDate value="${review1.review_regdate}"
+ pattern="yyyy-MM-dd"/>
+</span>
+</a></li>
 </c:forEach>
-</ul><hr>
+</ul>
 </div>
 
 <div class="center_main5">여행후기<hr>
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+<ul style="list-style-type: circle">
+<c:forEach var="review2" items="${reviewlist2}">
+<li>
+<a href="/reviewlist">${review2.review_title}
+<span class="pull-right">
+<fmt:formatDate value="${review2.review_regdate}"
+ pattern="yyyy-MM-dd"/>
+</span>
+</a></li>
+</c:forEach>
+</ul>
 <hr></div>
 
 <div class="center_main2">여행정보<hr>
@@ -113,41 +119,45 @@
 </div>
 
 <div class="notice">공지사항<hr>
-    <li>
-        <a href="#">11월 공지</a>&nbsp&nbsp&nbsp&nbsp
-        <span class="pull-right">
-        <span class="date">2021-11-08</span></span>
-    </li>
-    <li>
-        <a href="#">11월 공지</a>&nbsp&nbsp&nbsp&nbsp
-        <span class="pull-right">
-        <span class="date">2021-11-08</span></span>
-    </li>
-    <li>
-        <a href="#">11월 공지</a>&nbsp&nbsp&nbsp&nbsp
-        <span class="pull-right">
-        <span class="date">2021-11-08</span></span>
-    </li>
-    <li>
-        <a href="#">11월 공지</a>&nbsp&nbsp&nbsp&nbsp
-        <span class="pull-right">
-        <span class="date">2021-11-08</span></span>
-    </li>
-    <li>
-        <a href="#">11월 공지</a>&nbsp&nbsp&nbsp&nbsp
-        <span class="pull-right">
-        <span class="date">2021-11-08</span></span>
-    </li><hr>
+<ul style="list-style-type: circle">
+<c:forEach var="notice" items="${noticelist}">
+<li>
+<a href="/noticelist">${notice.notice_title}
+<span class="pull-right">
+<fmt:formatDate value="${notice.notice_regdate}"
+ pattern="yyyy-MM-dd"/>
+</span></a>
+</li>
+</c:forEach>
+</ul><hr>
 </div>
 
-<div class="aside1">동행구해요<hr></div>
+<div class="aside1">동행구해요<hr>
+<ul style="list-style-type: circle">
+<c:forEach var="meet" items="${meetlist}">
+<li>
+<a href="/meetlist">${meet.meet_title}
+<span class="pull-right">
+<fmt:formatDate value="${meet.meet_regdate}"
+ pattern="yyyy-MM-dd"/>
+</span>
+</a></li>
+</c:forEach>
+</ul>
+<hr></div>
 
 
 <div class="aside2">Q&A<hr>
 
-<ul>
+<ul style="list-style-type: circle">
 <c:forEach var="qna" items="${qnalist}">
-<li>${qna.qna_title}</li>
+<li>
+<a href="/qnalist.do">${qna.qna_title}
+<span class="pull-right">
+<fmt:formatDate value="${qna.qna_regdate}"
+ pattern="yyyy-MM-dd"/>
+</span>
+</a></li>
 </c:forEach>
 </ul>
 </div>

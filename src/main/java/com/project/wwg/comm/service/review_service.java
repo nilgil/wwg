@@ -25,4 +25,8 @@ public interface review_service {
 	int getMaxNum();
 
 	void like(int review_no);
+	
+	List<review> getReview1();
+	
+	List<review> getReview2();
 }

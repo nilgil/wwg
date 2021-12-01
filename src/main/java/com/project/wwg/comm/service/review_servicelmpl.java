@@ -59,4 +59,16 @@ public class review_servicelmpl implements review_service {
 	public void like(int review_no) {
 		rd.like(review_no);
 	}
+
+	@Override
+	public List<review> getReview1() {
+		// TODO Auto-generated method stub
+		return rd.getReview1();
+	}
+	
+	@Override
+	public List<review> getReview2() {
+		// TODO Auto-generated method stub
+		return rd.getReview2();
+	}
 }

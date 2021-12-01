@@ -60,4 +60,10 @@ public class meet_servicelmpl implements meet_service {
 	public void like(int meet_no) {
 		md.like(meet_no);
 	}
+
+	@Override
+	public List<meet> getMeet() {
+		// TODO Auto-generated method stub
+		return md.getMeet();
+	}
 }

@@ -62,4 +62,16 @@ public class review_daolmpl implements review_dao {
 		sst.update("reviewns.like", review_no);
 	}
 
+	@Override
+	public List<review> getReview1() {
+		// TODO Auto-generated method stub
+		return sst.selectList("reviewns.review1");
+	}
+	
+	@Override
+	public List<review> getReview2() {
+		// TODO Auto-generated method stub
+		return sst.selectList("reviewns.review2");
+	}
+
 }

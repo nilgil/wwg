@@ -3,6 +3,7 @@ package com.project.wwg.comm.dao;
 import java.util.List;
 
 import com.project.wwg.comm.model.meet;
+import com.project.wwg.comm.model.notice;
 
 
 
@@ -25,4 +26,6 @@ public interface meet_dao {
 	int getMaxNum();
 
 	void like(int meet_no);
+	
+	List<meet> getMeet();
 }

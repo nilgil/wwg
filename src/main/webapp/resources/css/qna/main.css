@@ -166,6 +166,9 @@ a{
 .aside_login form{
 	background-color: #ffffff;
 }
+ul{
+	padding: inherit;
+}
 
 
 
