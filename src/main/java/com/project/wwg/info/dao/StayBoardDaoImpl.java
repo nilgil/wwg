@@ -59,6 +59,11 @@ public class StayBoardDaoImpl implements StayBoardDao {
 	public int getMaxNum() {
 		return session.selectOne("stayMapper.getMaxNum");
 	}
+	// 게시글 총갯수
+	@Override
+	public int getStay_count() {
+		return session.selectOne("stayMapper.stay_count");
+	}
 
 	@Override
 	public void updateRe(StayBoard stayboard) {

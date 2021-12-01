@@ -84,9 +84,8 @@ public class FoodBoardController {
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
-		// 총 데이터 갯수
-		int currentPage = Integer.parseInt(pageNum);
-		
+		int food_count = service.getFood_count();	// 게시물 갯수
+		int currentPage = Integer.parseInt(pageNum);// 총 데이터 갯수
 		int total = service.getTotal(foodboard);	// 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -96,6 +95,7 @@ public class FoodBoardController {
 		
 		int no = total - startRow + 1;	// 화면 출력 번호
 		List<FoodBoard> foodlist = service.foodlist(foodboard);
+		model.addAttribute("food_count", food_count);
 		model.addAttribute("foodlist", foodlist);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);

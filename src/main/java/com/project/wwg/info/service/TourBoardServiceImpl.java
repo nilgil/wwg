@@ -56,6 +56,11 @@ public class TourBoardServiceImpl implements TourBoardService {
 	public int getMaxNum() {
 		return dao.getMaxNum();
 	}
+	// 게시글 총갯수
+	@Override
+	public int getTour_count() {
+		return dao.getTour_count();
+	}
 	
 	@Override
 	public void updateRe(TourBoard tourboard) {

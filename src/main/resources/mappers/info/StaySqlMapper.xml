@@ -30,8 +30,8 @@
 	</select>
 
 <!-- 글갯수 -->
-	<select id="count" resultType="int">
-		select count(*) from trip_stay
+	<select id="stay_count" resultType="int">
+		select count(stay_no) from trip_stay
 	</select>
 	
 <!-- 글목록 / alias="StayBoard" -->

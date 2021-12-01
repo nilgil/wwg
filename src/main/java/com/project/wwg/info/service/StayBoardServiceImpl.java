@@ -58,6 +58,11 @@ public class StayBoardServiceImpl implements StayBoardService {
 	}
 	
 	@Override
+	public int getStay_count() {
+		return dao.getStay_count();
+	}
+	
+	@Override
 	public void updateRe(StayBoard stayboard) {
 		dao.updateRe(stayboard);
 	}

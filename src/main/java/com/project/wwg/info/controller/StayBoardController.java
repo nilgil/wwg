@@ -84,9 +84,8 @@ public class StayBoardController {
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
-		// 총 데이터 갯수
-		int currentPage = Integer.parseInt(pageNum);
-		
+		int stay_count = service.getStay_count();	// 게시물 갯수
+		int currentPage = Integer.parseInt(pageNum);// 총 데이터 갯수
 		int total = service.getTotal(stayboard);	// 검색
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -96,6 +95,7 @@ public class StayBoardController {
 		
 		int no = total - startRow + 1;	// 화면 출력 번호
 		List<StayBoard> staylist = service.staylist(stayboard);
+		model.addAttribute("stay_count", stay_count);
 		model.addAttribute("staylist", staylist);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);

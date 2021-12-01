@@ -59,6 +59,11 @@ public class TourBoardDaoImpl implements TourBoardDao {
 	public int getMaxNum() {
 		return session.selectOne("tourMapper.getMaxNum");
 	}
+	// 게시글 총갯수
+	@Override
+	public int getTour_count() {
+		return session.selectOne("tourMapper.tour_count");
+	}
 
 	@Override
 	public void updateRe(TourBoard tourboard) {

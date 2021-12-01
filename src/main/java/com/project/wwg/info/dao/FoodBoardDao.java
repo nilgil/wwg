@@ -22,6 +22,8 @@ public interface FoodBoardDao {
 	
 	int getMaxNum();
 	
+	int getFood_count();
+	
 	void updateRe(FoodBoard foodboard);
 
 	void like(int food_no);

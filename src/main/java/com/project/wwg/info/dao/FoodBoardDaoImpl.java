@@ -59,6 +59,12 @@ public class FoodBoardDaoImpl implements FoodBoardDao {
 	public int getMaxNum() {
 		return session.selectOne("foodMapper.getMaxNum");
 	}
+	
+	// 게시물 총갯수
+	@Override
+	public int getFood_count() {
+		return session.selectOne("foodMapper.food_count");
+	}
 
 	@Override
 	public void updateRe(FoodBoard foodboard) {
