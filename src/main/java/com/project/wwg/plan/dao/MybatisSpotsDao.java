@@ -39,6 +39,11 @@ public class MybatisSpotsDao implements SpotsDao {
     }
 
     @Override
+    public List<Spot> searchSpotsByTitles(List<String> titleList) {
+        return sqlSession.selectList("spot.searchSpotsByTitles", titleList);
+    }
+
+    @Override
     public int getSearchSpotsCount(String keyword) {
         return sqlSession.selectOne("spot.getSearchSpotsCount", keyword);
     }

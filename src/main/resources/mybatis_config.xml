@@ -15,6 +15,7 @@
         <!-- 안영길 -->
         <typeAlias type="com.project.wwg.plan.dto.Spot" alias="Spot"/>
         <typeAlias type="com.project.wwg.plan.dto.Plan" alias="Plan"/>
+        <typeAlias type="com.project.wwg.plan.dto.PlanReply" alias="PlanReply"/>
         <typeAlias type="com.project.wwg.plan.dto.PageInfo" alias="PageInfo"/>
         <!-- 정준희 -->
         <typeAlias type="com.project.wwg.info.dto.FoodBoard" alias="FoodBoard"/>

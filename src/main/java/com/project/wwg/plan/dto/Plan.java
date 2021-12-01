@@ -18,6 +18,6 @@ public class Plan {
     private String plans;
     private int hit;
     private int good;
-    private Date regDate;
+    private java.util.Date regDate;
     private int pub;
 }
