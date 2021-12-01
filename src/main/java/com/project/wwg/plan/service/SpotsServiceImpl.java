@@ -55,8 +55,17 @@ public class SpotsServiceImpl {
      * [R] 검색어로 Spot 검색하여 list로 반환
      */
     public List<Spot> searchSpots(String keyword, int pageNum) {
-        PageInfo pageInfo = new PageInfo(keyword,pageNum);
+        PageInfo pageInfo = new PageInfo(8,keyword,pageNum);
         return spotsDao.searchSpots(pageInfo);
+    }
+
+
+    public List<Spot> searchSpotsByTitles(List<String> titleList) {
+        List<Spot> list = new ArrayList<Spot>();
+        for (String title : titleList) {
+            list.add(spotsDao.searchSpotOne(title));
+        }
+        return list;
     }
 
     /**
@@ -225,4 +234,5 @@ public class SpotsServiceImpl {
             e.printStackTrace();
         }
     }
+
 }

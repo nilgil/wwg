@@ -16,6 +16,8 @@ public interface SpotsDao {
 
     List<Spot> searchSpots(PageInfo pageInfo);
 
+    List<Spot> searchSpotsByTitles(List<String> titleList);
+
     int getSearchSpotsCount(String keyword);
 
     int insertSpot(Spot spot);
@@ -25,4 +27,5 @@ public interface SpotsDao {
     int deleteSpot(String id);
 
     int deleteAllSpots();
+
 }

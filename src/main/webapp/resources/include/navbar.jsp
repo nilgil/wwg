@@ -45,8 +45,9 @@
                 <a href="#">여행계획</a>
             </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="/planner*">계획짜기</a>
-            <a class="dropdown-item" href="#">계획게시판</a>
+            <a class="dropdown-item" href="/plan">일정짜기</a>
+            <a class="dropdown-item" href="/plan/my">내일정</a>
+            <a class="dropdown-item" href="/plan/board">일정게시판</a>
         </div>
         </div>
     </li>

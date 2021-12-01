@@ -1,12 +1,14 @@
+
 #container {
     display: grid;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.5);
+    place-items: center;
 }
 
-header {
+h1 {
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     text-align: center;
     width: 100%;
 }
@@ -14,10 +16,38 @@ header {
 #plan-box {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 300px 1fr;
     width: 1096px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
+}
+
+table {
+    background-color: #fffffff5;
+}
+
+#paging {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#paging li {
+    margin-right: 10px;
+}
+
+#good{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+#good i{
+    width: 30px;
 }
 
 .plan {
@@ -26,12 +56,13 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 300px;
+    height: 400px;
     text-align: center;
 }
 
-#plan-img{
-    position: relative;
+#pubPlans {
+    width: 1000px;
+    margin-bottom: 50px;
 }
 
 #plan-img img {
@@ -39,44 +70,9 @@ header {
     height: 200px;
 }
 
-#title {
-    font-weight: bold;
-}
-
-#none-plan {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-#none-plan a {
-    text-decoration:none;
-    width: 90px;
-    border: 1px solid black;
-    border-radius: 10%;
-}
-
-#none-plan p:hover {
-    cursor: pointer;
-}
-
-#pubToggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-#pubToggle i {
-    color: #DA8028;
-}
-#pubToggle:hover {
-    cursor: pointer;
-}
-
 #plan-info {
     display: grid;
-    grid-template-columns: 120px 130px 50px;
+    grid-template-columns: 80px 130px 90px;
     width: 300px;
     height: 60px;
     background-color: rgba(255, 255, 255, 0.9);
@@ -106,6 +102,6 @@ header {
     cursor: pointer;
 }
 
-
-
-
+li{
+    list-style: none;
+}

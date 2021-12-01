@@ -7,33 +7,36 @@ Date.prototype.toDateInputValue = (function () {
 
 $(document).ready(function () {
     $('#departureIn').val(new Date().toDateInputValue());
+    onlyNumberFunc(document.getElementById("dayIn"));
 });
 
-
+// 출발일, 여행기간 유효성 검사
 function checkDays() {
+    if ($('#departureIn').val() == "") {
+        alert("출발일을 정해주세요.");
+        $('#departureIn').focus();
+        return false;
+    }
     if ($('#dayIn').val() == "") {
         alert("여행 기간을 입력해주세요.");
         $('#dayIn').focus();
         return false;
-    } else if($('#dayIn').val() < 1){
-        alert("1이상의 숫자를 입력해주세요.");
-        $('#dayIn').focus();
-        return false;
     }
-        $("#initForm").submit();
+    $("#initForm").submit();
 }
 
+// 여행 기간 엔터 이벤트
 $("#dayIn").keydown(function (keyNum) {
     if (keyNum.keyCode == 13) {
         checkDays();
     }
 })
 
-// function fetchPage(name) {
-//     fetch(name).then(function (response) {
-//         response.text().then(function (text) {
-//             document.querySelector('article').innerHTML = text;
-//         })
-//     });
-// }
-
+// 여행 기간에 1~9 외에 허용하지 않는다.
+function onlyNumberFunc(t) {
+    var regexp = /[^1-9]/gi;
+    t.onkeyup = function (e) {
+        var v = this.value;
+        this.value = v.replace(regexp, '');
+    }
+}

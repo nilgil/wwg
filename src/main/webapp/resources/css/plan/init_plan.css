@@ -8,13 +8,17 @@
     
 }
 
+
 #initForm{
-    width: 600px;
+    width:600px;
+    height: 700px;
+    margin-top: 100px;
+    margin-bottom: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFFFFF;
-    height:700px;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
 
 }
@@ -27,13 +31,20 @@
 #howdays {
     text-align: center;
 }
+#howdays input{
+	display: flex;
+}
+#howdays .day{
+	display: flex;
+}
 
 
 #departureIn{
-    width: 170px;
+    width: 190px;
+
 }
 #dayIn{
-    width: 60px;
+    width: 40px;
 }
 
 #submit {
@@ -48,7 +59,7 @@
 	background-color: #FFB740;
 }
 .main_img img{
-	margin-top:0px;
+	margin-top:-62px;
 	width:600px;
 	height:300px;
 	border-radius: 10px 10px 0px 0px;
@@ -62,3 +73,11 @@ p{
 .p1{
 	font-size: 36px;
 }
+
+    border: 1px solid grey;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+

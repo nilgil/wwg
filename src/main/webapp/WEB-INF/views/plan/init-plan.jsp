@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 
 <html>
@@ -14,20 +14,21 @@
     
     
     <div id="container">
-        <p class="p1">계획짜기</p>
+        <p class="p1">일정짜기</p>
         <form id="initForm" method="post" action="/plan/create">
             <div class="main_img"><img src="/img/qna/plan03.jpg"></div>
             <s:csrfInput/>
             <input name="username" type="hidden" value="${username}"/>
             <div id="calendar">
-                <p>출발일?</p>
-            <input id="departureIn" class="form-control" name="departure" type="date">
+                <p>출발일</p>
+                <input id="departureIn" class="form-control" name="departure" type="date">
             </div>
             <br>
-            <div class="id_howdays" id="howdays">
-                <p>몇일?</p>
+            <div id="howdays">
+                <p>여행 기간</p>
                 <input hidden="hidden"/>
-                <input class="form-control" id="dayIn" name="days" onkeydown="">
+                <input class="form-control" type="text" id="dayIn" name="days" placeholder="" /><p class="day">일</p>
+
             </div>
             <br><br>
             <div id="submit" onclick="checkDays()">플랜 만들기</div>
