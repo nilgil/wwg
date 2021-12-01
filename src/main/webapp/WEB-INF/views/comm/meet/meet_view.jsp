@@ -100,7 +100,6 @@ $(function() {
 	<div class="c_meetview_table" >
 	<table id="c_m_view_table1" class="table table-hover">
 	<h2>동행구해요 게시판</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 		<tbody>
 			<tr>
 				<td width="90">제목</td>

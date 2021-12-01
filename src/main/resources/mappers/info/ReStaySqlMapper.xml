@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="restayMapper">
+
+	<resultMap id="restayResult"      		type="ReStayBoard">
+		<result property="stay_re_no"	    column="stay_re_no" />
+		<result property="rstay_no"	     	column="rstay_no" />
+		<result property="username"    		column="username" />
+		<result property="stay_re_content"  column="stay_re_content" />
+		<result property="stay_re_regdate" 	column="stay_re_regdate" />
+	</resultMap>
+	
+	<select id="staylist" parameterType="int" resultMap="restayResult">
+		select * from trip_stay_reply where rstay_no=#{rstay_no} order by stay_re_no
+	</select>
+	
+	<insert id="insert" parameterType="ReStayBoard">
+		<selectKey keyProperty="stay_re_no" order="BEFORE" resultType="int">
+			select nvl(max(stay_re_no),0) + 1 from trip_stay_reply
+		</selectKey>
+		insert into trip_stay_reply values(#{stay_re_no},#{rstay_no},#{username},
+			#{stay_re_content},sysdate)
+	</insert>
+	
+	<update id="update" parameterType="ReStayBoard">
+		update trip_stay_reply set stay_re_content=#{stay_re_content},
+			stay_re_regdate=sysdate where stay_re_no=#{stay_re_no} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from trip_stay_reply where stay_re_no=#{stay_re_no}
+	</delete>
+	
+</mapper>

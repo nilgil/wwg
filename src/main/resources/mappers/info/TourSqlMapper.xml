@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="tourMapper">
+	<resultMap id="tourResult"      type="TourBoard">
+		<result property="tour_no"	     column="tour_no" />
+		<result property="username"    column="username" />
+		<result property="tour_title"   column="tour_title" />
+		<result property="tour_content"   column="tour_content" />
+		<result property="tour_regdate" column="tour_regdate" />
+		<result property="tour_hit"    column="tour_hit" />
+		<result property="tour_like"    column="tour_like" />
+	</resultMap>
+
+<!-- 글작성 / alias="TourBoard" -->
+	<insert id="insert" parameterType="TourBoard">
+        insert into trip_tour values(#{tour_no},#{username},
+		#{tour_title},#{tour_content},sysdate,0,0)
+	</insert>
+
+<!-- 상세페이지 -->
+	<select id="select" parameterType="int" resultType="TourBoard">
+		select * from trip_tour where tour_no=#{tour_no}
+	</select>
+	
+<!-- 글번호 증가 -->
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(tour_no),0) + 1 from trip_tour
+	</select>
+
+<!-- 글갯수 -->
+	<select id="count" resultType="int">
+		select count(*) from trip_tour
+	</select>
+	
+<!-- 글목록 / alias="TourBoard" -->
+	<select id="tourlist" parameterType="TourBoard" resultMap="tourResult">
+		select * from (select TourBoard.*,rowNum rn from (
+			select * from trip_tour
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				tour_title like '%'||#{keyword}||'%' or
+				tour_content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by tour_no desc) TourBoard )
+			where rn between #{startRow} and #{endRow}
+	</select>
+
+<!-- 글목록 검색 기능 -->	
+	<select id="getTotal" parameterType="TourBoard" resultType="int">
+		select count(*) from trip_tour 
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				tour_title like '%'||#{keyword}||'%' or
+				tour_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+<!-- 조회수 증가 -->	
+	<update id="selectUpdate" parameterType="int">
+		update trip_tour set tour_hit = tour_hit+1 where tour_no=#{tour_no}
+	</update>
+
+<!-- 수정 기능 -->	
+	<update id="update" parameterType="TourBoard">
+		update trip_tour set username=#{username},tour_title=#{tour_title},
+			tour_content=#{tour_content},tour_regdate=sysdate
+			where tour_no=#{tour_no}
+	</update>
+	
+<!-- 글삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from trip_tour where tour_no=#{tour_no}
+	</delete>
+	
+<!-- 좋아요 -->
+	<update id="like" parameterType="TourBoard">
+		update trip_tour set tour_like=tour_like+1 where tour_no=#{tour_no}
+	</update>
+
+</mapper>

@@ -41,7 +41,7 @@ $(function(){
             </div>
         
             <div class="detail_table">
-                <table id="table_2" class="table table-hover">
+                <table id="detail_table_2" class="table table-hover">
                 <h2>Q&A 게시판</h2>
                 <h3>${qnalist.qna_title}</h3>            
                   <thead>
@@ -56,7 +56,7 @@ $(function(){
                   
                   <tbody>
                    <tr>
-                    <td colspan="5" text-align="center" >
+                    <td class="contents" colspan="5" text-align="center" >
                         <pre>${qnalist.qna_content}</pre>
                     </td>
                    </tr>

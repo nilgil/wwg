@@ -8,7 +8,6 @@
 		<result property="username"    column="username" />
 		<result property="food_title"   column="food_title" />
 		<result property="food_content"   column="food_content" />
-		<result property="food_photo"     column="food_photo" />
 		<result property="food_regdate" column="food_regdate" />
 		<result property="food_hit"    column="food_hit" />
 		<result property="food_like"    column="food_like" />
@@ -17,7 +16,7 @@
 <!-- 글작성 / alias="FoodBoard" -->
 	<insert id="insert" parameterType="FoodBoard">
         insert into trip_food values(#{food_no},#{username},
-		#{food_title},#{food_content},0,sysdate,0,0)
+		#{food_title},#{food_content},sysdate,0,0)
 	</insert>
 
 <!-- 상세페이지 -->
@@ -74,7 +73,7 @@
 <!-- 수정 기능 -->	
 	<update id="update" parameterType="FoodBoard">
 		update trip_food set username=#{username},food_title=#{food_title},
-			food_content=#{food_content}
+			food_content=#{food_content},food_regdate=sysdate
 			where food_no=#{food_no}
 	</update>
 	

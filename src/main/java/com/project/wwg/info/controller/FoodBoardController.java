@@ -45,7 +45,7 @@ public class FoodBoardController {
 		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
 		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
 		 */		 		
-		return "info/foodform";
+		return "info/food/foodform";
 	}
 	
 	// 글작성
@@ -68,7 +68,7 @@ public class FoodBoardController {
 		model.addAttribute("result", result);
 		/* model.addAttribute("username", username); */
 		
-		return "info/insertresult";
+		return "info/food/foodinsertresult";
 	}
 	
 	// 글목록 첫페이지 실행
@@ -103,7 +103,7 @@ public class FoodBoardController {
 		model.addAttribute("search", foodboard.getSearch());
 		model.addAttribute("keyword", foodboard.getKeyword());
 		
-		return "info/foodlist";
+		return "info/food/foodlist";
 	}
 	
 	// 상세페이지
@@ -113,7 +113,7 @@ public class FoodBoardController {
 		FoodBoard foodboard = service.select(food_no);	// 상세 정보 구하기
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
-		return "info/foodcontent";
+		return "info/food/foodcontent";
 	}
 	
 	// 글수정 폼
@@ -122,7 +122,7 @@ public class FoodBoardController {
 		FoodBoard foodboard = service.select(food_no);
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
-		return "info/foodupdateform";
+		return "info/food/foodupdateform";
 	}
 	
 	//글수정
@@ -131,7 +131,7 @@ public class FoodBoardController {
 		int result = service.update(foodboard);
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
-		return "info/foodupdate";
+		return "info/food/foodupdate";
 	}
 	
 	// 글삭제 폼
@@ -141,7 +141,7 @@ public class FoodBoardController {
 //		int result = service.delete(food_no);
 //		model.addAttribute("result", result);
 //		model.addAttribute("pageNum", pageNum);
-		return "info/fooddeleteform";
+		return "info/food/fooddeleteform";
 	}
 
 	// 글삭제
@@ -151,7 +151,7 @@ public class FoodBoardController {
 		int result = service.delete(food_no);
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
-		return "info/fooddelete";
+		return "info/food/fooddelete";
 	}
 	
 	// 좋아요

@@ -10,7 +10,6 @@ public class FoodBoard {
 	private String username;
 	private String food_title;
 	private String food_content;
-	private String food_photo;
 	private Date food_regdate;
 	private int food_hit;
 	private int food_like;

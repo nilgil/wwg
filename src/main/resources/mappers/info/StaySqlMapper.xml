@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="stayMapper">
+	<resultMap id="stayResult"      type="StayBoard">
+		<result property="stay_no"	     column="stay_no" />
+		<result property="username"    column="username" />
+		<result property="stay_title"   column="stay_title" />
+		<result property="stay_content"   column="stay_content" />
+		<result property="stay_regdate" column="stay_regdate" />
+		<result property="stay_hit"    column="stay_hit" />
+		<result property="stay_like"    column="stay_like" />
+	</resultMap>
+
+<!-- 글작성 / alias="StayBoard" -->
+	<insert id="insert" parameterType="StayBoard">
+        insert into trip_stay values(#{stay_no},#{username},
+		#{stay_title},#{stay_content},sysdate,0,0)
+	</insert>
+
+<!-- 상세페이지 -->
+	<select id="select" parameterType="int" resultType="StayBoard">
+		select * from trip_stay where stay_no=#{stay_no}
+	</select>
+	
+<!-- 글번호 증가 -->
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(stay_no),0) + 1 from trip_stay
+	</select>
+
+<!-- 글갯수 -->
+	<select id="count" resultType="int">
+		select count(*) from trip_stay
+	</select>
+	
+<!-- 글목록 / alias="StayBoard" -->
+	<select id="staylist" parameterType="StayBoard" resultMap="stayResult">
+		select * from (select StayBoard.*,rowNum rn from (
+			select * from trip_stay
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				stay_title like '%'||#{keyword}||'%' or
+				stay_content like '%'||#{keyword}||'%'
+			</if>
+		</where>			
+			 order by stay_no desc) StayBoard )
+			where rn between #{startRow} and #{endRow}
+	</select>
+
+<!-- 글목록 검색 기능 -->	
+	<select id="getTotal" parameterType="StayBoard" resultType="int">
+		select count(*) from trip_stay 
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				stay_title like '%'||#{keyword}||'%' or
+				stay_content like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+<!-- 조회수 증가 -->	
+	<update id="selectUpdate" parameterType="int">
+		update trip_stay set stay_hit = stay_hit+1 where stay_no=#{stay_no}
+	</update>
+
+<!-- 수정 기능 -->	
+	<update id="update" parameterType="StayBoard">
+		update trip_stay set username=#{username},stay_title=#{stay_title},
+			stay_content=#{stay_content},stay_regdate=sysdate
+			where stay_no=#{stay_no}
+	</update>
+	
+<!-- 글삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from trip_stay where stay_no=#{stay_no}
+	</delete>
+	
+<!-- 좋아요 -->
+	<update id="like" parameterType="StayBoard">
+		update trip_stay set stay_like=stay_like+1 where stay_no=#{stay_no}
+	</update>
+
+</mapper>

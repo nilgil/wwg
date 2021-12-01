@@ -42,7 +42,6 @@
 <div class="c_notiview_table">
 	<table id="c_n_view_table1" class="table table-hover" width=900 align=center>
 	<h2>공지사항 게시판</h2>
-	<p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
 			<tr>
 				<td width="90">제목</td>
 				<td>${notice.notice_title}</td>

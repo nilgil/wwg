@@ -38,7 +38,6 @@
      <div class="write_table">
       <table id="write_table1" class="table table-hover">
         <h2>문의글 작성</h2>
-        <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
         <thead>
         <tr>
             <th colspan="2" >글작성</th>
