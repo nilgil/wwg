@@ -114,7 +114,7 @@ $(function() {
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><pre>${tourboard.tour_content}</pre></td>
+				<td>${tourboard.tour_content}</td>
 			</tr>
 			</tbody>
 		</table>

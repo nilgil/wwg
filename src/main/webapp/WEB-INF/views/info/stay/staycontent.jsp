@@ -114,7 +114,7 @@ $(function() {
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><pre>${stayboard.stay_content}</pre></td>
+				<td>${stayboard.stay_content}</td>
 			</tr>
 			</tbody>
 		</table>
