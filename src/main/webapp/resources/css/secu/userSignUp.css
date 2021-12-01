@@ -11,7 +11,7 @@ body{
     margin: 0%;
     display: flex;
     flex-direction: column;
-    background-image : url('../img/main해녀.jpg');
+    background-image : url('/img/qna/main해녀.jpg');
     background-size: 900px 900px;
     font-family: 'paybooc-Bold';
 }
@@ -40,4 +40,5 @@ a{
 }
 #signUp_table_2{
     background-color: #fffffff5;
+    border-radius: 10px;
 }

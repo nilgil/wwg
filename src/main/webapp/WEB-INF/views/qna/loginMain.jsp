@@ -14,7 +14,7 @@
 
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
+<%@ include file="/resources/include/navbar_login.jsp"%>
 
 
 <!-- cneter -->
@@ -22,21 +22,9 @@
 
 <div class="center_main1">여행후기<hr>
 <ul>
-    <li><a href="#">부산여행 2박 3일 후기</a>&nbsp&nbsp&nbsp
-        <span class="pull-right">
-            <span class="count">댓글수</span>
-        &nbsp;
-        <span class="date">날짜시간</span></a>
-        </span>
-    </li>
-    <li><a href="#">제주도 한달살기 후기(1탄)</a></li>
-    <li><a href="#">제주도 현지인이 추천하는 맛집 후기</a></li>
-    <li><a href="#">친구들과 제주도 여행</a></li>
-    <li><a href="#">뚜벅이 제주도 일주일 </a></li>
-    <li><a href="#">제주도 한달살기 후기</a></li>
-    <li><a href="#">제목이 길면 어떻게 되나면 이렇게 되는거야 더 길어야해</a></li>
-    <li><a href="#">제주도 한달살기 후기</a></li>
-    <li><a href="#">부산여행 2박 3일 후기</a></li>
+<c:forEach var="notice" items="${noticelist}">
+<li>${notice.notice_title}</li>
+</c:forEach>
 </ul><hr>
 </div>
 

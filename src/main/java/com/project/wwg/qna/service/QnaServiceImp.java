@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.wwg.comm.dao.notice_dao;
+import com.project.wwg.comm.model.notice;
 import com.project.wwg.qna.dao.QnaDao;
 import com.project.wwg.qna.model.Qna;
 
@@ -14,6 +16,9 @@ public class QnaServiceImp implements QnaService{
 	
 	@Autowired
 	private QnaDao qd;
+	
+	@Autowired
+	private notice_dao nd;
 	
 	public List<Qna> list(Qna qna){ 
 		return qd.list(qna);
@@ -107,6 +112,8 @@ public class QnaServiceImp implements QnaService{
 		// TODO Auto-generated method stub
 		return qd.getQnaMain();
 	}
+
+
 	
 
 

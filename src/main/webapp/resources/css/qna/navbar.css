@@ -35,6 +35,7 @@ display: flex;
 list-style: none;
 padding-left: 0%;
 margin-bottom: 0px;
+font-size: 20px;
 }
 .navbar_menu li{
     padding: 8px 24px;
@@ -87,7 +88,7 @@ margin-bottom: 0px;
     font-size: 24px;
     color: rgb(49, 48, 41);
     display: none;
-    padding: 8px 12px;
+    padding: 30px 12px;
 }
 
 /* 반응형 웹 기능 */
@@ -129,5 +130,8 @@ margin-bottom: 0px;
     }
     .navbar_menu li li{
         display: none;
+    }
+    .navbar_logout{
+margin-right:5px;
     }
 }

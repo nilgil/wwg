@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.wwg.comm.dao.notice_dao;
+import com.project.wwg.comm.model.notice;
 import com.project.wwg.qna.model.Qna;
 
 
@@ -105,6 +107,8 @@ public class QnaDaoImp implements QnaDao{
 		// TODO Auto-generated method stub
 		return st.selectList("qnans.qnaMain");
 	}
+
+	
 	
 
 }

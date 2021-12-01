@@ -16,7 +16,7 @@
 <!-- <script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script> -->
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
+<%@ include file="/resources/include/navbar_login.jsp"%>
 
 
 <!-- center -->

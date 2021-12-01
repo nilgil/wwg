@@ -77,8 +77,8 @@ $(function() {
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
-<a>${user.username}님 환영합니다.</a>
+<%@ include file="/resources/include/navbar_login.jsp"%>
+
 
 
 <!-- center -->

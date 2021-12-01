@@ -55,4 +55,10 @@ public class notice_servicelmpl implements notice_service {
 		return nd.getMaxNum();
 	}
 
+	@Override
+	public List<notice> getNotice() {
+		// TODO Auto-generated method stub
+		return nd.getNotice();
+	}
+
 }

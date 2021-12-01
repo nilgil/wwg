@@ -57,4 +57,10 @@ public class notice_daolmpl implements notice_dao {
 		return sst.selectOne("noticens.getMaxNum");
 	}
 
+	@Override
+	public List<notice> getNotice() {
+		// TODO Auto-generated method stub
+		return sst.selectList("noticens.notice");
+	}
+
 }
