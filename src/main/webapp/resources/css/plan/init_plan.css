@@ -4,36 +4,61 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 80%;
+    
 }
 
 #initForm{
-    width: 300px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    background-color: #FFFFFF;
+    height:700px;
+    border-radius: 10px;
+
 }
 
 #calendar {
     text-align: center;
-    width: 100%;
+    margin-top: 40px;
 }
 
 #howdays {
     text-align: center;
-    width: 100%;
 }
 
 
 #departureIn{
-    width: 150px;
+    width: 170px;
 }
 #dayIn{
     width: 60px;
 }
 
 #submit {
-    border: 1px solid black;
+    border: 2px solid black;
     text-align: center;
+    width:140px;
+    border-radius: 15px;
+    font-size: 20px;
+}
+#submit:hover{
+	border: 3px solid #293462;
+	background-color: #FFB740;
+}
+.main_img img{
+	margin-top:0px;
+	width:600px;
+	height:300px;
+	border-radius: 10px 10px 0px 0px;
+}
+.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover, #submit, #close-box, #searchBtn {
+    cursor: pointer;
+}
+p{
+	font-size: 20px;
+}
+.p1{
+	font-size: 36px;
 }

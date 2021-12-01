@@ -30,7 +30,7 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
+<%@ include file="/resources/include/navbar_login.jsp"%>
 
 <!-- center -->
 <div class="c_meetupdate_center">

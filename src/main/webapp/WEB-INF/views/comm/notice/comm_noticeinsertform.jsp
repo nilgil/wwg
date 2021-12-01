@@ -18,11 +18,10 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
+<%@ include file="/resources/include/navbar_login.jsp"%>
 
 <!-- center -->
 <div class="c_notinsert_center">
-<a>${user.username}님 환영합니다.</a>
 
 	<div class="side"> 
 			<table id="side_menu" class="table table-hover">

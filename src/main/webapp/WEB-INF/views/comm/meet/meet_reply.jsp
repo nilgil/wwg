@@ -66,7 +66,7 @@
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${mr.meet_re_no}">
 						<c:if test="${mr.member_id==user.username }">
-							<input class="btn btn-outline-warning btn-sm" type="button" value="수정" class="edit1" id="${mr.meet_re_no}">
+							<input  type="button" value="수정" class="edit1" id="${mr.meet_re_no}">
 							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${mr.meet_re_no},${mr.meet_fno})">
 						</c:if></td>
 				</tr>

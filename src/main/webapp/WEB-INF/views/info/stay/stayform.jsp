@@ -28,9 +28,9 @@
                        <tr><th>회원문의</th></tr>
                      </thead>
                      <tbody>
-		             <tr><td><a href="/staylist.do">숙소</a></td></tr>
-		             <tr><td><a href="/foodlist.do">맛집</a></td></tr>
-		             <tr><td><a href="#">여행지</a></td></tr>
+		              <tr><td><a href="/staylist.do">숙소</a></td></tr>
+		              <tr><td><a href="/foodlist.do">맛집</a></td></tr>
+		              <tr><td><a href="/tourlist.do">여행지</a></td></tr>
                      </tbody>
                  </table>
       </div>

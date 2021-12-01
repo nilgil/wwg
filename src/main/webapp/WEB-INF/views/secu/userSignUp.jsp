@@ -7,12 +7,13 @@
 <head>
     <title>회원가입</title>
     <%@ include file="/resources/include/headTag.jsp"%>
-    <link defer rel='stylesheet' media='screen' href='/css/qna/userSignUp.css'>
+    <link defer rel='stylesheet' media='screen' href='/css/secu/userSignUp.css'>
     
 </head>
 <body>
 <!-- navbar -->
 <%@ include file="/resources/include/navbar.jsp"%>
+
 
 <form action="${pageContext.request.contextPath}/userSignUpProcess" method="post">
 
@@ -20,8 +21,7 @@
 
     <div class="signUp_table">
         <table id="signUp_table_2" class="table table-hover">
-        <h2>회원가입</h2>
-        <h3>{제목}</h3>            
+        <h2>회원가입</h2>           
           <thead>
            <tr>
             <th colspan="2" text-align="center">회원가입폼</th>

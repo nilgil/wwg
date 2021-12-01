@@ -18,7 +18,7 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar.jsp"%>
+<%@ include file="/resources/include/navbar_login.jsp"%>
 
 <!-- center -->
 <div class="review_update_center">

@@ -2,6 +2,7 @@ package com.project.wwg.qna.dao;
 
 import java.util.List;
 
+import com.project.wwg.comm.model.notice;
 import com.project.wwg.qna.model.Qna;
 
 public interface QnaDao{
@@ -32,6 +33,7 @@ public interface QnaDao{
 	int getComCount(Qna qna);
 
 	List<Qna> getQnaMain();
+	
 
 
 

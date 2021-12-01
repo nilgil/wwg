@@ -2,6 +2,7 @@ package com.project.wwg.qna.service;
 
 import java.util.List;
 
+import com.project.wwg.comm.model.notice;
 import com.project.wwg.qna.model.Qna;
 
 
@@ -32,6 +33,8 @@ public interface QnaService{
 	int getComment(Qna qna);
 
 	List<Qna> getQnaMain();
+
+	
 
 
 

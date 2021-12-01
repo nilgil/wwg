@@ -24,5 +24,6 @@ public interface notice_service {
 
 	int getMaxNum();
 
+	List<notice> getNotice();
 	
 }

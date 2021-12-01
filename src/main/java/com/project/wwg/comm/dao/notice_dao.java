@@ -22,5 +22,7 @@ public interface notice_dao {
 
 	int getMaxNum();
 
+	List<notice> getNotice();
+
 
 }

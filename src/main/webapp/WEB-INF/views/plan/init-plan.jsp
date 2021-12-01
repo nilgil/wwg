@@ -12,23 +12,27 @@
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     
+    
     <div id="container">
+        <p class="p1">계획짜기</p>
         <form id="initForm" method="post" action="/plan/create">
+            <div class="main_img"><img src="/img/qna/plan03.jpg"></div>
             <s:csrfInput/>
             <input name="username" type="hidden" value="${username}"/>
             <div id="calendar">
                 <p>출발일?</p>
-                <input id="departureIn" name="departure" type="date">
+            <input id="departureIn" class="form-control" name="departure" type="date">
             </div>
             <br>
-            <div id="howdays">
+            <div class="id_howdays" id="howdays">
                 <p>몇일?</p>
                 <input hidden="hidden"/>
-                <input id="dayIn" name="days" onkeydown="">
+                <input class="form-control" id="dayIn" name="days" onkeydown="">
             </div>
             <br><br>
             <div id="submit" onclick="checkDays()">플랜 만들기</div>
         </form>
+        
     </div>
     
     <%@ include file="/resources/include/footerbar.jsp" %>

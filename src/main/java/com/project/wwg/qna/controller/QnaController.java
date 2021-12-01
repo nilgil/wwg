@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.wwg.comm.model.notice;
+import com.project.wwg.comm.service.notice_service;
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
 import com.project.wwg.qna.service.QnaService;
@@ -23,29 +25,42 @@ public class QnaController{
 	
 	@Autowired
 	private QnaService qs; //service 인터페이스
+	
+	@Autowired
+	private notice_service ns; //service 인터페이스
 
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String mainpage(Qna qna, Model model) { 
+	public String mainpage(Qna qna, notice notice, Model model) { 
+
 	    List<Qna> qnalist = new ArrayList<Qna>();
 	    qnalist = qs.getQnaMain();
+	    
+	    List<notice> noticelist = new ArrayList<notice>();
+	    noticelist = ns.getNotice();
 	    
 	    System.out.println(qnalist);
 	    System.out.println("여기까지옴");
 	    
 		model.addAttribute("qnalist", qnalist);
+		model.addAttribute("noticelist", noticelist);
 		
 		return "qna/main";
 	}
 	
 	//로그인후 메인페이지
 		@RequestMapping("/loginMain")
-		public String loginMainPage(Qna qna, Model model) {
+		public String loginMainPage(Qna qna, notice notice, Model model) {
 			List<Qna> qnalist = new ArrayList<Qna>();
 	        qnalist = qs.getQnaMain(); 
 	        
+	        List<notice> noticelist = new ArrayList<notice>();
+		    noticelist = ns.getNotice();
+	        
 			model.addAttribute("qnalist", qnalist);
+			model.addAttribute("noticelist", noticelist);
+			
 			return "qna/loginMain";
 		}
 	
