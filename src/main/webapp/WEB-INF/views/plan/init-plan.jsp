@@ -27,7 +27,7 @@
             <div id="howdays">
                 <p>여행 기간</p>
                 <input hidden="hidden"/>
-                <input class="form-control" type="text" id="dayIn" name="days" placeholder="" /><p class="day">일</p>
+                <input class="form-control" type="text" id="dayIn" name="days" placeholder="" /><p class="days">일</p>
 
             </div>
             <br><br>

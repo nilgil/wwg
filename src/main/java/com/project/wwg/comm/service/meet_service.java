@@ -3,6 +3,7 @@ package com.project.wwg.comm.service;
 import java.util.List;
 
 import com.project.wwg.comm.model.meet;
+import com.project.wwg.comm.model.notice;
 
 
 
@@ -26,4 +27,6 @@ public interface meet_service {
 	int getMaxNum();
 
 	void like(int meet_no);
+	
+	List<meet> getMeet();
 }

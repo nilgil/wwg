@@ -62,4 +62,10 @@ public class meet_daolmpl implements meet_dao {
 		sst.update("meetns.like", meet_no);
 	}
 
+	@Override
+	public List<meet> getMeet() {
+		// TODO Auto-generated method stub
+		return sst.selectList("meetns.meet");
+	}
+
 }

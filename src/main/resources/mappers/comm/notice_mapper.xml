@@ -81,7 +81,8 @@
 	<update id="delete" parameterType="int">
 		delete from comm_notice where notice_no=#{notice_no}
 	</update>
-	
+
+<!-- 메인에 10개 데이터 호출 -->	
 <select id="notice" parameterType="notice" resultType="notice">
  select * from (select * from comm_notice order by notice_regdate desc) where rownum &lt;= 10
 </select>

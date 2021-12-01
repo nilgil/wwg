@@ -2,6 +2,7 @@ package com.project.wwg.comm.dao;
 
 import java.util.List;
 
+import com.project.wwg.comm.model.notice;
 import com.project.wwg.comm.model.review;
 
 
@@ -24,4 +25,8 @@ public interface review_dao {
 	int getMaxNum();
 
 	void like(int review_no);
+	
+	List<review> getReview1();
+	
+	List<review> getReview2();
 }

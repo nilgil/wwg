@@ -89,4 +89,9 @@
 		update comm_meet set meet_like=meet_like +1 where meet_no=#{meet_no}
 	</update>
 	
+<!-- 메인에 10개 데이터 호출 -->	
+<select id="meet" parameterType="meet" resultType="meet">
+ select * from (select * from comm_meet order by meet_regdate desc) where rownum &lt;= 10
+</select>	
+	
 </mapper>
