@@ -68,9 +68,9 @@
 		<!-- 글쓰기버튼 -->
 		<div class="c_n_write_btn">
 		<form method=post action="${path}/comm_noticeinsertform">
-		<c:if test="${user.username eq admin}">
+		<s:authorize access="hasRole('ROLE_ADMIN')">
 			<input class="btn btn-info" type=submit value="글작성">
-		</c:if>
+		</s:authorize>
 		</form>
 		</div>
 		
