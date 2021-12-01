@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -11,7 +11,23 @@
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
-        
+        <div id="content-header">
+            <div id="plan-info">
+                <div id="user-name">${plan.username}</div>
+                <div id="plan-title">${plan.title}</div>
+                <div id="plan-departure">${plan.departure}</div>
+                <div id="plan-days">${plan.days}</div>
+            </div>
+            <div id="features">
+                <div id="good">${plan.good}</div>
+                <div id="hit">${plan.hit}</div>
+                <div id="pub">${plan.pub}</div>
+            </div>
+        </div>
+        <div id="content-body">
+            <div id="plans"></div>
+            <button onclick="goodToggle(${plan.idx})">좋아요!</button>
+        </div>
     </div>
     <%@ include file="/resources/include/footerbar.jsp" %>
 </div>

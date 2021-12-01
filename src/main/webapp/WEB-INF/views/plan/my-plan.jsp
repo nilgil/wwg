@@ -1,12 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-<%--<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>--%>
-<%--<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>--%>
 <head>
     <title>Title</title>
     <%@ include file="/resources/include/headTag.jsp" %>
     <link rel='stylesheet' type='text/css' href='/css/plan/my_plan.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <script defer src="/js/plan/my_plan.js"></script>
 </head>
 <body>
@@ -18,11 +17,24 @@
             <h1>내 일정</h1>
         </header>
 
+        <c:if test="${empty plans}">
+            <div id="none-plan">
+                <br>
+                <h3>생성된 일정이 없습니다.</h3>
+                <br>
+                <a href="/plan">일정 만들기</a>
+            </div>
+        </c:if>
         <div id="plan-box">
             <c:forEach items="${plans}" var="plan" varStatus="st">
                 <div class='plan'>
                     <div id='plan-img'>
-                        <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}" alt="https://via.placeholder.com/150"/></a>
+                        <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}"
+                                                              alt="https://via.placeholder.com/150"/></a>
+                        <span id="pubToggle" onclick="askReallyPubToggle(${plan.idx},${plan.pub})">
+                            <c:if test="${plan.pub==0}"><i class="fas fa-toggle-off fa-2x"></i></c:if>
+                            <c:if test="${plan.pub==1}"><i class="fas fa-toggle-on fa-2x"></i></c:if>
+                    </span>
                     </div>
                     <div id='plan-info'>
                         <div id="day-info">

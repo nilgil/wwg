@@ -233,7 +233,7 @@ function printSearchResult(response) {
     createMap();
 
     // 페이징 처리
-    paging(jsonPageInfo.count, jsonPageInfo.div, 5, jsonPageInfo.pageNum);
+    paging(jsonPageInfo.count, jsonPageInfo.divPlans, jsonPageInfo.divPages, jsonPageInfo.page);
 }
 
 // 페이징 처리
@@ -382,8 +382,8 @@ function savePlan() {
             "plans": jsonPlans,
             "idx": Number(idx)
         },
-        success: function () {
-            location.replace("/plan/my");
+        success: function (response) {
+            location.replace(response);
         },
         error: function () {
             alert("savePlan");

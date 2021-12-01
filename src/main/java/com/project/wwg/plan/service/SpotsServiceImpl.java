@@ -55,7 +55,7 @@ public class SpotsServiceImpl {
      * [R] 검색어로 Spot 검색하여 list로 반환
      */
     public List<Spot> searchSpots(String keyword, int pageNum) {
-        PageInfo pageInfo = new PageInfo(keyword,pageNum);
+        PageInfo pageInfo = new PageInfo(8,keyword,pageNum);
         return spotsDao.searchSpots(pageInfo);
     }
 

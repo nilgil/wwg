@@ -18,19 +18,3 @@ function askReallyDelete(idx) {
         deletePlan(idx)
     }
 }
-
-function askReallyPubToggle(idx,pub) {
-    if (confirm("공개 여부를 변경하시겠습니까?")) {
-        pubToggle(idx,pub)
-    }
-}
-function pubToggle(idx,pub) {
-    $.ajax({
-        method: 'PUT',
-        url: '/plan/pub-toggle',
-        data: {'idx': Number(idx), 'pub': Number(pub)},
-        success: function () {
-            location.replace("/plan/my");
-        }
-    })
-}

@@ -22,24 +22,63 @@
         order by regdate desc
     </select>
 
-    <select id="getAllPlansList" parameterType="PageInfo" resultType="Plan">
+    <select id="getPubPlansList" parameterType="PageInfo" resultType="Plan">
         <![CDATA[
         select *
         from (
                  SELECT a.*, ROWNUM as rnum
                  FROM (
-                          SELECT *
-                          FROM plan
-                          ORDER BY regdate desc) a)
+                          select plan.*, (select count(*) from plan_good where plan_no = plan.idx) good
+                          from plan
+                          where pub = 1
+                          order by regdate desc
+                      ) a
+             )
         WHERE rnum >= #{startRow}
           and rnum <= #{endRow}
         ]]>
     </select>
 
-    <select id="getAllPlansCount" resultType="_int">
+    <select id="getPubPlansCount" resultType="_int">
         select count(*)
         from plan
-        where pub = 0
+        where pub = 1
+    </select>
+
+    <select id="getBestPubPlansList" resultType="Plan">
+        <![CDATA[
+        select *
+        from (
+                 SELECT a.*, ROWNUM as rnum
+                 FROM (
+                          select plan.*, (select count(*) from plan_good where plan_no = plan.idx) good
+                          from plan
+                          where pub = 1
+                          order by good desc
+                      ) a
+             )
+        WHERE rnum >= 1
+          and rnum <= 3
+        ]]>
+    </select>
+
+    <select id="getPlanReplys" parameterType="_int" resultType="PlanReply">
+        select *
+        from plan_reply
+        where idx = #{plan_no}
+    </select>
+
+    <select id="checkGoodAlready" parameterType="java.util.Map" resultType="_int">
+        select count(*)
+        from plan_good
+        where plan_no = #{idx}
+          and username = #{username}
+    </select>
+
+    <select id="getGoods" parameterType="_int" resultType="_int">
+        select count(*)
+        from plan_good
+        where plan_no = #{idx}
     </select>
 
     <update id="updatePlan" parameterType="Plan">
@@ -49,6 +88,37 @@
             plans=#{plans}
         where idx = #{idx}
     </update>
+
+    <update id="pubOn" parameterType="_int">
+        update plan
+        set pub=1
+        where idx = #{idx}
+    </update>
+
+    <update id="pubOff" parameterType="_int">
+        update plan
+        set pub=0
+        where idx = #{idx}
+    </update>
+
+    <update id="increaseHit" parameterType="_int">
+        update plan
+        set hit = hit + 1
+        where idx = #{idx}
+    </update>
+
+    <insert id="increaseGood" parameterType="java.util.Map">
+        insert into plan_good
+        values (#{idx}, #{username})
+    </insert>
+
+    <delete id="decreaseGood" parameterType="java.util.Map">
+        delete
+        from plan_good
+        where plan_no = #{idx}
+          and username = #{username}
+    </delete>
+
 
     <delete id="deletePlan" parameterType="_int">
         delete

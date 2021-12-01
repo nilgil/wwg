@@ -15,12 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/plan*")
@@ -42,7 +40,7 @@ public class PlannerController {
     @GetMapping("")
     public String plannerInitForm(Principal principal, Model model) throws NotLogInUserException {
         if (principal == null) {
-            throw new NotLogInUserException("로그인 하지 않은 상태입니다.");
+            return "forward:/loginPage";
         }
         String username = principal.getName();
         model.addAttribute("username", username);
@@ -66,10 +64,15 @@ public class PlannerController {
      * 3. 플랜을 저장하고 내 플랜 관리로 이동
      */
     @PostMapping("/save")
+    @ResponseBody
     public String createSuccess(Plan plan) {
-        plannerService.insertPlan(plan);
+        try {
+            plannerService.insertPlan(plan);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         log.debug("Create Plan Success | Plan : {}", plan);
-        return "redirect:/plan/my";
+        return "/plan/my";
     }
 
     // ----------------------------- 내 플랜 ------------------------------
@@ -156,8 +159,26 @@ public class PlannerController {
     @GetMapping("/view/{idx}")
     public String planViewPage(@PathVariable int idx, Model model) {
         Plan plan = plannerService.getPlanByIdx(idx);
+        plannerService.increaseHit(idx);
         model.addAttribute("plan", plan);
         return "/plan/view-plan";
+    }
+
+    @PutMapping("/good")
+    @ResponseBody
+    public String goodToggle(int idx, Principal principal) {
+        String username = principal.getName();
+        try {
+            boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
+            if (isAlreadyGood) {
+                plannerService.decreaseGood(idx, username);
+            } else {
+                plannerService.increaseGood(idx, username);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "success";
     }
 
 
@@ -181,14 +202,36 @@ public class PlannerController {
      * 플랜 게시판 이동
      */
     @GetMapping("/board")
-    public String planBoardForm(Model model, int page) {
-        int searchCount = plannerService.getAllPlansCount();
-        PageInfo pageInfo = new PageInfo(page, searchCount);
-        List<Plan> allPlansList = plannerService.getAllPlansList(pageInfo);
-        model.addAttribute("plans", allPlansList);
+    public String planBoardForm(int page, Model model) {
+        List<Plan> bestPlans = plannerService.getBestPubPlansList();
 
-        log.debug("Get All Plans for Board | Plans : {}", allPlansList);
-        return "/plan/planBoard";
+        String[] titles = new String[bestPlans.size()];
+        for (int i = 0; i < bestPlans.size(); i++) {
+            if (bestPlans.get(i).getPlans().contains("\"")) {
+                titles[i] = bestPlans.get(i).getPlans().split("\"")[1];
+            }
+        }
+        String[] thumbnails = plannerService.getThumbnails(titles);
+
+        int pubPlansCount = plannerService.getPubPlansCount();
+        PageInfo pageInfo = new PageInfo(10,page, pubPlansCount);
+        System.out.println("pageInfo = " + pageInfo);
+        List<Plan> pubPlansList = plannerService.getPubPlansList(pageInfo);
+
+        model.addAttribute("bestPlans", bestPlans);
+        model.addAttribute("thumbnails", thumbnails);
+        model.addAttribute("plans", pubPlansList);
+        model.addAttribute("pageInfo", pageInfo);
+
+        log.debug("Get Public Plans for Board | Plans : {}", pubPlansList);
+        return "/plan/plan-board";
+    }
+
+    @PutMapping("/pub-toggle")
+    @ResponseBody
+    public void togglePub(int idx, int pub) {
+        log.debug("Toggle Public/Private Plan | Parameter : idx={}, pub={}", idx, pub);
+        plannerService.togglePub(idx, pub);
     }
 
     // -----------------------------------------------------------

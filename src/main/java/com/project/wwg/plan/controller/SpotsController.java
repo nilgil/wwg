@@ -58,7 +58,7 @@ public class SpotsController {
 
         List<Spot> spots = spotService.searchSpots(keyword, pageNum);
         int searchCount = spotService.getSearchSpotsCount(keyword);
-        PageInfo pageInfo = new PageInfo(keyword, pageNum, searchCount);
+        PageInfo pageInfo = new PageInfo(8, keyword, pageNum, searchCount);
 
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(spots);
@@ -67,6 +67,8 @@ public class SpotsController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", result);
         jsonObject.put("page_info", pageInfoString);
+
+        System.out.println("pageInfoString = " + pageInfoString);
 
         return jsonObject.toJSONString();
     }

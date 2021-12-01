@@ -6,7 +6,7 @@
     <title>Planner</title>
     <%@ include file="/resources/include/headTag.jsp" %>
     <script defer src="/js/plan/planner.js"></script>
-    <link rel='stylesheet' type='text/css' href='/css/plan/planner.css'>
+    <link rel='stylesheet' type='text/css' href='/css/plan/planner.css'/>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5375710c5345c7b4704ecd71a402404e"></script>
     <script type="text/javascript"
