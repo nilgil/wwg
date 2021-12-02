@@ -60,7 +60,7 @@
 	height:300px;
 	border-radius: 10px 10px 0px 0px;
 }
-.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover, #submit, #close-box, #searchBtn {
+#departureIn:hover, .day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, #submit, #close-box, #searchBtn {
     cursor: pointer;
 }
 p{

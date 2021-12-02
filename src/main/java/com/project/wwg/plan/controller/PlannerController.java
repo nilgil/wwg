@@ -183,15 +183,8 @@ public class PlannerController {
 
     @PutMapping("/good")
     @ResponseBody
-    public String goodToggle(int idx, String username, String beforeUrl, HttpServletRequest request) {
+    public String goodToggle(int idx, String username, HttpServletRequest request) {
         log.debug("[goodToggle] Good Toggle | Param : IDX={}, Username={}", idx, username);
-        log.info(beforeUrl);
-
-        if (username.equals("guest")) {
-            HttpSession session = request.getSession();
-            session.setAttribute("beforeUrl",beforeUrl);
-            return "/loginPage";
-        }
 
         String result = "";
         try {
@@ -248,7 +241,7 @@ public class PlannerController {
         return "/plan/plan-board";
     }
 
-    @GetMapping(value = "/pub", produces = "application/json; charset=utf8")
+    @GetMapping(value = "/pub-list", produces = "application/json; charset=utf8")
     @ResponseBody
     public String getPubPlans(int page) {
         log.debug("Get All Pub Plans | Parameter : page={}", page);
@@ -267,7 +260,7 @@ public class PlannerController {
         return gson.toJson(result);
     }
 
-    @PutMapping("/pub-toggle")
+    @PutMapping("/pub")
     @ResponseBody
     public void togglePub(int idx, int pub) {
         log.debug("Toggle Public/Private Plan | Parameter : idx={}, pub={}", idx, pub);

@@ -15,7 +15,7 @@ function resetBoard(page) {
 function getBoard(page) {
     return new Promise((resolve => {
         $.ajax({
-            url: "/plan/pub",
+            url: "/plan/pub-list",
             method: "GET",
             data: {'page': page},
             dataType: 'json',
@@ -24,7 +24,7 @@ function getBoard(page) {
                 resolve(data);
             },
             error: function () {
-                alert("initBoard");
+                alert("getBoard");
             }
         })
     }));

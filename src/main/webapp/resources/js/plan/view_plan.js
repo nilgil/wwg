@@ -66,8 +66,8 @@ function initPage(response) {
     hit = response.hit;
     pub = response.pub;
 
-    $('#user-name').text(username);
     $('#plan-title').text(title);
+    $('#user-name').text(writer);
 
     let depDate = new Date(departure);
     depDate.setDate(depDate.getDate() + days - 1);
@@ -95,14 +95,16 @@ function goodToggle(idx, username) {
     $.ajax({
         url: '/plan/good',
         method: 'put',
-        data: {"idx": idx, 'username': username, 'beforeUrl': beforeUrl},
+        data: {"idx": idx, 'username': username},
         success: function (response) {
             if (alreadyGood) {
                 $('#good span:nth-child(2)').text(good - 1);
             } else {
                 $('#good span:nth-child(2)').text(good + 1);
             }
-            location.replace(response);
+
+            if (response != "increase" && response != "decrease")
+                location.replace(response);
         }
     })
 }
