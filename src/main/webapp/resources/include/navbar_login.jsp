@@ -11,12 +11,12 @@
     <div class="navbar_logo">
     <c:choose>
     
-    <c:when test="${not empty username}"> 
-    <a href="/loginMain">
+    <c:when test="${username eq 'guest'}"> 
+    <a href="/">
     </c:when>
     
     <c:otherwise>
-    <a href="/">
+    <a href="/loginMain">
     </c:otherwise>
     
     </c:choose>
@@ -85,7 +85,14 @@
         </ul>
         
         
-        <div class="navbar_logout" >${username}님 | <a href="#">로그아웃</a></div>
+        <div class="navbar_logout" >${username}님 |
+        <c:if test="${username eq 'guest'}">
+        <a href="#"> 로그인</a></div>
+        </c:if>
+        <s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+        <a href="#">로그아웃</a></div>
+        </s:authorize>
+        
         
 
         <a href="#" class="navbar_toogleBtn">
