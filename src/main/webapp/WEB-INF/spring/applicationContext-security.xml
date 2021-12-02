@@ -26,7 +26,7 @@
         <!--영길's 요청 권한체크-->
         <intercept-url pattern="/plan" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/plan/create" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/plan/my" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/plan/my" access="hasAnyRole('ROLE_USER')"/>
         <intercept-url pattern="/plan/update-form/*" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/plan/view/*" access="permitAll"/>
         <intercept-url pattern="/plan/board" access="permitAll"/>

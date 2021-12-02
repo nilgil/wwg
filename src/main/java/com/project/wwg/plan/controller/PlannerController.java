@@ -1,6 +1,8 @@
 package com.project.wwg.plan.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
@@ -8,6 +10,7 @@ import com.project.wwg.plan.exceptions.NotLogInUserException;
 import com.project.wwg.plan.service.PlannerServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
@@ -25,6 +29,7 @@ import java.util.List;
 @Slf4j
 public class PlannerController {
     private final JSONParser jsonParser = new JSONParser();
+    private final Gson gson = new Gson();
     private PlannerServiceImpl plannerService;
 
     @Autowired
@@ -40,7 +45,7 @@ public class PlannerController {
     @GetMapping("")
     public String plannerInitForm(Principal principal, Model model) throws NotLogInUserException {
         if (principal == null) {
-            return "forward:/loginPage";
+            return "redirect:/loginPage";
         }
         String username = principal.getName();
         model.addAttribute("username", username);
@@ -82,9 +87,6 @@ public class PlannerController {
      */
     @GetMapping("/my")
     public String myPlan(Principal principal, Model model) throws ParseException, NotLogInUserException {
-        if (principal == null) {
-            throw new NotLogInUserException("로그인 하지 않은 상태입니다.");
-        }
         String username = principal.getName();
         List<Plan> plansByUser = plannerService.getPlansByUser(username);
 
@@ -127,7 +129,7 @@ public class PlannerController {
      */
     @GetMapping(value = "/{idx}", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String getPlanByIdx(@PathVariable int idx) throws ParseException {
+    public String getPlanByIdx(@PathVariable int idx) {
         Plan plan = plannerService.getPlanByIdx(idx);
 
         JsonObject jsonObject = new JsonObject();
@@ -137,8 +139,11 @@ public class PlannerController {
         jsonObject.addProperty("departure", plan.getDeparture().toString());
         jsonObject.addProperty("days", plan.getDays());
         jsonObject.addProperty("plans", plan.getPlans());
+        jsonObject.addProperty("hit", plan.getHit());
+        jsonObject.addProperty("good", plan.getGood());
+        jsonObject.addProperty("pub", plan.getPub());
 
-        log.debug("Update User's Plan | Username : {}, Plan IDX : {}", plan.getUsername(), plan.getIdx());
+        log.debug("Get User's Plan | Username : {}, Plan IDX : {}", plan.getUsername(), plan.getIdx());
         return jsonObject.toString();
     }
 
@@ -157,28 +162,51 @@ public class PlannerController {
     }
 
     @GetMapping("/view/{idx}")
-    public String planViewPage(@PathVariable int idx, Model model) {
-        Plan plan = plannerService.getPlanByIdx(idx);
+    public String planViewPage(@PathVariable int idx, Principal principal, Model model) throws ParseException {
+        String username = "guest";
+        if (principal != null) {
+            username = principal.getName();
+        }
+        log.debug("[planViewPage] View Plan Detail | Param : idx={}", idx);
+
+        boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
+
         plannerService.increaseHit(idx);
-        model.addAttribute("plan", plan);
+        plannerService.checkGoodAlready(idx, username);
+        model.addAttribute("idx", idx);
+        model.addAttribute("username", username);
+        model.addAttribute("isAlreadyGood", isAlreadyGood);
+
+        log.debug("[planViewPage] Result : IDX={}, Hit + 1", idx);
         return "/plan/view-plan";
     }
 
     @PutMapping("/good")
     @ResponseBody
-    public String goodToggle(int idx, Principal principal) {
-        String username = principal.getName();
+    public String goodToggle(int idx, String username, String beforeUrl, HttpServletRequest request) {
+        log.debug("[goodToggle] Good Toggle | Param : IDX={}, Username={}", idx, username);
+        log.info(beforeUrl);
+
+        if (username.equals("guest")) {
+            HttpSession session = request.getSession();
+            session.setAttribute("beforeUrl",beforeUrl);
+            return "/loginPage";
+        }
+
+        String result = "";
         try {
             boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
             if (isAlreadyGood) {
                 plannerService.decreaseGood(idx, username);
+                result = "decrease";
             } else {
                 plannerService.increaseGood(idx, username);
+                result = "increase";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "success";
+        return result;
     }
 
 
@@ -202,7 +230,7 @@ public class PlannerController {
      * 플랜 게시판 이동
      */
     @GetMapping("/board")
-    public String planBoardForm(int page, Model model) {
+    public String planBoardForm(Model model) {
         List<Plan> bestPlans = plannerService.getBestPubPlansList();
 
         String[] titles = new String[bestPlans.size()];
@@ -213,18 +241,30 @@ public class PlannerController {
         }
         String[] thumbnails = plannerService.getThumbnails(titles);
 
-        int pubPlansCount = plannerService.getPubPlansCount();
-        PageInfo pageInfo = new PageInfo(10,page, pubPlansCount);
-        System.out.println("pageInfo = " + pageInfo);
-        List<Plan> pubPlansList = plannerService.getPubPlansList(pageInfo);
-
         model.addAttribute("bestPlans", bestPlans);
         model.addAttribute("thumbnails", thumbnails);
-        model.addAttribute("plans", pubPlansList);
-        model.addAttribute("pageInfo", pageInfo);
 
-        log.debug("Get Public Plans for Board | Plans : {}", pubPlansList);
+        log.debug("Move To Plan Board | Best Plans : {}", bestPlans);
         return "/plan/plan-board";
+    }
+
+    @GetMapping(value = "/pub", produces = "application/json; charset=utf8")
+    @ResponseBody
+    public String getPubPlans(int page) {
+        log.debug("Get All Pub Plans | Parameter : page={}", page);
+
+        int pubPlansCount = plannerService.getPubPlansCount();
+        PageInfo pageInfo = new PageInfo(10, page, pubPlansCount);
+        List<Plan> pubPlansList = plannerService.getPubPlansList(pageInfo);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("plans", pubPlansList);
+        jsonObject.put("pageInfo", pageInfo);
+
+        String result = gson.toJson(jsonObject);
+
+        log.debug("Return : {}", result);
+        return gson.toJson(result);
     }
 
     @PutMapping("/pub-toggle")
