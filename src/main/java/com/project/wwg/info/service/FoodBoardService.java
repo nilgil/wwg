@@ -27,4 +27,7 @@ public interface FoodBoardService {
 	void updateRe(FoodBoard foodboard);
 
 	void like(int food_no);
+	
+	//main 페이지에 데이터 호출
+	List<FoodBoard> getfood();
 }

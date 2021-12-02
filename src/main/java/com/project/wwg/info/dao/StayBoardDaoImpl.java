@@ -75,4 +75,11 @@ public class StayBoardDaoImpl implements StayBoardDao {
 		session.update("stayMapper.like", stay_no);
 	}
 
+	//main 페이지에 데이터 호출
+	@Override
+	public List<StayBoard> getstay() {
+		// TODO Auto-generated method stub
+		return session.selectList("stayMapper.stay");
+	}
+
 }
