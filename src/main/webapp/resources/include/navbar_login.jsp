@@ -90,7 +90,7 @@
         <a href="#"> 로그인</a></div>
         </c:if>
         <s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-        <a href="#">로그아웃</a></div>
+        <a href="/logout">로그아웃</a></div>
         </s:authorize>
         
         

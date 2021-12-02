@@ -27,4 +27,7 @@ public interface StayBoardDao {
 	void updateRe(StayBoard stayboard);
 
 	void like(int stay_no);
+
+	//main 페이지에 데이터 호출
+	List<StayBoard> getstay();
 }

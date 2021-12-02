@@ -70,4 +70,11 @@ public class StayBoardServiceImpl implements StayBoardService {
 	public void like(int stay_no) {
 		dao.like(stay_no);
 	}
+
+	//main 페이지에 데이터 호출
+	@Override
+	public List<StayBoard> getstay() {
+		// TODO Auto-generated method stub
+		return dao.getstay();
+	}
 }

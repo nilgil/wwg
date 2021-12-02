@@ -76,4 +76,11 @@ public class FoodBoardDaoImpl implements FoodBoardDao {
 		session.update("foodMapper.like", food_no);
 	}
 
+	//main 페이지에 데이터 호출
+	@Override
+	public List<FoodBoard> getfood() {
+		// TODO Auto-generated method stub
+		return session.selectList("foodMapper.food");
+	}
+
 }
