@@ -70,7 +70,9 @@
 			</table>
 
 			<div class="f_write_btn" align="center">
+				<s:authorize access="hasRole('ROLE_ADMIN')">
 				<a href="${path}/tourform.do" class="btn btn-info">글 작성</a>
+				</s:authorize>
 			</div>
 			
 

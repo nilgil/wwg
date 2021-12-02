@@ -122,6 +122,7 @@ $(function() {
 	        <div class="foodcont_btns" align=center>
 				<input class="btn btn-dark" type="button" value="목록" onClick="location.href='/tourlist.do/pageNum/${pageNum}' " >
 				
+				<s:authorize access="hasRole('ROLE_ADMIN')">
 				<form action="${path}/tourupdateform.do/tour_no/${tourboard.tour_no}/pageNum/${pageNum}"
 		 		method="post" name="chk" id="chk1">
 				<input class="btn btn-dark" type="submit" value="수정" >
@@ -131,6 +132,7 @@ $(function() {
 		 		method="post" name="chk" id="chk2">
 				<input class="btn btn-dark" type="submit" value="삭제" >
 				</form>
+				</s:authorize>
 				
 				<form action="/tourlike.do?tour_no=${tourboard.tour_no}&pageNum=${pageNum}"
 				method="post" id="like">
