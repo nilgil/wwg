@@ -11,7 +11,6 @@
 		<result property="review_content"   column="review_content" />
 		<result property="review_regdate"     column="review_regdate" />
 		<result property="review_hit" column="review_hit" />
-		<result property="review_photo" column="review_photo" />
 		<result property="review_like" column="review_like" />
 </resultMap> 
 
@@ -39,7 +38,7 @@
 
 <insert id="insert" parameterType="review">
 		insert into comm_review values (#{review_no},#{member_id},#{review_title},
-		#{review_content},sysdate,0,'photo_path',0)
+		#{review_content},sysdate,0,0)
 
 </insert>
 

@@ -41,7 +41,6 @@
 <div class="reviewlist_table" >
 <table id="r_list_table1" class="table table-hover">
     <h2>여행후기 게시판</h2>
-	<p>총 글개수 : ${listcount}</p>		
 			<thead>
 			<tr>
 				<td>번호</td>
@@ -72,9 +71,10 @@
 		</table>
 		
 		<div class="c_r_write_btn">
+		<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			<a href="${path}/comm_reviewinsertform" class="btn btn-info">글 작성</a>
+		</s:authorize>
 		</div>
-		
 		<!-- 페이징 -->
 		<div class="c_r_paging">
 			<c:if test="${not empty keyword}">

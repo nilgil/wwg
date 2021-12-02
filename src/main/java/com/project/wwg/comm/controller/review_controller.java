@@ -43,8 +43,11 @@ public class review_controller {
 		}
 
 	@RequestMapping("/reviewlist/pageNum/{pageNum}")
-	public String list(@PathVariable String pageNum, review review, Model model) {
-		
+	public String list(Principal principal, @PathVariable String pageNum, review review, Model model) {
+		String username = "guest";
+		if(principal != null) {
+			username=principal.getName();
+		};
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -64,6 +67,7 @@ public class review_controller {
 		int no = total - startRow + 1;		// 화면 출력 번호
 		List<review> list = rs.list(review);
 		
+		model.addAttribute("username", username);
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
@@ -102,9 +106,14 @@ public class review_controller {
 		}
 	// 상세페이지	
 		@RequestMapping("/reviewview/review_no/{review_no}/pageNum/{pageNum}")
-		public String view(@PathVariable int review_no, @PathVariable String pageNum, Model model) {
+		public String view(Principal principal, @PathVariable int review_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
 			rs.selectUpdate(review_no);
 			review review = rs.select(review_no);
+			model.addAttribute("username", username);
 			model.addAttribute("review", review);
 			model.addAttribute("pageNum", pageNum);
 			return "comm/review/review_view";
