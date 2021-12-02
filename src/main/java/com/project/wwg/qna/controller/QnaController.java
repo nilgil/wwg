@@ -41,8 +41,14 @@ public class QnaController{
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String mainpage(Qna qna, notice notice, meet meet, review review, Model model) { 
+	public String mainpage(Principal principal, Qna qna, notice notice, meet meet, review review, Model model) { 
 
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 	    List<Qna> qnalist = new ArrayList<Qna>();
 	    qnalist = qs.getQnaMain();
 	    
@@ -66,6 +72,7 @@ public class QnaController{
 		model.addAttribute("meetlist", meetlist);
 		model.addAttribute("reviewlist1", reviewlist1);
 		model.addAttribute("reviewlist2", reviewlist2);
+		model.addAttribute("username", username);
 		
 		
 		return "qna/main";
@@ -73,7 +80,14 @@ public class QnaController{
 	
 	//로그인후 메인페이지
 		@RequestMapping("/loginMain")
-		public String loginMainPage(Qna qna, notice notice, meet meet, review review, Model model) {
+		public String loginMainPage(Principal principal, Qna qna, notice notice, meet meet, review review, Model model) {
+			
+			String username = "guest"; 
+			
+			if(principal != null) {
+				username = principal.getName();
+			}
+			
 			List<Qna> qnalist = new ArrayList<Qna>();
 	        qnalist = qs.getQnaMain(); 
 	        
@@ -94,6 +108,7 @@ public class QnaController{
 			model.addAttribute("meetlist", meetlist);
 			model.addAttribute("reviewlist1", reviewlist1);
 			model.addAttribute("reviewlist2", reviewlist2);
+			model.addAttribute("username", username);
 			
 			return "qna/loginMain";
 		}
@@ -186,7 +201,7 @@ public class QnaController{
 		model.addAttribute("maxpage", maxpage); //총 게시물개수
 		model.addAttribute("listcount", listcount); //총 리스트
 		model.addAttribute("qnalist", qnalist); //list화
-		model.addAttribute("qna", qna); 		
+		model.addAttribute("qna", qna);  //없어도될듯?
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
 		
