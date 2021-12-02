@@ -116,6 +116,7 @@
      <div class="quit_share"><a href="#">회원탈퇴</a> | 
      <a href="#">친구공유</a></div>
     </form>
+    
 </div>
 
 <div class="notice">공지사항<hr>
