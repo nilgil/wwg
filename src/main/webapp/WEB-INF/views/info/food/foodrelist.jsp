@@ -67,7 +67,7 @@
 					<td><fmt:formatDate value="${ReFoodBoard.food_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${ReFoodBoard.food_re_no}">
-						<c:if test="${ReFoodBoard.username==user.username }">
+						<c:if test="${ReFoodBoard.username==username }">
 							<input type="button" value="수정" class="edit1" id="${ReFoodBoard.food_re_no}">
 							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${ReFoodBoard.food_re_no},${ReFoodBoard.rfood_no})">
 						</c:if></td>

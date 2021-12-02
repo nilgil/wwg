@@ -21,7 +21,7 @@
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
-	var session = '${user.username}';
+	var session = '${username}';
     var username = '${foodboard.username}';
     console.log(username);
 	$(function(){
@@ -62,7 +62,7 @@
 
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
-var session = '${user.username}';
+var session = '${username}';
 var username = '${foodboard.username}';
 $(function() {	
 	$("#like").submit(function(){
@@ -134,10 +134,12 @@ $(function() {
 				</form>
 				</s:authorize>
 				
+				<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 				<form action="/foodlike.do?food_no=${foodboard.food_no}&pageNum=${pageNum}"
 				method="post" id="like">
 				<input class="btn btn-danger" type="submit" value="좋아요">
 				</form>
+				</s:authorize>
 	          </div>
 			
 			
@@ -146,14 +148,16 @@ $(function() {
 		<!-- 댓글 작성 -->
 		<div class="foodcont_repl" align=center>
 		<form name="frm" id="frm">
-			<input type="hidden" name="username" value="${user.username}">
+			<input type="hidden" name="username" value="${username}">
 			<input type="hidden" name="rfood_no" value="${foodboard.food_no}"> 
 			<p>댓글 쓰기:</p>
 			<div>
 			<textarea class="form-control" rows="3" cols="50" name="food_re_content"></textarea>
 			</div>
 			<div>
+			<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			<input class="btn btn-outline-secondary" type="button" value="확인" id="repInsert">
+			</s:authorize>
 			</div>
 		</form>
 		</div>

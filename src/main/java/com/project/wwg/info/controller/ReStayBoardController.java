@@ -27,14 +27,15 @@ public class ReStayBoardController {
 		StayBoard stayboard = fs.select(stay_no);
 		List<ReStayBoard> stayrelist = rfs.staylist(stay_no);
 		
-		/*
-		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
-		 */		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		model.addAttribute("stayrelist", stayrelist);
 		model.addAttribute("stayboard", stayboard);
-		/*
-		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
-		 */		
+	
 		return "info/stay/stayrelist";
 	}
 

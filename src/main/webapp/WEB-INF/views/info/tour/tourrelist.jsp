@@ -67,7 +67,7 @@
 					<td><fmt:formatDate value="${ReTourBoard.tour_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${ReTourBoard.tour_re_no}">
-						<c:if test="${ReTourBoard.username==user.username }">
+						<c:if test="${ReTourBoard.username==username }">
 							<input type="button" value="수정" class="edit1" id="${ReTourBoard.tour_re_no}">
 							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${ReTourBoard.tour_re_no},${ReTourBoard.rtour_no})">
 						</c:if></td>

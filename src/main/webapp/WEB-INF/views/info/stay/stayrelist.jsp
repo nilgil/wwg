@@ -67,7 +67,7 @@
 					<td><fmt:formatDate value="${ReStayBoard.stay_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${ReStayBoard.stay_re_no}">
-						<c:if test="${ReStayBoard.username==user.username }">
+						<c:if test="${ReStayBoard.username==username }">
 							<input type="button" value="수정" class="edit1" id="${ReStayBoard.stay_re_no}">
 							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${ReStayBoard.stay_re_no},${ReStayBoard.rstay_no})">
 						</c:if></td>
