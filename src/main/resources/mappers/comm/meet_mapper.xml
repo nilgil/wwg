@@ -11,7 +11,6 @@
 		<result property="meet_content"   column="meet_content" />
 		<result property="meet_regdate"     column="meet_regdate" />
 		<result property="meet_hit" column="meet_hit" />
-		<result property="meet_photo" column="meet_photo" />
 		<result property="meet_like" column="meet_like" />
 </resultMap> 
 
@@ -39,7 +38,7 @@
 
 <insert id="insert" parameterType="meet">
 		insert into comm_meet values (#{meet_no},#{member_id},#{meet_title},
-		#{meet_content},sysdate,0,'photo_path',0)
+		#{meet_content},sysdate,0,0)
 
 </insert>
 

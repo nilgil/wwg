@@ -43,8 +43,11 @@ public class meet_controller {
 		}
 
 	@RequestMapping("/meetlist/pageNum/{pageNum}")
-	public String list(@PathVariable String pageNum, meet meet, Model model) {
-		
+	public String list(Principal principal, @PathVariable String pageNum, meet meet, Model model) {
+		String username = "guest";
+		if(principal != null) {
+			username=principal.getName();
+		};
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -64,6 +67,7 @@ public class meet_controller {
 		int no = total - startRow + 1;		// 화면 출력 번호
 		List<meet> list = ms.list(meet);
 		
+		model.addAttribute("username", username);
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
@@ -102,9 +106,14 @@ public class meet_controller {
 		}
 	// 상세페이지	
 		@RequestMapping("/meetview/meet_no/{meet_no}/pageNum/{pageNum}")
-		public String view(@PathVariable int meet_no, @PathVariable String pageNum, Model model) {
+		public String view(Principal principal, @PathVariable int meet_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
 			ms.selectUpdate(meet_no);
 			meet meet = ms.select(meet_no);
+			model.addAttribute("username", username);
 			model.addAttribute("meet", meet);
 			model.addAttribute("pageNum", pageNum);
 			return "comm/meet/meet_view";

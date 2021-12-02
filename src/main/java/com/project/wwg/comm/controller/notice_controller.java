@@ -29,7 +29,11 @@ public class notice_controller {
 		}
 
 	@RequestMapping("/noticelist/pageNum/{pageNum}")
-	public String list(@PathVariable String pageNum, notice notice, Model model) {
+	public String list(Principal principal, @PathVariable String pageNum, notice notice, Model model) {
+		String username = "guest";
+		if(principal != null) {
+			username=principal.getName();
+		};
 		
 		final int rowPerPage = 10;	// 화면에 출력할 데이터 갯수
 		if (pageNum == null || pageNum.equals("")) {
@@ -50,6 +54,7 @@ public class notice_controller {
 		int no = total - startRow + 1;		// 화면 출력 번호
 		List<notice> list = ns.list(notice);
 		
+		model.addAttribute("username", username);
 		model.addAttribute("list", list);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
@@ -90,9 +95,14 @@ public class notice_controller {
 		}
 	// 상세페이지	
 		@RequestMapping("/noticeview/notice_no/{notice_no}/pageNum/{pageNum}")
-		public String view(@PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+		public String view(Principal principal, @PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
 			ns.selectUpdate(notice_no);
 			notice notice = ns.select(notice_no);
+			model.addAttribute("username", username);
 			model.addAttribute("notice", notice);
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("admin", "user2");

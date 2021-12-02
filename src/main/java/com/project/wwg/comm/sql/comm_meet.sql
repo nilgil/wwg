@@ -8,11 +8,10 @@ create table comm_meet (
 	meet_content varchar2(4000) not null,  -- 모임게시판 내용
 	meet_regdate date not null,            -- 모임게시판 생성일자
 	meet_hit number default 0,             -- 모임게시판 조회수
-	meet_photo varchar2(200) not null,     -- 업로드된 사진 경로
 	meet_like number default 0             -- 좋아요
 	);               
 	
 	select * from meet_review;
 	
-ALTER TABLE comm_review ADD CONSTRAINT member_id   -- member_id foreign key 생성
-FOREIGN KEY(member_id) REFERENCES users(username);
+--ALTER TABLE comm_review ADD CONSTRAINT member_id   -- member_id foreign key 없을때생성
+--FOREIGN KEY(member_id) REFERENCES users(username);
