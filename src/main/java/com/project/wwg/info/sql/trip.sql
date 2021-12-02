@@ -8,7 +8,8 @@ create table trip_food(
     food_title varchar2(100) not null,
     food_content varchar2(1000) not null,
     food_regdate date not null,
-    food_hit number default 0
+    food_hit number default 0,
+    food_like number default 0
 );
 
 -- 여행정보(맛집 페이지-댓글)
@@ -29,7 +30,8 @@ create table trip_tour(
     tour_title varchar2(100) not null,
     tour_content varchar2(1000) not null,
     tour_regdate date not null,
-    tour_hit number default 0
+    tour_hit number default 0,
+    tour_like number default 0
 );
 
 -- 여행정보(여행지 페이지-댓글)
@@ -50,11 +52,16 @@ create table trip_stay(
     stay_title varchar2(100) not null,
     stay_content varchar2(1000) not null,
     stay_regdate date not null,
-    stay_hit number default 0
+    stay_hit number default 0,
+    stay_like number default 0
 );
 
 -- 여행정보(숙소 페이지-댓글)
 drop table trip_stay_reply;
 create table trip_stay_reply(
     stay_re_no number primary key,
-    stay_no number not null references trip_stay(stay_no),
+    rstay_no number not null references trip_stay(stay_no),
+    username varchar2(20) not null references users(username),
+    stay_re_content varchar2(500) not null,
+    stay_re_regdate date not null
+);
