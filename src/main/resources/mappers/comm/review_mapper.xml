@@ -91,14 +91,14 @@
 	
 <!-- 메인에 최근 1~10개 데이터 호출 -->	
 <select id="review1" parameterType="review" resultType="review">
- select * from (select * from comm_review order by review_regdate desc) where rownum &lt;= 10
+ select * from (select * from comm_review order by review_regdate desc) where rownum &lt;= 10 
 </select>
 
 <!-- 메인에 최근 11~20개 데이터 호출 -->	
-<select id="review2" parameterType="review" resultType="review">
- select rnum, review_no, review_title, review_content, review_regdate from (
- select  rownum rnum, review_no, review_title, review_content, review_regdate from comm_review order by review_regdate desc) 
- where rnum between 11 and 20
+<select id="review2" resultType="review">
+	select * from ( select rownum rnum, review.* from (
+    select  * from comm_review order by review_regdate desc) review )
+    where rnum between 11 and 20
 </select>	
 	
 </mapper>

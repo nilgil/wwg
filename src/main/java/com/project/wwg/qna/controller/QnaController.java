@@ -127,7 +127,12 @@ public class QnaController{
 	public String qnaInsert(Principal principal, Qna qna, Model model) throws Exception {
 		System.out.println("qnawrite까지는 왔음");
 		
-		String username = principal.getName(); // 로그인후 유저네임 넘기기
+        String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		 // 로그인후 유저네임 넘기기
 		//qna_no 증가
 //		int num = qna.getQna_no();
 //		System.out.println("qna_no 가져옴");
@@ -138,6 +143,7 @@ public class QnaController{
 		qna.setUsername(username); // 로그인후 유저네임 넘기기
 		int result = qs.insert(qna);
 		model.addAttribute("result", result);
+		model.addAttribute("username", username);
 		
 		return "qna/qnaWriteResult";
 	}
@@ -145,7 +151,13 @@ public class QnaController{
 	
 	//글목록list
 	@RequestMapping("qnalist.do")
-	public String qnaList(Model model, HttpServletRequest request, Qna qna) throws Exception {
+	public String qnaList(Principal principal, Model model, HttpServletRequest request, Qna qna) throws Exception {
+
+        String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
 		
 		List<Qna> qnalist = new ArrayList<Qna>();
 
@@ -208,13 +220,21 @@ public class QnaController{
 		model.addAttribute("search", qna.getSearch());
 		model.addAttribute("keyword", qna.getKeyword());
 		
+		model.addAttribute("username", username);
+		
 		System.out.println("list호출");
 		return "qna/qnaList";
 	}
 	
 	//qnalist호출
 	@RequestMapping("qnalist2.do")
-	public String qnaList2(Model model, HttpServletRequest request, Qna qna) throws Exception {
+	public String qnaList2(Principal principal, Model model, HttpServletRequest request, Qna qna) throws Exception {
+		
+        String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
 		
 		List<Qna> qnalist = new ArrayList<Qna>();
 
@@ -275,14 +295,23 @@ public class QnaController{
 		model.addAttribute("search", qna.getSearch());
 		model.addAttribute("keyword", qna.getKeyword());
 		
+		model.addAttribute("username", username);
+		
 		System.out.println("list2호출");
 		return "qna/qnaList2";
 	}
 	
 	//상세페이지
 	@RequestMapping("/qna_detail/qna_no/{qna_no}/page/{page}/no/{no1}")
-	public String qnaDetail(@PathVariable int qna_no, @PathVariable String page, @PathVariable int no1, Model model, Qna qna, HttpServletRequest request) {
+	public String qnaDetail(Principal principal, @PathVariable int qna_no, @PathVariable String page, @PathVariable int no1, Model model, Qna qna, HttpServletRequest request) {
 		System.out.println("상세페이지호출controller");
+        
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		//조회수
 		qs.hitupdate(qna_no);
 		System.out.println("조회수 올라감");
@@ -290,6 +319,7 @@ public class QnaController{
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
 		model.addAttribute("no", no1);
+		model.addAttribute("username", username);
 		return "qna/qnaDetail";
 	}
 	
@@ -297,14 +327,21 @@ public class QnaController{
 	//수정 session 체크
 	//${path}/qna_updatecheck?qna_no=${qnalist.qna_no}&page=${page}'
 	@RequestMapping("/qna_updatecheck")
-	public String qnaUpdateCheck(Qna qna, String page, Model model) {
+	public String qnaUpdateCheck(Principal principal, Qna qna, String page, Model model) {
 		System.out.println("수정 session체크");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
 		
 		Qna qnalist = qs.select(qna.getQna_no());
 		System.out.println("수정 session qnalist호출");
 		
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
+		model.addAttribute("username", username);
 		System.out.println("수정 session 공유");
 		
 		return "qna/qnaUpdateRecheck";
@@ -312,19 +349,34 @@ public class QnaController{
 	
 	//수정폼
 	@RequestMapping("/qna_updateform")
-	public String qnaUpdateForm(Model model, Qna qna, String page) {
+	public String qnaUpdateForm(Principal principal, Model model, Qna qna, String page) {
 		System.out.println("수정페이지controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		Qna qnalist = qs.select(qna.getQna_no());
 		// = Qna qnalist = qs.select(qna_no);
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
+		model.addAttribute("username", username);
 		return "qna/qnaUpdate";
 	}
 	
 	//수정완료
 	@RequestMapping("/qna_update")
-	public String qnaUpdate(Qna qna,String page, Model model) {
+	public String qnaUpdate(Principal principal, Qna qna,String page, Model model) {
 		System.out.println("수정완료버튼controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		int result = qs.update(qna);
 		
 		System.out.println("result:"+result);
@@ -332,37 +384,63 @@ public class QnaController{
 		
 		model.addAttribute("page", page);
 		model.addAttribute("result", result);
+		model.addAttribute("username", username);
 		return "qna/qnaUpdateResult";
 	}
 	
 	//삭제 재확인
 	@RequestMapping("/qna_deletecheck/qna_no/{qna_no}/page/{page}")
-	public String qnaDeleteCheck(Model model, Qna qna, @PathVariable int qna_no, @PathVariable String page) { 
+	public String qnaDeleteCheck(Principal principal, Model model, Qna qna, @PathVariable int qna_no, @PathVariable String page) { 
 		System.out.println("삭제재확인controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		Qna qnalist = qs.select(qna_no);
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
+		model.addAttribute("username", username);
 		return "qna/qnaDeleteRecheck";
 	}
 	
 	//게시물삭제
 	@RequestMapping("/delete/qna_no/{qna_no}")
-	public String Delete(Qna qna, @PathVariable int qna_no, HttpServletRequest request, Model model) {
+	public String Delete(Principal principal, Qna qna, @PathVariable int qna_no, HttpServletRequest request, Model model) {
 		System.out.println("삭제controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		qs.delete(qna_no);
+		
+		model.addAttribute("username", username);
+		
 		return "redirect:/qnalist.do";
 	}
 	
 	//답글form
 	@RequestMapping("/qna_commentForm")
-	public String commentFrom(Qna qna, Model model, String page) {
+	public String commentFrom(Principal principal, Qna qna, Model model, String page) {
 		System.out.println("commentform controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
 		
 		Qna qnalist = qs.select(qna.getQna_no());
 		System.out.println("commentform selectSQL문사용");
 		
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
+		model.addAttribute("username", username);
 		System.out.println("commentform에서 값공유");
 		
 		return "qna/qnaComment";
@@ -370,12 +448,20 @@ public class QnaController{
 	
 	//답글등록
 	@RequestMapping("qna_comment.do")
-	public String insertComment(String page, Qna qna, Model model) {
+	public String insertComment(Principal principal, String page, Qna qna, Model model) {
 		System.out.println("답글등록controller");
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
 		qs.insertCom(qna);
 		System.out.println("답글등록OK");
 		
 //		model.addAttribute("page", page);
+		model.addAttribute("username", username);
 		return "redirect:/qnalist.do?page="+page;
 	}
 	
