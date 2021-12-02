@@ -36,7 +36,7 @@
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/"
+                default-target-url="/loginMain"
                 authentication-failure-url="/loginError"
         />
         <logout
