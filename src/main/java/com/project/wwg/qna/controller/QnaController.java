@@ -19,6 +19,11 @@ import com.project.wwg.comm.model.review;
 import com.project.wwg.comm.service.meet_service;
 import com.project.wwg.comm.service.notice_service;
 import com.project.wwg.comm.service.review_service;
+import com.project.wwg.info.dao.FoodBoardDao;
+import com.project.wwg.info.dto.FoodBoard;
+import com.project.wwg.info.dto.StayBoard;
+import com.project.wwg.info.service.FoodBoardService;
+import com.project.wwg.info.service.StayBoardService;
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
 import com.project.wwg.qna.service.QnaService;
@@ -35,13 +40,17 @@ public class QnaController{
 	private meet_service ms; //동행구해요 service 인터페이스
 	@Autowired
 	private review_service rs; //여행후기 service 인터페이스
+	@Autowired
+	private FoodBoardService fs; //맛집 서비스 인터
+	@Autowired
+	private StayBoardService ss; //숙박 서비스 인터
 	
 	
 
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String mainpage(Principal principal, Qna qna, notice notice, meet meet, review review, Model model) { 
+	public String mainpage(Principal principal, Qna qna, notice notice, meet meet, review review, FoodBoard foodboard, StayBoard stayboard, Model model) { 
 
 		String username = "guest"; 
 		
@@ -64,6 +73,12 @@ public class QnaController{
 	    List<review> reviewlist2 = new ArrayList<review>();
 	    reviewlist2 = rs.getReview2();
 	    
+	    List<FoodBoard> food = new ArrayList<FoodBoard>();
+	    food = fs.getfood();
+	    
+	    List<StayBoard> stay = new ArrayList<StayBoard>();
+	    stay = ss.getstay();
+	    
 	    System.out.println(qnalist);
 	    System.out.println("여기까지옴");
 	    
@@ -72,12 +87,48 @@ public class QnaController{
 		model.addAttribute("meetlist", meetlist);
 		model.addAttribute("reviewlist1", reviewlist1);
 		model.addAttribute("reviewlist2", reviewlist2);
+		model.addAttribute("food", food);
+		model.addAttribute("stay", stay);
 		model.addAttribute("username", username);
 
 		return "qna/main";
 	}
 
-	
+	//로그인후 메인페이지
+		@RequestMapping("/loginMain")
+		public String loginMainPage(Principal principal, Qna qna, notice notice, meet meet, review review, StayBoard stayboard, Model model) {
+			
+			String username = "guest"; 
+			
+			if(principal != null) {
+				username = principal.getName();
+			}
+			
+			List<Qna> qnalist = new ArrayList<Qna>();
+	        qnalist = qs.getQnaMain(); 
+	        
+	        List<notice> noticelist = new ArrayList<notice>();
+		    noticelist = ns.getNotice();
+		    
+		    List<meet> meetlist = new ArrayList<meet>();
+		    meetlist = ms.getMeet();
+		    
+		    List<review> reviewlist1 = new ArrayList<review>();
+		    reviewlist1 = rs.getReview1();
+		    
+		    List<review> reviewlist2 = new ArrayList<review>();
+		    reviewlist2 = rs.getReview2();
+	        
+			model.addAttribute("qnalist", qnalist);
+			model.addAttribute("noticelist", noticelist);
+			model.addAttribute("meetlist", meetlist);
+			model.addAttribute("reviewlist1", reviewlist1);
+			model.addAttribute("reviewlist2", reviewlist2);
+			model.addAttribute("username", username);
+			
+			return "qna/loginMain";
+		}
+
 	//글작성폼
 	@RequestMapping("qnawriteform.do")
 	public String qnaWriteForm() {
@@ -437,6 +488,40 @@ public class QnaController{
 	}
 	
 	
+	//main 여행후기1
+	@RequestMapping("/reviewviewcont/review_no/{review_no1}/pageNum/1")
+	public String totalSearcg1(Principal principal, Model model, @PathVariable String review_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("review_no1", review_no1);
+		
+		return "redirect:/reviewview/review_no/"+review_no1+"/pageNum/1";
+	}
+	
+	//main 여행후기2
+	@RequestMapping("/reviewviewcont/review_no/{review_no1}/pageNum/2")
+	public String totalSearcg2(Principal principal, Model model, @PathVariable String review_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("review_no1", review_no1);
+		
+		return "redirect:/reviewview/review_no/"+review_no1+"/pageNum/2";
+	}
+	
+		
+
 	
 	
 	

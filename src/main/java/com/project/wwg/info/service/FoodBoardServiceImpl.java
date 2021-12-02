@@ -71,4 +71,11 @@ public class FoodBoardServiceImpl implements FoodBoardService {
 	public void like(int food_no) {
 		dao.like(food_no);
 	}
+
+	//main 페이지에 데이터 호출
+	@Override
+	public List<FoodBoard> getfood() {
+		// TODO Auto-generated method stub
+		return dao.getfood();
+	}
 }
