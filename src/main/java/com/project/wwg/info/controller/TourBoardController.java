@@ -108,9 +108,17 @@ public class TourBoardController {
 	
 	// 상세페이지
 	@RequestMapping("tourcontent.do/tour_no/{tour_no}/pageNum/{pageNum}")
-	public String tourcontent(@PathVariable int tour_no, @PathVariable String pageNum, Model model) {
+	public String tourcontent(Principal principal, @PathVariable int tour_no, @PathVariable String pageNum, Model model) {
 		service.selectUpdate(tour_no);					// 조회수 1증가
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		TourBoard tourboard = service.select(tour_no);	// 상세 정보 구하기
+		
+		model.addAttribute("username", username);
 		model.addAttribute("tourboard", tourboard);
 		model.addAttribute("pageNum", pageNum);
 		return "info/tour/tourcontent";

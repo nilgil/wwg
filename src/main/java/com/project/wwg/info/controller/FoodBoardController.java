@@ -108,11 +108,20 @@ public class FoodBoardController {
 	
 	// 상세페이지
 	@RequestMapping("foodcontent.do/food_no/{food_no}/pageNum/{pageNum}")
-	public String foodcontent(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
-		service.selectUpdate(food_no);					// 조회수 1증가
+	public String foodcontent(Principal principal, @PathVariable int food_no, @PathVariable String pageNum, Model model) {
+		service.selectUpdate(food_no);		// 조회수 1증가
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		FoodBoard foodboard = service.select(food_no);	// 상세 정보 구하기
+		
+		model.addAttribute("username", username);
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
+		
 		return "info/food/foodcontent";
 	}
 	

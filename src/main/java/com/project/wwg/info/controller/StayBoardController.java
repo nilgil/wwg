@@ -108,9 +108,17 @@ public class StayBoardController {
 	
 	// 상세페이지
 	@RequestMapping("staycontent.do/stay_no/{stay_no}/pageNum/{pageNum}")
-	public String staycontent(@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+	public String staycontent(Principal principal, @PathVariable int stay_no, @PathVariable String pageNum, Model model) {
 		service.selectUpdate(stay_no);					// 조회수 1증가
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		StayBoard stayboard = service.select(stay_no);	// 상세 정보 구하기
+		
+		model.addAttribute("username", username);
 		model.addAttribute("stayboard", stayboard);
 		model.addAttribute("pageNum", pageNum);
 		return "info/stay/staycontent";

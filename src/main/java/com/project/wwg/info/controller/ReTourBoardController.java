@@ -27,14 +27,15 @@ public class ReTourBoardController {
 		TourBoard tourboard = fs.select(tour_no);
 		List<ReTourBoard> tourrelist = rfs.tourlist(tour_no);
 		
-		/*
-		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
-		 */		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+			
+		model.addAttribute("username", username);
 		model.addAttribute("tourrelist", tourrelist);
 		model.addAttribute("tourboard", tourboard);
-		/*
-		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
-		 */		
+	
 		return "info/tour/tourrelist";
 	}
 

@@ -27,14 +27,15 @@ public class ReFoodBoardController {
 		FoodBoard foodboard = fs.select(food_no);
 		List<ReFoodBoard> foodrelist = rfs.foodlist(food_no);
 		
-		/*
-		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
-		 */		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		model.addAttribute("foodrelist", foodrelist);
 		model.addAttribute("foodboard", foodboard);
-		/*
-		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
-		 */		
+		 		
 		return "info/food/foodrelist";
 	}
 
