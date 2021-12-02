@@ -22,15 +22,15 @@
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/admin/api/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/userSignUp" access="isAnonymous"/>
-        <intercept-url pattern="/**" access="permitAll"/>
-        <!--영길's 요청 권한체크-->
-        <intercept-url pattern="/plan" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/plan/create" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/plan/my" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/plan/update-form/*" access="hasRole('ROLE_USER')"/>
+<!--        <intercept-url pattern="/**" access="permitAll"/>-->
+
+        <intercept-url pattern="/plan" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/plan/create" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/plan/my" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/plan/update-form/*" access="hasAnyRole('ROLE_USER')"/>
         <intercept-url pattern="/plan/view/*" access="permitAll"/>
         <intercept-url pattern="/plan/board" access="permitAll"/>
-        <intercept-url pattern="/plan/reset" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/plan/reset" access="hasAnyRole('ROLE_ADMIN')"/>
 
         <intercept-url pattern="/resources/**" access="permitAll" />
 
