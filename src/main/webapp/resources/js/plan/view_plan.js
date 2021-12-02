@@ -16,19 +16,10 @@ function printSpotsInfo() {
 
 }
 
-function checkAlreadyGood() {
-    return new Promise((resolve => {
-        $.ajax({
-            url: ''
-        })
-    }));
-}
-
 $(document).ready(function () {
     beforeUrl = window.location.href;
     idx = $('#hiddenIdx').val();
     username = $('#hiddenUsername').val();
-    alreadyGood = $('#hiddenIsAlreadyGood').val();
 
     getPlans(idx).then((response) => {
         initPage(response);
@@ -96,15 +87,16 @@ function goodToggle(idx, username) {
         url: '/plan/good',
         method: 'put',
         data: {"idx": idx, 'username': username},
+        dataType: 'text',
         success: function (response) {
-            if (alreadyGood) {
+            console.log(response);
+            if (response) {
                 $('#good span:nth-child(2)').text(good - 1);
+                alreadyGood = false;
             } else {
                 $('#good span:nth-child(2)').text(good + 1);
+                alreadyGood = true;
             }
-
-            if (response != "increase" && response != "decrease")
-                location.replace(response);
         }
     })
 }

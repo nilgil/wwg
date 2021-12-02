@@ -2,7 +2,6 @@ package com.project.wwg.plan.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
@@ -14,12 +13,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
@@ -169,37 +168,27 @@ public class PlannerController {
         }
         log.debug("[planViewPage] View Plan Detail | Param : idx={}", idx);
 
-        boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
-
         plannerService.increaseHit(idx);
-        plannerService.checkGoodAlready(idx, username);
         model.addAttribute("idx", idx);
         model.addAttribute("username", username);
-        model.addAttribute("isAlreadyGood", isAlreadyGood);
 
-        log.debug("[planViewPage] Result : IDX={}, Hit + 1", idx);
+        log.debug("[planViewPage] Result : Username={}, IDX={}, Hit + 1", username, idx);
         return "/plan/view-plan";
     }
 
     @PutMapping("/good")
-    @ResponseBody
-    public String goodToggle(int idx, String username, HttpServletRequest request) {
+    public ResponseEntity<String> goodToggle(int idx, String username) {
         log.debug("[goodToggle] Good Toggle | Param : IDX={}, Username={}", idx, username);
 
-        String result = "";
-        try {
-            boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
-            if (isAlreadyGood) {
-                plannerService.decreaseGood(idx, username);
-                result = "decrease";
-            } else {
-                plannerService.increaseGood(idx, username);
-                result = "increase";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
+        System.out.println("isAlreadyGood = " + isAlreadyGood);
+        if (isAlreadyGood) {
+            plannerService.decreaseGood(idx, username);
+        } else {
+            plannerService.increaseGood(idx, username);
         }
-        return result;
+
+        return ResponseEntity.ok("false");
     }
 
 

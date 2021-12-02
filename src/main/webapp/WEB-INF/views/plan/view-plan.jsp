@@ -14,7 +14,6 @@
 <body>
 <input id="hiddenIdx" type="hidden" value="${idx}">
 <input id="hiddenUsername" type="hidden" value="${username}">
-<input id="hiddenIsAlreadyGood" type="hidden" value="${isAlreadyGood}">
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
