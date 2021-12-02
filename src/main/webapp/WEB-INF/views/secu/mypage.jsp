@@ -9,7 +9,6 @@
 </head>
 <body>
 <s:authentication property="principal" var="user"/>
-
 <form action="${pageContext.request.contextPath}/user/changeInfoProcess" method="post">
 
 <div class="signUp_center">

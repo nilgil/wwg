@@ -21,12 +21,19 @@
     </insert>
 
     <select id="isUserHere" parameterType="String" resultType="String">
-        SELECT USERNAME from Users where username = #{username}
+        SELECT USERNAME from Users where username = #{username} and PASSWORD=#{password}
     </select>
 
     <update id="updateInfo" parameterType="UsersDto">
         update USERS set PASSWORD=#{password}, location=#{location}, realname=#{realname}
             where USERNAME=#{username}
     </update>
+
+    <delete id="removeAuth" parameterType="UsersDto">
+        DELETE from authorities where username='user11'
+    </delete>
+    <delete id="removeUser" parameterType="UsersDto">
+        DELETE from users where username='user11'
+    </delete>
 
 </mapper>

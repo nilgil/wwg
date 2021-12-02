@@ -1,16 +1,18 @@
 package com.project.wwg.secu.controller;
 
+import com.project.wwg.secu.dto.UsersDto;
 import com.project.wwg.secu.service.TestService;
+import com.project.wwg.secu.service.UserDeleteService;
 import com.project.wwg.secu.service.UserInfoUpdateService;
 import com.project.wwg.secu.service.UserSignUpService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 public class SecuController {
@@ -19,17 +21,19 @@ public class SecuController {
     TestService testService;
     UserSignUpService userSignUpService;
     UserInfoUpdateService userInfoUpdateService;
+    UserDeleteService userDeleteService;
 
-    SecuController(TestService testService,UserSignUpService userSignUpService, UserInfoUpdateService userInfoUpdateService){
+    SecuController(TestService testService, UserSignUpService userSignUpService,
+                   UserInfoUpdateService userInfoUpdateService, UserDeleteService userDeleteService){
         this.testService = testService;
         this.userSignUpService = userSignUpService;
         this.userInfoUpdateService = userInfoUpdateService;
+        this.userDeleteService = userDeleteService;
     }
 
     @GetMapping("/loginPage")
-    public String login(Model model){
-        LOG.info("hello");
-        model.addAttribute("content","testSuccess");
+    public String login(Model model, Principal principal,Authentication authentication){
+
         return "secu/login";
     }
     @PostMapping("/userSignUpProcess")
@@ -71,6 +75,16 @@ public class SecuController {
         return "secu/mypage";//나중에 메인페이지로 변경
     }
 
+    @GetMapping("user/quit")
+    public String userQuit(Principal principal){
+        LOG.info(principal.getName());
+        UsersDto usersDto = new UsersDto();
+        usersDto.setUsername(principal.getName());
+        userDeleteService.userQuit(usersDto);
+        return "redirect:/";
+    }
+
+
     @GetMapping("/admin")
     public String admin() {
         return "admin";
@@ -82,13 +96,13 @@ public class SecuController {
     }
 
     @GetMapping("/all")
-    public String all() {
+    public String all(Principal principal) {
         return "secu/all";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/loginError")
     public String test() {
-        return "secu/dbTest";
+        return "secu/loginErrorPage";
     }
 
 

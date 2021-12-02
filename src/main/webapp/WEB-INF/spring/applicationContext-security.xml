@@ -29,12 +29,15 @@
 
         <csrf disabled="true"/>
         <!--폼 로그인에 대한 처리 설정-->
+            <!--login-page = 컨트롤러로 맵핑-->
+            <!--default-target-url="/loginMain"-->
         <form-login
                 username-parameter="id"
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/loginMain"
+                default-target-url="/all"
+                authentication-failure-url="/loginError"
         />
         <logout
                 logout-url="/logout"
