@@ -66,8 +66,8 @@
 			onClick="location.href='/noticelist/pageNum/${pageNum}' ">
     
 
-    <c:if test="${user.username eq admin}">
- 
+    <c:if test="${username eq admin}">
+ <sec:authorize access="hasRole('ROLE_ADMIN')">
 		<form
 			action="${path}/noticeupdateform/notice_no/${notice.notice_no}/pageNum/${pageNum}"
 			method="post" name="chk" id="chk1">
@@ -80,6 +80,7 @@
 			<input class="btn btn-dark" type="submit" value="삭제">
 		</form>
 
+</sec:authorize>
     </c:if>
     </div>
 

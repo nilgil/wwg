@@ -13,7 +13,6 @@ public class meet {
 	private String meet_content;  // 후기게시판 내용
 	private Date meet_regdate;    // 후기게시판 생성일자
 	private int meet_hit;         // 후기게시판 조회수
-	private String meet_photo;    // 후기게시판 업로드 사진 경로
 	private int meet_like;
 	
 	// page

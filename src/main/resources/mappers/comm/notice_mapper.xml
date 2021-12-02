@@ -37,7 +37,7 @@
 
 <insert id="insert" parameterType="notice">
 		insert into comm_notice values (#{notice_no},#{member_id},#{notice_title},
-		#{notice_content},sysdate,0,'n')
+		#{notice_content},sysdate,0)
 
 </insert>
 

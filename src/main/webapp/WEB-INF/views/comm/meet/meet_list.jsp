@@ -39,7 +39,6 @@
 <div class="c_meetlist_table" >	
 <table id="c_m_table1" class="table table-hover">
         <h2>동행구해요 게시판</h2>
-		<p>총 글개수 : ${listcount}</p>
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -70,9 +69,10 @@
 		</table>
 		
 		<div class="c_m_write_btn">
+	<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			<a href="${path}/comm_meetinsertform" class="btn btn-info">글 작성</a>
+		</s:authorize>		
 		</div>
-		
 		<!-- 페이징 -->
 		<div class="c_m_paging" >
 		<c:if test="${not empty keyword}">

@@ -16,9 +16,8 @@
 <%@ include file="/resources/include/navbar_login.jsp"%>
 
 
-<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 <!-- CKeditor 적용 -->
-<!-- <script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script> -->
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
 <!-- center -->
 <div class="c_meetinsert_center">

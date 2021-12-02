@@ -20,7 +20,7 @@
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
-var session = '${user.username}';
+var session = '${username}';
 var member_id = '${meet.member_id}';
 console.log(member_id);
 $(function(){
@@ -41,7 +41,7 @@ $(function(){
 
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
-var session = '${user.username}';
+var session = '${username}';
 var member_id = '${meet.member_id}';
 $(function() {	
 	$("#like").submit(function(){
@@ -139,7 +139,9 @@ $(function() {
 		<form
 			action="/meetlike?meet_no=${meet.meet_no}&pageNum=${pageNum}"
 			method="post" id="like">
+			<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			<input class="btn btn-dark" type="submit" value="좋아요">
+	</s:authorize>
 		</form>
 		</div>
 		
@@ -150,7 +152,7 @@ $(function() {
 		<!-- 댓글 작성 -->   
 		<div class="meetview_repl" align=center>
 		<form name="frm" id="frm">
-			<input type="hidden" name="member_id" value="${user.username}">
+			<input type="hidden" name="member_id" value="${username}">
 			<input type="hidden" name="meet_fno" value="${meet.meet_no}"> 
 			<p>댓글쓰기 :</p>
 			<div>

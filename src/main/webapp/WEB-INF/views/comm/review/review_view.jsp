@@ -21,7 +21,7 @@
 
 <!-- 로그인한 사람과 글쓴사람이 동일할때 수정,삭제 가능 -->
 <script type="text/javascript">
-var session = '${user.username}';
+var session = '${username}';
 var member_id = '${review.member_id}';
 console.log(member_id);
 $(function(){
@@ -42,18 +42,19 @@ $(function(){
 
 <!-- 좋아요 버튼 -->
 <script type="text/javascript">
-var session = '${user.username}';
+var session = '${username}';
 var member_id = '${review.member_id}';
 $(function() {	
 	$("#like").submit(function(){
     	if(member_id == session){
         	alert("사용자가 같으면 좋아요를 할수 없습니다.");
         	return false;
+        	
         }
+    	
     });
 });
 </script>
-
 <!-- 댓글 작성 jQuery문 -->
 <script type="text/javascript">
 	$(function() {
@@ -140,7 +141,9 @@ $(function() {
 		<form
 			action="/revlike?review_no=${review.review_no}&pageNum=${pageNum}"
 			method="post" id="like">
+			<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			<input class="btn btn-dark" type="submit" value="좋아요">
+			</s:authorize>
 		</form>
 	</div>
 
@@ -150,7 +153,7 @@ $(function() {
 	<!-- 댓글 작성 -->
 	<div class="r_view_repl" align=center>
 	<form name="frm" id="frm">
-		<input type="hidden" name="member_id" value="${user.username}">
+		<input type="hidden" name="member_id" value="${username}">
 		<input type="hidden" name="review_fno" value="${review.review_no}">
 		<p>댓글쓰기 :</p>
 		<div><textarea class="form-control"  rows="3" cols="50" name="review_re_content"></textarea></div>

@@ -14,18 +14,6 @@
 <!-- CKeditor 적용 -->
 <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
-
-
-<!-- <script type="text/javascript">
-	function chk() {
-		if (frm.passwd.value != frm.passwd2.value) {
-			alert("암호가 다르면 수정할 수 없습니다");
-			frm.passwd2.focus();
-			return false;
-		}
-	}
-</script> -->
-<%-- <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/> --%>
 </head>
 <body>
 
@@ -70,15 +58,13 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-			<td><textarea rows="25" cols="70" name="meet_content" required="required" maxlength="284" >
-		     ${meet.meet_content}
-		    </textarea>
+			<td><textarea rows="25" cols="70" id="content" name="meet_content" required="required" maxlength="284" >
+		     ${meet.meet_content}</textarea>
 		    <script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
 			CKEDITOR.replace('content',
 			{filebrowserUploadUrl:'/comm/imageupload'
 			});
-		    </script>
-						</td>
+		    </script></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input class="btn btn-dark" type="submit" value="확인"></td>
