@@ -25,7 +25,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/plan*")
+@RequestMapping("/plan")
 @Slf4j
 public class PlannerController {
     private final JSONParser jsonParser = new JSONParser();
