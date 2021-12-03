@@ -42,14 +42,23 @@
             </div>
 
             <div id="sub-menu">
-                <div id="goodToggle"><i id="heart" class="far fa-heart fa-3x" onclick="goodToggle(idx, username)"></i></div>
-                <div id="total-spots-count"></div>
+                <div id="day-info">
+                    <div id="choose-day"></div>
+                    <div id="day-detail">
+                        <div id="day-date"></div>
+                        <div id="day-spots-count"></div>
+                        <div id="day-move-length"></div>
+                    </div>
+                </div>
                 <div id="days"></div>
+                <div id="goodToggle"><i id="heart" class="far fa-heart fa-3x" onclick="goodToggle(idx, username)"></i>
+                </div>
             </div>
 
             <div id="content-body">
                 <div id="plans"></div>
                 <div id="map"></div>
+                <div id="detail-view"></div>
             </div>
         </div>
     </div>

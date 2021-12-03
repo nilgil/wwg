@@ -222,7 +222,11 @@ public class PlannerController {
      * 플랜 게시판 이동
      */
     @GetMapping("/board")
-    public String planBoardForm(Model model) {
+    public String planBoardForm(Principal principal,Model model) {
+        String username = "guest";
+        if (principal != null) {
+            username = principal.getName();
+        }
         List<Plan> bestPlans = plannerService.getBestPubPlansList();
 
         String[] titles = new String[bestPlans.size()];
@@ -235,6 +239,7 @@ public class PlannerController {
 
         model.addAttribute("bestPlans", bestPlans);
         model.addAttribute("thumbnails", thumbnails);
+        model.addAttribute("username",username);
 
         log.debug("Move To Plan Board | Best Plans : {}", bestPlans);
         return "/plan/plan-board";

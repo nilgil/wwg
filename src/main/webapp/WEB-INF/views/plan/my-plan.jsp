@@ -30,7 +30,7 @@
                 <div class='plan'>
                     <div id='plan-img'>
                         <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}"
-                                                              alt="https://via.placeholder.com/150"/></a>
+                                                              alt="/img/qna/jlogo.png"/></a>
                         <span id="pubToggle" onclick="askReallyPubToggle(${plan.idx},${plan.pub})">
                             <c:if test="${plan.pub==0}"><i class="fas fa-toggle-off fa-2x"></i></c:if>
                             <c:if test="${plan.pub==1}"><i class="fas fa-toggle-on fa-2x"></i></c:if>

@@ -44,14 +44,14 @@
 }
 
 #submit {
-    border: 2px solid black;
+    border: 1px solid black;
     text-align: center;
     width:140px;
     border-radius: 15px;
     font-size: 20px;
 }
 #submit:hover{
-	border: 3px solid #293462;
+	border: 1px solid #293462;
 	background-color: #FFB740;
 }
 .main_img img{

@@ -373,7 +373,7 @@ function savePlan() {
     }
     $.ajax({
         url: `/plan/${path}`,
-        type: 'get',
+        type: method,
         data: {
             "username": username,
             "departure": dateFormatter(departure),

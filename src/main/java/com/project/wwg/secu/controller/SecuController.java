@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -24,7 +26,7 @@ public class SecuController {
     UserDeleteService userDeleteService;
 
     SecuController(TestService testService, UserSignUpService userSignUpService,
-                   UserInfoUpdateService userInfoUpdateService, UserDeleteService userDeleteService){
+                   UserInfoUpdateService userInfoUpdateService, UserDeleteService userDeleteService) {
         this.testService = testService;
         this.userSignUpService = userSignUpService;
         this.userInfoUpdateService = userInfoUpdateService;
@@ -32,51 +34,49 @@ public class SecuController {
     }
 
     @GetMapping("/loginPage")
-    public String login(Model model, Principal principal,Authentication authentication){
+    public String login(Model model, Principal principal, Authentication authentication) {
 
         return "secu/login";
     }
+
     @PostMapping("/userSignUpProcess")
     public String userSignUp(Model model,
                              @RequestParam(name = "username") String username,
                              @RequestParam(name = "password") String password,
                              @RequestParam(name = "realname") String realname,
-                             @RequestParam(name = "location") String location)
-    {
-        LOG.info(username +", "+ password+", "+ realname+", "+ location);
-        if(userSignUpService.userSignUp(username, password, realname, location)){
+                             @RequestParam(name = "location") String location) {
+        LOG.info(username + ", " + password + ", " + realname + ", " + location);
+        if (userSignUpService.userSignUp(username, password, realname, location)) {
             LOG.info("signsUp success");
-            return"/";
-        }
-        else {
+            return "/";
+        } else {
             LOG.info("signsUp fail");
             return "redirect:/userSignUp";//나중에 적절한 페이지로 이동
         }
     }
 
     @GetMapping("/userSignUp")
-    public String userSignUpPage(Model model){
-        return"secu/userSignUp";
+    public String userSignUpPage(Model model) {
+        return "secu/userSignUp";
     }
 
     @GetMapping("/user/mypage")
-    public String myPage(Model model){
+    public String myPage(Model model) {
         return "secu/mypage";
     }
 
     @PostMapping("/user/changeInfoProcess")
-    public String changeInfoProcess( @RequestParam(name = "username") String username,
-                                     @RequestParam(name = "password") String password,
-                                     @RequestParam(name = "realname") String realname,
-                                     @RequestParam(name = "location") String location)
-    {
-        LOG.info(username +", "+ password+", "+ realname+", "+ location);
+    public String changeInfoProcess(@RequestParam(name = "username") String username,
+                                    @RequestParam(name = "password") String password,
+                                    @RequestParam(name = "realname") String realname,
+                                    @RequestParam(name = "location") String location) {
+        LOG.info(username + ", " + password + ", " + realname + ", " + location);
         userInfoUpdateService.userInfoUpdate(username, password, location, realname);
         return "secu/mypage";//나중에 메인페이지로 변경
     }
 
     @GetMapping("user/quit")
-    public String userQuit(Principal principal){
+    public String userQuit(Principal principal) {
         LOG.info(principal.getName());
         UsersDto usersDto = new UsersDto();
         usersDto.setUsername(principal.getName());
@@ -105,5 +105,12 @@ public class SecuController {
         return "secu/loginErrorPage";
     }
 
-
+    @GetMapping("/loginSuccess")
+    public String loginSuccess(HttpSession session) {
+        String beforeUrl = (String) session.getAttribute("beforeUrl");
+        if (beforeUrl != null) {
+            return "redirect:" + beforeUrl;
+        }
+        return "redirect:/";
+    }
 }
