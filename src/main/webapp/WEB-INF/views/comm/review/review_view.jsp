@@ -136,7 +136,7 @@
 			<div class="r_view_btns">
 				<input type="button" value="목록" class="btn btn-dark"
 					onClick="location.href='/reviewlist/pageNum/${pageNum}' ">
-				<s:authorize access="hasRole('ROLE_USER')">
+				<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 					<form
 						action="${path}/reviewupdateform/review_no/${review.review_no}/pageNum/${pageNum}"
 						method="post" name="chk" id="chk1">
