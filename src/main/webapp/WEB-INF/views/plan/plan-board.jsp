@@ -30,9 +30,7 @@
                                     <c:if test="${plan.days == 1}">당일치기</c:if>
                                     <c:if test="${plan.days != 1}">${plan.days-1}박 ${plan.days}일</c:if>
                                 </p>
-                                <p>
-                                        ${plan.username}
-                                </p>
+                                <p>${plan.username}</p>
                             </div>
                             <div id="title">
                                 <a href="/plan/view/${plan.idx}"><p>${plan.title}</p></a>
@@ -51,7 +49,7 @@
             <table id="f_table" class="table table-hover" align="center" width=900>
                 <h2>일정 게시판</h2>
                 <br>
-                <p>총 글개수 : ${pageInfo.count}</p>
+                <p>총 글개수 : <span id="count"></span></p>
                 <thead>
                 <tr>
                     <th>번호</th>
@@ -63,42 +61,13 @@
                     <th>좋아요</th>
                 </tr>
                 </thead>
-
-                <tbody>
-                <c:forEach var="plan" items="${plans}">
-                    <tr>
-                        <td>${plan.idx}</td>
-                        <td><a href="/plan/view/${plan.idx}">
-                                ${plan.title}
-                        </a></td>
-                        <td style="width: 120px">(<c:if test="${plan.days == 1}">당일치기</c:if><c:if test="${plan.days != 1}">${plan.days-1}박 ${plan.days}일</c:if>)</td>
-                        <td style="width: 100px">${plan.username}</td>
-                        <td style="width: 250px">
-                            <span style="margin-right: 10px"><fmt:formatDate value="${plan.regDate}" pattern="yyyy-MM-dd"/></span>
-                            <span><fmt:formatDate value="${plan.regDate}" pattern="HH:mm:ss"/></span>
-                        </td>
-                        <td style="width: 80px">${plan.hit}</td>
-                        <td style="width: 80px">${plan.good}</td>
-
-                    </tr>
-                </c:forEach>
+                <tbody id="boardContent">
                 </tbody>
             </table>
 
             <!-- 페이지 넘기기 기능 -->
             <div id="paging">
-                <c:if test="${pageInfo.startPage > pageInfo.divPages }">
-                    <li><a href="/plan/board?page=${pageInfo.startPage - 1}">이전</a></li>
-                </c:if>
-                <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                    <li <c:if test="${pageInfo.page==i}">class="active"</c:if>><a
-                            href="/plan/board?page=${i}">${i}</a></li>
-                </c:forEach>
-                <c:if test="${pageInfo.endPage < pageInfo.totalPage}">
-                    <li><a href="/plan/board?page=${pageInfo.endPage + 1}">다음</a></li>
-                </c:if>
             </div>
-
 
             <!-- 검색 기능 -->
             <div class="foodlist_search">
