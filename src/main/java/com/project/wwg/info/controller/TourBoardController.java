@@ -40,7 +40,13 @@ public class TourBoardController {
 	// 글작성 폼
 	@RequestMapping("tourform.do")
 	public String tourform(Principal principal, Model model) {
-			 		
+
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/tour/tourform";
 	}
 	
@@ -73,7 +79,13 @@ public class TourBoardController {
 	
 	// 글목록
 	@RequestMapping("tourlist.do/pageNum/{pageNum}")
-	public String tourlist(@PathVariable String pageNum, TourBoard tourboard, Model model) {
+	public String tourlist(Principal principal ,@PathVariable String pageNum, TourBoard tourboard, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		final int rowPerPage = 10;
 		
 		if(pageNum == null || pageNum.equals("")) {
@@ -98,7 +110,7 @@ public class TourBoardController {
 		// 검색
 		model.addAttribute("search", tourboard.getSearch());
 		model.addAttribute("keyword", tourboard.getKeyword());
-		
+		model.addAttribute("username", username);
 		return "info/tour/tourlist";
 	}
 	
@@ -122,10 +134,17 @@ public class TourBoardController {
 	
 	// 글수정 폼
 	@RequestMapping("tourupdateform.do/tour_no/{tour_no}/pageNum/{pageNum}")
-	public String tourupdateform(@PathVariable int tour_no, @PathVariable String pageNum, Model model) {
+	public String tourupdateform(Principal principal ,@PathVariable int tour_no, @PathVariable String pageNum, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		TourBoard tourboard = service.select(tour_no);
 		model.addAttribute("tourboard", tourboard);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("username", username);
 		return "info/tour/tourupdateform";
 	}
 	
@@ -140,8 +159,14 @@ public class TourBoardController {
 	
 	// 글삭제 폼
 	@RequestMapping("tourdeleteform.do")
-	public String tourdeleteform() {
+	public String tourdeleteform(Principal principal, Model model) {
 
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/tour/tourdeleteform";
 	}
 
