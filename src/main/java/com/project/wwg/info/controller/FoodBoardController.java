@@ -41,6 +41,12 @@ public class FoodBoardController {
 	@RequestMapping("foodform.do")
 	public String foodform(Principal principal, Model model) {
 		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/food/foodform";
 	}
 	
@@ -73,7 +79,13 @@ public class FoodBoardController {
 	
 	// 글목록
 	@RequestMapping("foodlist.do/pageNum/{pageNum}")
-	public String foodlist(@PathVariable String pageNum, FoodBoard foodboard, Model model) {
+	public String foodlist(Principal principal ,@PathVariable String pageNum, FoodBoard foodboard, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		final int rowPerPage = 10;
 		
 		if(pageNum == null || pageNum.equals("")) {
@@ -98,7 +110,7 @@ public class FoodBoardController {
 		// 검색
 		model.addAttribute("search", foodboard.getSearch());
 		model.addAttribute("keyword", foodboard.getKeyword());
-		
+		model.addAttribute("username", username);
 		return "info/food/foodlist";
 	}
 	
@@ -122,10 +134,17 @@ public class FoodBoardController {
 	
 	// 글수정 폼
 	@RequestMapping("foodupdateform.do/food_no/{food_no}/pageNum/{pageNum}")
-	public String foodupdateform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
+	public String foodupdateform(Principal principal ,@PathVariable int food_no, @PathVariable String pageNum, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		FoodBoard foodboard = service.select(food_no);
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("username", username);
 		return "info/food/foodupdateform";
 	}
 	
@@ -140,8 +159,14 @@ public class FoodBoardController {
 	
 	// 글삭제 폼
 	@RequestMapping("fooddeleteform.do")
-	public String fooddeleteform() {
-
+	public String fooddeleteform(Principal principal, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/food/fooddeleteform";
 	}
 
