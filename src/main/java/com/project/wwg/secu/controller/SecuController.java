@@ -46,7 +46,7 @@ public class SecuController {
         LOG.info(username +", "+ password+", "+ realname+", "+ location);
         if(userSignUpService.userSignUp(username, password, realname, location)){
             LOG.info("signsUp success");
-            return"home";
+            return"/";
         }
         else {
             LOG.info("signsUp fail");
