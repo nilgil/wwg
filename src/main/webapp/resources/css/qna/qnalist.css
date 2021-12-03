@@ -45,6 +45,8 @@ body{
     width: 151px;
     height: 210px;
     margin-top: 57%;
+    box-shadow: 2px 2px 3px #0000003b;
+    border-radius: 5px;
 }
 #side_menu thead{
     /* color: cadetblue; */

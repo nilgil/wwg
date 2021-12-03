@@ -71,6 +71,15 @@
            <li><button class="btn btn-success" type="submit">검색</button></li>
         </ul>
         
+        
+        <div class="navbar_logout" >${username}님 |
+        <c:if test="${username eq 'guest'}">
+        <a href="/loginPage"> 로그인</a></div>
+        </c:if>
+        <s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+        <a href="/logout">로그아웃</a></div>
+        </s:authorize>
+        
 
         <a href="#" class="navbar_toogleBtn">
             <i class="fas fa-bars"></i>

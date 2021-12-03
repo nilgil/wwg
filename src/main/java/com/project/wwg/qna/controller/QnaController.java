@@ -22,8 +22,10 @@ import com.project.wwg.comm.service.review_service;
 import com.project.wwg.info.dao.FoodBoardDao;
 import com.project.wwg.info.dto.FoodBoard;
 import com.project.wwg.info.dto.StayBoard;
+import com.project.wwg.info.dto.TourBoard;
 import com.project.wwg.info.service.FoodBoardService;
 import com.project.wwg.info.service.StayBoardService;
+import com.project.wwg.info.service.TourBoardService;
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
 import com.project.wwg.qna.service.QnaService;
@@ -44,13 +46,15 @@ public class QnaController{
 	private FoodBoardService fs; //맛집 서비스 인터
 	@Autowired
 	private StayBoardService ss; //숙박 서비스 인터
+	@Autowired
+	private TourBoardService ts; //여행지 서비스 인터
 	
 	
 
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String mainpage(Principal principal, Qna qna, notice notice, meet meet, review review, FoodBoard foodboard, StayBoard stayboard, Model model) { 
+	public String mainpage(Principal principal, Qna qna, notice notice, meet meet, review review, FoodBoard foodboard, StayBoard stayboard, TourBoard tourboard, Model model) { 
 
 		String username = "guest"; 
 		
@@ -79,6 +83,9 @@ public class QnaController{
 	    List<StayBoard> stay = new ArrayList<StayBoard>();
 	    stay = ss.getstay();
 	    
+	    List<TourBoard> tour = new ArrayList<TourBoard>();
+	    tour = ts.gettour();
+	    
 	    System.out.println(qnalist);
 	    System.out.println("여기까지옴");
 	    
@@ -89,52 +96,25 @@ public class QnaController{
 		model.addAttribute("reviewlist2", reviewlist2);
 		model.addAttribute("food", food);
 		model.addAttribute("stay", stay);
+		model.addAttribute("tour", tour);
 		model.addAttribute("username", username);
-		
 		
 		return "qna/main";
 	}
 	
-	//로그인후 메인페이지
-		@RequestMapping("/loginMain")
-		public String loginMainPage(Principal principal, Qna qna, notice notice, meet meet, review review, StayBoard stayboard, Model model) {
-			
-			String username = "guest"; 
-			
-			if(principal != null) {
-				username = principal.getName();
-			}
-			
-			List<Qna> qnalist = new ArrayList<Qna>();
-	        qnalist = qs.getQnaMain(); 
-	        
-	        List<notice> noticelist = new ArrayList<notice>();
-		    noticelist = ns.getNotice();
-		    
-		    List<meet> meetlist = new ArrayList<meet>();
-		    meetlist = ms.getMeet();
-		    
-		    List<review> reviewlist1 = new ArrayList<review>();
-		    reviewlist1 = rs.getReview1();
-		    
-		    List<review> reviewlist2 = new ArrayList<review>();
-		    reviewlist2 = rs.getReview2();
-	        
-			model.addAttribute("qnalist", qnalist);
-			model.addAttribute("noticelist", noticelist);
-			model.addAttribute("meetlist", meetlist);
-			model.addAttribute("reviewlist1", reviewlist1);
-			model.addAttribute("reviewlist2", reviewlist2);
-			model.addAttribute("username", username);
-			
-			return "qna/loginMain";
-		}
-	
-	
 	//글작성폼
 	@RequestMapping("qnawriteform.do")
-	public String qnaWriteForm() {
+	public String qnaWriteForm(Principal principal, Model model) {
 		System.out.println("qnawriteform성공");
+		
+        String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		
 		return "qna/qnaWrite";
 	}
 	
@@ -353,12 +333,14 @@ public class QnaController{
 			username = principal.getName();
 		}
 		
+		//String username = principal.getName();
+		
 		Qna qnalist = qs.select(qna.getQna_no());
 		System.out.println("수정 session qnalist호출");
 		
 		model.addAttribute("qnalist", qnalist);
 		model.addAttribute("page", page);
-		model.addAttribute("username", username);
+		model.addAttribute("username", username);		
 		System.out.println("수정 session 공유");
 		
 		return "qna/qnaUpdateRecheck";
@@ -490,7 +472,7 @@ public class QnaController{
 	}
 	
 	
-	//main 여행후기1
+	//main 여행후기1 게시글 호출
 	@RequestMapping("/reviewviewcont/review_no/{review_no1}/pageNum/1")
 	public String totalSearcg1(Principal principal, Model model, @PathVariable String review_no1) {
 	
@@ -506,7 +488,7 @@ public class QnaController{
 		return "redirect:/reviewview/review_no/"+review_no1+"/pageNum/1";
 	}
 	
-	//main 여행후기2
+	//main 여행후기2 게시글 호출
 	@RequestMapping("/reviewviewcont/review_no/{review_no1}/pageNum/2")
 	public String totalSearcg2(Principal principal, Model model, @PathVariable String review_no1) {
 	
@@ -522,6 +504,64 @@ public class QnaController{
 		return "redirect:/reviewview/review_no/"+review_no1+"/pageNum/2";
 	}
 	
+	//main qna게시글 호출
+	@RequestMapping("/qna_detailcont/qna_no/{qna_no1}/page/1")
+	public String qnamain(Principal principal, Model model, @PathVariable String qna_no1) {
+	
+		
+		int page = 1;   //1번게시물부터
+		int limit = 10; //10번게시물까지 출력
+		
+		int listcount = qs.getListCount();
+		
+		int no1 = listcount - (page-1) * limit;
+		
+		
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("no1", no1);
+		model.addAttribute("qna_no1", qna_no1);
+		
+		return "redirect:/qna_detail/qna_no/"+qna_no1+"/page/1/no/{no1}";
+		
+	}
+	
+	//main 동행구해요 게시글 호출
+	@RequestMapping("/meetviewcont/meet_no/{meet_no1}/pageNum/1")
+	public String meetmain(Principal principal, Model model, @PathVariable String meet_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("meet_no1", meet_no1);
+		
+		return "redirect:/meetview/meet_no/{meet_no1}/pageNum/1";
+	}
+	
+	//main 공지사항 게시글 호출
+	@RequestMapping("/noticeviewcont/notice_no/{notice_no1}/pageNum/1")
+	public String noticemain(Principal principal, Model model, @PathVariable String notice_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("notice_no1", notice_no1);
+		
+		return "redirect:/noticeview/notice_no/{notice_no1}/pageNum/{1";
+	}
 		
 
 	

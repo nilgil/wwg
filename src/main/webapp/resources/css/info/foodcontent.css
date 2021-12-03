@@ -32,7 +32,7 @@ a{
     grid-template-rows: 1fr 180px 1fr;
     grid-template-areas: 'side foodcontent_table' 
                          'side foodcont_repl'
-                         'side food_rel_list';                     
+                         'side food_rep_list';                     
     margin-top: 5%;
 }
 .side{
@@ -47,6 +47,7 @@ a{
     height: 210px;
     margin-top: 57%;
     background-color: #fffffff5;
+    box-shadow: 2px 2px 3px #0000003b;
     border-radius: 5px;
 
 }
@@ -67,8 +68,8 @@ a{
 .foodcont_btns input{
 	margin:10px;
 }
-.foodcont_relp{
-	grid-area:foodcont_relp;
+.foodcont_repl{
+	grid-area:foodcont_repl;
 	background-color: #fffffff5;
 	border-radius: 10px;
 }
@@ -83,8 +84,8 @@ a{
 .foodcont_repl div{
 	display: inline-table;
 }
-.food_rel_list{
-	grid-area:food_rel_list;
+.food_rep_list{
+	grid-area:food_rep_list;
 	background-color: #fffffff5;
 	border-radius: 10px;
 }

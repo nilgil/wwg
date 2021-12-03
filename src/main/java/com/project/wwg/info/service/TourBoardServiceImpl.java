@@ -70,4 +70,11 @@ public class TourBoardServiceImpl implements TourBoardService {
 	public void like(int tour_no) {
 		dao.like(tour_no);
 	}
+
+	//main 페이지에 데이터 호출
+	@Override
+	public List<TourBoard> gettour() {
+		// TODO Auto-generated method stub
+		return dao.gettour();
+	}
 }

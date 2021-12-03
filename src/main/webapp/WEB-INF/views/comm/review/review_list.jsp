@@ -19,7 +19,7 @@
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 
 <!-- center -->
@@ -41,6 +41,7 @@
 <div class="reviewlist_table" >
 <table id="r_list_table1" class="table table-hover">
     <h2>여행후기 게시판</h2>
+    &nbsp;
 			<thead>
 			<tr>
 				<td>번호</td>
@@ -72,7 +73,7 @@
 		
 		<div class="c_r_write_btn">
 		<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-			<a href="${path}/comm_reviewinsertform" class="btn btn-info">글 작성</a>
+			<a href="${path}/comm_reviewinsertform" class="btn btn-dark">글작성</a>
 		</s:authorize>
 		</div>
 		<!-- 페이징 -->
@@ -83,7 +84,7 @@
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="${path }/reviewlist/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+						href="${path }/reviewlist/pageNum/${i}?search=${search}&keyword=${keyword}">&nbsp;${i}&nbsp;</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
 					<li><a href="${path }/reviewlist/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
@@ -117,7 +118,7 @@
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> 
 			<input type="text" name="keyword"> 
-			<input type="submit" value="확인">
+			<input class="btn btn-dark" type="submit" value="검색">
 		</form>
 		</div>
 		

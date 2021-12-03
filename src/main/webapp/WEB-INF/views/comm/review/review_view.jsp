@@ -78,7 +78,7 @@ $(function() {
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 
 
@@ -102,6 +102,7 @@ $(function() {
 	<div class="review_view_table">
 	<table id="r_view_table1" class="table table-hover">
 	<h2>여행후기 게시판</h2>
+	&nbsp;
 		<tbody>
 		<tr>
 			<td width="90">제목</td>

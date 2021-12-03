@@ -58,8 +58,18 @@
      <%--    <a href="#"><span>${fod.food_content}</span> <span>${fod.food_title}</span></a> --%>
         </li>
         </c:forEach>
-        <li><a href="#"><img alt="이미지2" src="/img/qna/test사진2.jpg">제목</a></li>
-        <li><a href="#"><img alt="이미지3" src="/img/qna/test사진7.jpg">제목</a></li>
+        
+        <c:forEach var="sy" items="${stay}">
+        <li>
+        <a href="#"><img alt="이미지2" src="/img/qna/test사진2.jpg"><span>${sy.stay_title}</span></a>
+        </li>
+        </c:forEach>
+        
+        <c:forEach var="tr" items="${tour}">
+        <li>
+        <a href="#"><img alt="이미지3" src="/img/qna/test사진7.jpg"><span>${tr.tour_title}</span></a>
+        </li>
+        </c:forEach>
     </ul>
 </div>
 
@@ -96,20 +106,9 @@
 </div>
 
 <div class="aside_login">로그인<hr>
-<!--     <form id="login" action="/action_page.php">
-        <div class="form-group">
-          <label for="usr">아이디</label>
-          <input type="text" class="form-control" id="usr" name="username">
-        </div>
-        <div class="form-group">
-          <label for="pwd">비밀번호</label>
-          <input type="password" class="form-control" id="pwd" name="password">
-        </div>
-        <div class="login_btn"><button type="submit" class="btn btn-success">로그인</button> 
-            <a href="#">회원가입</a> | 
-            <a href="#">아이디/비밀번호 찾기</a></div>
-      </form> -->
       
+    <c:choose>
+    <c:when test="${username eq 'guest'}">
     
     <form action="/login" method="post">
     <div class="form-group">
@@ -122,19 +121,39 @@
     </div>
     <s:csrfInput/>
     <div class="login_btn"><button type="submit" class="btn btn-success" >로그인</button>
-     <a href="/userSignUp">회원가입</a> | 
-     <a href="#">아이디/비밀번호 찾기</a></div>
-     
+     <a href="/userSignUp">회원가입</a></div>    
+    </form>
     
-     
-</form>
+    </c:when>
+    
+    <c:otherwise>
+    
+    <form action="/login" method="post">
+    <div class="main_profile"><img alt="이미지1" src="/img/qna/프로필사진1.png" width="90" height="90"></div>
+    <div class="login_id">
+    ${username}님 | <a href="/user/mypage">내정보</a>
+    </div>
+    <div class="logout_btn">
+    <input type="button" name="logout" value="로그아웃" onclick="location='/logout'">
+    </div>
+    <s:csrfInput/>
+     <div class="quit_share"><a href="#">회원탈퇴</a> | 
+     <a href="#">친구공유</a></div>
+    </form>
+    
+    </c:otherwise>
+    
+    </c:choose>  
+    
 </div>
+
+
 
 <div class="notice">공지사항<hr>
 <ul style="list-style-type: circle">
 <c:forEach var="notice" items="${noticelist}">
 <li>
-<a href="/noticelist">${notice.notice_title}
+<a href="/noticeviewcont/notice_no/${notice.notice_no}/pageNum/1">${notice.notice_title}
 <span class="pull-right">
 <fmt:formatDate value="${notice.notice_regdate}"
  pattern="yyyy-MM-dd"/>
@@ -148,7 +167,7 @@
 <ul style="list-style-type: circle">
 <c:forEach var="meet" items="${meetlist}">
 <li>
-<a href="/meetlist">${meet.meet_title}
+<a href="/meetviewcont/meet_no/${meet.meet_no}/pageNum/1">${meet.meet_title}
 <span class="pull-right">
 <fmt:formatDate value="${meet.meet_regdate}"
  pattern="yyyy-MM-dd"/>
@@ -158,12 +177,11 @@
 </ul>
 <hr></div>
 
-
 <div class="aside2">Q&A<hr>
 <ul style="list-style-type: circle">
 <c:forEach var="qna" items="${qnalist}">
 <li>
-<a href="/qnalist.do">${qna.qna_title}
+<a href="/qna_detailcont/qna_no/${qna.qna_no}/page/1">${qna.qna_title}
 <span class="pull-right">
 <fmt:formatDate value="${qna.qna_regdate}"
  pattern="yyyy-MM-dd"/>

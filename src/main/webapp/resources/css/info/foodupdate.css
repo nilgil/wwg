@@ -42,6 +42,7 @@ a{
     height: 210px;
     margin-top: 57%;
     background-color: #fffffff5;
+    box-shadow: 2px 2px 3px #0000003b;
     border-radius: 5px;
 
 }

@@ -17,7 +17,7 @@
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_meetlist_center">
@@ -39,6 +39,7 @@
 <div class="c_meetlist_table" >	
 <table id="c_m_table1" class="table table-hover">
         <h2>동행구해요 게시판</h2>
+        &nbsp;
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -70,7 +71,7 @@
 		
 		<div class="c_m_write_btn">
 	<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-			<a href="${path}/comm_meetinsertform" class="btn btn-info">글 작성</a>
+			<a href="${path}/comm_meetinsertform" class="btn btn-dark">글작성</a>
 		</s:authorize>		
 		</div>
 		<!-- 페이징 -->
@@ -115,7 +116,7 @@
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> 
 			<input type="text" name="keyword"> 
-			<input type="submit" value="확인">
+			<input class="btn btn-dark" type="submit" value="검색">
 		</form>
 		</div>
 </div>

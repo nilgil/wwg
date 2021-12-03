@@ -17,43 +17,40 @@
 
 <form action="${pageContext.request.contextPath}/userSignUpProcess" method="post">
 
-<div class="signUp_center">
 
-    <div class="signUp_table">
-        <table id="signUp_table_2" class="table table-hover">
-        <h2>회원가입</h2>           
-          <thead>
-           <tr>
-            <th colspan="2" text-align="center">회원가입폼</th>
-           </tr>
-          </thead>
-          
-          <tbody>
-        <tr>
-            <td>아이디</td>
-            <td><input type="text" name="username" placeholder="pleas type username you wants"></td>
-        </tr>
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" name="password" placeholder="pleas type password you wants"></td>
-        </tr>
-        <tr>    
-            <td>이름</td>
-            <td><input type="text" name="realname" placeholder="please type your name"></td>
-        </tr>
-        <tr>
-            <td>거주지</td>   
-            <td><input type="text" name="location" placeholder="please type the location you live."></td>
-        </tr>
-        <tr>
-            <td colspan="2" text-align="center"> 
-                <s:csrfInput/>
-                <button>회원가입</button>
-            </td>
-        </tr>
-        </tbody>
-        </table>
-    </div>
+     
+
+            <div class="signUp_center">        
+            
+           
+            
+            <div class="signUp_id">
+            <h2>회원가입</h2><br>
+            <p>아이디</p>
+            <input class="form-control" type="text" name="username" placeholder="아이디">
+            </div>
+       
+            <div class="signUp_pw">
+            <p>비밀번호</p>
+            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자 ">
+            </div>
+        
+            <div class="signUp_name">
+            <p>이름</p>
+            <input class="form-control" type="text" name="realname" placeholder="이름">
+            </div>
+     
+            <div class="signUp_address">
+            <p>거주지</p>  
+            <input class="form-control" type="text" name="location" placeholder="예)서울,경기...">
+            </div>
+     
+            <s:csrfInput/>
+            
+            <div class="signUp_btn">
+            <button id="btn" type="button" class="btn">회원가입</button>
+            </div>
+  
 
 </div>
 

@@ -18,7 +18,7 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_notinsert_center">
@@ -41,7 +41,7 @@
 <form method=post action="/comm_noticeinsert">
 <table id="c_notinsert_table1" class="table table-hover" >
     <h2>공지사항 글작성</h2>
-	
+	&nbsp;
 	<tr><th>제목</th>
 		<td><input type=text name="notice_title" required="required" size="60" maxlength="29" placeholder="제목(최대 29자)"></td>
 	</tr>

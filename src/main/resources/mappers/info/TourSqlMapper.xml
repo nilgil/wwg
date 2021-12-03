@@ -86,5 +86,10 @@
 	<update id="like" parameterType="TourBoard">
 		update trip_tour set tour_like=tour_like+1 where tour_no=#{tour_no}
 	</update>
+	
+<!-- main 페이지에 데이터 호출 -->	
+    <select id="tour" resultType="TourBoard">
+        select * from (select * from trip_tour order by tour_regdate desc) where rownum &lt;= 1
+    </select>	
 
 </mapper>
