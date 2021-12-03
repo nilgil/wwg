@@ -40,11 +40,7 @@ public class TourBoardController {
 	// 글작성 폼
 	@RequestMapping("tourform.do")
 	public String tourform(Principal principal, Model model) {
-		
-		/*
-		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
-		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
-		 */		 		
+			 		
 		return "info/tour/tourform";
 	}
 	
@@ -61,12 +57,10 @@ public class TourBoardController {
 		int number = service.getMaxNum();
 		
 		tourboard.setTour_no(number);
-		
 		tourboard.setUsername(username); // 로그인후 유저네임 넘기기
 		 		
 		int result = service.insert(tourboard);
 		model.addAttribute("result", result);
-		/* model.addAttribute("username", username); */
 		
 		return "info/tour/tourinsertresult";
 	}
@@ -81,9 +75,11 @@ public class TourBoardController {
 	@RequestMapping("tourlist.do/pageNum/{pageNum}")
 	public String tourlist(@PathVariable String pageNum, TourBoard tourboard, Model model) {
 		final int rowPerPage = 10;
+		
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
+		
 		int tour_count = service.getTour_count();	// 게시물 갯수
 		int currentPage = Integer.parseInt(pageNum);// 총 데이터 갯수
 		int total = service.getTotal(tourboard);	// 검색
@@ -144,11 +140,8 @@ public class TourBoardController {
 	
 	// 글삭제 폼
 	@RequestMapping("tourdeleteform.do")
-//	public String tourdeleteform(@PathVariable int tour_no, @PathVariable String pageNum, Model model) {
 	public String tourdeleteform() {
-//		int result = service.delete(tour_no);
-//		model.addAttribute("result", result);
-//		model.addAttribute("pageNum", pageNum);
+
 		return "info/tour/tourdeleteform";
 	}
 
@@ -190,6 +183,7 @@ public class TourBoardController {
     		byte[] bytes = upload.getBytes();
     		
     		//이미지 경로 생성
+//        	String path = "${pageContext.request.contextPath}/info";
     		String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
     		String ckUploadPath = path + uid + "_" + fileName;
     		File folder = new File(path);
@@ -234,6 +228,7 @@ public class TourBoardController {
     throws ServletException, IOException{
     	
     	//서버에 저장된 이미지 경로
+//    	String path = "${pageContext.request.contextPath}/info";
     	String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
     	System.out.println("path:"+path);
     	String sDirPath = path + uid + "_" + fileName;
@@ -274,6 +269,5 @@ public class TourBoardController {
     			}
     		}
     }
-
 	
 }
