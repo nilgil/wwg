@@ -80,7 +80,12 @@ public class review_controller {
 
 	// 글작성 폼
 		@RequestMapping("/comm_reviewinsertform")
-		public String review_insertform() {
+		public String review_insertform(Principal principal, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			return "comm/review/review_insertform";
 		}
 		
@@ -111,6 +116,7 @@ public class review_controller {
 			if(principal != null) {
 				username=principal.getName();
 			};
+			
 			rs.selectUpdate(review_no);
 			review review = rs.select(review_no);
 			model.addAttribute("username", username);
@@ -120,7 +126,12 @@ public class review_controller {
 		}	
 	// 수정폼	
 		@RequestMapping("/reviewupdateform/review_no/{review_no}/pageNum/{pageNum}")
-		public String updateForm(@PathVariable int review_no, @PathVariable String pageNum, Model model) {
+		public String updateForm(Principal principal, @PathVariable int review_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			review review = rs.select(review_no);
 			model.addAttribute("review", review);
 			model.addAttribute("pageNum", pageNum);

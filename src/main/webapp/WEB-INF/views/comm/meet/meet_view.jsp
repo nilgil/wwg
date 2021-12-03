@@ -133,7 +133,7 @@
 			<div class="m_view_btns">
 				<input type="button" value="목록" class="btn btn-dark"
 					onClick="location.href='/meetlist/pageNum/${pageNum}'">
-				<s:authorize access="hasRole('ROLE_USER')">
+				<s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 					<form
 						action="${path}/meetupdateform/meet_no/${meet.meet_no}/pageNum/${pageNum}"
 						method="post" name="chk" id="chk1">

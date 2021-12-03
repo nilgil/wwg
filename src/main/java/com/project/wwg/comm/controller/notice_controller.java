@@ -69,7 +69,12 @@ public class notice_controller {
 
 	// 글작성 폼
 		@RequestMapping("/comm_noticeinsertform")
-		public String comm_noticeinsertform() {
+		public String comm_noticeinsertform(Principal principal, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			return "comm/notice/comm_noticeinsertform";
 		}
 		
@@ -110,7 +115,12 @@ public class notice_controller {
 		}	
 	// 수정폼	
 		@RequestMapping("/noticeupdateform/notice_no/{notice_no}/pageNum/{pageNum}")
-		public String updateForm(@PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+		public String updateForm(Principal principal, @PathVariable int notice_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			notice notice = ns.select(notice_no);
 			model.addAttribute("notice", notice);
 			model.addAttribute("pageNum", pageNum);
