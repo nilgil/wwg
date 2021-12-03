@@ -32,7 +32,6 @@
         <intercept-url pattern="/plan/board" access="permitAll"/>
         <intercept-url pattern="/plan/reset" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/plan/pub" access="hasAnyRole('ROLE_USER')"/>
-        <intercept-url pattern="/plan/good" access="hasAnyRole('ROLE_USER')"/>
 
         <intercept-url pattern="/resources/**" access="permitAll" />
 
@@ -45,7 +44,7 @@
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/loginMain"
+                default-target-url="/loginSuccess"
                 authentication-failure-url="/loginError"
         />
         <logout

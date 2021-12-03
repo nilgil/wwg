@@ -86,7 +86,7 @@ public class SpotsController {
 
     @PostMapping(value = "/searchArray", produces = "application/json; charset=utf8")
     @ResponseBody
-    public String searchSpotsByTitles(String titles) throws ParseException {
+    public String searchSpotsByTitles(String titles) {
         log.debug("searchSpotsByTitles | Parameter : titles = {}", titles);
         if (titles.equals("[]")) {
             return "{\"response\":\"none\"}";

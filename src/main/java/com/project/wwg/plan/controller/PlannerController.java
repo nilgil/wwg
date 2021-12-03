@@ -167,28 +167,38 @@ public class PlannerController {
             username = principal.getName();
         }
         log.debug("[planViewPage] View Plan Detail | Param : idx={}", idx);
-
         plannerService.increaseHit(idx);
+        boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
+
         model.addAttribute("idx", idx);
         model.addAttribute("username", username);
+        model.addAttribute("isAlreadyGood", isAlreadyGood);
 
-        log.debug("[planViewPage] Result : Username={}, IDX={}, Hit + 1", username, idx);
+        log.debug("[planViewPage] Result : Username={}, IDX={}, IsAlreadyGood={}", username, idx, isAlreadyGood);
         return "/plan/view-plan";
     }
 
     @PutMapping("/good")
-    public ResponseEntity<String> goodToggle(int idx, String username) {
-        log.debug("[goodToggle] Good Toggle | Param : IDX={}, Username={}", idx, username);
+    @ResponseBody
+    public String goodToggle(int idx, String username, String beforeUrl, HttpServletRequest request) {
+        if (username.equals("guest")) {
+            request.getSession().setAttribute("beforeUrl", beforeUrl);
+            return username;
+        }
+
+        log.debug("[goodToggle] Good Toggle | Param : IDX={}, Username={}, BeforeURL={}", idx, username, beforeUrl);
 
         boolean isAlreadyGood = plannerService.checkGoodAlready(idx, username);
-        System.out.println("isAlreadyGood = " + isAlreadyGood);
+
         if (isAlreadyGood) {
             plannerService.decreaseGood(idx, username);
         } else {
             plannerService.increaseGood(idx, username);
         }
 
-        return ResponseEntity.ok("false");
+        log.debug("[goodToggle] Result : {}", isAlreadyGood);
+
+        return String.valueOf(isAlreadyGood);
     }
 
 

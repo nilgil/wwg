@@ -14,6 +14,7 @@
 <body>
 <input id="hiddenIdx" type="hidden" value="${idx}">
 <input id="hiddenUsername" type="hidden" value="${username}">
+<input id="hiddenIsAlreadyGood" type="hidden" value="${isAlreadyGood}">
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
@@ -41,7 +42,7 @@
             </div>
 
             <div id="sub-menu">
-                <div id="goodToggle"><i class="far fa-heart fa-3x" onclick="goodToggle(idx, username)"></i></div>
+                <div id="goodToggle"><i id="heart" class="far fa-heart fa-3x" onclick="goodToggle(idx, username)"></i></div>
                 <div id="total-spots-count"></div>
                 <div id="days"></div>
             </div>

@@ -17,18 +17,25 @@ function printSpotsInfo() {
 }
 
 $(document).ready(function () {
+    initVar();
+
+    getPlans(idx).then(response => {
+        initPage(response);
+        printSpotsInfo();
+        getSpotsDetails(response).then(r => {
+
+        });
+    });
+
+    createMap();
+});
+
+function initVar() {
     beforeUrl = window.location.href;
     idx = $('#hiddenIdx').val();
     username = $('#hiddenUsername').val();
-
-    getPlans(idx).then((response) => {
-        initPage(response);
-        printSpotsInfo();
-    });
-
-    getSpotsDetail();
-    createMap();
-});
+    alreadyGood = $('#hiddenIsAlreadyGood').val();
+}
 
 function getPlans(idx) {
     return new Promise((resolve => {
@@ -68,34 +75,57 @@ function initPage(response) {
     if (pub == 0) {
         $('#pub span').html("비공개");
     }
+
     $('#good span:nth-child(2)').text(good);
     $('#hit span:nth-child(2)').text(hit);
+
+    if (alreadyGood == "true") {
+        $('#heart').css({"fontWeight": "bolder"});
+    }
 }
 
-
-function getSpotsDetail() {
-    // return new Promise((resolve => {
-    //     $.ajax({
-    //         url: "/spots/"
-    //     })
-    // }));
-
+function getSpotsDetails(response) {
+    let plans = JSON.parse(response.plans);
+    console.log(JSON.stringify(plans[0]));
+    console.log(plans[0]);
+    return new Promise((resolve => {
+        (async () => {
+            for (let i = 0; i < plans.length; i++) {
+                await $.ajax({
+                    url: '/spots/searchArray',
+                    method: 'post',
+                    data: {"titles": plans[i]},
+                    dataType: 'json',
+                    success: function (response) {
+                        resolve(JSON.parse(response));
+                    },
+                    error: function () {
+                        alert("getSpotsDetail");
+                    }
+                })
+            }
+        })();
+    }));
 }
 
 function goodToggle(idx, username) {
     $.ajax({
         url: '/plan/good',
         method: 'put',
-        data: {"idx": idx, 'username': username},
+        data: {"idx": idx, 'username': username, 'beforeUrl': beforeUrl},
         dataType: 'text',
         success: function (response) {
             console.log(response);
-            if (response) {
-                $('#good span:nth-child(2)').text(good - 1);
-                alreadyGood = false;
-            } else {
-                $('#good span:nth-child(2)').text(good + 1);
-                alreadyGood = true;
+            if (response == "guest") {
+                location.replace('/loginPage');
+            } else if (response == "true") {
+                good = good - 1;
+                $('#good span:nth-child(2)').text(good);
+                $('#heart').css({"fontWeight": "normal"});
+            } else if (response == "false") {
+                good = good + 1;
+                $('#good span:nth-child(2)').text(good);
+                $('#heart').css({"fontWeight": "bolder"});
             }
         }
     })

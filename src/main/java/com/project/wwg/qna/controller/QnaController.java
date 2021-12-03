@@ -97,35 +97,35 @@ public class QnaController{
 	//로그인후 메인페이지
 		@RequestMapping("/loginMain")
 		public String loginMainPage(Principal principal, Qna qna, notice notice, meet meet, review review, StayBoard stayboard, Model model) {
-			
-			String username = "guest"; 
-			
+
+			String username = "guest";
+
 			if(principal != null) {
 				username = principal.getName();
 			}
-			
+
 			List<Qna> qnalist = new ArrayList<Qna>();
-	        qnalist = qs.getQnaMain(); 
-	        
+	        qnalist = qs.getQnaMain();
+
 	        List<notice> noticelist = new ArrayList<notice>();
 		    noticelist = ns.getNotice();
-		    
+
 		    List<meet> meetlist = new ArrayList<meet>();
 		    meetlist = ms.getMeet();
-		    
+
 		    List<review> reviewlist1 = new ArrayList<review>();
 		    reviewlist1 = rs.getReview1();
-		    
+
 		    List<review> reviewlist2 = new ArrayList<review>();
 		    reviewlist2 = rs.getReview2();
-	        
+
 			model.addAttribute("qnalist", qnalist);
 			model.addAttribute("noticelist", noticelist);
 			model.addAttribute("meetlist", meetlist);
 			model.addAttribute("reviewlist1", reviewlist1);
 			model.addAttribute("reviewlist2", reviewlist2);
 			model.addAttribute("username", username);
-			
+
 			return "qna/loginMain";
 		}
 
