@@ -41,6 +41,12 @@ public class StayBoardController {
 	@RequestMapping("stayform.do")
 	public String stayform(Principal principal, Model model) {
 		 		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/stay/stayform";
 	}
 	
@@ -73,7 +79,13 @@ public class StayBoardController {
 	
 	// 글목록
 	@RequestMapping("staylist.do/pageNum/{pageNum}")
-	public String staylist(@PathVariable String pageNum, StayBoard stayboard, Model model) {
+	public String staylist(Principal principal ,@PathVariable String pageNum, StayBoard stayboard, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		final int rowPerPage = 10;
 		
 		if(pageNum == null || pageNum.equals("")) {
@@ -98,7 +110,7 @@ public class StayBoardController {
 		// 검색
 		model.addAttribute("search", stayboard.getSearch());
 		model.addAttribute("keyword", stayboard.getKeyword());
-		
+		model.addAttribute("username", username);
 		return "info/stay/staylist";
 	}
 	
@@ -122,10 +134,17 @@ public class StayBoardController {
 	
 	// 글수정 폼
 	@RequestMapping("stayupdateform.do/stay_no/{stay_no}/pageNum/{pageNum}")
-	public String stayupdateform(@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+	public String stayupdateform(Principal principal ,@PathVariable int stay_no, @PathVariable String pageNum, Model model) {
+		
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
 		StayBoard stayboard = service.select(stay_no);
 		model.addAttribute("stayboard", stayboard);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("username", username);
 		return "info/stay/stayupdateform";
 	}
 	
@@ -140,8 +159,14 @@ public class StayBoardController {
 	
 	// 글삭제 폼
 	@RequestMapping("staydeleteform.do")
-	public String staydeleteform() {
+	public String staydeleteform(Principal principal, Model model) {
 
+		String username = "guest";
+		if(principal != null) {			// 비로그인시 상세정보 구하기
+		username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
 		return "info/stay/staydeleteform";
 	}
 
