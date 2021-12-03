@@ -20,8 +20,7 @@
    
    <div class="table2">
           <table class="table table-hover">
-          <h2>Q&A 게시글 목록</h2>
-          <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
+          <h2>Q&A 게시글 목록</h2>         
           <p>총 글개수 : ${listcount}</p>  
             <thead>
              <tr>
@@ -47,7 +46,7 @@
 						<c:forEach var="q" begin="1" end="${qna.qna_re_lev}">
 							&nbsp;&nbsp;
 						</c:forEach>
-						<img src="/img/qna/replyd-brands.svg" width="25" height="25">	
+						<img src="/img/qna/reply.png" width="22" height="22">	
 		      </c:if>
               <a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no1}">${qna.qna_title}</a></td>
               
@@ -65,7 +64,16 @@
         
         <!-- 글작성버튼 -->
           <div class="qnalist_write_btn2">
-            <a href="/qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
+            <c:choose>
+            
+            <c:when test="${username eq 'guest'}">
+            <a href="${path}/loginPage"><input class="btn btn-dark" type="button" value="글작성"></a>
+            </c:when>
+            <c:otherwise>
+            <a href="${path}/qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
+            </c:otherwise>
+            
+            </c:choose>
           </div>
         
         
@@ -74,7 +82,7 @@
          <c:if test="${page <= 1}">[이전]&nbsp;</c:if>
          
          <c:if test="${page > 1}">
-         <a href="qnalist.do?page=${page-1}">[이전]</a>&nbsp;
+         <a href="${path}/qnalist.do?page=${page-1}">[이전]</a>&nbsp;
          </c:if>
          
          <c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -82,18 +90,18 @@
          ${a}
          </c:if>
          <c:if test="${a != page }">
-          <a href="qnalist.do?page=${a}">${a}</a>&nbsp;
+          <a href="${path}/qnalist.do?page=${a}">${a}</a>&nbsp;
          </c:if>
          </c:forEach>
          
          <c:if test="${page >= maxpage}">[다음]</c:if>
-         <c:if test="${page < maxpage}"><a href="qnalist.do?page=${page+1}">[다음]</a></c:if>
+         <c:if test="${page < maxpage}"><a href="${path}/qnalist.do?page=${page+1}">[다음]</a></c:if>
         </div>
         
         
         <!-- 목록검색기능 -->
         <form action="${path }/views/qna/qnaList/page/1">
-        <div class="search_bar2">
+        <div class="search_bar">
             <select class="search">
                 <option value="title"
                 <c:if test="${search=='qna_title'}"> selected="selected"</c:if> > 제목 </option>

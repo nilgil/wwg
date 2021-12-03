@@ -71,7 +71,7 @@
 
 			<div class="f_write_btn" align="center">
 				<s:authorize access="hasRole('ROLE_ADMIN')">
-				<a href="${path}/stayform.do" class="btn btn-info">글 작성</a>
+				<a href="${path}/stayform.do" class="btn btn-dark">글작성</a>
 				</s:authorize>
 			</div>
 			
@@ -85,7 +85,7 @@
 					</c:if>
 					<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 						<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-							href="${path }/staylist.do/pageNum/${i}?search=${search}&keyword=${keyword}">${i}</a></li>
+							href="${path }/staylist.do/pageNum/${i}?search=${search}&keyword=${keyword}">&nbsp;${i}&nbsp;</a></li>
 					</c:forEach>
 					<c:if test="${pp.endPage < pp.totalPage}">
 						<li><a href="${path }/staylist.do/pageNum/${pp.endPage + 1}?search=${search}&keyword=${keyword}">다음</a></li>
@@ -121,7 +121,7 @@
 					<c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용</option>
 			</select> 
 			<input type="text" name="keyword"> 
-			<input class="btn btn-dark" type="submit" value="확인">
+			<input class="btn btn-dark" type="submit" value="검색">
 		</form>
 	    </div>
 	    </div>

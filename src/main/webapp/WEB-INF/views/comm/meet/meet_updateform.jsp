@@ -18,7 +18,7 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_meetupdate_center">
@@ -43,6 +43,7 @@
 			<!-- onsubmit="return chk()"> -->
 			<table id="m_up_table1" class="table table-hover" >
 			    <h2>동행구해요 글수정</h2>
+			    &nbsp;
 				<tr>
 					<td>번호</td>
 					<td>${meet.meet_no}</td>

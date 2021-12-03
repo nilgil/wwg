@@ -6,57 +6,56 @@
 <html>
 <head>
     <title>마이페이지</title>
+    <%@ include file="/resources/include/headTag.jsp"%>
+    <link defer rel='stylesheet' media='screen' href='/css/secu/mypage.css'>
 </head>
 <body>
+
+<!-- navbar -->
+<%@ include file="/resources/include/navbar.jsp"%>
+
 <s:authentication property="principal" var="user"/>
 <form action="${pageContext.request.contextPath}/user/changeInfoProcess" method="post">
 
-<div class="signUp_center">
-
-    <div class="signUp_table">
-        <table id="signUp_table_2" class="table table-hover">
-        <h2>회원가입</h2>
-        <h3>{제목}</h3>            
-          <thead>
-           <tr>
-            <th colspan="3" text-align="center">회원가입폼</th>
-           </tr>
-          </thead>
-          
-          <tbody>
-        <tr>
-            <td>아이디</td>
-            <td><input type="text" name="username" value="${user.username}" readonly/></td>
-            <td><p class="alert"></p></td>
-        </tr>
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" name="password"
-                       placeholder="pleas type password you wants"></td>
-            <td><p class="alert"></p></td>
-        </tr>
-        <tr>    
-            <td>이름</td>
-            <td><input type="text" name="realname" placeholder="please type your name"></td>
-        </tr>
-        <tr>
-            <td>거주지</td>   
-            <td><input type="text" name="location" placeholder="please type the location you live."></td>
-        </tr>
-        <tr>
-            <td colspan="3" text-align="center">
+<div class="mypage_center">
+        
+            <div class="mypage_id">
+            <h2>내 정보 수정</h2><br>
+            <p>아이디</p>
+            <input class="form-control" type="text" name="username" value="${user.username}" readonly ">
+            </div>
+       
+            <div class="mypage_pw">
+            <p>비밀번호</p>
+            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자">
+            </div>
+        
+            <div class="mypage_name">
+            <p>이름</p>
+            <input class="form-control" type="text" name="realname" placeholder="이름">
+            </div>
+     
+            <div class="mypage_address">
+            <p>거주지</p>  
+            <input class="form-control" type="text" name="location" placeholder="예)서울,경기...">
+            </div>
+            
+        
                 <input type="hidden" name="_method" value="PUT"/>
                 <s:csrfInput/>
-                <button>정보변경</button>
-            </td>
-        </tr>
-        </tbody>
-        </table>
-    </div>
+            <div class="mypage_btn">
+            <button id="btn" type="button" class="btn">정보변경</button>
+            </div>
+      
+
 
 </div>
 
 </form>
+
+<!-- footer -->
+<%@ include file="/resources/include/footerbar.jsp"%>
+
 
 </body>
 </html>

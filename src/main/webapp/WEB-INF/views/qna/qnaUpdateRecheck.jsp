@@ -18,18 +18,19 @@
 <body>
 
 <!-- 방법 1 -->
-<c:if test="${qnalist.username != user.username}">
+<c:if test="${qnalist.username != username}">
 <script type="text/javascript">
 	alert("사용자가 다르면 수정할 수 없습니다");
 	history.go(-1);
 </script>
 </c:if>
 
-<c:if test="${qnalist.username == user.username}">
+<c:if test="${qnalist.username == username}">
 <script type="text/javascript">
     location.href = "${path}/qna_updateform?qna_no=${qnalist.qna_no}&page=${page}";
 </script>
 </c:if>
+
 
 
 </body>

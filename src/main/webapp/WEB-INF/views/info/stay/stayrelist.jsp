@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link defer rel='stylesheet' media='screen' href='/css/info/foodrelist.css'>
+
 
 <!-- jQuery문 설정 불러오기 -->
 <script src="${path}/js/info/jquery.js"></script>
@@ -50,16 +50,16 @@
 </script>
 </head>
 <body>
+<h3 align="center">댓글</h3>
 <table id="f_Re_table" class="table table-striped" width=300 align="center">
-	       <thead>
+	   
 			<tr>
 				<td>작성자</td>
 				<td>내용</td>
 				<td>작성일</td>
 				<td></td>
 			</tr>
-			</thead>
-			<tbody>
+	
 			<c:forEach var="ReStayBoard" items="${stayrelist}">
 				<tr>
 					<td>${ReStayBoard.username}</td>
@@ -73,7 +73,7 @@
 						</c:if></td>
 				</tr>
 			</c:forEach>
-			</tbody>
+		
 </table>
 </body>
 </html>

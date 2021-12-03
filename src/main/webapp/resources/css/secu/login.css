@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전체 한번에 설정 (되는건지..)*/
+:root{
+    --text-color: rgb(51, 51, 49);
+    --text-decoration: none;
+}   
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    background-image : url('/img/qna/main하르방.jpg');
+    background-size: 900px 900px;
+    font-family: 'paybooc-Bold';
+}
+a{
+    text-decoration: none;
+    color: rgb(49, 48, 41);
+}
+.loginPage_center1{
+	flex: 1;
+	display: table; 
+	padding: 50px;
+    margin: 200px auto;;
+    background-color: #fffffff5;
+    border-radius: 15px;
+    box-shadow: 2px 2px 3px #0000003b;                  
+
+}
+.loginPage_id{
+	display: grid;
+	justify-items: center; 
+}
+.loginPage_pw{
+    display: grid;
+	justify-items: center; 
+}
+.loginPage_btn{
+	grid-area: loginPage_btn;
+	display: grid;
+	justify-items: center; 
+}
+.loginPage_center1 input{
+	width:200px;
+}
+.loginPage_center1 div{
+	margin: 30px;
+}
+.loginPage_btn button{
+	width:230px;
+}
+

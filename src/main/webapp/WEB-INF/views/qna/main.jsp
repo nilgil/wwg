@@ -106,19 +106,6 @@
 </div>
 
 <div class="aside_login">로그인<hr>
-<!--     <form id="login" action="/action_page.php">
-        <div class="form-group">
-          <label for="usr">아이디</label>
-          <input type="text" class="form-control" id="usr" name="username">
-        </div>
-        <div class="form-group">
-          <label for="pwd">비밀번호</label>
-          <input type="password" class="form-control" id="pwd" name="password">
-        </div>
-        <div class="login_btn"><button type="submit" class="btn btn-success">로그인</button> 
-            <a href="#">회원가입</a> | 
-            <a href="#">아이디/비밀번호 찾기</a></div>
-      </form> -->
       
     <c:choose>
     <c:when test="${username eq 'guest'}">
@@ -134,8 +121,7 @@
     </div>
     <s:csrfInput/>
     <div class="login_btn"><button type="submit" class="btn btn-success" >로그인</button>
-     <a href="/userSignUp">회원가입</a> | 
-     <a href="#">아이디/비밀번호 찾기</a></div>    
+     <a href="/userSignUp">회원가입</a></div>    
     </form>
     
     </c:when>
@@ -148,7 +134,7 @@
     ${username}님 | <a href="/user/mypage">내정보</a>
     </div>
     <div class="logout_btn">
-    <input type="button" name="logout" value="로그아웃">
+    <input type="button" name="logout" value="로그아웃" onclick="location='/logout'">
     </div>
     <s:csrfInput/>
      <div class="quit_share"><a href="#">회원탈퇴</a> | 
@@ -159,21 +145,6 @@
     
     </c:choose>  
     
-    <form action="/login" method="post">
-    <div class="form-group">
-    <label for="usr">아이디</label>
-    <input type="text" class="form-control" name="id" placeholder="아이디">
-    </div>
-    <div class="form-group">
-    <label for="pwd">비밀번호</label>
-    <input type="password" class="form-control" name="pw" placeholder="비밀번호">
-    </div>
-    <s:csrfInput/>
-    <div class="login_btn"><button type="submit" class="btn btn-success" >로그인</button>
-     <a href="/userSignUp">회원가입</a> | 
-     <a href="#">아이디/비밀번호 찾기</a></div>    
-    </form>
-    
 </div>
 
 
@@ -182,7 +153,7 @@
 <ul style="list-style-type: circle">
 <c:forEach var="notice" items="${noticelist}">
 <li>
-<a href="/noticelist">${notice.notice_title}
+<a href="/noticeviewcont/notice_no/${notice.notice_no}/pageNum/1">${notice.notice_title}
 <span class="pull-right">
 <fmt:formatDate value="${notice.notice_regdate}"
  pattern="yyyy-MM-dd"/>
@@ -196,7 +167,7 @@
 <ul style="list-style-type: circle">
 <c:forEach var="meet" items="${meetlist}">
 <li>
-<a href="/meetlist">${meet.meet_title}
+<a href="/meetviewcont/meet_no/${meet.meet_no}/pageNum/1">${meet.meet_title}
 <span class="pull-right">
 <fmt:formatDate value="${meet.meet_regdate}"
  pattern="yyyy-MM-dd"/>
@@ -205,8 +176,6 @@
 </c:forEach>
 </ul>
 <hr></div>
-
-<a href="/reviewviewcont/review_no/${review1.review_no}/pageNum/1">${review1.review_title}
 
 <div class="aside2">Q&A<hr>
 <ul style="list-style-type: circle">

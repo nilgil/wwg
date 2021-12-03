@@ -75,4 +75,11 @@ public class TourBoardDaoImpl implements TourBoardDao {
 		session.update("tourMapper.like", tour_no);
 	}
 
+	//main 페이지에 데이터 호출
+	@Override
+	public List<TourBoard> gettour() {
+		// TODO Auto-generated method stub
+		return session.selectList("tourMapper.tour");
+	}
+
 }

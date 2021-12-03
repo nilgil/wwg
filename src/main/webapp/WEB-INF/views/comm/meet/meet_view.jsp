@@ -77,7 +77,7 @@ $(function() {
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_meetview_center">
@@ -99,6 +99,7 @@ $(function() {
 	<div class="c_meetview_table" >
 	<table id="c_m_view_table1" class="table table-hover">
 	<h2>동행구해요 게시판</h2>
+	&nbsp;
 		<tbody>
 			<tr>
 				<td width="90">제목</td>
@@ -165,7 +166,7 @@ $(function() {
 		</div>
 	
 		<!-- 댓글 list 불러오는곳 -->
-		<div class="meetrel_list" id="meet_reply"></div>
+		<div class="meetrep_list" id="meet_reply"></div>
 		
 </div>
 

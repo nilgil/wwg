@@ -40,6 +40,7 @@
 	<input type="hidden" name="username" value="${foodboard.username}">
 <table id="f_up_table1" class="table table-striped" width=400 align=center>
 	<h2>맛집 게시글 수정</h2>
+	&nbsp;
 	<tr><th>번호</th>
 		<td>${foodboard.food_no}</td>
 	</tr>

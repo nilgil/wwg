@@ -38,15 +38,13 @@ a{
 .side{
     grid-area: side;
 }
-.side{
-	border-radius: 5px;
-}
 #side_menu{
     padding: 10%;
     width: 151px;
     height: 210px;
     margin-top: 57%;
     background-color: #fffffff5;
+    box-shadow: 2px 2px 3px #0000003b;
     border-radius: 5px;
 
 }
@@ -83,7 +81,7 @@ a{
 .meetview_repl div{
 	display: inline-table;
 }
-.meetrel_list{
+.meetrep_list{
 	grid-area:meetrel_list;
 	background-color: #fffffff5;
 	border-radius: 10px;

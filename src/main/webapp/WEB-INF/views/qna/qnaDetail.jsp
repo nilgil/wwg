@@ -12,18 +12,26 @@
 <head>
 <title>Q&A 게시판 상세페이지</title>
 <%@ include file="/resources/include/headTag.jsp"%>
-<link rel='stylesheet' media='screen' href='/css/qna/detail.css'>
+<link defer rel='stylesheet' media='screen' href='/css/qna/detail.css'>
+
 
 <script defer type="text/javascript">
 $(function(){
 	$('#qna_list').load('/qnalist2.do?page=${page}');
 });
 </script>
+
+<script type="text/javascript">
+$(function(){
+	${'#qna_comt'}.load();
+});
+</script>
+
 </head>
 
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
         <div class="detail_center">
@@ -65,8 +73,10 @@ $(function(){
             
             
                <div class="table_btn">
+               <s:authorize access="hasRole('ROLE_ADMIN')">
                 <div><input class="btn btn-dark" type="button" id="de_comment" value="답글"
                 onclick="location='${path}/qna_commentForm?qna_no=${qnalist.qna_no}&page=${page}'"></div>
+                </s:authorize>
              
              
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
@@ -75,6 +85,8 @@ $(function(){
                 <div id="del"><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
                 onclick="location='${path}/qna_deletecheck/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                </div>
+               
+               <div id="qna_comt"></div>
                
                <div id="qna_list"></div>
                

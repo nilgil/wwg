@@ -16,7 +16,7 @@
 
 <body>
    <!-- navbar -->
-   <%@ include file="/resources/include/navbar_login.jsp"%>
+   <%@ include file="/resources/include/navbar.jsp"%>
     
     <!-- center -->
    <div class="qnalist_center">
@@ -62,7 +62,7 @@
 						<c:forEach var="q" begin="1" end="${qna.qna_re_lev}">
 							&nbsp;&nbsp;
 						</c:forEach>
-						<img src="/img/qna/replyd-brands.svg" width="22" height="22">	
+						<img src="/img/qna/reply.png" width="22" height="22">	
 		      </c:if>
               <a href="${path}/qna_detail/qna_no/${qna.qna_no}/page/${page}/no/${no1}">${qna.qna_title}</a></td>
               
@@ -80,7 +80,19 @@
         
         <!-- 글작성버튼 -->
           <div class="qnalist_write_btn">
+            
+            <c:choose>
+            <c:when test="${username eq 'guest'}">
+            <a href="loginPage"><input class="btn btn-dark" type="button" value="글작성"></a>
+            </c:when>
+            <c:otherwise>
             <a href="qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
+            </c:otherwise>
+            
+            </c:choose>
+            
+
+            
           </div>
         
         
@@ -94,7 +106,7 @@
          
          <c:forEach var="a" begin="${startpage}" end="${endpage}">
          <c:if test="${a == page }">
-         ${a}
+         &nbsp;${a}&nbsp;
          </c:if>
          <c:if test="${a != page }">
           <a href="qnalist.do?page=${a}">${a}</a>&nbsp;
@@ -107,9 +119,10 @@
         
         
         <!-- 목록검색기능 -->
+        <div class="search_bar">
         <form action="qnalist.do">
         <input type="hidden" name="page" value="${page}">
-        <div class="search_bar">
+        
             <select name="search">
                 <option value="qna_title"
                 <c:if test="${search=='qna_title'}"> selected="selected"</c:if> > 제목 </option>
@@ -122,8 +135,8 @@
             </select> 
             <input type="text" name="keyword"> 
             <input class="btn btn-dark" type="submit" value="검색">
-        </div>
         </form>
+        </div>
         
    </div>
    
