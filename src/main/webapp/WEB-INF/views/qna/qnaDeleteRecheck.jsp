@@ -21,7 +21,7 @@
 <script type="text/javascript">
 
 var username = "${qnalist.username}";
-var session = "${user.username}";
+var session = "${username}";
 
 	if(username != session){
 		alert("사용자가 다르면 삭제할 수 없습니다"); 

@@ -13,7 +13,7 @@
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 
 <!-- CKeditor 적용 -->
@@ -39,6 +39,7 @@
 <form method=post action="/comm_meetinsert">
 <table id="c_m_insert_table1" class="table table-hover">
 	<h2>동행구해요 글작성</h2>
+	&nbsp;
 	<tbody>
 	<tr><th width="90" >제목</th>
 		<td><input type=text name="meet_title" required="required" size="60" maxlength="29" placeholder="제목(최대 29자)"></td>

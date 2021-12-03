@@ -27,4 +27,7 @@ public interface TourBoardDao {
 	void updateRe(TourBoard tourboard);
 
 	void like(int tour_no);
+
+	//main 페이지에 데이터 호출
+	List<TourBoard> gettour();
 }

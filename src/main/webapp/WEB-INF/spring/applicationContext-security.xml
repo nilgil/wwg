@@ -31,9 +31,10 @@
         <intercept-url pattern="/plan/view/*" access="permitAll"/>
         <intercept-url pattern="/plan/board" access="permitAll"/>
         <intercept-url pattern="/plan/reset" access="hasAnyRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/plan/pub" access="hasAnyRole('ROLE_USER')"/>
 
         <intercept-url pattern="/resources/**" access="permitAll" />
+
+
 
         <csrf disabled="true"/>
         <!--폼 로그인에 대한 처리 설정-->
@@ -44,12 +45,12 @@
                 password-parameter="pw"
                 login-processing-url="/login"
                 login-page="/loginPage"
-                default-target-url="/loginSuccess"
+                default-target-url="/"
                 authentication-failure-url="/loginError"
         />
         <logout
                 logout-url="/logout"
-                logout-success-url="/all"
+                logout-success-url="/"
                 invalidate-session="true"
                 delete-cookies="true"
         />

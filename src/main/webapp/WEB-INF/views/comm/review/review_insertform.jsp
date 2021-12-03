@@ -16,7 +16,7 @@
 <!-- <script type="text/javascript" src="/js/info/ckeditor/ckeditor.js"></script> -->
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 
 <!-- center -->
@@ -39,6 +39,7 @@
 <form method=post action="/comm_reviewinsert">
 <table id="r_inert_table1" class="table table-hover">
 	<h2>여행후기 글작성</h2>
+	&nbsp;
 	<tbody>
 	<tr><th>제목</th>
 		<td><input type=text name="review_title" required="required" size="60" maxlength="29" placeholder="제목(최대 29자)"></td>

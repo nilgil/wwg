@@ -41,10 +41,6 @@ public class FoodBoardController {
 	@RequestMapping("foodform.do")
 	public String foodform(Principal principal, Model model) {
 		
-		/*
-		 * String username = principal.getName(); // 로그인후 유저네임 넘기기
-		 * model.addAttribute("username", username); // 로그인후 유저네임 넘기기
-		 */		 		
 		return "info/food/foodform";
 	}
 	
@@ -61,12 +57,10 @@ public class FoodBoardController {
 		int number = service.getMaxNum();
 		
 		foodboard.setFood_no(number);
-		
 		foodboard.setUsername(username); // 로그인후 유저네임 넘기기
 		 		
 		int result = service.insert(foodboard);
 		model.addAttribute("result", result);
-		/* model.addAttribute("username", username); */
 		
 		return "info/food/foodinsertresult";
 	}
@@ -81,9 +75,11 @@ public class FoodBoardController {
 	@RequestMapping("foodlist.do/pageNum/{pageNum}")
 	public String foodlist(@PathVariable String pageNum, FoodBoard foodboard, Model model) {
 		final int rowPerPage = 10;
+		
 		if(pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
+		
 		int food_count = service.getFood_count();	// 게시물 갯수
 		int currentPage = Integer.parseInt(pageNum);// 총 데이터 갯수
 		int total = service.getTotal(foodboard);	// 검색
@@ -121,7 +117,6 @@ public class FoodBoardController {
 		model.addAttribute("username", username);
 		model.addAttribute("foodboard", foodboard);
 		model.addAttribute("pageNum", pageNum);
-		
 		return "info/food/foodcontent";
 	}
 	
@@ -145,11 +140,8 @@ public class FoodBoardController {
 	
 	// 글삭제 폼
 	@RequestMapping("fooddeleteform.do")
-//	public String fooddeleteform(@PathVariable int food_no, @PathVariable String pageNum, Model model) {
 	public String fooddeleteform() {
-//		int result = service.delete(food_no);
-//		model.addAttribute("result", result);
-//		model.addAttribute("pageNum", pageNum);
+
 		return "info/food/fooddeleteform";
 	}
 
@@ -191,6 +183,7 @@ public class FoodBoardController {
     		byte[] bytes = upload.getBytes();
     		
     		//이미지 경로 생성
+//    		String path = "${pageContext.request.contextPath}/info";	// 이미지 경로 설정(폴더 자동 생성)
     		String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
     		String ckUploadPath = path + uid + "_" + fileName;
     		File folder = new File(path);
@@ -235,6 +228,7 @@ public class FoodBoardController {
     throws ServletException, IOException{
     	
     	//서버에 저장된 이미지 경로
+//    	String path = "${pageContext.request.contextPath}/info";	// 저장된 이미지 경로
     	String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
     	System.out.println("path:"+path);
     	String sDirPath = path + uid + "_" + fileName;
@@ -275,6 +269,5 @@ public class FoodBoardController {
     			}
     		}
     }
-
 	
 }

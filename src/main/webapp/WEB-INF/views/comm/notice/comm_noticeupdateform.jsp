@@ -23,7 +23,7 @@
 </head>
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="c_notiupdate_center">
@@ -47,6 +47,7 @@
 			<!-- onsubmit="return chk()"> -->
 			<table id="c_n_up_table1" class="table table-hover">
 			<h2>공지사항 게시글 수정</h2>
+			&nbsp;
 				<tr>
 					<td width="90">번호</td>
 					<td>${notice.notice_no}</td>

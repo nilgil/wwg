@@ -40,7 +40,7 @@
 <form method=post action="tourwrite.do">
 <table id="foodform_table1" class="table table-hover" width=900 align=center>
 	<h2>여행지 게시판 글작성</h2>
-	
+	&nbsp;
 	<tr><th>작성자명</th>
 		<td>${user.username}</td>
 	</tr>

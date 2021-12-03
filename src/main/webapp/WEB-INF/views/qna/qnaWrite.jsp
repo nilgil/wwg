@@ -17,7 +17,7 @@
 
 <body>
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
     <!-- center -->
    <form action="/qnawrite.do" method="post">

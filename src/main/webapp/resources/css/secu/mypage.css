@@ -15,14 +15,12 @@ body{
     background-size: 900px 900px;
     font-family: 'paybooc-Bold';
 }
-.center{
-    flex: 1;
-}
 a{
     text-decoration: none;
     color: rgb(49, 48, 41);
 }
-.signUp_center{
+.mypage_center{
+	flex:1;
     padding: 15px;
     margin: 400px auto;
     justify-content: center;
@@ -31,11 +29,11 @@ a{
     /* height: 100vh; 혹시 몰라서 안지움 */
     grid-template-columns: 500px;
     grid-template-rows: 180px 130px 130px 130px 130px;
-    grid-template-areas: 'signUp_id'
-                         'signUp_pw'
-                         'signUp_name'
-                         'signUp_address'
-                         'signUp_btn';                     
+    grid-template-areas: 'mypage_id'
+                         'mypage_pw'
+                         'mypage_name'
+                         'mypage_address'
+                         'mypage_btn';                     
     margin-top: 5%;
     background-color: #fffffff5;
     border-radius: 15px;
@@ -43,34 +41,31 @@ a{
     height: 700px;
 }
 
-.signUp_id{
-	grid-area: signUp_id;
+.mypage_id{
+	grid-area: mypage_id;
 }
-.signUp_pw{
-	grid-area:signUp_pw;
+.mypage_pw{
+	grid-area:mypage_pw;
 }
-.signUp_name{
-	grid-area:signUp_name;
+.mypage_name{
+	grid-area:mypage_name;
 }
-.signUp_address{
-	grid-area:signUp_address;
+.mypage_address{
+	grid-area:mypage_address;
 }
-.signUp_btn{
-	grid-area:signUp_btn;
+.mypage_btn{
+	grid-area:mypage_btn;
 }
 #btn{
 	width:200px;
 	height:50px;
 }
-.signUp_center div{
+.mypage_center div{
 	margin:10px;
 	padding:10px;
 	display: inline-grid;
     justify-items: center;
 }
-.signUp_center input{
-	width:200px;
-}
-.sign_up{
-	
+.mypage_center input{
+	width:170px;
 }

@@ -51,7 +51,7 @@
 <body>
 
 
-		<h2>댓글</h2>
+		<h3 align="center">댓글</h3>
 		<table class="table table-striped">
 			<tr>
 				<td>작성자</td>

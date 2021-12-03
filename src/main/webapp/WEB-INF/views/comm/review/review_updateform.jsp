@@ -18,7 +18,7 @@
 <body>
 
 <!-- navbar -->
-<%@ include file="/resources/include/navbar_login.jsp"%>
+<%@ include file="/resources/include/navbar.jsp"%>
 
 <!-- center -->
 <div class="review_update_center">
@@ -42,6 +42,7 @@
 			<!-- onsubmit="return chk()"> -->
 			<table id="r_up_table1" class="table table-hover" >
             <h2>여행후기 글수정</h2>
+            &nbsp;
 				<tr>
 					<td>번호</td>
 					<td>${review.review_no}</td>

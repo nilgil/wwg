@@ -99,6 +99,7 @@ $(function() {
     <div class="foodcontent_table">
 	<table id="foodcont_table1" class="table table-hover" align="center">
 	<h2>맛집 정보 게시판</h2>
+	&nbsp;
 	<tbody>
 			<tr>
 				<td width="90">제목</td>
@@ -163,7 +164,7 @@ $(function() {
 		</div>
 		
 		<!-- 댓글 list 불러오는곳 -->
-		<div id="foodrelist" class="food_rel_list"></div>
+		<div id="foodrelist" class="food_rep_list"></div>
 		
 </div>		
 		

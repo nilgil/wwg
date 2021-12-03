@@ -80,7 +80,12 @@ public class meet_controller {
 
 	// 글작성 폼
 		@RequestMapping("/comm_meetinsertform")
-		public String meet_insertform() {
+		public String meet_insertform(Principal principal, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			return "comm/meet/meet_insertform";
 		}
 		
@@ -91,8 +96,12 @@ public class meet_controller {
 			System.out.println("제목:"+meet.getMeet_title());
 			System.out.println("내용:"+meet.getMeet_content());
 			
-			String username = principal.getName(); // 로그인후 유저네임 넘기기
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
 			System.out.println("username:"+username);
+			
 			meet.setMember_id(username); // 로그인후 유저네임 넘기기
 			
 			int meet_no = meet.getMeet_no();
@@ -101,6 +110,7 @@ public class meet_controller {
 			int result = ms.insert(meet);
 			
 			model.addAttribute("result", result);
+			
 			
 			return "comm/meet/meet_insertalert";
 		}
@@ -120,7 +130,12 @@ public class meet_controller {
 		}	
 	// 수정폼	
 		@RequestMapping("/meetupdateform/meet_no/{meet_no}/pageNum/{pageNum}")
-		public String updateForm(@PathVariable int meet_no, @PathVariable String pageNum, Model model) {
+		public String updateForm(Principal principal, @PathVariable int meet_no, @PathVariable String pageNum, Model model) {
+			String username = "guest";
+			if(principal != null) {
+				username=principal.getName();
+			};
+			model.addAttribute("username", username);
 			meet meet = ms.select(meet_no);
 			model.addAttribute("meet", meet);
 			model.addAttribute("pageNum", pageNum);
