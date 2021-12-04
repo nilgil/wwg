@@ -1,21 +1,17 @@
 // ------------------------------- 전역 변수 -------------------------------
-const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+const WEEKEND = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 요일 배열
 
-// Controller에서 넘긴 값 받아오기
-let username = $('#hiddenUsername').val();
-if ($('#usernameForUpdate').val() != "") {
-    username = $('#usernameForUpdate').val();
-}
-let departure = new Date($('#hiddenDeparture').val()); // 출발일
-let days = $('#hiddenDays').val(); // 총 여행기간
+let username; // 접속한 유저명 (작성자)
+let departure;  // 출발일
+let days; // 여행 기간
 
-let idx = $('#idxForUpdate').val(); // 업데이트인 경우 idx에 값이 할당된다.
-let oldTitle;
-let oldPlans;
+let idx; // 업데이트인 경우 idx에 값이 할당됨
+let oldTitle; // 업데이트시 이전 일정 이름
+let oldPlans; // 업데이트시 이전 관광지 목록
 
-let chooseDay = 1; // 선택한 여행일
-let now_date = departure; // 선택한 여행일의 날짜
-let now_week = WEEKEND[departure.getDay()]; // 선택한 여행일의 요일
+let chooseDay; // 현재 선택한 여행일
+let now_date; // 선택한 여행일의 날짜
+let now_week; // 선택한 여행일의 요일
 
 let dayInfoArr = []; // 각 날짜별 플랜 저장해둘 객체 배열
 let searchKeyword; // 현재 검색어
@@ -23,10 +19,8 @@ let spots = []; // 현재 화면의 검색된 관광지들
 
 let map; // 지도
 
-
 // ------------------------------- 클래스 -------------------------------
-
-// 각 여행일 마다의 정보 (날짜, 요일, 일정들)
+// 각 여행일 정보 (날짜, 요일, 일정들)
 let DayInfo = class {
     date;
     week;
@@ -39,7 +33,7 @@ let DayInfo = class {
     }
 };
 
-// 관광지 정보 (제목, 사진경로, 평점, 위도, 경도)
+// 관광지 세부정보 (제목, 사진경로, 평점, 위도, 경도)
 let SpotInfo = class {
     title;
     photo;
@@ -56,13 +50,14 @@ let SpotInfo = class {
     }
 }
 
-
 // ------------------------------- Init -------------------------------
 $(document).ready(async function () {
     // 디테일 뷰 숨기기
     $('#detail-view').hide();
 
-    // Update Plan으로 들어온 경우
+    initVar();
+
+    // Update Plan으로 들어온 경우와 아닌 경우 분리
     if (idx != "") {
         await initForUpdate().then(async (oldPlans) => await getSpotDetailByTitles(oldPlans)).then(async () => await makePlans());
     } else {
@@ -82,14 +77,29 @@ $(document).ready(async function () {
     // 관광지 출력
     await makeSpots("", "1");
 
+    // 일정의 관광지 출력
     await makePlans();
 
     // 지도 생성
     await createMap();
 });
 
+// 전역변수 초기화
+function initVar() {
+    username = $('#hiddenUsername').val();
+    if ($('#usernameForUpdate').val() != "") {
+        username = $('#usernameForUpdate').val();
+    }
+    departure = new Date($('#hiddenDeparture').val());
+    days = $('#hiddenDays').val();
+    idx = $('#idxForUpdate').val();
 
-// 업데이트인 경우를 위한 초기화
+    chooseDay = 1;
+    now_date = departure;
+    now_week = WEEKEND[departure.getDay()];
+}
+
+// 업데이트인 경우 이전 일정 데이터 가져와서 변수 초기화 (Ajax-GET)
 function initForUpdate() {
     return new Promise((resolve => {
         $.ajax({
@@ -112,14 +122,14 @@ function initForUpdate() {
     }))
 }
 
-// idx로 가져온 저장된 관광지명 배열로 상세정보를 불러와 dayInfoArr[]에 저장
+// 이전 일정 데이터의 관광지 목록으로 세부정보 구하고 dayInfoArr[]에 저장
 function getSpotDetailByTitles(oldPlans) {
     return new Promise((resolve => {
         (async () => {
             for (let i = 0; i < days; i++) {
                 await $.ajax({
-                    url: '/spots/searchArray',
-                    type: 'POST',
+                    url: '/spot/search/many',
+                    type: 'get',
                     data: {titles: JSON.stringify(oldPlans[i])},
                     dataType: 'json',
                     success: function (response) {
@@ -160,7 +170,7 @@ function makeDays() {
     $(`#day-btn-${chooseDay}`).css("color", "#0f74a8");
 }
 
-// 관광지 화면 출력
+// 관광지 화면 출력 (로직X)
 function makeSpots(keyword, pageNum) {
     // 전역변수에 현재 검색 키워드 저장
     searchKeyword = keyword;
@@ -171,12 +181,12 @@ function makeSpots(keyword, pageNum) {
     );
 }
 
-// 검색어, 페이지번호로 관광지 목록 구하기
+// 검색어, 페이지 번호로 관광지 목록 구하기 (Ajax-GET)
 function searchSpots(keyword, pageNum) {
     return new Promise((resolve) => {
         $.ajax({
-            method: "POST",
-            url: "/spots/search",
+            method: "GET",
+            url: "/spot/search",
             data: {keyword: keyword, pageNum: pageNum},
             dataType: "json",
             success: function (response) {
@@ -220,7 +230,6 @@ function printSearchResult(response) {
             "   <img onclick='viewSpotDetail('" + spots[i].title + "')' src='" + spots[i].photo + "'/>\n" +
             "   <div>\n" +
             "       <p class='spot-title' onclick=\"viewSpotDetail(" + `'${spots[i].title}'` + ")\">" + spots[i].title + "</p></a>\n" +
-            "       <p>👍🏻  " + spots[i].rating + "</p>\n" +
             "   </div>" +
             "   <div>" +
             "       <p class='add-plan' onclick=\"addPlan('" + spots[i].title + "'," + i + ")\">+</p>" +
@@ -270,6 +279,7 @@ function paging(resultCount, resultDiv, pageDiv, currentPage) {
     }
     $('#pageBtnsUl').html(pageHtml);
 
+    // 페이지 버튼 클릭시 이벤트
     $("#pageBtnsUl li span").click(function () {
         let $id = $(this).attr("id");
         let selectedPage = $(this).text(); // 현재 선택된 페이지번호
@@ -282,13 +292,13 @@ function paging(resultCount, resultDiv, pageDiv, currentPage) {
     });
 }
 
-// 관광지 검색 처리
+// 관광지 검색 이벤트 처리 (로직X)
 function clickSearchBtn() {
     searchKeyword = $('#search-keyword').val();
     makeSpots(searchKeyword, "1");
 }
 
-// Day의 플랜들 출력
+// 선택한 날짜의 일정 관광지들 출력
 function makePlans() {
     $('#plans').empty();
     for (let i = 0; i < dayInfoArr[chooseDay - 1].spots.length; i++) {
@@ -331,7 +341,7 @@ function changeDay(i) {
     $(`#day-btn-${i}`).css("color", "#0f74a8");
 }
 
-// 여행 기간 1일 추가
+// 여행 기간 + 눌러서 1일 추가
 function dayPlus() {
     days = Number(days) + 1;
 
@@ -341,7 +351,7 @@ function dayPlus() {
     makeDays();
 }
 
-// 여행 기간 1일 감소
+// 여행 기간 - 눌러서 1일 감소
 function dayMinus() {
     if (days > 1) {
         if (chooseDay == dayInfoArr.length)
@@ -353,8 +363,33 @@ function dayMinus() {
     }
 }
 
-// 플랜 저장하기
-function savePlan() {
+// 제목으로 관광지 세부정보 불러와 출력 (Ajax-GET)
+function viewSpotDetail(title) {
+    $.ajax({
+        url: "/spot/search/one",
+        method: "GET",
+        data: {title: title},
+        dataType: "json"
+    }).done(function (response) {
+        $('#detail-img').attr('src', response.photo);
+        $('#detail-title').text(response.title);
+        $('#detail-info').text(response.info);
+        $('#detail-phone').text("📞 " + response.phone);
+        $('#detail-address').text("📮 " + response.address);
+
+        $('#map').hide();
+        $('#detail-view').show();
+    });
+}
+
+// 관광지 세부정보 뷰에서 지도 뷰로 전환
+function detailToMap() {
+    $('#detail-view').hide();
+    $('#map').show();
+}
+
+// 일정 저장/업데이트
+function submitPlan() {
     let plans = []; // 각 여행일의 플랜을 한번에 담을 2차 배열
     for (let i = 0; i < dayInfoArr.length; i++) {
         let dayPlan = dayInfoArr[i].spots; // 각 여행일의 하루 일정들 정보
@@ -365,59 +400,22 @@ function savePlan() {
         plans.push(titles); // 하루의 일정을 관광지명만 추출하여 저장
     }
     let jsonPlans = JSON.stringify(plans); // 추출한 일정들을 JSON 형식으로 변환
-    let path = "save";
-    let method = "post";
+
+    $('.hiddenUsername').val(username);
+    $('.hiddenDeparture').val(dateFormatter(departure));
+    $('.hiddenDays').val(Number(days));
+    $('.hiddenTitle').val($("#title").val());
+    $('.hiddenPlans').val(jsonPlans);
+    $('.hiddenIdx').val(Number(idx));
+
     if (idx != "") {
-        path = "update";
-        method = "put";
+        $('#update').submit();
+    } else {
+        $('#save').submit();
     }
-    $.ajax({
-        url: `/plan/${path}`,
-        type: method,
-        data: {
-            "username": username,
-            "departure": dateFormatter(departure),
-            "days": Number(days),
-            "title": $("#title").val(),
-            "plans": jsonPlans,
-            "idx": Number(idx)
-        },
-        success: function (response) {
-            location.replace(response);
-        },
-        error: function () {
-            alert("savePlan");
-        }
-    })
 }
-
-// 제목으로 관광지 세부정보 불러와 출력
-function viewSpotDetail(title) {
-    $.ajax({
-        method: "POST",
-        url: "/spots/searchOne",
-        data: {title: title},
-        dataType: "json"
-    }).done(function (response) {
-        $('#detail-img').attr('src', response.photo);
-        $('#detail-title').text(response.title);
-        $('#detail-info').text(response.info);
-        $('#detail-rating').text("👍🏻 " + response.rating);
-
-        $('#map').hide();
-        $('#detail-view').show();
-    });
-}
-
-// 관광지 세부정보 X 누르면 지도로 변경
-function detailToMap() {
-    $('#detail-view').hide();
-    $('#map').show();
-}
-
 
 // ---------------------------- 지도 ----------------------------
-
 // 지도 생성
 function createMap() {
     let container = document.getElementById('map');
@@ -439,7 +437,7 @@ function createMap() {
     createMarker();
 }
 
-// 마커 생성, 인포윈도우
+// 마커, 인포윈도우 생성
 function createMarker() {
     let points = [];
     let marker = [];
@@ -484,10 +482,18 @@ function createMarker() {
     }
 }
 
+// --------------------------- 그 외 ---------------------------
+// 저장시 유효성 검사
+function checkPlan() {
+    if ($('#title').val() == "") {
+        alert("일정 제목을 입력해주세요.");
+        $('#title').focus();
+        return false;
+    }
+    submitPlan();
+}
 
-// -------------------- 그 외 --------------------
-
-// 검색창 엔터키 이벤트
+// 검색창 엔터 이벤트
 $("#search-keyword").keydown(function (keyNum) {
     if (keyNum.keyCode == 13) {
         $("#searchBtn").click()

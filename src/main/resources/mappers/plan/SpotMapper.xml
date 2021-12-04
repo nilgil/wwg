@@ -52,7 +52,7 @@
 
     <update id="insertSpots" parameterType="java.util.List">
         <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-            INTO plan_spot(title,info,lat,lng,address,photo,phone)
+            INTO plan_spot
             VALUES (
             #{spot.title}
             , #{spot.info}
@@ -64,12 +64,6 @@
             )
         </foreach>
     </update>
-
-    <!--    <delete id="deleteSpot" parameterType="String">-->
-    <!--        delete-->
-    <!--        from plan_spot-->
-    <!--        where id = #{id}-->
-    <!--    </delete>-->
 
     <delete id="deleteAllSpots">
         delete

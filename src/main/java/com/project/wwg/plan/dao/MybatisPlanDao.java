@@ -2,7 +2,6 @@ package com.project.wwg.plan.dao;
 
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
-import com.project.wwg.plan.dto.PlanReply;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class MybatisPlannerDao implements PlannerDao {
+public class MybatisPlanDao implements PlanDao {
 
     private SqlSession sqlSession;
 
     @Autowired
-    public MybatisPlannerDao(SqlSession sqlSession) {
+    public MybatisPlanDao(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
 
@@ -46,11 +45,6 @@ public class MybatisPlannerDao implements PlannerDao {
     @Override
     public int getPubPlansCount() {
         return sqlSession.selectOne("plan.getPubPlansCount");
-    }
-
-    @Override
-    public List<PlanReply> getPlanReplys(int plan_no) {
-        return sqlSession.selectList("plan.getPlanReplys", plan_no);
     }
 
     @Override

@@ -27,10 +27,10 @@
         <intercept-url pattern="/plan" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/plan/create" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/plan/my" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
-        <intercept-url pattern="/plan/update-form/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+        <intercept-url pattern="/plan/update/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/plan/view/*" access="permitAll"/>
         <intercept-url pattern="/plan/board" access="permitAll"/>
-        <intercept-url pattern="/spots/reset" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/spot/reset" access="hasAnyRole('ROLE_ADMIN')"/>
 
         <intercept-url pattern="/resources/**" access="permitAll" />
 

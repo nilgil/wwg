@@ -1,13 +1,13 @@
-// 출발일 기본값 오늘로 설정
-Date.prototype.toDateInputValue = (function () {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
-});
-
 $(document).ready(function () {
     $('#departureIn').val(new Date().toDateInputValue());
     onlyNumberFunc(document.getElementById("dayIn"));
+});
+
+// 출발일 기본값 오늘로 설정
+Date.prototype.toDateInputValue = (function () {
+    let local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0, 10);
 });
 
 // 출발일, 여행기간 유효성 검사
@@ -34,9 +34,9 @@ $("#dayIn").keydown(function (keyNum) {
 
 // 여행 기간에 1~9 외에 허용하지 않는다.
 function onlyNumberFunc(t) {
-    var regexp = /[^1-9]/gi;
+    let regexp = /[^1-9]/gi;
     t.onkeyup = function (e) {
-        var v = this.value;
+        let v = this.value;
         this.value = v.replace(regexp, '');
     }
 }

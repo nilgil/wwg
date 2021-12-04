@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>일정 게시판</title>
     <%@ include file="/resources/include/headTag.jsp" %>
     <link rel='stylesheet' type='text/css' href='/css/plan/plan_board.css'/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -44,7 +44,6 @@
                 </c:forEach>
             </div>
         </div>
-
         <div id="pubPlans">
             <table id="f_table" class="table table-hover" align="center" width=900>
                 <h2>일정 게시판</h2>
@@ -64,11 +63,8 @@
                 <tbody id="boardContent">
                 </tbody>
             </table>
-
-            <!-- 페이지 넘기기 기능 -->
             <div id="paging">
             </div>
-
         </div>
     </div>
 </div>

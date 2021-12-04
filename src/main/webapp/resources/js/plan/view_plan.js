@@ -1,21 +1,20 @@
-let idx;
-let writer;
-let title;
-let departure;
-let days;
-let plans;
-let good;
-let hit;
-let pub;
+let idx; // 일정 번호
+let writer; // 일정 작성자
+let title; // 일정 이름
+let departure; // 일정 출발일
+let days; // 일정 기간
+let plans; // 일정 관광지들
+let good; // 일정 좋아요 개수
+let hit; // 일정 조회수
+let pub; // 일정 공개여부
+let plan; // 일정 전체 데이터
 
-let username;
-let beforeUrl;
-let alreadyGood;
-let plan;
-
-let spotsOfDays = [];
-let chooseDay = 1;
-let dayMoveLength;
+let username; // 접속자 이름
+let alreadyGood; // 이전 좋아요 여부
+let spotsOfDays = []; // 날짜별 관광지 세부정보들
+let chooseDay = 1; // 현재 선택한 날짜
+let dayMoveLength; // 하루 총 이동거리
+let beforeUrl; // 이전 페이지 경로
 
 $(document).ready(function () {
     $('#detail-view').hide();
@@ -23,7 +22,7 @@ $(document).ready(function () {
 
     getPlans(idx).then(response => {
         initPage(response);
-        printSpotsInfo();
+        // printSpotsInfo();
         getSpotsDetails(response).then(() => {
             printSpotsInfo();
             printDaysforMap();
@@ -31,9 +30,9 @@ $(document).ready(function () {
         });
     });
 
-})
-;
+});
 
+// 컨트롤러에서 Model에 넘긴 값 변수에 할당
 function initVar() {
     beforeUrl = window.location.href;
     idx = $('#hiddenIdx').val();
@@ -41,6 +40,7 @@ function initVar() {
     alreadyGood = $('#hiddenIsAlreadyGood').val();
 }
 
+// 일정 정보 가져오기 (Ajax)
 function getPlans(idx) {
     return new Promise((resolve => {
         $.ajax({
@@ -59,6 +59,7 @@ function getPlans(idx) {
     }));
 }
 
+// 가져온 일정 데이터로 초기화면 구성
 function initPage(response) {
     writer = response.username;
     title = response.title;
@@ -89,15 +90,17 @@ function initPage(response) {
     }
 }
 
+// 일정의 관광지 세부정보 가져오기 (Ajax)
 function getSpotsDetails(response) {
     let plans = JSON.parse(response.plans);
     return new Promise((resolve => {
         (async () => {
             for (let i = 0; i < plans.length; i++) {
                 await $.ajax({
-                    url: '/spots/searchArray',
-                    method: 'post',
+                    url: '/spot/search/many',
+                    method: 'get',
                     data: {"titles": JSON.stringify(plans[i])},
+                    dataType: 'json',
                     success: function (response) {
                         spotsOfDays[i] = response;
                     },
@@ -111,6 +114,7 @@ function getSpotsDetails(response) {
     }));
 }
 
+// 일정의 관광지 출력
 function printSpotsInfo() {
     for (let i = 0; i < spotsOfDays.length; i++) {
         $('#plans').append(
@@ -133,56 +137,13 @@ function printSpotsInfo() {
     }
 }
 
+// 날짜 선택 버튼 출력
 function printDaysforMap() {
     for (let i = 0; i < spotsOfDays.length; i++) {
         $('#days').append(
             `<div class="day" onclick="createMap(${i + 1})">Day${i + 1}</div>`
         );
     }
-}
-
-
-function goodToggle(idx, username) {
-    $.ajax({
-        url: '/plan/good',
-        method: 'put',
-        data: {"idx": idx, 'username': username, 'beforeUrl': beforeUrl},
-        dataType: 'text',
-        success: function (response) {
-            console.log(response);
-            if (response == "guest") {
-                location.replace('/loginPage');
-            } else if (response == "true") {
-                good = good - 1;
-                $('#good span:nth-child(2)').text(good);
-                $('#heart').css({"fontWeight": "normal"});
-            } else if (response == "false") {
-                good = good + 1;
-                $('#good span:nth-child(2)').text(good);
-                $('#heart').css({"fontWeight": "bolder"});
-            }
-        }
-    })
-}
-
-function viewSpotDetail(spot) {
-    $('#map').hide();
-    $('#detail-view').empty();
-
-    $('#detail-view').append(
-        `<img src="${spot.photo}">` +
-        `<div id="detail-title">${spot.title}</div>` +
-        `<div id="detail-info">${spot.info}</div>` +
-        `<div id="close" onclick="detailToMap()">X</div>`
-    );
-
-    $('#detail-view').show();
-}
-
-function detailToMap() {
-    $('#detail-view').empty();
-    $('#detail-view').hide();
-    $('#map').show();
 }
 
 // 지도 생성
@@ -213,14 +174,14 @@ function createMap(day) {
     createMarkerAndLine(day);
 }
 
+// 마커, 라인 생성
 function createMarkerAndLine(day) {
     let points = [];
     let marker = [];
     let linePath = [];
 
-    let target = document.querySelectorAll('.day-spots');
-
     for (let i = 0; i < spotsOfDays[day - 1].length; i++) {
+
         let daySpots = spotsOfDays[day - 1][i];
         points.push(new kakao.maps.LatLng(daySpots.lat, daySpots.lng));
         marker.push(new kakao.maps.Marker({position: points[i]}));
@@ -238,7 +199,7 @@ function createMarkerAndLine(day) {
 
         // 마커 클릭 이벤트 : 관광지 세부정보 표시
         kakao.maps.event.addListener(marker[i], 'click', function () {
-            viewSpotDetail(spots[i].title);
+            viewSpotDetail(daySpots);
         });
 
         // 마커 마우스오버 이벤트 : 인포윈도우 표시
@@ -248,16 +209,6 @@ function createMarkerAndLine(day) {
 
         // 마커 마우스아웃 이벤트 : 인포윈도우 제거
         kakao.maps.event.addListener(marker[i], 'mouseout', function () {
-            infowindow.close();
-        });
-
-        // 관광지 목록 마우스오버 이벤트 : 인포윈도우 표시
-        target[i].addEventListener('mouseover', function () {
-            infowindow.open(map, marker[i]);
-        });
-
-        // 관광지 목록 마우스아웃 이벤트 : 인포윈도우 제거
-        target[i].addEventListener('mouseout', function () {
             infowindow.close();
         });
     }
@@ -274,6 +225,7 @@ function createMarkerAndLine(day) {
     printDayInfo(day);
 }
 
+// 선택일 정보 출력
 function printDayInfo(day) {
     $('#choose-day').text(`Day${chooseDay}`)
 
@@ -289,6 +241,51 @@ function printDayInfo(day) {
     $('#day-move-length').text(`이동거리 : 약 ${dayMoveLength}km`);
 }
 
+// 지도 뷰에서 디테일 뷰로 전환
+function viewSpotDetail(spot) {
+    $('#map').hide();
+    $('#detail-view').empty();
+
+    $('#detail-view').append(
+        `<img src="${spot.photo}">` +
+        `<div id="detail-title">${spot.title}</div>` +
+        `<div id="detail-info">${spot.info}</div>` +
+        `<div id="close" onclick="detailToMap()">X</div>`
+    );
+
+    $('#detail-view').show();
+}
+
+// 디테일 뷰에서 지도 뷰로 전환
+function detailToMap() {
+    $('#detail-view').empty();
+    $('#detail-view').hide();
+    $('#map').show();
+}
+
+// 좋아요 변경 (Ajax)
+function goodToggle(idx, username) {
+    $.ajax({
+        url: '/plan/good/toggle',
+        method: 'put',
+        data: {"idx": idx, 'username': username, 'beforeUrl': beforeUrl},
+        success: function (response) {
+            if (response == "guest") {
+                location.replace('/loginPage');
+            } else if (response == "true") {
+                good = good - 1;
+                $('#good span:nth-child(2)').text(good);
+                $('#heart').css({"fontWeight": "normal"});
+            } else if (response == "false") {
+                good = good + 1;
+                $('#good span:nth-child(2)').text(good);
+                $('#heart').css({"fontWeight": "bolder"});
+            }
+        }
+    })
+}
+
+// 날짜 포맷 변환
 function dateFormatter(date) {
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2);

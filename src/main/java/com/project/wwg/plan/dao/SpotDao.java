@@ -9,7 +9,7 @@ import java.util.List;
  * 아이템 DAO
  * @author giri
  */
-public interface SpotsDao {
+public interface SpotDao {
     List<Spot> getSpotsList(int startRow, int endRow);
 
     Spot searchSpotOne(String title);

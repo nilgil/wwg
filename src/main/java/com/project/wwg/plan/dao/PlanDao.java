@@ -2,12 +2,11 @@ package com.project.wwg.plan.dao;
 
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
-import com.project.wwg.plan.dto.PlanReply;
 
 import java.util.List;
 import java.util.Map;
 
-public interface PlannerDao {
+public interface PlanDao {
     // ------------------ [C] ------------------
     int insertPlan(Plan plan);
 
@@ -20,7 +19,6 @@ public interface PlannerDao {
 
     int getPubPlansCount();
 
-    List<PlanReply> getPlanReplys(int plan_no);
 
     List<Plan> getBestPubPlansList();
 
