@@ -33,6 +33,8 @@ public interface QnaDao{
 	int getComCount(Qna qna);
 
 	List<Qna> getQnaMain();
+
+	List<Qna> getQnaComt();
 	
 
 

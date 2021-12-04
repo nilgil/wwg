@@ -122,5 +122,11 @@ select qna_title from qna_board where like
  select * from (select * from qna_board where qna_re_lev = 0 order by qna_regdate desc) where rownum &lt;= 10
 </select>
 
+<select id="qnaComt" parameterType="qna" resultType="qna">
+<![CDATA[
+ select * from (select * from qna_board where qna_re_lev >= 1)
+]]> 
+</select>
+
 </mapper>        
         

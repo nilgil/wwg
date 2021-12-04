@@ -113,6 +113,12 @@ public class QnaServiceImp implements QnaService{
 		return qd.getQnaMain();
 	}
 
+	@Override
+	public List<Qna> getQnaComt() {
+		// TODO Auto-generated method stub
+		return qd.getQnaComt();
+	}
+
 
 	
 

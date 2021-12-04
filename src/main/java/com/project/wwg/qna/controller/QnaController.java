@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.comm.model.meet;
+import com.project.wwg.comm.model.meet_replydto;
 import com.project.wwg.comm.model.notice;
 import com.project.wwg.comm.model.review;
 import com.project.wwg.comm.service.meet_service;
@@ -26,6 +27,8 @@ import com.project.wwg.info.dto.TourBoard;
 import com.project.wwg.info.service.FoodBoardService;
 import com.project.wwg.info.service.StayBoardService;
 import com.project.wwg.info.service.TourBoardService;
+import com.project.wwg.plan.dto.Plan;
+import com.project.wwg.plan.service.PlannerServiceImpl;
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
 import com.project.wwg.qna.service.QnaService;
@@ -48,6 +51,8 @@ public class QnaController{
 	private StayBoardService ss; //숙박 서비스 인터
 	@Autowired
 	private TourBoardService ts; //여행지 서비스 인터
+	@Autowired 
+	private PlannerServiceImpl psi; //
 	
 	
 
@@ -85,6 +90,17 @@ public class QnaController{
 	    
 	    List<TourBoard> tour = new ArrayList<TourBoard>();
 	    tour = ts.gettour();
+	   
+	    
+	    List<Plan> bestPlans = psi.getBestPubPlansList();
+
+        String[] titles = new String[bestPlans.size()];
+        for (int i = 0; i < bestPlans.size(); i++) {
+            if (bestPlans.get(i).getPlans().contains("\"")) {
+                titles[i] = bestPlans.get(i).getPlans().split("\"")[1];
+            }
+        }
+        String[] thumbnails = psi.getThumbnails(titles);
 	    
 	    System.out.println(qnalist);
 	    System.out.println("여기까지옴");
@@ -98,6 +114,8 @@ public class QnaController{
 		model.addAttribute("stay", stay);
 		model.addAttribute("tour", tour);
 		model.addAttribute("username", username);
+		model.addAttribute("bestPlans", bestPlans);
+		model.addAttribute("thumbnails", thumbnails);
 		
 		return "qna/main";
 	}
@@ -296,6 +314,15 @@ public class QnaController{
 		
 		System.out.println("list2호출");
 		return "qna/qnaList2";
+	}
+	
+	// 댓글 목록 구하기
+	@RequestMapping("/qna_comt/qna_no/{qna_no}")
+	public String comt(@PathVariable int qna_no, Model model) {
+		
+		List<Qna> comtlist = qs.getQnaComt();
+		
+		return "qna";
 	}
 	
 	//상세페이지

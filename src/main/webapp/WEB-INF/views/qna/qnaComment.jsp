@@ -77,7 +77,7 @@
            </thead>
            <tr>
             <td>작성자</td>
-            <td><input type="text" name="username" value="${user.username }"></td>
+            <td><input type="text" name="username" value="${user.username}"></td>
            </tr>
           
           <tr>
