@@ -31,7 +31,7 @@
                           select plan.*, (select count(*) from plan_good where plan_no = plan.idx) good
                           from plan
                           where pub = 1
-                          order by regdate desc
+                          order by idx desc
                       ) a
              )
         WHERE rnum >= #{startRow}

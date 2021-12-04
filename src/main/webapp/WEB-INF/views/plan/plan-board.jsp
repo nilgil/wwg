@@ -69,27 +69,6 @@
             <div id="paging">
             </div>
 
-            <!-- 검색 기능 -->
-            <div class="foodlist_search">
-                <form align="center" action="${path}/foodlist.do/page/1">
-                    <select name="search">
-                        <option value="food_title"
-                                <c:if test="${search=='food_title'}">selected="selected" </c:if>>제목
-                        </option>
-                        <option value="food_content"
-                                <c:if test="${search=='food_content'}">selected="selected" </c:if>>내용
-                        </option>
-                        <option value="username"
-                                <c:if test="${search=='username'}">selected="selected" </c:if>>작성자
-                        </option>
-                        <option value="subcon"
-                                <c:if test="${search=='subcon'}">selected="selected" </c:if>>제목+내용
-                        </option>
-                    </select>
-                    <input type="text" name="keyword">
-                    <input class="btn btn-dark" type="submit" value="확인">
-                </form>
-            </div>
         </div>
     </div>
 </div>
