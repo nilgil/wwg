@@ -64,7 +64,7 @@ $(function(){
                   <tbody>
                    <tr>
                     <td class="contents" colspan="5" text-align="center" >
-                        <pre>${qnalist.qna_content}</pre>
+                        <p style="width:900px;">${qnalist.qna_content}</p>
                     </td>
                    </tr>
                 </tbody>
