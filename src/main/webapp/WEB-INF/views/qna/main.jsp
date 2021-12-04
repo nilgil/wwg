@@ -181,7 +181,7 @@
 						</div>
 						<s:csrfInput />
 						<div class="quit_share">
-							<a data-toggle="tooltip" title="안 하실거죠?!" href="/user/quit">회원탈퇴</a>
+							<a data-toggle="tooltip" title="안 하실거죠?!" href="user/quit">회원탈퇴</a>
 						</div>
 					</form>
 

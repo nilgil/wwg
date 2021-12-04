@@ -27,7 +27,7 @@
        
             <div class="mypage_pw">
             <p>비밀번호</p>
-            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자" value="${user.password}">
+            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자">
             </div>
         
             <div class="mypage_name">
@@ -44,7 +44,7 @@
                 <input type="hidden" name="_method" value="PUT"/>
                 <s:csrfInput/>
             <div class="mypage_btn">
-            <button id="btn" type="button" class="btn" onclick="location='/user/changeInfoProcess'">정보변경</button>
+            <button id="btn" class="btn" onclick="location.href='${pageContext.request.contextPath}/user/changeInfoProcess'">정보변경</button>
             </div>
       
 
