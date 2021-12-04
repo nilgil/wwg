@@ -89,7 +89,7 @@
 	
 <!-- main 페이지에 데이터 호출 -->	
     <select id="stay" resultType="StayBoard">
-        select * from (select * from trip_stay order by stay_regdate desc) where rownum &lt;= 1
+        select * from (select * from trip_stay order by stay_regdate desc) where rownum &lt;= 3
     </select>	
 
 </mapper>

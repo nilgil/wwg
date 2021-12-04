@@ -48,7 +48,7 @@
             <s:csrfInput/>
             
             <div class="signUp_btn">
-            <button id="btn" type="button" class="btn" onclick="location='/userSignUpProcess'">가입</button>
+            <button id="btn" class="btn" onclick="location.href='${pageContext.request.contextPath}/userSignUpProcess'">가입</button>
             </div>
   
 

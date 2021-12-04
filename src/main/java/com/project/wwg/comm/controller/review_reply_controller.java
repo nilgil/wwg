@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.security.Principal;
 //Board;
 import com.project.wwg.comm.model.review;
 
@@ -29,7 +29,12 @@ public class review_reply_controller {
 
 	// 댓글 목록 구하기
 	@RequestMapping("/review_reply/review_no/{review_no}")
-	public String slist(@PathVariable int review_no, Model model) {
+	public String slist(Principal principal, @PathVariable int review_no, Model model) {
+		String username = "guest";
+		if(principal != null) {
+			username=principal.getName();
+		};
+		model.addAttribute("username", username);
 		review review = rs.select(review_no);
 		List<review_replydto> review_reply = rrs.list(review_no);
 		model.addAttribute("review_reply", review_reply);

@@ -587,9 +587,60 @@ public class QnaController{
 		model.addAttribute("username", username);
 		model.addAttribute("notice_no1", notice_no1);
 		
-		return "redirect:/noticeview/notice_no/{notice_no1}/pageNum/{1";
+		return "redirect:/noticeview/notice_no/{notice_no1}/pageNum/1";
 	}
 		
+	
+	//main 맛집
+	//foodcontent.do/food_no/{food_no}/pageNum/{pageNum}
+	@RequestMapping("/foodcontentcont/food_no/{food_no1}/pageNum/1")
+	public String foodmain(Principal principal, Model model, @PathVariable String food_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("food_no1", food_no1);
+		
+		return "redirect:/foodcontent.do/food_no/{food_no1}/pageNum/1";
+	}
+	
+	//main 숙소
+	//staycontent.do/stay_no/{stay_no}/pageNum/{pageNum}
+	@RequestMapping("staycontentcont/stay_no/{stay_no1}/pageNum/1")
+	public String staymain(Principal principal, Model model, @PathVariable String stay_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("stay_no1", stay_no1);
+		
+		return "redirect:/staycontent.do/stay_no/{stay_no1}/pageNum/1";
+	}
+	
+	//main 여행지
+	//tourcontent.do/tour_no/{tour_no}/pageNum/{pageNum}
+	@RequestMapping("tourcontentcont/tour_no/{tour_no1}/pageNum/1")
+	public String tourmain(Principal principal, Model model, @PathVariable String tour_no1) {
+	
+		String username = "guest"; 
+		
+		if(principal != null) {
+			username = principal.getName();
+		}
+		
+		model.addAttribute("username", username);
+		model.addAttribute("tour_no1", tour_no1);
+		
+		return "redirect:/tourcontent.do/tour_no/{tour_no1}/pageNum/1";
+	}
 
 	
 	

@@ -53,18 +53,19 @@ a{
 }
 .center_main2{
     grid-area: center_main2;
+    overflow:hidden;
 }
 .center_main2 ul{
     margin: 0 auto;
 }
-.center_main2 ul li{
+/* .center_main2 ul li{
     color: gainsboro;
     list-style: none;
 	width: 301px;
 	height: 264px;
     margin-left: 5px;
     float: left;
-}
+} 
 .center_main2 ul li a{
     display: table-caption;
 }
@@ -72,7 +73,7 @@ a{
     width: 280px;
     height: 250px;
     margin-left: -18px;
-}
+} */
 .center_main3{
     grid-area: center_main3;
 }
