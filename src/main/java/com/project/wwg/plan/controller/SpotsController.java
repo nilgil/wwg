@@ -138,10 +138,11 @@ public class SpotsController {
      * Security 쪽에서 접근 제한 걸어줘야함
      */
     @GetMapping("/reset")
-    public String resetAllSpotsFromApi() {
+    @ResponseBody
+    public int resetAllSpotsFromApi() {
         int result = spotService.resetAllSpotsFromApi();
         System.out.println("Reset All Spots From API >> Result = " + result + " Spots Exist");
-        return "/plan/resetAllSpotsResult";
+        return result;
     }
 
 }
