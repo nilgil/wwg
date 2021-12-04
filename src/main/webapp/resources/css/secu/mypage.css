@@ -39,6 +39,7 @@ a{
     border-radius: 15px;
     width: 500px;
     height: 700px;
+    box-shadow: 2px 2px 3px #0000003b;
 }
 
 .mypage_id{

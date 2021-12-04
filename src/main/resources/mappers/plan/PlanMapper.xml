@@ -10,7 +10,7 @@
     </insert>
 
     <select id="getPlanByIdx" parameterType="_int" resultType="Plan">
-        select *
+        select plan.*, (select count(*) from plan_good where plan_no = plan.idx) good
         from plan
         where idx = #{idx}
     </select>

@@ -12,8 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>상세</title>
+
 <!-- jQuery문 설정 불러오기 -->
-<script src="${path}/js/info/jquery.js"></script>
+<%-- <script src="${path}/js/info/jquery.js"></script> --%>
 
 
 <!-- 댓글 수정, 삭제 기능 -->
@@ -66,7 +67,7 @@
 					<td><fmt:formatDate value="${rr.review_re_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td id="btn_${rr.review_re_no}">
-						<c:if test="${rr.member_id==user.username }">
+						<c:if test="${rr.member_id==username }">
 							<input type="button" value="수정" class="edit1" id="${rr.review_re_no}">
 							<input class="btn btn-outline-dark btn-sm" type="button" value="삭제"	 onclick="del(${rr.review_re_no},${rr.review_fno})">
 						</c:if></td>

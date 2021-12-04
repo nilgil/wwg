@@ -14,7 +14,6 @@
     
     
     <div id="container">
-        <p class="p1">일정짜기</p>
         <form id="initForm" method="post" action="/plan/create">
             <div class="main_img"><img src="/img/qna/plan03.jpg"></div>
             <s:csrfInput/>

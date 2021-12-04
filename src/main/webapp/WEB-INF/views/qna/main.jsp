@@ -11,6 +11,13 @@
 <head>
 <title>메인페이지</title>
 <%@ include file="/resources/include/headTag.jsp"%>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
 </head>
 
 <body>
@@ -54,20 +61,20 @@
     <ul style="list-style-type: circle">
         <c:forEach var="fod" items="${food}">
         <li>
-        <a href="#"><img alt="이미지2" src="/food/ckImgSubmit.do?uid=a231549b-a265-444c-91c6-c9c6be42fe80&amp;fileName=Tulips.jpg"><span>${fod.food_title}</span></a>
+        <a href="#"><span>${fod.food_title}</span></a>
      <%--    <a href="#"><span>${fod.food_content}</span> <span>${fod.food_title}</span></a> --%>
         </li>
         </c:forEach>
         
         <c:forEach var="sy" items="${stay}">
         <li>
-        <a href="#"><img alt="이미지2" src="/img/qna/test사진2.jpg"><span>${sy.stay_title}</span></a>
+        <a href="#"><span>${sy.stay_title}</span></a>
         </li>
         </c:forEach>
         
         <c:forEach var="tr" items="${tour}">
         <li>
-        <a href="#"><img alt="이미지3" src="/img/qna/test사진7.jpg"><span>${tr.tour_title}</span></a>
+        <a href="#"><span>${tr.tour_title}</span></a>
         </li>
         </c:forEach>
     </ul>
@@ -105,10 +112,12 @@
       </div>
 </div>
 
-<div class="aside_login">로그인<hr>
+<div class="aside_login">
       
     <c:choose>
     <c:when test="${username eq 'guest'}">
+    
+          로그인<hr>
     
     <form action="/login" method="post">
     <div class="form-group">
@@ -128,6 +137,8 @@
     
     <c:otherwise>
     
+         ${username}님 환영합니다^^<hr>
+    
     <form action="/login" method="post">
     <div class="main_profile"><img alt="이미지1" src="/img/qna/프로필사진1.png" width="90" height="90"></div>
     <div class="login_id">
@@ -137,8 +148,7 @@
     <input type="button" name="logout" value="로그아웃" onclick="location='/logout'">
     </div>
     <s:csrfInput/>
-     <div class="quit_share"><a href="#">회원탈퇴</a> | 
-     <a href="#">친구공유</a></div>
+    <div class="quit_share"><a data-toggle="tooltip" title="안 하실거죠?!" href="/user/quit">회원탈퇴</a></div>
     </form>
     
     </c:otherwise>

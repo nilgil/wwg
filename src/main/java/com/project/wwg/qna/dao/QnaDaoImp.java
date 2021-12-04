@@ -108,6 +108,12 @@ public class QnaDaoImp implements QnaDao{
 		return st.selectList("qnans.qnaMain");
 	}
 
+	@Override
+	public List<Qna> getQnaComt() {
+		// TODO Auto-generated method stub
+		return st.selectList("qnans.qnaComt");
+	}
+
 	
 	
 

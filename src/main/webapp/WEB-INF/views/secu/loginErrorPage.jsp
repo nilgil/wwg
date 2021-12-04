@@ -4,10 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>에러</title>
 </head>
 <body>
-    입력을 똑바로 해라 ㅆ1ㅂㅅㅐ야
-    <button onclick="location.href='${pageContext.request.contextPath}/loginPage'">네 알겟습니다^^</button>
+<script type="text/javascript">
+ alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+ history.go(-1);
+</script>
+   <%--  <button onclick="location.href='${pageContext.request.contextPath}/loginPage'">네 알겟습니다^^</button> --%>
 </body>
 </html>

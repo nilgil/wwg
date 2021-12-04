@@ -8,18 +8,17 @@
     
 }
 
-
 #initForm{
     width:600px;
     height: 700px;
-    margin-top: 100px;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
+    box-shadow: 2px 2px 3px #0000003b;
 
 }
 
@@ -46,14 +45,14 @@
 }
 
 #submit {
-    border: 2px solid black;
+    border: 1px solid black;
     text-align: center;
     width:140px;
     border-radius: 15px;
     font-size: 20px;
 }
 #submit:hover{
-	border: 3px solid #293462;
+	border: 1px solid #293462;
 	background-color: #FFB740;
 }
 .main_img img{
@@ -62,20 +61,10 @@
 	height:300px;
 	border-radius: 10px 10px 0px 0px;
 }
-.day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, img:hover, #submit, #close-box, #searchBtn {
+#departureIn:hover, .day-btn:hover, .price-btn:hover, .remove-plan:hover, .add-plan:hover, .spot-title:hover, #day-plus:hover, #day-minus:hover, #submit, #close-box, #searchBtn {
     cursor: pointer;
 }
 p{
 	font-size: 20px;
-}
-.p1{
-	font-size: 36px;
-}
-
-    border: 1px solid grey;
-    width: 100px;
-    height: 30px;
-    text-align: center;
-    cursor: pointer;
 }
 
