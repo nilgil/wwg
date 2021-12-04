@@ -2,8 +2,10 @@ $(document).ready(function () {
     resetBoard(1);
 });
 
+let pageNum;
 // 페이지 번호로 전체 화면 재출력
 function resetBoard(page) {
+    pageNum = page;
     getBoard(page).then((data) => {
         printCount(data);
         printBoard(data);
@@ -64,7 +66,6 @@ function printPaging(data) {
     $('#paging').empty();
 
     let pageInfo = data.pageInfo;
-    console.log(pageInfo);
     if (pageInfo.startPage > pageInfo.divPages) {
         $('#paging').append(`<li><a class="pages" onclick="resetBoard(${pageInfo.startPage - 1})">이전</a></li>`);
     }
