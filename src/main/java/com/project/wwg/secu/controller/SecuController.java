@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -75,7 +76,7 @@ public class SecuController {
         return "secu/mypage";//나중에 메인페이지로 변경
     }
 
-    @GetMapping("user/quit")
+    @GetMapping("/user/quit")
     public String userQuit(Principal principal){
         LOG.info(principal.getName());
         UsersDto usersDto = new UsersDto();
@@ -105,5 +106,12 @@ public class SecuController {
         return "secu/loginErrorPage";
     }
 
-
+    @GetMapping("/loginSuccess")
+    public String loginSuccess(HttpSession session) {
+        String beforeUrl = (String) session.getAttribute("beforeUrl");
+        if (beforeUrl != null) {
+            return "redirect:" + beforeUrl;
+        }
+        return "redirect:/";
+    }
 }

@@ -8,19 +8,16 @@
 <html>
 <head>
 <title>Title</title>
-<%@ include file="/resources/include/headTag.jsp"%>
 <link rel='stylesheet' media='screen' href='/css/admin/memberList.css'>
-
-
 <script
-	src="${pageContext.request.contextPath}/resources/admin/memberList.js"></script>
+	src="${pageContext.request.contextPath}/admi/memberList.js"></script>
 
 <script>
 	window.onload = function() {
 		console.log("시작");
 		let memberList = new MemberList();
 		for (let i = 0; i <= document.getElementsByClassName('user-info').length; i++) {
-			document.getElementsByClassName('user-info')[i].addEventListener(
+			document.getElementsByClassName('user-del')[i].addEventListener(
 					"click", memberList.deleteUser);
 		}
 	}
@@ -30,8 +27,6 @@
 </head>
 
 <body>
-	<!-- navbar -->
-	<%@ include file="/resources/include/navbar.jsp"%>
 
 	<!-- cneter -->
 	<%--<s:authentication property="principal" var="user"/>--%>
@@ -94,11 +89,6 @@
 			</div>
 
 </div>
-
-				
-
-				<!-- footer -->
-				<%@ include file="/resources/include/footerbar.jsp"%>
 </body>
 
 </html>
