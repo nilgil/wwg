@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -9,7 +8,6 @@
 <html>
 <head>
     <title>Q&A게시판 목록호출</title>
-   <%@ include file="/resources/include/headTag.jsp"%>
    <link rel='stylesheet' media='screen' href='/css/qna/list.css'> 
 </head>
 <body>
@@ -100,8 +98,10 @@
         
         
         <!-- 목록검색기능 -->
-        <form action="${path }/views/qna/qnaList/page/1">
         <div class="search_bar">
+        
+        <form action="${path }/views/qna/qnaList/page/1">
+    
             <select class="search">
                 <option value="title"
                 <c:if test="${search=='qna_title'}"> selected="selected"</c:if> > 제목 </option>
@@ -114,8 +114,11 @@
             </select> 
             <input type="text" name="keyword"> 
             <input class="btn btn-dark" type="submit" value="검색">
-        </div>
+        
         </form>
+        
+        </div>
+        
    </div>
    </div>
 

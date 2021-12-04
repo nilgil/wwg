@@ -15,17 +15,16 @@
 <link defer rel='stylesheet' media='screen' href='/css/qna/detail.css'>
 
 
+
+
 <script defer type="text/javascript">
+
 $(function(){
 	$('#qna_list').load('/qnalist2.do?page=${page}');
 });
+
 </script>
 
-<script type="text/javascript">
-$(function(){
-	${'#qna_comt'}.load();
-});
-</script>
 
 </head>
 
@@ -69,9 +68,14 @@ $(function(){
                     </td>
                    </tr>
                 </tbody>
+<<<<<<< HEAD
             </table>
 
 
+=======
+            </table>   
+            
+>>>>>>> 4d0c1fe4643e06f4b296b1e3f5c03498cf4f2e14
                <div class="table_btn">
                <s:authorize access="hasRole('ROLE_ADMIN')">
                 <div><input class="btn btn-dark" type="button" id="de_comment" value="답글"
@@ -85,9 +89,13 @@ $(function(){
                 <div id="del"><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
                 onclick="location='${path}/qna_deletecheck/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                </div>
+<<<<<<< HEAD
 
                <div id="qna_comt"></div>
 
+=======
+              
+>>>>>>> 4d0c1fe4643e06f4b296b1e3f5c03498cf4f2e14
                <div id="qna_list"></div>
 
               </div>
