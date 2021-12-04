@@ -34,7 +34,7 @@ $(function(){
 
 <!-- center -->
         <div class="detail_center">
-            <div class="side"> 
+            <div class="side">
                 <table id="side_menu" class="table table-hover">
                      <thead>
                        <tr><th>회원문의</th></tr>
@@ -46,11 +46,11 @@ $(function(){
                      </tbody>
                  </table>
             </div>
-        
+
             <div class="detail_table">
                 <table id="detail_table_2" class="table table-hover">
                 <h2>Q&A 게시판</h2>
-                <h3>${qnalist.qna_title}</h3>            
+                <h3>${qnalist.qna_title}</h3>
                   <thead>
                    <tr>
                     <th>게시물번호:${no1}</th>
@@ -60,7 +60,7 @@ $(function(){
                     <th>날짜:${qnalist.qna_regdate}</th>
                    </tr>
                   </thead>
-                  
+
                   <tbody>
                    <tr>
                     <td class="contents" colspan="5" text-align="center" >
@@ -68,28 +68,29 @@ $(function(){
                     </td>
                    </tr>
                 </tbody>
-            </table>   
-            
+
+            </table>
+
                <div class="table_btn">
                <s:authorize access="hasRole('ROLE_ADMIN')">
                 <div><input class="btn btn-dark" type="button" id="de_comment" value="답글"
                 onclick="location='${path}/qna_commentForm?qna_no=${qnalist.qna_no}&page=${page}'"></div>
                 </s:authorize>
-             
-             
+
+
                 <div><input class="btn btn-dark" type="button" id="de_update" value="수정"
                 onclick="location='${path}/qna_updatecheck?qna_no=${qnalist.qna_no}&page=${page}'"></div>
-               
+
                 <div id="del"><input class="btn btn-dark" type="button" id="de_delete" value="삭제"
                 onclick="location='${path}/qna_deletecheck/qna_no/${qnalist.qna_no}/page/${page}'"></div>
                </div>
-              
+
                <div id="qna_list"></div>
-               
+
               </div>
-            
+
             </div>
-            
+
            <!-- footer -->
            <%@ include file="/resources/include/footerbar.jsp"%>
 
