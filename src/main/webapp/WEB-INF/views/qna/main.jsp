@@ -184,6 +184,11 @@
 						<div class="login_id">
 							${username}님 | <a href="/user/mypage">내정보</a>
 						</div>
+						<s:authorize access="hasRole('ROLE_ADMIN')">
+						<div class="manager">
+							<input type="button" onclick="location='/admin/memberList'" value="관리페이지"  />
+						</div>
+						</s:authorize>
 						<div class="logout_btn">
 							<input type="button" name="logout" value="로그아웃"
 								onclick="location='/logout'">

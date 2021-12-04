@@ -36,7 +36,7 @@ a{
     /* grid-gap: 1px; 혹시 몰라서 안지움 */
     /* height: 100vh; 혹시 몰라서 안지움 */
     grid-template-columns: 500px 500px 350px;
-    grid-template-rows: 350px 450px 450px 600px;
+    grid-template-rows: 350px 340px 460px 600px;
     grid-template-areas: 'center_main1 center_main5 aside_login'
                          'center_main2 center_main2 notice'
                          'center_main3 center_main3 aside1'
