@@ -91,25 +91,34 @@
 			<hr>
 		</div>
 
-		<div class="center_main3">
-			일정게시판
-			<hr>
-			<img alt="이미지4" src="/img/qna/test사진6.JPG">
-			<p>나리는 꽃가루에 눈이 따끔해 (아야) 눈물이 고여도 꾹 참을래 내 마음 한켠 비밀스런 오르골에 넣어두고서 영원히
-				되감을 순간이니까 우리 둘의 마지막 페이지를 잘 부탁해 어느 작별이 이보다 완벽할까 Love me only till
-				this spring 오 라일락 꽃이 지는 날 good bye 이런 결말이 어울려 안녕 꽃잎 같은 안녕 하이얀 우리 봄날의
-				climax 아 얼마나 기쁜 일이야 Ooh ooh Love me only till this spring 봄바람처럼 Ooh
-				ooh Love me only till this spring 봄바람처럼 기분이 달아 콧노래 부르네 (랄라) 입꼬리는 살짝
-				올린 채 어쩜 이렇게 하늘은 더 바람은 또 완벽한 건지 오늘따라 내 모습 맘에 들어 처음 만난 그날처럼 예쁘다고 말해줄래
-				어느 이별이 이토록 달콤할까 Love resembles misty dream 오 라일락 꽃이 지는 날 good bye 이런
-				결말이 어울려 안녕 꽃잎 같은 안녕 하이얀 우리 봄날의 climax 아 얼마나 기쁜 일이야 Ooh ooh Love
-				resembles misty dream 뜬구름처럼 Ooh ooh Love resembles misty dream 뜬구름처럼
-				너도 언젠가 날 잊게 될까 지금 표정과 오늘의 향기도 단잠 사이에 스쳐간 봄날의 꿈처럼 오 라일락 꽃이 지는 날 good
-				bye 너의 대답이 날 울려 안녕 약속 같은 안녕 하이얀 우리 봄날에 climax 아 얼마나 기쁜 일이야 Ooh ooh
-				Love me only untill this spring 봄바람처럼 Ooh ooh Love me only untill
-				this spring 봄바람처럼 Ooh ooh Love resembles misty dream 뜬구름처럼 Ooh ooh
-				Love resembles misty dream 뜬구름처럼</p>
-		</div>
+        <div class="center_main3">인기 여행계획<hr>
+            <div id="plan-box">
+                <c:forEach items="${bestPlans}" var="plan" varStatus="st">
+                    <div class='plan'>
+                        <div id='plan-img'>
+                            <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}"
+                                                                  alt="https://via.placeholder.com/150"/></a>
+                        </div>
+                        <div id='plan-info'>
+                            <div id="day-info">
+                                <p>
+                                    <c:if test="${plan.days == 1}">당일치기</c:if>
+                                    <c:if test="${plan.days != 1}">${plan.days-1}박 ${plan.days}일</c:if>
+                                </p>
+                                <p>${plan.username}</p>
+                            </div>
+                            <div id="title">
+                                <a href="/plan/view/${plan.idx}"><p>${plan.title}</p></a>
+                            </div>
+                            <div id="good">
+                                <p><i class="fas fa-eye"></i> ${plan.hit}</p>
+                                <p><i class="far fa-thumbs-up"></i> ${plan.good}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
 
 		<div class="center_main4">
 			제주도 사진
@@ -143,17 +152,17 @@
 
 			<c:choose>
 				<c:when test="${username eq 'guest'}">
-    
+
           로그인<hr>
 
 					<form action="/login" method="post">
 						<div class="form-group">
 							<label for="usr">아이디</label> <input type="text"
-								class="form-control" name="id" placeholder="아이디">
+								class="form-control" name="id" placeholder="아이디" id="usr">
 						</div>
 						<div class="form-group">
 							<label for="pwd">비밀번호</label> <input type="password"
-								class="form-control" name="pw" placeholder="비밀번호">
+								class="form-control" name="pw" placeholder="비밀번호" id="pwd">
 						</div>
 						<s:csrfInput />
 						<div class="login_btn">
