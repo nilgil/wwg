@@ -1,5 +1,6 @@
 package com.project.wwg.comm.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,12 @@ public class meet_reply_controller {
 
 	// 댓글 목록 구하기
 	@RequestMapping("/meet_reply/meet_no/{meet_no}")
-	public String slist(@PathVariable int meet_no, Model model) {
+	public String slist(Principal principal, @PathVariable int meet_no, Model model) {
+		String username = "guest";
+		if(principal != null) {
+			username=principal.getName();
+		};
+		model.addAttribute("username", username);
 		meet meet = ms.select(meet_no);
 		List<meet_replydto> meet_reply = mrs.list(meet_no);
 		model.addAttribute("meet_reply", meet_reply);

@@ -89,7 +89,7 @@
 	
 <!-- main 페이지에 데이터 호출 -->	
     <select id="food" resultType="FoodBoard">
-        select * from (select * from trip_food order by food_regdate desc) where rownum &lt;= 1
+        select * from (select * from trip_food order by food_regdate desc) where rownum &lt;= 3
     </select>
 
 </mapper>

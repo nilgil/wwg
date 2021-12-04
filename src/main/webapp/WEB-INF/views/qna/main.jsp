@@ -61,20 +61,20 @@ $(document).ready(function(){
     <ul style="list-style-type: circle">
         <c:forEach var="fod" items="${food}">
         <li>
-        <a href="#"><img alt="이미지2" src="/food/ckImgSubmit.do?uid=a231549b-a265-444c-91c6-c9c6be42fe80&amp;fileName=Tulips.jpg"><span>${fod.food_title}</span></a>
+        <a href="#"><span>${fod.food_title}</span></a>
      <%--    <a href="#"><span>${fod.food_content}</span> <span>${fod.food_title}</span></a> --%>
         </li>
         </c:forEach>
         
         <c:forEach var="sy" items="${stay}">
         <li>
-        <a href="#"><img alt="이미지2" src="/img/qna/test사진2.jpg"><span>${sy.stay_title}</span></a>
+        <a href="#"><span>${sy.stay_title}</span></a>
         </li>
         </c:forEach>
         
         <c:forEach var="tr" items="${tour}">
         <li>
-        <a href="#"><img alt="이미지3" src="/img/qna/test사진7.jpg"><span>${tr.tour_title}</span></a>
+        <a href="#"><span>${tr.tour_title}</span></a>
         </li>
         </c:forEach>
     </ul>
