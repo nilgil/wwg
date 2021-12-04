@@ -34,6 +34,7 @@ public interface QnaService{
 
 	List<Qna> getQnaMain();
 
+	List<Qna> getQnaComt();
 	
 
 

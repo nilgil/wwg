@@ -11,6 +11,13 @@
 <head>
 <title>메인페이지</title>
 <%@ include file="/resources/include/headTag.jsp"%>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
 </head>
 
 <body>
@@ -105,10 +112,12 @@
       </div>
 </div>
 
-<div class="aside_login">로그인<hr>
+<div class="aside_login">
       
     <c:choose>
     <c:when test="${username eq 'guest'}">
+    
+          로그인<hr>
     
     <form action="/login" method="post">
     <div class="form-group">
@@ -128,6 +137,8 @@
     
     <c:otherwise>
     
+         ${username}님 환영합니다^^<hr>
+    
     <form action="/login" method="post">
     <div class="main_profile"><img alt="이미지1" src="/img/qna/프로필사진1.png" width="90" height="90"></div>
     <div class="login_id">
@@ -137,8 +148,7 @@
     <input type="button" name="logout" value="로그아웃" onclick="location='/logout'">
     </div>
     <s:csrfInput/>
-     <div class="quit_share"><a href="#">회원탈퇴</a> | 
-     <a href="#">친구공유</a></div>
+    <div class="quit_share"><a data-toggle="tooltip" title="안 하실거죠?!" href="/user/quit">회원탈퇴</a></div>
     </form>
     
     </c:otherwise>

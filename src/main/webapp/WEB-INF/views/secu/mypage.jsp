@@ -27,12 +27,12 @@
        
             <div class="mypage_pw">
             <p>비밀번호</p>
-            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자">
+            <input class="form-control" type="password" name="password" placeholder="문자  + 숫자" value="${user.password}">
             </div>
         
             <div class="mypage_name">
             <p>이름</p>
-            <input class="form-control" type="text" name="realname" placeholder="이름">
+            <input class="form-control" type="text" name="realname" placeholder="이름" >
             </div>
      
             <div class="mypage_address">
@@ -44,7 +44,7 @@
                 <input type="hidden" name="_method" value="PUT"/>
                 <s:csrfInput/>
             <div class="mypage_btn">
-            <button id="btn" type="button" class="btn">정보변경</button>
+            <button id="btn" type="button" class="btn" onclick="location='/user/changeInfoProcess'">정보변경</button>
             </div>
       
 

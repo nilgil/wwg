@@ -170,6 +170,7 @@ a{
 }
 .quit_share{
 	display: inline-block;
+	margin-left: 73px;
 }
 .aside_login form{
 	background-color: #ffffff;

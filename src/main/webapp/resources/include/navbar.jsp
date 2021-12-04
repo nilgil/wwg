@@ -64,13 +64,8 @@
     </li>
 
         </ul>
-
-
-        <ul class="navbar_search" action="/action_page.php">
-           <li><input class="form-control mr-sm-2" type="text" placeholder="애월 카페" title="검색어입력"></li>
-           <li><button class="btn btn-success" type="submit">검색</button></li>
-        </ul>
         
+    <%--     <c:if test="${username eq null}"> --%>
         
         <div class="navbar_logout" >${username}님 |
         <c:if test="${username eq 'guest'}">
