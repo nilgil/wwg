@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class AdminPageController {
     }
 
     @GetMapping("/memberList")
-    public String memberList(Model model) {
+    public String memberList(Model model, Principal principal) {
         List<UsersDto> userList = new ArrayList<UsersDto>();
         LOG.info("aproach to memberList");
         userList =memberListTakingService.getUserList(userList);
@@ -34,6 +35,7 @@ public class AdminPageController {
         });
         LOG.info("end");
         model.addAttribute("memberList", userList);
+        model.addAttribute("username",principal.getName());
         return"admin/memberList";
     }
 }

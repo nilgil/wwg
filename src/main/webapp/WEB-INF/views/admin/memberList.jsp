@@ -4,11 +4,11 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 
-
 <html>
 <head>
 <title>Title</title>
-<link rel='stylesheet' media='screen' href='/css/admin/memberList.css'>
+	<%@ include file="/resources/include/headTag.jsp"%>
+	<link rel='stylesheet' media='screen' href='/css/admin/memberList.css'>
 <script
 	src="${pageContext.request.contextPath}/admi/memberList.js"></script>
 
@@ -17,7 +17,7 @@
 		console.log("시작");
 		let memberList = new MemberList();
 		for (let i = 0; i <= document.getElementsByClassName('user-info').length; i++) {
-			document.getElementsByClassName('user-del')[i].addEventListener(
+			document.getElementsByClassName('user-info')[i].addEventListener(
 					"click", memberList.deleteUser);
 		}
 	}
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+<%@ include file="/resources/include/navbar.jsp"%>
 	<!-- cneter -->
 	<%--<s:authentication property="principal" var="user"/>--%>
 	<%--    ${user.username}--%>
@@ -59,28 +59,25 @@
 				
 					<table class="table table-hover">
 						<h2>회원관리 게시판</h2>
-						<p>The .table-hover class enables a hover state (grey
-							background on mouse over) on table rows:</p>
 						<p> 총 회원수 : ${memberList.size()} </p>
 						<thead>
 							<tr>
 								<th>아이디</th>
-								<th>지역</th>
 								<th>이름</th>
+								<th>지역</th>
+								<th>처리</th>
 							</tr>
 						</thead>
 						
 						<tbody>
 						<s:authorize access="permitAll">
 							<c:forEach var="i" items="${memberList}">
-								<div data-user="${i.username}" class="user-info">
-					            <tr>
-								<th><c:out value="${i.username}" /></th>
-								<th><c:out value="${i.location}" /></th>
-								<th><c:out value="${i.realname}" /></th>
-								<th><button class="user-del">삭제</button></th>
+								<tr data-user="${i.username}" class="user-info">
+									<td><c:out value="${i.username}" /></td>
+									<td><c:out value="${i.realname}" /></td>
+									<td><c:out value="${i.location}" /></td>
+									<td><button>삭제</button></td>
 								</tr>
-								</div>
 							</c:forEach>
 						</s:authorize>
 						</tbody>
@@ -89,6 +86,7 @@
 			</div>
 
 </div>
+<%@ include file="/resources/include/footerbar.jsp"%>
 </body>
 
 </html>

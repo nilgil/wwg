@@ -19,7 +19,7 @@ public class UserInfoUpdateDao {
     public void userInfoUpdate(String username, String password, String realname, String location){
         UsersDto usersDto = new UsersDto();
         usersDto.setUsername(username);
-        usersDto.setPassword(password);
+        usersDto.setPassword("{noop}"+password);
         usersDto.setRealname(realname);
         usersDto.setLocation(location);
         sqlSession.update(NAMESPACE+"updateInfo", usersDto);
