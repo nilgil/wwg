@@ -17,6 +17,7 @@ public class UserDeleteDao {
     }
 
     public void userQuit(UsersDto usersDto){
+        LOG.info(usersDto.getUsername());
         sqlSession.delete(NAMESPACE+"removeAuth",usersDto);
         sqlSession.delete(NAMESPACE+"removeUser",usersDto);
     }

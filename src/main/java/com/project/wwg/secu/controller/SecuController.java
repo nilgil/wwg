@@ -1,10 +1,7 @@
 package com.project.wwg.secu.controller;
 
 import com.project.wwg.secu.dto.UsersDto;
-import com.project.wwg.secu.service.TestService;
-import com.project.wwg.secu.service.UserDeleteService;
-import com.project.wwg.secu.service.UserInfoUpdateService;
-import com.project.wwg.secu.service.UserSignUpService;
+import com.project.wwg.secu.service.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
@@ -24,64 +20,79 @@ public class SecuController {
     UserSignUpService userSignUpService;
     UserInfoUpdateService userInfoUpdateService;
     UserDeleteService userDeleteService;
+    UserInfoService userInfoService;
 
     SecuController(TestService testService, UserSignUpService userSignUpService,
-                   UserInfoUpdateService userInfoUpdateService, UserDeleteService userDeleteService) {
+                   UserInfoUpdateService userInfoUpdateService,
+                   UserDeleteService userDeleteService,UserInfoService userInfoService){
         this.testService = testService;
         this.userSignUpService = userSignUpService;
         this.userInfoUpdateService = userInfoUpdateService;
         this.userDeleteService = userDeleteService;
+        this.userInfoService = userInfoService;
     }
 
     @GetMapping("/loginPage")
-    public String login(Model model, Principal principal, Authentication authentication) {
-
+    public String login(Model model, Principal principal,Authentication authentication){
+        model.addAttribute("username","guest");
         return "secu/login";
     }
-
     @PostMapping("/userSignUpProcess")
     public String userSignUp(Model model,
                              @RequestParam(name = "username") String username,
                              @RequestParam(name = "password") String password,
                              @RequestParam(name = "realname") String realname,
-                             @RequestParam(name = "location") String location) {
-        LOG.info(username + ", " + password + ", " + realname + ", " + location);
-        if (userSignUpService.userSignUp(username, password, realname, location)) {
+                             @RequestParam(name = "location") String location)
+    {
+        LOG.info(username +", "+ password+", "+ realname+", "+ location);
+        if(userSignUpService.userSignUp(username, password, realname, location)){
             LOG.info("signsUp success");
-            return "/";
-        } else {
+            return"redirect:/";
+        }
+        else {
             LOG.info("signsUp fail");
             return "redirect:/userSignUp";//나중에 적절한 페이지로 이동
         }
     }
 
     @GetMapping("/userSignUp")
-    public String userSignUpPage(Model model) {
-        return "secu/userSignUp";
+    public String userSignUpPage(Model model){
+        return"secu/userSignUp";
     }
 
     @GetMapping("/user/mypage")
-    public String myPage(Model model) {
+    public String myPage(Model model, Principal principal){
+        UsersDto usersDto = new UsersDto();
+        LOG.info(principal.getName());
+        usersDto.setUsername(principal.getName());
+        LOG.info(usersDto.getUsername());
+        usersDto=userInfoService.getUserInfo(usersDto);
+        model.addAttribute("userInfo",usersDto);
+        model.addAttribute("username",principal.getName());
         return "secu/mypage";
     }
 
     @PostMapping("/user/changeInfoProcess")
-    public String changeInfoProcess(@RequestParam(name = "username") String username,
-                                    @RequestParam(name = "password") String password,
-                                    @RequestParam(name = "realname") String realname,
-                                    @RequestParam(name = "location") String location) {
-        LOG.info(username + ", " + password + ", " + realname + ", " + location);
+    public String changeInfoProcess( @RequestParam(name = "username") String username,
+                                     @RequestParam(name = "password") String password,
+                                     @RequestParam(name = "realname") String realname,
+                                     @RequestParam(name = "location") String location)
+    {
+        LOG.info(username +", "+ password+", "+ realname+", "+ location);
         userInfoUpdateService.userInfoUpdate(username, password, location, realname);
-        return "secu/mypage";//나중에 메인페이지로 변경
+        return "redirect:/";//나중에 메인페이지로 변경
     }
 
-    @GetMapping("user/quit")
-    public String userQuit(Principal principal) {
+    @GetMapping("/user/quit")
+    public String userQuit(Principal principal,Authentication authentication){
         LOG.info(principal.getName());
         UsersDto usersDto = new UsersDto();
         usersDto.setUsername(principal.getName());
         userDeleteService.userQuit(usersDto);
-        return "redirect:/";
+        principal=null;
+        authentication=null;
+        LOG.info(principal);
+        return "redirect:/logout";
     }
 
 

@@ -22,7 +22,7 @@
             <div class="mypage_id">
             <h2>내 정보 수정</h2><br>
             <p>아이디</p>
-            <input class="form-control" type="text" name="username" value="${user.username}" readonly ">
+            <input class="form-control" type="text" name="username" value="${user.username}" readonly">
             </div>
        
             <div class="mypage_pw">
@@ -32,12 +32,14 @@
         
             <div class="mypage_name">
             <p>이름</p>
-            <input class="form-control" type="text" name="realname" placeholder="이름" >
+            <input class="form-control" type="text" name="realname" placeholder="이름"
+                   value="${userInfo.realname}">
             </div>
      
             <div class="mypage_address">
             <p>거주지</p>  
-            <input class="form-control" type="text" name="location" placeholder="예)서울,경기...">
+            <input class="form-control" type="text" name="location" placeholder="예)서울,경기..."
+                   value="${userInfo.location}">
             </div>
             
         
