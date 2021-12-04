@@ -222,7 +222,7 @@ public class PlannerController {
      * 플랜 게시판 이동
      */
     @GetMapping("/board")
-    public String planBoardForm(Principal principal,Model model) {
+    public String planBoardForm(Principal principal, Model model) {
         String username = "guest";
         if (principal != null) {
             username = principal.getName();
@@ -239,7 +239,7 @@ public class PlannerController {
 
         model.addAttribute("bestPlans", bestPlans);
         model.addAttribute("thumbnails", thumbnails);
-        model.addAttribute("username",username);
+        model.addAttribute("username", username);
 
         log.debug("Move To Plan Board | Best Plans : {}", bestPlans);
         return "/plan/plan-board";
