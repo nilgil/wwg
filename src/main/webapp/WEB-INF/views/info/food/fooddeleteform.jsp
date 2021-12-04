@@ -42,7 +42,11 @@
 	<tr><th>글을 삭제하시겠습니까?</th></tr>
 	</thead>
 	<tr><td colspan=2 align=center>
-			<input type=submit value="삭제">
+	<a href="javascript:history.back()" class="btn btn-primary">이전</a>
+			<input type=submit value="삭제" class="btn btn-primary">
+		</td>
+	<tr><td colspan=2 align=center>
+			
 		</td>
 	</tr>
 </table>
