@@ -14,12 +14,27 @@
 
 <script>
 	window.onload = function() {
-		console.log("시작");
 		let memberList = new MemberList();
 		for (let i = 0; i <= document.getElementsByClassName('user-info').length; i++) {
 			document.getElementsByClassName('user-info')[i].addEventListener(
 					"click", memberList.deleteUser);
 		}
+	}
+
+	function askReallyResetSpots() {
+		if (confirm("정말로 관광지를 초기화하시겠습니까?")) {
+			resetSpots()
+		}
+	}
+
+	function resetSpots() {
+		$.ajax({
+			url:'/spots/reset',
+			method:'GET',
+			success: function (result) {
+				alert("총 관광지 개수 : "+result);
+			}
+		})
 	}
 </script>
 
@@ -47,16 +62,19 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a href="/admin/memberList">회원관리/삭제</a></td>
+						<td><a id="manage" href="/admin/memberList">회원관리/삭제</a></td>
 					</tr>
+				<tr>
+					<td><a id="reset" onclick="askReallyResetSpots()">관광지 초기화</a></td>
+				</tr>
 				</tbody>
 				</table>
 	    </div>
-          
-        
+
+
 
 		<div class="memberList_table">
-				
+
 					<table class="table table-hover">
 						<h2>회원관리 게시판</h2>
 						<p> 총 회원수 : ${memberList.size()} </p>
@@ -68,7 +86,7 @@
 								<th>처리</th>
 							</tr>
 						</thead>
-						
+
 						<tbody>
 						<s:authorize access="permitAll">
 							<c:forEach var="i" items="${memberList}">
