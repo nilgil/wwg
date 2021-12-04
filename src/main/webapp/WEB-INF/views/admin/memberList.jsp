@@ -22,35 +22,29 @@
 	}
 
 	function askReallyResetSpots() {
-		if (confirm("정말로 관광지를 초기화하시겠습니까?")) {
-			resetSpots()
+		if (confirm("정말로 관광지를 초기화하시겠습니까? 약 10초 가량 소요됩니다.")) {
+			resetSpots();
 		}
 	}
 
 	function resetSpots() {
 		$.ajax({
-			url:'/spots/reset',
-			method:'GET',
-			success: function (result) {
-				alert("총 관광지 개수 : "+result);
+			url:'/spot/reset',
+			method: 'post',
+			success: function (response) {
+				alert("총 관광지 개수 : " + response);
+			},
+			error: function () {
+				alert("resetSpots");
 			}
 		})
 	}
 </script>
 
-
 </head>
 
 <body>
 <%@ include file="/resources/include/navbar.jsp"%>
-	<!-- cneter -->
-	<%--<s:authentication property="principal" var="user"/>--%>
-	<%--    ${user.username}--%>
-	<%--    ${user.password}--%>
-	<%--    ${user.authorities}--%>
-
-	<!-- hasRole('ROLE_ADMIN') -->
-
 	<div class="memberList_center">
 
 		<div class="memberList_side">
@@ -70,8 +64,6 @@
 				</tbody>
 				</table>
 	    </div>
-
-
 
 		<div class="memberList_table">
 

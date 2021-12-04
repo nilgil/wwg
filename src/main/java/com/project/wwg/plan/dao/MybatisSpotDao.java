@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MybatisSpotsDao implements SpotsDao {
+public class MybatisSpotDao implements SpotDao {
 
     private SqlSession sqlSession;
 
     @Autowired
-    public MybatisSpotsDao(SqlSession sqlSession) {
+    public MybatisSpotDao(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
     }
 

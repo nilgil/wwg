@@ -1,6 +1,6 @@
 package com.project.wwg.plan.service;
 
-import com.project.wwg.plan.dao.SpotsDao;
+import com.project.wwg.plan.dao.SpotDao;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
 import com.project.wwg.plan.exceptions.NotAvailableDataException;
@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SpotsServiceImpl {
+public class SpotService {
 
-    private final SpotsDao spotsDao;
+    private final SpotDao spotDao;
     private final JSONParser parser = new JSONParser();
     private List<Spot> spots;
 
-    public SpotsServiceImpl(SpotsDao spotsDao) {
-        this.spotsDao = spotsDao;
+    public SpotService(SpotDao spotDao) {
+        this.spotDao = spotDao;
     }
 
     // ----------------------------- Spot CRUD -----------------------------
@@ -34,36 +34,36 @@ public class SpotsServiceImpl {
      * [C] Spot 1개 등록
      */
     public int insertSpot(Spot spot) {
-       return spotsDao.insertSpot(spot);
+        return spotDao.insertSpot(spot);
     }
 
     /**
      * [C] Spot 여러 개 등록
      */
     public int insertSpots(List<Spot> spots) {
-        return spotsDao.insertSpots(spots);
+        return spotDao.insertSpots(spots);
     }
 
     /**
      * [R] 검색어로 Spot 1개 반환
      */
     public Spot searchSpotOne(String title) {
-        return spotsDao.searchSpotOne(title);
+        return spotDao.searchSpotOne(title);
     }
 
     /**
      * [R] 검색어로 Spot 검색하여 list로 반환
      */
     public List<Spot> searchSpots(String keyword, int pageNum) {
-        PageInfo pageInfo = new PageInfo(8,keyword,pageNum);
-        return spotsDao.searchSpots(pageInfo);
+        PageInfo pageInfo = new PageInfo(8, pageNum, keyword);
+        return spotDao.searchSpots(pageInfo);
     }
 
 
-    public List<Spot> searchSpotsByTitles(List<String> titleList) {
-        List<Spot> list = new ArrayList<Spot>();
+    public List<Spot> searchSpotsByTitles(String[] titleList) {
+        List<Spot> list = new ArrayList<>();
         for (String title : titleList) {
-            list.add(spotsDao.searchSpotOne(title));
+            list.add(spotDao.searchSpotOne(title));
         }
         return list;
     }
@@ -72,21 +72,21 @@ public class SpotsServiceImpl {
      * [R] 검색어 결과 개수 반환
      */
     public int getSearchSpotsCount(String keyword) {
-        return spotsDao.getSearchSpotsCount(keyword);
+        return spotDao.getSearchSpotsCount(keyword);
     }
 
     /**
      * [D] id로 Spot 1개 삭제
      */
     public int deleteSpot(String id) {
-        return spotsDao.deleteSpot(id);
+        return spotDao.deleteSpot(id);
     }
 
     /**
      * [D] 모든 Spot 삭제
      */
     public int deleteAllSpots() {
-        return spotsDao.deleteAllSpots();
+        return spotDao.deleteAllSpots();
     }
 
     /**
@@ -95,7 +95,7 @@ public class SpotsServiceImpl {
      * @return 저장된 Spot의 개수 리턴
      */
     public int resetAllSpotsFromApi() {
-        spots = new ArrayList<Spot>();
+        spots = new ArrayList<>();
         int result = 0;
         try {
             int pageCount = getPageCountFromApi();
@@ -186,7 +186,7 @@ public class SpotsServiceImpl {
                 /* Title */
                 String title = (String) currentObj.get("title");
                 if (title == null) {
-                    title = "--";
+                    return;
                 }
 
                 /* Info */
