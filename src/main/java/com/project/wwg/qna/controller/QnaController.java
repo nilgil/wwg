@@ -11,16 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.wwg.comm.model.meet;
-import com.project.wwg.comm.model.meet_replydto;
 import com.project.wwg.comm.model.notice;
 import com.project.wwg.comm.model.review;
 import com.project.wwg.comm.service.meet_service;
 import com.project.wwg.comm.service.notice_service;
 import com.project.wwg.comm.service.review_service;
-import com.project.wwg.info.dao.FoodBoardDao;
 import com.project.wwg.info.dto.FoodBoard;
 import com.project.wwg.info.dto.StayBoard;
 import com.project.wwg.info.dto.TourBoard;
@@ -28,7 +25,7 @@ import com.project.wwg.info.service.FoodBoardService;
 import com.project.wwg.info.service.StayBoardService;
 import com.project.wwg.info.service.TourBoardService;
 import com.project.wwg.plan.dto.Plan;
-import com.project.wwg.plan.service.PlannerServiceImpl;
+import com.project.wwg.plan.service.PlanService;
 import com.project.wwg.qna.model.Qna;
 import com.project.wwg.qna.service.PagingPgm;
 import com.project.wwg.qna.service.QnaService;
@@ -52,7 +49,7 @@ public class QnaController{
 	@Autowired
 	private TourBoardService ts; //여행지 서비스 인터
 	@Autowired 
-	private PlannerServiceImpl psi; //
+	private PlanService psi; //
 	
 	
 

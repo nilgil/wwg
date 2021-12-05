@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>일정보기</title>
     <%@ include file="/resources/include/headTag.jsp" %>
     <link rel='stylesheet' type='text/css' href='/css/plan/view_plan.css'>
     <script defer src="/js/plan/view_plan.js"></script>
@@ -20,12 +20,10 @@
     <div id="container">
         <div id="content">
             <div id="content-header">
-
                 <div id="plan-writer">
                     <p>작성자</p>
                     <div id="user-name"></div>
                 </div>
-
                 <div id="plan-main">
                     <div id="plan-title"></div>
                     <div id="plan-dayInfo">
@@ -33,14 +31,12 @@
                         <div id="plan-days"></div>
                     </div>
                 </div>
-
                 <div id="features">
                     <div id="pub"><span>공개</span></div>
                     <div id="good"><span><i class="fas fa-heart"></i>️</span>&nbsp;<span></span></div>
                     <div id="hit"><span><i class="fas fa-search"></i></span>&nbsp;<span></span></div>
                 </div>
             </div>
-
             <div id="sub-menu">
                 <div id="day-info">
                     <div id="choose-day"></div>
@@ -54,7 +50,6 @@
                 <div id="goodToggle"><i id="heart" class="far fa-heart fa-3x" onclick="goodToggle(idx, username)"></i>
                 </div>
             </div>
-
             <div id="content-body">
                 <div id="plans"></div>
                 <div id="map"></div>
@@ -64,6 +59,5 @@
     </div>
     <%@ include file="/resources/include/footerbar.jsp" %>
 </div>
-
 </body>
 </html>

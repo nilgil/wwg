@@ -31,7 +31,7 @@
                           select plan.*, (select count(*) from plan_good where plan_no = plan.idx) good
                           from plan
                           where pub = 1
-                          order by regdate desc
+                          order by idx desc
                       ) a
              )
         WHERE rnum >= #{startRow}
@@ -60,12 +60,6 @@
         WHERE rnum >= 1
           and rnum <= 3
         ]]>
-    </select>
-
-    <select id="getPlanReplys" parameterType="_int" resultType="PlanReply">
-        select *
-        from plan_reply
-        where idx = #{plan_no}
     </select>
 
     <select id="checkGoodAlready" parameterType="java.util.Map" resultType="_int">

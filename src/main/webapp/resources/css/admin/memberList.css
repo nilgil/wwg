@@ -47,3 +47,11 @@ body{
 table{
     background-color: #fffffff5;
 }
+
+#manage {
+    text-decoration: none;
+}
+#reset:hover {
+    cursor: pointer;
+    color: #1d75b3;
+}

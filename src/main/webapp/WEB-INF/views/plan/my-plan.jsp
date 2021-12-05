@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>내 일정</title>
     <%@ include file="/resources/include/headTag.jsp" %>
     <link rel='stylesheet' type='text/css' href='/css/plan/my_plan.css'>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <script defer src="/js/plan/my_plan.js"></script>
 </head>
 <body>
@@ -16,7 +17,6 @@
         <header>
             <h1>내 일정</h1>
         </header>
-
         <c:if test="${empty plans}">
             <div id="none-plan">
                 <br>

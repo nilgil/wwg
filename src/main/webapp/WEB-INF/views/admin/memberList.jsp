@@ -4,43 +4,47 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="principal" var="user"/>
 
-
 <html>
 <head>
 <title>Title</title>
-<%@ include file="/resources/include/headTag.jsp"%>
-<link rel='stylesheet' media='screen' href='/css/admin/memberList.css'>
-
-
+	<%@ include file="/resources/include/headTag.jsp"%>
+	<link rel='stylesheet' media='screen' href='/css/admin/memberList.css'>
 <script
-	src="${pageContext.request.contextPath}/resources/admin/memberList.js"></script>
+	src="${pageContext.request.contextPath}/admi/memberList.js"></script>
 
 <script>
 	window.onload = function() {
-		console.log("시작");
 		let memberList = new MemberList();
 		for (let i = 0; i <= document.getElementsByClassName('user-info').length; i++) {
 			document.getElementsByClassName('user-info')[i].addEventListener(
 					"click", memberList.deleteUser);
 		}
 	}
-</script>
 
+	function askReallyResetSpots() {
+		if (confirm("정말로 관광지를 초기화하시겠습니까? 약 10초 가량 소요됩니다.")) {
+			resetSpots();
+		}
+	}
+
+	function resetSpots() {
+		$.ajax({
+			url:'/spot/reset',
+			method: 'post',
+			success: function (response) {
+				alert("총 관광지 개수 : " + response);
+			},
+			error: function () {
+				alert("resetSpots");
+			}
+		})
+	}
+</script>
 
 </head>
 
 <body>
-	<!-- navbar -->
-	<%@ include file="/resources/include/navbar.jsp"%>
-
-	<!-- cneter -->
-	<%--<s:authentication property="principal" var="user"/>--%>
-	<%--    ${user.username}--%>
-	<%--    ${user.password}--%>
-	<%--    ${user.authorities}--%>
-
-	<!-- hasRole('ROLE_ADMIN') -->
-
+<%@ include file="/resources/include/navbar.jsp"%>
 	<div class="memberList_center">
 
 		<div class="memberList_side">
@@ -52,40 +56,38 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a href="/admin/memberList">회원관리/삭제</a></td>
+						<td><a id="manage" href="/admin/memberList">회원관리/삭제</a></td>
 					</tr>
+				<tr>
+					<td><a id="reset" onclick="askReallyResetSpots()">관광지 초기화</a></td>
+				</tr>
 				</tbody>
 				</table>
 	    </div>
-          
-        
 
 		<div class="memberList_table">
-				
+
 					<table class="table table-hover">
 						<h2>회원관리 게시판</h2>
-						<p>The .table-hover class enables a hover state (grey
-							background on mouse over) on table rows:</p>
 						<p> 총 회원수 : ${memberList.size()} </p>
 						<thead>
 							<tr>
 								<th>아이디</th>
-								<th>지역</th>
 								<th>이름</th>
+								<th>지역</th>
+								<th>처리</th>
 							</tr>
 						</thead>
-						
+
 						<tbody>
 						<s:authorize access="permitAll">
 							<c:forEach var="i" items="${memberList}">
-								<div data-user="${i.username}" class="user-info">
-					            <tr>
-								<th><c:out value="${i.username}" /></th>
-								<th><c:out value="${i.location}" /></th>
-								<th><c:out value="${i.realname}" /></th>
-								<th><button class="user-del">삭제</button></th>
+								<tr data-user="${i.username}" class="user-info">
+									<td><c:out value="${i.username}" /></td>
+									<td><c:out value="${i.realname}" /></td>
+									<td><c:out value="${i.location}" /></td>
+									<td><button>삭제</button></td>
 								</tr>
-								</div>
 							</c:forEach>
 						</s:authorize>
 						</tbody>
@@ -94,11 +96,7 @@
 			</div>
 
 </div>
-
-				
-
-				<!-- footer -->
-				<%@ include file="/resources/include/footerbar.jsp"%>
+<%@ include file="/resources/include/footerbar.jsp"%>
 </body>
 
 </html>

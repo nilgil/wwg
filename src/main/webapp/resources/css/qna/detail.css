@@ -52,7 +52,6 @@ table{
     border-image: initial; */
 }
 .contents{
-
 }
 .side{
     grid-area: side;
@@ -78,4 +77,3 @@ table{
 textarea{
 	resize: none;
 }
-

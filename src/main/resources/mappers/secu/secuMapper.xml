@@ -30,10 +30,14 @@
     </update>
 
     <delete id="removeAuth" parameterType="UsersDto">
-        DELETE from authorities where username='user11'
+        DELETE from authorities where username=#{username}
     </delete>
     <delete id="removeUser" parameterType="UsersDto">
-        DELETE from users where username='user11'
+        DELETE from users where username=#{username}
     </delete>
+
+    <select id="getUserInfo" parameterType="String" resultType="UsersDto">
+        SELECT * from Users where username = #{username}
+    </select>
 
 </mapper>
