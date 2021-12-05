@@ -29,7 +29,7 @@
 
 	function resetSpots() {
 		$.ajax({
-			url:'/spot/reset',
+			url:'/spot/all',
 			method: 'post',
 			success: function (response) {
 				alert("총 관광지 개수 : " + response);

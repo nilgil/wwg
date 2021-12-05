@@ -25,7 +25,7 @@
     <input class="hiddenTitle" name="title" type="hidden"/>
     <input class="hiddenPlans" name="plans" type="hidden"/>
 </form>
-<form name="update" id="update" method="post" action="/plan/update">
+<form name="update" id="update" method="post" action="/plan/${idx}">
     <input type="hidden" name="_method" value="PUT"/>
     <input class="hiddenUsername" name="username" type="hidden"/>
     <input class="hiddenDeparture" name="departure" type="hidden"/>

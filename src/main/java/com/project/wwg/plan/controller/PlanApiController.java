@@ -2,8 +2,6 @@ package com.project.wwg.plan.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
 import com.project.wwg.plan.service.PlanService;
@@ -20,7 +18,7 @@ import java.util.List;
 public class PlanApiController {
 
     private final PlanService planService;
-    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     public PlanApiController(PlanService planService) {
         this.planService = planService;
@@ -38,16 +36,16 @@ public class PlanApiController {
     /**
      * IDX로 플랜 삭제
      */
-    @DeleteMapping("/delete")
-    public void deletePlan(int idx) {
+    @DeleteMapping("/{idx}")
+    public void deletePlan(@PathVariable int idx) {
         planService.deletePlan(idx);
     }
 
     /**
      * 공개 처리된 플랜 리스트, 페이지 정보 가져오기
      */
-    @GetMapping("/pub-list")
-    public String getPubPlans(int page) {
+    @GetMapping("/list/pub/{page}")
+    public String getPubPlans(@PathVariable int page) {
         int pubPlansCount = planService.getPubPlansCount();
         PageInfo pageInfo = new PageInfo(10, page, pubPlansCount);
         List<Plan> pubPlans = planService.getPubPlansList(pageInfo);
@@ -63,22 +61,21 @@ public class PlanApiController {
     /**
      * 플랜의 공개 여부 검사 후 공개/비공개 처리
      */
-    @PutMapping("/pub-toggle")
-    public void putPubToggle(int idx, int pub) {
-        planService.togglePub(idx, pub);
+    @PutMapping("/{idx}/pub")
+    public void pubToggle(@PathVariable int idx, int pub) {
+        planService.pubToggle(idx, pub);
     }
 
     /**
      * 접속 유저의 좋아요 여부 확인 후 좋아요 증,감 처리
      */
-    @PutMapping("/good/toggle")
-    public String putGoodToggle(int idx, String username, String beforeUrl, HttpSession session) {
+    @PutMapping("/{idx}/good")
+    public String goodToggle(@PathVariable int idx, String username, String beforeUrl, HttpSession session) {
         // 비로그인시
         if (username.equals("guest")) {
             session.setAttribute("beforeUrl", beforeUrl);
             return username;
         }
-
         // 이전에 좋아요를 눌렀었는지 여부
         boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
 
@@ -87,7 +84,6 @@ public class PlanApiController {
         } else {
             planService.increaseGood(idx, username);
         }
-
         return String.valueOf(isAlreadyGood);
     }
 

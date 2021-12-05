@@ -10,22 +10,21 @@ import java.util.List;
  * @author giri
  */
 public interface SpotDao {
-    List<Spot> getSpotsList(int startRow, int endRow);
-
-    Spot searchSpotOne(String title);
-
-    List<Spot> searchSpots(PageInfo pageInfo);
-
-    List<Spot> searchSpotsByTitles(List<String> titleList);
-
-    int getSearchSpotsCount(String keyword);
-
+    // ------------------ [C] ------------------
     int insertSpot(Spot spot);
 
     int insertSpots(List<Spot> spots);
 
-    int deleteSpot(String id);
+    // ------------------ [R] ------------------
+    Spot searchSpotOne(String title);
 
+    List<Spot> searchSpots(PageInfo pageInfo);
+
+    int getSearchSpotsCount(String keyword);
+
+    // ------------------ [U] ------------------
+
+    // ------------------ [D] ------------------
     int deleteAllSpots();
 
 }

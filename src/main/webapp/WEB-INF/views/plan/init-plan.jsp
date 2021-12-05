@@ -11,7 +11,7 @@
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
-        <form id="initForm" method="post" action="/plan/create">
+        <form id="initForm" method="post" action="/plan/create-form">
             <div class="main_img"><img src="/img/qna/plan03.jpg"></div>
             <s:csrfInput/>
             <input name="username" type="hidden" value="${username}"/>

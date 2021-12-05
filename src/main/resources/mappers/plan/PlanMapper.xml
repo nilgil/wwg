@@ -62,17 +62,11 @@
         ]]>
     </select>
 
-    <select id="checkGoodAlready" parameterType="java.util.Map" resultType="_int">
+    <select id="checkAlreadyGood" parameterType="java.util.Map" resultType="_int">
         select count(*)
         from plan_good
         where plan_no = #{idx}
           and username = #{username}
-    </select>
-
-    <select id="getGoods" parameterType="_int" resultType="_int">
-        select count(*)
-        from plan_good
-        where plan_no = #{idx}
     </select>
 
     <update id="updatePlan" parameterType="Plan">
@@ -112,7 +106,6 @@
         where plan_no = #{idx}
           and username = #{username}
     </delete>
-
 
     <delete id="deletePlan" parameterType="_int">
         delete
