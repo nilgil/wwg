@@ -62,16 +62,10 @@
         
         <!-- 글작성버튼 -->
           <div class="qnalist_write_btn2">
-            <c:choose>
-            
-            <c:when test="${username eq 'guest'}">
-            <a href="${path}/loginPage"><input class="btn btn-dark" type="button" value="글작성"></a>
-            </c:when>
-            <c:otherwise>
+         
+         <s:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
             <a href="${path}/qnawriteform.do"><input class="btn btn-dark" type="button" value="글작성"></a>
-            </c:otherwise>
-            
-            </c:choose>
+         </s:authorize>
           </div>
         
         

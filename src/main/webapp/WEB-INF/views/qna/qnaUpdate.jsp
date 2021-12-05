@@ -68,7 +68,6 @@
       </table>
 
      <div class="update_end_btn">
-        <div><input class="btn btn-dark" type="button" value="미리보기"></div>
         <div><input class="btn btn-dark" type="submit" value="글수정"></div>
         <div><input class="btn btn-dark" type="button" value="수정취소"
         onclick="location='/qnalist.do'"></div>
