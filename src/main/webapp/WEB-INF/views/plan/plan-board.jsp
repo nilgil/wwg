@@ -21,7 +21,7 @@
                 <c:forEach items="${bestPlans}" var="plan" varStatus="st">
                     <div class='plan'>
                         <div id='plan-img'>
-                            <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}"
+                            <a href="/plan/${plan.idx}/detail"><img src="${thumbnails[st.index]}"
                                                                   alt="https://via.placeholder.com/150"/></a>
                         </div>
                         <div id='plan-info'>
@@ -33,7 +33,7 @@
                                 <p>${plan.username}</p>
                             </div>
                             <div id="title">
-                                <a href="/plan/view/${plan.idx}"><p>${plan.title}</p></a>
+                                <a href="/plan/${plan.idx}/detail"><p>${plan.title}</p></a>
                             </div>
                             <div id="good">
                                 <span><i class="fas fa-eye"></i> ${plan.hit}</span>

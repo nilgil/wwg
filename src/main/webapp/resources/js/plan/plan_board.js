@@ -18,9 +18,8 @@ function resetBoard(page) {
 function getBoard(page) {
     return new Promise((resolve => {
         $.ajax({
-            url: "/plan/pub-list",
+            url: `/plan/list/pub/${page}`,
             method: "GET",
-            data: {'page': page},
             dataType: 'json',
             success: function (response) {
                 let data = JSON.parse(response);
@@ -49,7 +48,7 @@ function printBoard(data) {
         $('#boardContent').append(
             `   <tr>` +
             `       <td>${plans[i].idx}</td>` +
-            `       <td><a href="/plan/view/${plans[i].idx}">${plans[i].title}</a></td>` +
+            `       <td><a href="/plan/${plans[i].idx}/detail">${plans[i].title}</a></td>` +
             `       <td style="width: 120px">${plans[i].days == 1 ? "당일치기" : plans[i].days - 1 + "박 " + plans[i].days + "일"}</td>` +
             `       <td style="width: 100px">${plans[i].username}</td>` +
             `       <td style="width: 250px">` +

@@ -29,7 +29,7 @@
             <c:forEach items="${plans}" var="plan" varStatus="st">
                 <div class='plan'>
                     <div id='plan-img'>
-                        <a href="/plan/view/${plan.idx}"><img src="${thumbnails[st.index]}"
+                        <a href="/plan/${plan.idx}/detail"><img src="${thumbnails[st.index]}"
                                                               alt="/img/qna/jlogo.png"/></a>
                         <span id="pubToggle" onclick="askReallyPubToggle(${plan.idx},${plan.pub})">
                             <c:if test="${plan.pub==0}"><i class="fas fa-toggle-off fa-2x"></i></c:if>
@@ -45,7 +45,7 @@
                             </p>
                         </div>
                         <div id="title">
-                            <a href="/plan/view/${plan.idx}"><p>${plan.title}</p></a>
+                            <a href="/plan/${plan.idx}/detail"><p>${plan.title}</p></a>
                         </div>
                         <div id="plan-controll">
                             <p onclick="updatePlanForm(${plan.idx})">수정</p>

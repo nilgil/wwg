@@ -3,7 +3,7 @@ package com.project.wwg.plan.service;
 import com.project.wwg.plan.dao.SpotDao;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
-import com.project.wwg.plan.exceptions.NotAvailableDataException;
+import com.project.wwg.plan.exceptions.NotExistDataException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,37 +28,18 @@ public class SpotService {
         this.spotDao = spotDao;
     }
 
-    // ----------------------------- Spot CRUD -----------------------------
-
-    /**
-     * [C] Spot 1개 등록
-     */
-    public int insertSpot(Spot spot) {
-        return spotDao.insertSpot(spot);
-    }
-
-    /**
-     * [C] Spot 여러 개 등록
-     */
     public int insertSpots(List<Spot> spots) {
         return spotDao.insertSpots(spots);
     }
 
-    /**
-     * [R] 검색어로 Spot 1개 반환
-     */
     public Spot searchSpotOne(String title) {
         return spotDao.searchSpotOne(title);
     }
 
-    /**
-     * [R] 검색어로 Spot 검색하여 list로 반환
-     */
     public List<Spot> searchSpots(String keyword, int pageNum) {
         PageInfo pageInfo = new PageInfo(8, pageNum, keyword);
         return spotDao.searchSpots(pageInfo);
     }
-
 
     public List<Spot> searchSpotsByTitles(String[] titleList) {
         List<Spot> list = new ArrayList<>();
@@ -68,39 +49,31 @@ public class SpotService {
         return list;
     }
 
-    /**
-     * [R] 검색어 결과 개수 반환
-     */
     public int getSearchSpotsCount(String keyword) {
         return spotDao.getSearchSpotsCount(keyword);
     }
 
-    /**
-     * [D] id로 Spot 1개 삭제
-     */
-    public int deleteSpot(String id) {
-        return spotDao.deleteSpot(id);
-    }
-
-    /**
-     * [D] 모든 Spot 삭제
-     */
     public int deleteAllSpots() {
         return spotDao.deleteAllSpots();
     }
 
+
+    // ---------------------------- API 연동 관련 ----------------------------
+
     /**
-     * [ETC] API의 모든 Spots를 파싱하여 DB에 저장
-     *
-     * @return 저장된 Spot의 개수 리턴
+     * 외부 API로부터 관광지 데이터 받고, 기존 데이터 초기화 (종합)
+     * 1. 외부 API 데이터 개수 확인
+     * 2. JSON 형식 데이터를 파싱하여 List에 담기
+     * 3. 기존 모든 관광지 데이터 삭제
+     * 4. List에 담은 모든 관광지 데이터 등록
      */
-    public int resetAllSpotsFromApi() {
+    public synchronized int resetAllSpots() {
         spots = new ArrayList<>();
         int result = 0;
         try {
             int pageCount = getPageCountFromApi();
             if (pageCount == 0) {
-                throw new NotAvailableDataException("데이터가 존재하지 않습니다.");
+                throw new NotExistDataException("데이터가 존재하지 않습니다.");
             }
             for (int i = 1; i <= pageCount; i++) {
                 jsonToList(searchSpotsFromApi(i));
@@ -110,22 +83,21 @@ public class SpotService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return result;
     }
 
-    // ---------------------------- API 연동 관련 ----------------------------
-
     /**
-     * API의 1페이지 Spots 조회
+     * 외부 API 1페이지 데이터 조회
      */
     public String searchSpotsFromApi() {
         return searchSpotsFromApi(1);
     }
 
     /**
-     * API의 n페이지 Spots 조회
+     * 외부 API의 n페이지 데이터 조회
      *
-     * @return JSON 형식의 String response 리턴
+     * @Return JSON 타입 문자열
      */
     public String searchSpotsFromApi(int page) {
         StringBuilder sb = new StringBuilder();
@@ -158,7 +130,7 @@ public class SpotService {
     /**
      * API의 1페이지 조회하여 pageCount값 찾기
      *
-     * @return json형식의 String 리턴
+     * @Return 외부 API의 전체 페이지 개수
      */
     public int getPageCountFromApi() {
         String response = searchSpotsFromApi();
@@ -173,7 +145,7 @@ public class SpotService {
     }
 
     /**
-     * JSON 타입의 String response를 파싱하여 List에 담기
+     * JSON 타입 문자열 데이터를 파싱하여 List에 담기
      */
     public void jsonToList(String response) {
         try {
@@ -185,13 +157,13 @@ public class SpotService {
 
                 /* Title */
                 String title = (String) currentObj.get("title");
-                if (title == null) {
-                    return;
+                if (title == null || title.equals("")) {
+                    continue;
                 }
 
                 /* Info */
                 String info = (String) currentObj.get("introduction");
-                if (info == null)
+                if (info == null || info.equals(""))
                     info = "--";
 
                 /* Lat,Lng */
@@ -205,25 +177,25 @@ public class SpotService {
 
                 /* Address */
                 String address = (String) currentObj.get("roadaddress");
-                if (address == null)
+                if (address == null || address.equals(""))
                     address = "--";
 
                 /* Photo */
                 String photo = "";
                 JSONObject photo1 = (JSONObject) currentObj.get("repPhoto");
-                if (photo1 != null) {
+                if (photo1 != null && !photo1.equals("")) {
                     JSONObject photo2 = (JSONObject) photo1.get("photoid");
-                    if (photo2 != null) {
+                    if (photo2 != null && !photo2.equals("")) {
                         photo = (String) photo2.get("imgpath");
                     }
                 }
-                if (photo == null) {
+                if (photo == null || photo.equals("")) {
                     photo = "--";
                 }
 
                 /* Phone */
                 String phone = (String) currentObj.get("phoneno");
-                if (phone == null) {
+                if (phone == null || phone.equals("")) {
                     phone = "--";
                 }
 

@@ -4,8 +4,6 @@ import com.project.wwg.plan.dao.PlanDao;
 import com.project.wwg.plan.dao.SpotDao;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Plan;
-import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,16 +21,28 @@ public class PlanService {
         this.spotDao = spotDao;
     }
 
-    public int insertPlan(Plan plan) {
-        return planDao.insertPlan(plan);
+    public int createPlan(Plan plan) {
+        return planDao.createPlan(plan);
     }
 
     public Plan getPlanByIdx(int idx) {
         return planDao.getPlanByIdx(idx);
     }
 
-    public List<Plan> getPlansByUser(String username) throws ParseException {
+    public List<Plan> getPlansByUser(String username){
         return planDao.getPlansByUser(username);
+    }
+
+    public List<Plan> getPubPlansList(PageInfo pageInfo) {
+        return planDao.getPubPlansList(pageInfo);
+    }
+
+    public int getPubPlansCount() {
+        return planDao.getPubPlansCount();
+    }
+
+    public List<Plan> getBestPubPlansList() {
+        return planDao.getBest3PubPlansList();
     }
 
     public String[] getThumbnails(String[] firstSpots) {
@@ -54,19 +64,7 @@ public class PlanService {
         return planDao.deletePlan(idx);
     }
 
-    public List<Plan> getPubPlansList(PageInfo pageInfo) {
-        return planDao.getPubPlansList(pageInfo);
-    }
-
-    public int getPubPlansCount() {
-        return planDao.getPubPlansCount();
-    }
-
-    public List<Plan> getBestPubPlansList() {
-        return planDao.getBestPubPlansList();
-    }
-
-    public void togglePub(int idx, int pub) {
+    public void pubToggle(int idx, int pub) {
         if (pub == 0) {
             planDao.pubOn(idx);
         }
@@ -85,7 +83,7 @@ public class PlanService {
         params.put("idx", idx);
         params.put("username", username);
 
-        return planDao.checkGoodAlready(params) == 1;
+        return planDao.checkAlreadyGood(params) == 1;
     }
 
     public void increaseGood(int idx, String username) {

@@ -4,6 +4,26 @@
 
 <mapper namespace="spot">
 
+    <insert id="insertSpot" parameterType="Spot">
+        insert into plan_spot
+        values (#{title}, #{info}, #{lat}, #{lng}, #{address}, #{photo}, #{phone})
+    </insert>
+
+    <update id="insertSpots" parameterType="java.util.List">
+        <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+            INTO plan_spot
+            VALUES (
+            #{spot.title}
+            , #{spot.info}
+            , #{spot.lat}
+            , #{spot.lng}
+            , #{spot.address}
+            , #{spot.photo}
+            , #{spot.phone}
+            )
+        </foreach>
+    </update>
+
     <select id="searchSpotOne" parameterType="string" resultType="Spot">
         select *
         from plan_spot
@@ -25,13 +45,6 @@
         ]]>
     </select>
 
-    <select id="searchSpotsByTitles" parameterType="java.util.List" resultType="Spot">
-        select * from plan_spot where title in (
-        <foreach collection="list" item="title" separator=",">
-            #{title}
-        </foreach>)
-    </select>
-    
     <select id="getSearchSpotsCount" parameterType="string" resultType="_int">
         select count(*)
         from plan_spot
@@ -45,28 +58,9 @@
         </foreach>)
     </select>
 
-    <insert id="insertSpot" parameterType="Spot">
-        insert into plan_spot (title, info, lat, lng, address, photo, phone)
-        values (#{title}, #{info}, #{lat}, #{lng}, #{address}, #{photo}, #{phone})
-    </insert>
-
-    <update id="insertSpots" parameterType="java.util.List">
-        <foreach collection="list" item="spot" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-            INTO plan_spot
-            VALUES (
-            #{spot.title}
-            , #{spot.info}
-            , #{spot.lat}
-            , #{spot.lng}
-            , #{spot.address}
-            , #{spot.photo}
-            , #{spot.phone}
-            )
-        </foreach>
-    </update>
-
     <delete id="deleteAllSpots">
         delete
         from plan_spot
     </delete>
+
 </mapper>

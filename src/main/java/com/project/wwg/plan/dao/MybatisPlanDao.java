@@ -19,10 +19,9 @@ public class MybatisPlanDao implements PlanDao {
         this.sqlSession = sqlSession;
     }
 
-
     // ------------------------------------ [C] ------------------------------------
     @Override
-    public int insertPlan(Plan plan) {
+    public int createPlan(Plan plan) {
         return sqlSession.insert("plan.insertPlan", plan);
     }
 
@@ -48,20 +47,19 @@ public class MybatisPlanDao implements PlanDao {
     }
 
     @Override
-    public List<Plan> getBestPubPlansList() {
+    public List<Plan> getBest3PubPlansList() {
         return sqlSession.selectList("plan.getBestPubPlansList");
+    }
+
+    @Override
+    public int checkAlreadyGood(Map<String, Object> params) {
+        return sqlSession.selectOne("plan.checkAlreadyGood", params);
     }
 
     // ------------------------------------ [U] ------------------------------------
     @Override
     public int updatePlan(Plan plan) {
         return sqlSession.update("plan.updatePlan", plan);
-    }
-
-    // ------------------------------------ [D] ------------------------------------
-    @Override
-    public int deletePlan(int idx) {
-        return sqlSession.delete("plan.deletePlan", idx);
     }
 
     @Override
@@ -80,11 +78,6 @@ public class MybatisPlanDao implements PlanDao {
     }
 
     @Override
-    public int checkGoodAlready(Map<String, Object> params) {
-        return sqlSession.selectOne("plan.checkGoodAlready",params);
-    }
-
-    @Override
     public void increaseGood(Map<String, Object> params) {
         sqlSession.insert("plan.increaseGood", params);
     }
@@ -94,10 +87,10 @@ public class MybatisPlanDao implements PlanDao {
         sqlSession.delete("plan.decreaseGood", params);
     }
 
+    // ------------------------------------ [D] ------------------------------------
     @Override
-    public int getGoods(int idx) {
-        return sqlSession.selectOne("plan.getGoods", idx);
+    public int deletePlan(int idx) {
+        return sqlSession.delete("plan.deletePlan", idx);
     }
-
 
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface PlanDao {
     // ------------------ [C] ------------------
-    int insertPlan(Plan plan);
+    int createPlan(Plan plan);
 
     // ------------------ [R] ------------------
     Plan getPlanByIdx(int idx);
@@ -19,15 +19,12 @@ public interface PlanDao {
 
     int getPubPlansCount();
 
+    List<Plan> getBest3PubPlansList();
 
-    List<Plan> getBestPubPlansList();
+    int checkAlreadyGood(Map<String, Object> params);
 
     // ------------------ [U] ------------------
     int updatePlan(Plan plan);
-
-    // ------------------ [D] ------------------
-    int deletePlan(int idx);
-
 
     void pubOn(int idx);
 
@@ -35,11 +32,11 @@ public interface PlanDao {
 
     void increaseHit(int idx);
 
-    int checkGoodAlready(Map<String, Object> params);
-
     void increaseGood(Map<String, Object> params);
 
     void decreaseGood(Map<String, Object> params);
 
-    int getGoods(int idx);
+    // ------------------ [D] ------------------
+    int deletePlan(int idx);
+
 }

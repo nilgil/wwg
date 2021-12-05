@@ -1,6 +1,6 @@
 // 일정 수정 폼으로 이동
 function updatePlanForm(idx) {
-    location.replace(`/plan/update/${idx}`);
+    location.replace(`/plan/${idx}/update-form`);
 }
 
 // 일정 삭제 실수 방지 alert
@@ -21,8 +21,7 @@ function askReallyPubToggle(idx,pub) {
 function deletePlan(idx) {
     $.ajax({
         method: "DELETE",
-        url: "/plan/delete",
-        data: {'idx': idx},
+        url: `/plan/${idx}`,
         success: function () {
             location.reload();
         },
@@ -36,8 +35,8 @@ function deletePlan(idx) {
 function pubToggle(idx,pub) {
     $.ajax({
         method: 'PUT',
-        url: '/plan/pub-toggle',
-        data: {'idx': Number(idx), 'pub': Number(pub)},
+        url: `/plan/${idx}/pub/`,
+        data: {'pub': Number(pub)},
         success: function () {
             location.replace("/plan/my");
         },
