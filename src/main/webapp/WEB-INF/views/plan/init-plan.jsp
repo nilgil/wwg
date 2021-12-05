@@ -27,7 +27,7 @@
                 <p class="days">일</p>
             </div>
             <br><br>
-            <div id="submit" onclick="checkDays()">플랜 만들기</div>
+            <div id="submit" onclick="checkDays()">일정 만들기</div>
         </form>
     </div>
     <%@ include file="/resources/include/footerbar.jsp" %>
