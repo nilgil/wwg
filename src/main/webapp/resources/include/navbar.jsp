@@ -61,6 +61,8 @@
         </div>
         </div>
     </li>
+    
+    </ul>
 
     <div class="navbar_logout">${username}님
     <s:authorize access="hasAnyRole('ROLE_ADMIN')">
