@@ -77,14 +77,15 @@ public class PlanApiController {
             return username;
         }
         // 이전에 좋아요를 눌렀었는지 여부
-        boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
-
-        if (isAlreadyGood) {
-            planService.decreaseGood(idx, username);
-        } else {
-            planService.increaseGood(idx, username);
-        }
-        return String.valueOf(isAlreadyGood);
+//        boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
+//
+//        if (isAlreadyGood) {
+//            planService.decreaseGood(idx, username);
+//        } else {
+//            planService.increaseGood(idx, username);
+//        }
+//        return String.valueOf(isAlreadyGood);
+        return "true";
     }
 
 }
