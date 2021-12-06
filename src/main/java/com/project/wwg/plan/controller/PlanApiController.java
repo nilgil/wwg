@@ -62,7 +62,7 @@ public class PlanApiController {
      * 플랜의 공개 여부 검사 후 공개/비공개 처리
      */
     @PutMapping("/{idx}/pub")
-    public void pubToggle(@PathVariable int idx, int pub) {
+    public void pubToggle(@PathVariable int idx, @RequestBody int pub) {
         planService.pubToggle(idx, pub);
     }
 
@@ -70,7 +70,7 @@ public class PlanApiController {
      * 접속 유저의 좋아요 여부 확인 후 좋아요 증,감 처리
      */
     @PutMapping("/{idx}/good")
-    public String goodToggle(@PathVariable int idx, @RequestParam(name = "username") String username, @RequestParam(name = "beforeUrl") String beforeUrl, HttpSession session) {
+    public String goodToggle(@PathVariable int idx, @RequestBody String username, @RequestBody String beforeUrl, HttpSession session) {
         // 비로그인시
         if (username.equals("guest")) {
             session.setAttribute("beforeUrl", beforeUrl);
