@@ -118,6 +118,7 @@ public class PlanController {
         if (principal != null) {
             username = principal.getName();
         }
+        System.out.println("username = " + username);
         planService.increaseHit(idx);
         boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
 
