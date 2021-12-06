@@ -74,7 +74,6 @@ public class SpotApiController {
      * 외부 API에 접근하여 DB에 저장된 모든 관광지 정보를 리셋
      */
     @PostMapping("/all")
-    @Transactional
     public int resetAllSpots() {
         return spotService.resetAllSpots();
     }

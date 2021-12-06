@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,6 +68,7 @@ public class SpotService {
      * 3. 기존 모든 관광지 데이터 삭제
      * 4. List에 담은 모든 관광지 데이터 등록
      */
+    @Transactional
     public synchronized int resetAllSpots() {
         spots = new ArrayList<>();
         int result = 0;
