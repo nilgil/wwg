@@ -48,10 +48,20 @@
 		<td><input type=text name="stay_title" required="required" size="60" maxlength="29" placeholder="제목(최대 29자)"></td>
 	</tr>
 	<tr><th>내용</th>
-		<td><textarea rows="25" cols="70" id="content" name="stay_content" maxlength="284" placeholder="내용(최대 284자)"></textarea>
+		<td><textarea required="required" rows="25" cols="70" id="content" name="stay_content" maxlength="284" placeholder="내용(최대 284자)"></textarea>
 		<script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
 			CKEDITOR.replace('content',
 			{filebrowserUploadUrl:'/stay/imageUpload.do'
+			});
+		
+			$(function(){
+				$("form").submit(function(){
+					if(CKEDITOR.instances.content.getData() =='' 
+				        || CKEDITOR.instances.content.getData().length ==0){
+				      alert("내용을 입력해주세요.");
+				     return false;
+				    }
+				});		
 			});
 		</script></td>
 	</tr>
