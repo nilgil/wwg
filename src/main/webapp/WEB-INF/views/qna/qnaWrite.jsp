@@ -11,7 +11,10 @@
 <title>글작성폼</title>
 <%@ include file="/resources/include/headTag.jsp"%>
 <link rel='stylesheet' media='screen' href='/css/qna/write.css'>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script defer type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<%-- <script defer type="text/javascript" src="${path}/js/qna/write.js"></script> --%>
+
+
 
 </head>
 
@@ -52,7 +55,7 @@
         
         <tr>
             <td>제목</td>
-            <td><input type="text" name="qna_title" required="required" size="60" maxlength="29" placeholder="제목(최대 29자)"></td>
+            <td><input id="title" type="text" name="qna_title" size="50" maxlength="29" placeholder="제목(최대 29자)"></td>
         </tr>
         <tr>
             <td>내용</td>
