@@ -71,7 +71,7 @@ $(function(){
                   <tbody>
                    <tr>
                     <td class="contents" colspan="5" text-align="center" >
-                        <p style="width:900px;">${qnalist.qna_content}</p>
+                        <pre></pre><p style="width:900px;">${qnalist.qna_content}</p></pre>
                     </td>
                    </tr>
                 </tbody>
