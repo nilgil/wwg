@@ -4,8 +4,8 @@
 <head>
     <title>일정보기</title>
     <%@ include file="/resources/include/headTag.jsp" %>
-    <link rel='stylesheet' type='text/css' href='/css/plan/view_plan.css'>
-    <script defer src="/js/plan/view_plan.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/plan/detail_plan.css'>
+    <script defer src="/js/plan/detail_plan.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5375710c5345c7b4704ecd71a402404e"></script>
     <script type="text/javascript"

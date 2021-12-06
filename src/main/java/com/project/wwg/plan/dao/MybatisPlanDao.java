@@ -52,8 +52,8 @@ public class MybatisPlanDao implements PlanDao {
     }
 
     @Override
-    public int checkAlreadyGood(Map<String, Object> params) {
-        return sqlSession.selectOne("plan.checkAlreadyGood", params);
+    public int checkGoodAlready(Map<String, Object> params) {
+        return sqlSession.selectOne("plan.checkGoodAlready", params);
     }
 
     // ------------------------------------ [U] ------------------------------------
