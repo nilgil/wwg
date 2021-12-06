@@ -70,7 +70,7 @@ public class PlanApiController {
      * 접속 유저의 좋아요 여부 확인 후 좋아요 증,감 처리
      */
     @PutMapping("/{idx}/good")
-    public String goodToggle(@PathVariable int idx, String username, String beforeUrl, HttpSession session) {
+    public String goodToggle(@PathVariable int idx, @RequestBody String username, String beforeUrl, HttpSession session) {
         // 비로그인시
         if (username.equals("guest")) {
             session.setAttribute("beforeUrl", beforeUrl);
