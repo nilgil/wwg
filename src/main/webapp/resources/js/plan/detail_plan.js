@@ -266,6 +266,8 @@ function detailToMap() {
 
 // 좋아요 변경 (Ajax)
 function goodToggle(idx, username) {
+    console.log(idx);
+    console.log(username);
     $.ajax({
         url: `/plan/${idx}/good`,
         method: 'put',
