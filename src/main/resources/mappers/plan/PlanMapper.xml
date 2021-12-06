@@ -62,7 +62,7 @@
         ]]>
     </select>
 
-    <select id="checkAlreadyGood" parameterType="java.util.Map" resultType="_int">
+    <select id="checkGoodAlready" parameterType="java.util.Map" resultType="_int">
         select count(*)
         from plan_good
         where plan_no = #{idx}

@@ -83,7 +83,7 @@ public class PlanService {
         params.put("idx", idx);
         params.put("username", username);
 
-        return planDao.checkAlreadyGood(params) == 1;
+        return planDao.checkGoodAlready(params) == 1;
     }
 
     public void increaseGood(int idx, String username) {

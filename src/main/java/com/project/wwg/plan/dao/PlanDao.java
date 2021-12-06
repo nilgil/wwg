@@ -21,7 +21,7 @@ public interface PlanDao {
 
     List<Plan> getBest3PubPlansList();
 
-    int checkAlreadyGood(Map<String, Object> params);
+    int checkGoodAlready(Map<String, Object> params);
 
     // ------------------ [U] ------------------
     int updatePlan(Plan plan);
