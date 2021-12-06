@@ -34,7 +34,7 @@ function deletePlan(idx) {
 // 공개 여부 변경 (Ajax-PUT)
 function pubToggle(idx,pub) {
     $.ajax({
-        method: 'PUT',
+        method: 'post',
         url: `/plan/${idx}/pub/`,
         data: {'pub': Number(pub)},
         success: function () {
