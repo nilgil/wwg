@@ -70,22 +70,21 @@ public class PlanApiController {
      * 접속 유저의 좋아요 여부 확인 후 좋아요 증,감 처리
      */
     @PutMapping("/{idx}/good")
-    public String goodToggle(@PathVariable int idx, @RequestBody String username, String beforeUrl, HttpSession session) {
+    public String goodToggle(@PathVariable int idx, @RequestParam(name = "username") String username, @RequestParam(name = "beforeUrl") String beforeUrl, HttpSession session) {
         // 비로그인시
         if (username.equals("guest")) {
             session.setAttribute("beforeUrl", beforeUrl);
             return username;
         }
         // 이전에 좋아요를 눌렀었는지 여부
-//        boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
-//
-//        if (isAlreadyGood) {
-//            planService.decreaseGood(idx, username);
-//        } else {
-//            planService.increaseGood(idx, username);
-//        }
-//        return String.valueOf(isAlreadyGood);
-        return "true";
+        boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
+
+        if (isAlreadyGood) {
+            planService.decreaseGood(idx, username);
+        } else {
+            planService.increaseGood(idx, username);
+        }
+        return String.valueOf(isAlreadyGood);
     }
 
 }

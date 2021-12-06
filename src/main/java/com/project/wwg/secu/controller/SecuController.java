@@ -72,7 +72,7 @@ public class SecuController {
         return "secu/mypage";
     }
 
-    @PostMapping("/user/changeInfoProcess")
+    @PutMapping("/user/changeInfoProcess")
     public String changeInfoProcess( @RequestParam(name = "username") String username,
                                      @RequestParam(name = "password") String password,
                                      @RequestParam(name = "realname") String realname,
