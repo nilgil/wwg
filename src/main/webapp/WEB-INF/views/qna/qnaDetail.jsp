@@ -50,12 +50,19 @@ $(function(){
             <div class="detail_table">
                 <table id="detail_table_2" class="table table-hover">
                 <h2>Q&A 게시판</h2>
-                <h3>${qnalist.qna_title}</h3>
+                <h3>제목: ${qnalist.qna_title}</h3>
                   <thead>
                    <tr>
                     <th>게시물번호:${no1}</th>
                     <th>작성자:${qnalist.username}</th>
-                    <th>댓글수:</th>
+                    <th>답글수:
+                    <c:if test="${qnalist.qna_re_lev == 1}">
+                     1
+                     </c:if>
+                     <c:if test="${qnalist.qna_re_lev == 0}">
+                     0
+                     </c:if>
+                     </th>
                     <th>조회수:${qnalist.qna_hit}</th>
                     <th>날짜:${qnalist.qna_regdate}</th>
                    </tr>

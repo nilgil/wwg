@@ -41,7 +41,6 @@
      <div class="update_table">
       <table id="update_table1" class="table table-hover">
         <h2>문의글 수정</h2>
-        <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
         <thead>
         <tr>
             <th colspan="2">글 수정</th>
@@ -68,7 +67,6 @@
       </table>
 
      <div class="update_end_btn">
-        <div><input class="btn btn-dark" type="button" value="미리보기"></div>
         <div><input class="btn btn-dark" type="submit" value="글수정"></div>
         <div><input class="btn btn-dark" type="button" value="수정취소"
         onclick="location='/qnalist.do'"></div>

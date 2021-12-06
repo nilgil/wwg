@@ -14,7 +14,7 @@
         <li>
             <div class="dropdown">
                 <button data-toggle="dropdown">
-                    <a href="#">여행정보</a>
+                   여행정보
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/staylist.do">숙소</a>
@@ -27,7 +27,7 @@
         <li>
             <div class="dropdown">
                 <button data-toggle="dropdown">
-                    <a href="#">커뮤니티</a>
+                    커뮤니티
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/noticelist">공지사항</a>
@@ -37,30 +37,31 @@
             </div>
         </li>
 
-        <li>
-            <div class="dropdown">
-                <button data-toggle="dropdown">
-                    <a href="#">여행계획</a>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/plan">일정짜기</a>
-                    <a class="dropdown-item" href="/plan/my">내일정</a>
-                    <a class="dropdown-item" href="/plan/board">일정게시판</a>
-                </div>
-            </div>
-        </li>
 
-        <li>
-            <div class="dropdown">
-                <button data-toggle="dropdown">
-                    <a href="#">회원문의</a>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/qnalist.do">Q&A</a>
-                </div>
-            </div>
-        </li>
+    <li>
+        <div class="dropdown">
+            <button data-toggle="dropdown">
+                여행계획
+            </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/plan">일정짜기</a>
+            <a class="dropdown-item" href="/plan/my">내일정</a>
+            <a class="dropdown-item" href="/plan/board">일정게시판</a>
+        </div>
+        </div>
+    </li>
 
+    <li>
+        <div class="dropdown">
+            <button data-toggle="dropdown">
+                회원문의
+            </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/qnalist.do">Q&A</a>
+        </div>
+        </div>
+    </li>
+    
     </ul>
 
     <div class="navbar_logout">${username}님

@@ -128,21 +128,30 @@
 					<li data-target="#demo" data-slide-to="0" class="active"></li>
 					<li data-target="#demo" data-slide-to="1"></li>
 					<li data-target="#demo" data-slide-to="2"></li>
+					<li data-target="#demo" data-slide-to="3"></li>
+					<li data-target="#demo" data-slide-to="4"></li>
 				</ul>
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="/img/qna/test사진3.jpg" alt="제주도">
+				    <div class="carousel-item active">
+						<img src="/img/qna/한라산.jpg" alt="한라산">
 					</div>
 					<div class="carousel-item">
-						<img src="/img/qna/test사진4.jpg" alt="제주도">
+						<img src="/img/qna/성읍민속마을.jpg" alt="성읍민속마을">
 					</div>
 					<div class="carousel-item">
-						<img src="/img/qna/test사진5.png" alt="제주도">
+						<img src="/img/qna/용두암.jpg" alt="용두암">
+					</div>
+										<div class="carousel-item">
+						<img src="/img/qna/카페 벨로인더로맨틱.png" alt="카페 벨로인더로맨틱">
+					</div>
+										<div class="carousel-item">
+						<img src="/img/qna/우도 서빈백사.jpg" alt="우도 서빈백사">
 					</div>
 				</div>
-				<a class="carousel-control-prev" href="#demo" data-slide="제주도">
+				
+				<a class="carousel-control-prev" href="#demo" data-slide="prev">
 					<span class="carousel-control-prev-icon"></span>
-				</a> <a class="carousel-control-next" href="#demo" data-slide="제주도">
+				</a> <a class="carousel-control-next" href="#demo" data-slide="next">
 					<span class="carousel-control-next-icon"></span>
 				</a>
 			</div>
