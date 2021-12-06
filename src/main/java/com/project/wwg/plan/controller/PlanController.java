@@ -118,9 +118,16 @@ public class PlanController {
         if (principal != null) {
             username = principal.getName();
         }
-        System.out.println("username = " + username);
         planService.increaseHit(idx);
-        boolean isAlreadyGood = planService.checkGoodAlready(idx, username);
+        boolean isAlreadyGood = true;
+        try {
+            isAlreadyGood = planService.checkGoodAlready(idx, username);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("idx = " + idx);
+        System.out.println("username = " + username);
+        System.out.println("isAlreadyGood = " + isAlreadyGood);
 
         model.addAttribute("idx", idx);
         model.addAttribute("username", username);
