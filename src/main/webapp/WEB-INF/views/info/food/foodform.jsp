@@ -53,6 +53,16 @@
 			CKEDITOR.replace('content',
 			{filebrowserUploadUrl:'/food/imageUpload.do'
 			});
+		
+			$(function(){
+				$("form").submit(function(){
+					if(CKEDITOR.instances.content.getData() =='' 
+				        || CKEDITOR.instances.content.getData().length ==0){
+				      alert("내용을 입력해주세요.");
+				     return false;
+				    }
+				});		
+			});
 		</script></td>
 	</tr>
 	<tr><td colspan=2 align=center>

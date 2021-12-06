@@ -74,8 +74,9 @@ function initPage(response) {
     $('#user-name').text(writer);
 
     let depDate = new Date(departure);
-    depDate.setDate(depDate.getDate() + days - 1);
-    $('#plan-date').text(departure + " ~ " + dateFormatter(depDate));
+    let lastDate = new Date(departure);
+    lastDate.setDate(lastDate.getDate() + days - 1);
+    $('#plan-date').text(dateFormatter(depDate) + " ~ " + dateFormatter(lastDate));
     $('#plan-days').text(days == 1 ? "당일치기" : "(" + (days - 1) + "박 " + days + "일)");
 
     if (pub == 0) {
@@ -97,7 +98,7 @@ function getSpotsDetails(response) {
         (async () => {
             for (let i = 0; i < plans.length; i++) {
                 await $.ajax({
-                    url: '/spot/search/many',
+                    url: `/spot/list/titles`,
                     method: 'get',
                     data: {"titles": JSON.stringify(plans[i])},
                     dataType: 'json',
@@ -266,9 +267,9 @@ function detailToMap() {
 // 좋아요 변경 (Ajax)
 function goodToggle(idx, username) {
     $.ajax({
-        url: '/plan/good/toggle',
+        url: `/plan/${idx}/good`,
         method: 'put',
-        data: {"idx": idx, 'username': username, 'beforeUrl': beforeUrl},
+        data: {'username': username, 'beforeUrl': beforeUrl},
         success: function (response) {
             if (response == "guest") {
                 location.replace('/loginPage');

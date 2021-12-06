@@ -11,7 +11,7 @@
 <div id="wrapper">
     <%@ include file="/resources/include/navbar.jsp" %>
     <div id="container">
-        <form id="initForm" method="post" action="/plan/create">
+        <form id="initForm" method="post" action="/plan/create-form">
             <div class="main_img"><img src="/img/qna/plan03.jpg"></div>
             <s:csrfInput/>
             <input name="username" type="hidden" value="${username}"/>
@@ -27,7 +27,7 @@
                 <p class="days">일</p>
             </div>
             <br><br>
-            <div id="submit" onclick="checkDays()">플랜 만들기</div>
+            <div id="submit" onclick="checkDays()">일정 만들기</div>
         </form>
     </div>
     <%@ include file="/resources/include/footerbar.jsp" %>

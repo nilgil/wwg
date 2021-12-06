@@ -10,12 +10,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,11 +31,11 @@ public class SpotApiController {
     /**
      * 검색어와 페이지 번호로 관광지 목록, 페이지 정보 가져오기
      */
-    @GetMapping("/search")
-    public String getSearchSpotsByPage(String keyword, int pageNum) {
-        List<Spot> spots = spotService.searchSpots(keyword, pageNum);
+    @GetMapping("/list/keyword/{page}")
+    public String getSearchSpotsByPage(String keyword, @PathVariable int page) {
+        List<Spot> spots = spotService.searchSpots(keyword, page);
         int searchCount = spotService.getSearchSpotsCount(keyword);
-        PageInfo pageInfo = new PageInfo(8, pageNum, searchCount, keyword);
+        PageInfo pageInfo = new PageInfo(8, page, searchCount, keyword);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", gson.toJson(spots));
@@ -51,7 +47,7 @@ public class SpotApiController {
     /**
      * 정확한 관광지 이름으로 하나의 관광지 세부정보 가져오기
      */
-    @GetMapping("/search/one")
+    @GetMapping("/title")
     public String getSearchSpot(String title) {
         Spot spot = spotService.searchSpotOne(title);
         return gson.toJson(spot);
@@ -60,7 +56,7 @@ public class SpotApiController {
     /**
      * 관광지 이름 배열로 여러개의 관광지 세부정보 가져오기
      */
-    @GetMapping("/search/many")
+    @GetMapping("/list/titles")
     public String getSearchSpotsByTitles(String titles) throws ParseException {
         if (titles.equals("[]")) {
             return "{\"response\":\"none\"}";
@@ -77,10 +73,10 @@ public class SpotApiController {
     /**
      * 외부 API에 접근하여 DB에 저장된 모든 관광지 정보를 리셋
      */
-    @PostMapping("/reset")
+    @PostMapping("/all")
     @Transactional
     public int resetAllSpots() {
-        return spotService.resetAllSpotsFromApi();
+        return spotService.resetAllSpots();
     }
 
 }

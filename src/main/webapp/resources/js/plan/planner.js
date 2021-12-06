@@ -75,7 +75,7 @@ $(document).ready(async function () {
     await makeDays();
 
     // 관광지 출력
-    await makeSpots("", "1");
+    await makeSpots("", 1);
 
     // 일정의 관광지 출력
     await makePlans();
@@ -128,7 +128,7 @@ function getSpotDetailByTitles(oldPlans) {
         (async () => {
             for (let i = 0; i < days; i++) {
                 await $.ajax({
-                    url: '/spot/search/many',
+                    url: `/spot/list/titles`,
                     type: 'get',
                     data: {titles: JSON.stringify(oldPlans[i])},
                     dataType: 'json',
@@ -171,23 +171,23 @@ function makeDays() {
 }
 
 // 관광지 화면 출력 (로직X)
-function makeSpots(keyword, pageNum) {
+function makeSpots(keyword, page) {
     // 전역변수에 현재 검색 키워드 저장
     searchKeyword = keyword;
 
     // 검색한 관광지 목록 화면에 출력
-    searchSpots(keyword, pageNum).then((response) =>
+    searchSpots(keyword, page).then((response) =>
         printSearchResult(response)
     );
 }
 
 // 검색어, 페이지 번호로 관광지 목록 구하기 (Ajax-GET)
-function searchSpots(keyword, pageNum) {
+function searchSpots(keyword, page) {
     return new Promise((resolve) => {
         $.ajax({
             method: "GET",
-            url: "/spot/search",
-            data: {keyword: keyword, pageNum: pageNum},
+            url: `/spot/list/keyword/${page}`,
+            data: {keyword: keyword},
             dataType: "json",
             success: function (response) {
                 resolve(response);
@@ -366,7 +366,7 @@ function dayMinus() {
 // 제목으로 관광지 세부정보 불러와 출력 (Ajax-GET)
 function viewSpotDetail(title) {
     $.ajax({
-        url: "/spot/search/one",
+        url: `/spot/title`,
         method: "GET",
         data: {title: title},
         dataType: "json"

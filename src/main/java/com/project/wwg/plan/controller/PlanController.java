@@ -40,7 +40,7 @@ public class PlanController {
     /**
      * 2. 유저명, 출발일, 여행기간 정보를 전달하며 플랜 생성 페이지로 이동
      */
-    @PostMapping("/create")
+    @PostMapping("/create-form")
     public String planCreateForm(Plan plan, Model model) {
         model.addAttribute("plan", plan);
         model.addAttribute("username", plan.getUsername());
@@ -52,7 +52,7 @@ public class PlanController {
      */
     @PostMapping("/save")
     public String savePlan(Plan plan) {
-        planService.insertPlan(plan);
+        planService.createPlan(plan);
         return "redirect:/plan/my";
     }
 
@@ -72,7 +72,7 @@ public class PlanController {
             JSONArray arrayDeep2 = (JSONArray) arrayDeep1.get(0);
 
             firstSpots[i] = "default";
-            if (!arrayDeep1.isEmpty() && !arrayDeep2.isEmpty())
+            if (!arrayDeep2.isEmpty())
                 firstSpots[i] = String.valueOf(arrayDeep2.get(0));
         }
 
@@ -91,7 +91,7 @@ public class PlanController {
     /**
      * 플랜의 IDX를 Update Form으로 전달, 수정
      */
-    @GetMapping("/update/{idx}")
+    @GetMapping("/{idx}/update-form")
     public String planUpdateForm(@PathVariable int idx, Principal principal, Model model) {
         model.addAttribute("idx", idx);
         model.addAttribute("username", principal.getName());
@@ -101,7 +101,7 @@ public class PlanController {
     /**
      * 플랜을 업데이트하고 내 플랜 관리로 이동
      */
-    @PutMapping("/update")
+    @PutMapping("/{idx}")
     public String updatePlan(Plan plan, @RequestParam("departure") String departure) {
         Date date = Date.valueOf(departure);
         plan.setDeparture(date);
@@ -112,8 +112,8 @@ public class PlanController {
     /**
      * 플랜의 IDX를 전달하며 상세 페이지 이동
      */
-    @GetMapping("/view/{idx}")
-    public String planViewPage(@PathVariable int idx, Principal principal, Model model) {
+    @GetMapping("/{idx}/detail")
+    public String planDetailPage(@PathVariable int idx, Principal principal, Model model) {
         String username = "guest";
         if (principal != null) {
             username = principal.getName();
@@ -125,7 +125,7 @@ public class PlanController {
         model.addAttribute("username", username);
         model.addAttribute("isAlreadyGood", isAlreadyGood);
 
-        return "/plan/view-plan";
+        return "/plan/detail-plan";
     }
 
     /**
