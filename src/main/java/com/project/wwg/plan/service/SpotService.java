@@ -85,7 +85,6 @@ public class SpotService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return result;
     }
 
