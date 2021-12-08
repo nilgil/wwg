@@ -25,7 +25,7 @@
         <property name="mapperLocations" value="classpath:mappers/*/*.xml"/>
     </bean>
 
-    <!-- SqlSession 빈 등록,  -->
+    <!-- SqlSession 빈 등록  -->
     <bean id="sqlsession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>

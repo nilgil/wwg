@@ -69,22 +69,18 @@ public class SpotService {
      * 4. List에 담은 모든 관광지 데이터 등록
      */
     @Transactional
-    public synchronized int resetAllSpots() {
+    public int resetAllSpots() throws NotExistDataException {
         spots = new ArrayList<>();
         int result = 0;
-        try {
-            int pageCount = getPageCountFromApi();
-            if (pageCount == 0) {
-                throw new NotExistDataException("데이터가 존재하지 않습니다.");
-            }
-            for (int i = 1; i <= pageCount; i++) {
-                jsonToList(searchSpotsFromApi(i));
-            }
-            deleteAllSpots();
-            result = insertSpots(spots);
-        } catch (Exception e) {
-            e.printStackTrace();
+        deleteAllSpots();
+        int pageCount = getPageCountFromApi();
+        if (pageCount == 0) {
+            throw new NotExistDataException("데이터가 존재하지 않습니다.");
         }
+        for (int i = 1; i <= pageCount; i++) {
+            jsonToList(searchSpotsFromApi(i));
+        }
+        result = insertSpots(spots);
         return result;
     }
 

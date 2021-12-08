@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.wwg.plan.dto.PageInfo;
 import com.project.wwg.plan.dto.Spot;
+import com.project.wwg.plan.exceptions.NotExistDataException;
 import com.project.wwg.plan.service.SpotService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -74,7 +75,7 @@ public class SpotApiController {
      * 외부 API에 접근하여 DB에 저장된 모든 관광지 정보를 리셋
      */
     @PostMapping("/all")
-    public int resetAllSpots() {
+    public int resetAllSpots() throws NotExistDataException {
         return spotService.resetAllSpots();
     }
 
