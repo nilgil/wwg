@@ -51,13 +51,6 @@
         where title like '%' || #{keyword} || '%'
     </select>
 
-    <select id="getThumbnails" parameterType="java.util.List" resultType="java.util.List">
-        select photo from plan_spot where title in (
-        <foreach collection="list" item="title" separator=",">
-            #{title}
-        </foreach>)
-    </select>
-
     <delete id="deleteAllSpots">
         delete
         from plan_spot

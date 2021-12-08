@@ -268,7 +268,7 @@ function detailToMap() {
 function goodToggle(idx, username) {
     $.ajax({
         url: `/plan/${idx}/good`,
-        method: 'put',
+        method: 'patch',
         data: {'username': username, 'beforeUrl': beforeUrl},
         success: function (response) {
             if (response == "guest") {
