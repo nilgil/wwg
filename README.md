@@ -2,9 +2,9 @@
 
 
 
-#### 제주도 여행 관련 커뮤니티 사이트
+#### 제주도 여행 관련 커뮤니티 사이트  
 
-🔗 <a href="http://0giri.com:5555" target="_blank">Web</a>
+#### 🔗 Link : [혼저옵서예](http://0giri.com:5555/)
 
 ---
 > Frontend 기술 스택
